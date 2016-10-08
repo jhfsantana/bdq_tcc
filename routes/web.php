@@ -43,7 +43,7 @@ Route::get('/', function () {
 
 
 */
-
+use App\Models\Professor;
 
 Route::get('professor/login','Professores\ProfessorController@logintela');
 
@@ -53,11 +53,7 @@ Route::post('professor/login', 'Professores\AuthController@login');
 Route::group(['middleware'=> ['auth:web_teachers']], function ()
 {
 
-	Route::get('professor', function()
-	{
-		return view('professores.index');
-	});
-
+	Route::get('professor', 'Professores\ProfessorController@bemvindo');
 
 
 	Route::post('professor/{id}/questao', 'Questoes\QuestaoController@create');
@@ -66,7 +62,10 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 
 	Route::post('professor/avaliacao/{id}/gerar', 'Avaliacoes\AvaliacaoController@formulario');
 
+	Route::get('avaliacao/{id}/gerar/buscar/', 'Avaliacoes\AvaliacaoController@trazerQuestao');
 
+	Route::post('professor/avaliacao/{id}/gerar/salvar', 'Avaliacoes\AvaliacaoController@salvar');
+	
 	Route::get('professor/logout', 'Professores\AuthController@logout');
 
 });

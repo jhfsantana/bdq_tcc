@@ -22,7 +22,9 @@
                             
                         <form id="questaoform" class="form-horizontal" role="form" method="post" action="questao/adicionada">
 							
-							<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
+							<input name="_token" type="hidden" value="{{ csrf_token() }}">
+                            <input name="professor_id" type="hidden" value="{{Auth::user()->id }}"> 
+
 							
 							<div style="margin-bottom: 25px" class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
@@ -31,7 +33,7 @@
 	  									<option value="{{$disciplinas->id}}">{{$disciplinas->nome}}</option>
 									@endforeach
 								</select>
-								
+
 							</div>
 
 							<div style="margin-bottom: 25px" class="input-group">
