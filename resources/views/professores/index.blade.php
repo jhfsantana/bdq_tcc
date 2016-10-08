@@ -19,19 +19,16 @@
 		
 </div>
 
-<h1>Olá, {{Auth::guard('web_teachers')->user()->name }}</h1>
+<h1>Olá, {{Auth::guard('web_teachers')->user()->nome }}</h1> <p>
+<p>
 
 
-
-
-		<form action="professor/{{Auth::user()->id }}/questao" method="post">
+		<form action="professor/{{Auth::user()->id}}/questao" method="post">
 			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
 			<input type="submit" name="cadastrar-questao" value="Cadastrar Questão">
 		</form>
 
-
-
-		<form action="professor/avaliacao/{{Auth::user()->id }}/gerar" method="post">
+		<form action="professor/avaliacao/{{Auth::user()->id}}/gerar" method="post">
 			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
 			<input type="submit" name="gerar-avaliacao" value="Gerar Avaliacao">
 		</form>

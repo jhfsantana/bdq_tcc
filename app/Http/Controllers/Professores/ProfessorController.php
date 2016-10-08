@@ -15,6 +15,7 @@ use App\Models\Turma;
 use App\Models\Disciplina;
 use Hash;
 use App\Http\Requests\FormRequest;
+use DateTime;
 
 class ProfessorController extends Controller
 {
@@ -23,6 +24,14 @@ class ProfessorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function bemvindo()
+    {
+        return view('professores.index');
+    }
+
+
+
     public function index()
     {
         $professores = Professor::all();

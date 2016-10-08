@@ -42,17 +42,7 @@ class QuestaoController extends Controller
      */
     public function store(Request $request)
     {
-
-        $regras = array(
-                    'questao' => 'required');
-
-
-        $validador = Validator::make($request->all(), $regras);
-
-        if($validador->fails())
-        {
-            return back()->withInput();
-        }
+        
         
         $questao = new Questao();
 
@@ -63,8 +53,8 @@ class QuestaoController extends Controller
         $questao->alternativaD = $request->d;
         $questao->alternativaE = $request->e;
         $questao->correta = $request->correta;
-
         $questao->nivel = $request->nivel;
+        $questao->professor_id = $request->professor_id;
 
 
         $questao->disciplina()->associate($request->disciplina);
@@ -119,5 +109,12 @@ class QuestaoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function buscarQuestao()
+    {
+        
+        /*$questao = Questao::find($disciplina_id);
+        $questao = Questao::orderByRaw('RAND()')->take(1)->where($disciplina_id)->get();*/
     }
 }
