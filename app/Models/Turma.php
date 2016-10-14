@@ -24,6 +24,6 @@ class Turma extends Model
 
     public function avaliacoes()
     {
-    	return $this->belongsToMany('App\Models\Avaliacao');
+    	return $this->hasMany('App\Models\Avaliacao');
     }
 }
