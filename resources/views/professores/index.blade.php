@@ -33,6 +33,11 @@
 			<input type="submit" name="gerar-avaliacao" value="Gerar Avaliacao">
 		</form>
 
+		<form action="professor/avaliacao/{{Auth::user()->id}}" method="post">
+			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
+			<input type="submit" name="avaliacao" value="Avaliacao">
+		</form>
+
 
 <form action="professor/logout">
 	<input type="submit" name="logout" value="logout">

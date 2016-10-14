@@ -7,8 +7,11 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddChaveEstrangeiraDisciplinaTabelaQuestoes' => $baseDir . '/database/migrations/2016_10_06_141213_add_chave_estrangeira_disciplina_tabela_questoes.php',
+    'AdicionandoChaveEstrangeiraTurmaTabelaAvaliacoes' => $baseDir . '/database/migrations/2016_10_12_193559_adicionando_chave_estrangeira_turma_tabela_avaliacoes.php',
+    'AdicionarChaveDisciplinaTabelaAvaliacao' => $baseDir . '/database/migrations/2016_10_10_221454_adicionar_chave_disciplina_tabela_avaliacao.php',
     'AdicionarChaveEstrangeiraDaTablaDisciplina' => $baseDir . '/database/migrations/2016_10_01_161102_adicionar_chave_estrangeira_da_tabla_disciplina.php',
     'AdicionarIdDoProfNaTabelaQuestoes' => $baseDir . '/database/migrations/2016_10_03_233827_adicionar_id_do_prof_na_tabela_questoes.php',
+    'AdicionarTimestamps' => $baseDir . '/database/migrations/2016_10_10_004946_adicionar_timestamps.php',
     'CreateAlunoDisciplina' => $baseDir . '/database/migrations/2016_09_30_233718_create_aluno_disciplina.php',
     'CreateAlunos' => $baseDir . '/database/migrations/2016_09_30_234026_create_alunos.php',
     'CreateClassroomSubjects' => $baseDir . '/database/migrations/2016_09_15_234013_create_classroom_subjects.php',
@@ -27,7 +30,9 @@ return array(
     'CreateTurmaDisciplina' => $baseDir . '/database/migrations/2016_09_30_234437_create_turma_disciplina.php',
     'CreateTurmas' => $baseDir . '/database/migrations/2016_09_30_234342_create_turmas.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
-    'CriacaoTabelaAvaliacoes' => $baseDir . '/database/migrations/2016_10_08_142903_criacao_tabela_avaliacoes.php',
+    'CriarTabelaAvaliacaoDisciplina' => $baseDir . '/database/migrations/2016_10_10_003824_criar_tabela_avaliacao_disciplina.php',
+    'CriarTabelaAvaliacaoQuestao' => $baseDir . '/database/migrations/2016_10_10_005522_criar_tabela_avaliacao_questao.php',
+    'CriarTabelaAvaliacoes' => $baseDir . '/database/migrations/2016_10_10_003710_criar_tabela_avaliacoes.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',

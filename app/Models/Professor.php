@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\hasMany;
 use App\Models\Disciplina;
 use App\Models\Turma;
 use App\Models\Aluno;
@@ -21,5 +22,10 @@ class Professor extends User
     public function turmas()
     {
     	return $this->belongsToMany('App\Models\Turma');
+    }
+
+    public function avaliacoes()
+    {
+        return $this->hasMany('App\Models\Avaliacao');
     }
 }

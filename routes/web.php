@@ -45,6 +45,7 @@ Route::get('/', function () {
 */
 use App\Models\Professor;
 
+
 Route::get('professor/login','Professores\ProfessorController@logintela');
 
 Route::post('professor/login', 'Professores\AuthController@login');
@@ -55,6 +56,9 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 
 	Route::get('professor', 'Professores\ProfessorController@bemvindo');
 
+	Route::post('professor/avaliacao/{id}', 'Avaliacoes\AvaliacaoController@index');
+
+	Route::get('professor/avaliacao/finalizada/{id}', 'Avaliacoes\AvaliacaoController@mostrar');
 
 	Route::post('professor/{id}/questao', 'Questoes\QuestaoController@create');
 
@@ -65,6 +69,8 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 	Route::get('avaliacao/{id}/gerar/buscar/', 'Avaliacoes\AvaliacaoController@trazerQuestao');
 
 	Route::post('professor/avaliacao/{id}/gerar/salvar', 'Avaliacoes\AvaliacaoController@salvar');
+
+	Route::get('professor/avaliacao/{id}/gerar/adicionar', 'Avaliacoes\AvaliacaoController@receberQuestao');
 	
 	Route::get('professor/logout', 'Professores\AuthController@logout');
 

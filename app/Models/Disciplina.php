@@ -32,4 +32,9 @@ class Disciplina extends Model
     {
         return $this->hasMany('App\Models\Questao');
     }
+
+    public function avaliacao()
+    {
+        return $this->hasMany('App\Models\Avaliacao');
+    }
 }
