@@ -10,6 +10,8 @@ use App\Models\Professor;
 use App\Models\Questao;
 use Validator;
 use Auth;
+use Illuminate\Support\Facades\Input;
+
 
 class QuestaoController extends Controller
 {
@@ -18,9 +20,12 @@ class QuestaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $questoes = Professor::with('questoes')
+                    ->find($id)->questoes;
+        return view('questoes.questao_lista')
+                    ->with('questoes', $questoes);
     }
 
     /**
@@ -54,7 +59,7 @@ class QuestaoController extends Controller
         $questao->alternativaE = $request->e;
         $questao->correta = $request->correta;
         $questao->nivel = $request->nivel;
-        $questao->professor_id = $request->professor_id;
+        $questao->professor()->associate($request->professor_id);
 
 
         $questao->disciplina()->associate($request->disciplina);
@@ -83,9 +88,14 @@ class QuestaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $questao_id = $request->id;
+        $questao = Questao::find($questao_id);
+        $professor_id = $request->professor_id;
+        $professor = Professor::find($professor_id);
+
+        return view('questoes.questao_alterar')->withQuestao($questao)->with('professor', $professor);
     }
 
     /**
@@ -95,9 +105,33 @@ class QuestaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        $alterado = Questao::find($request->questao_id);
+
+        $alterado->questao = $request->questao;
+
+        $alterado->alternativaA = $request->a;
+
+        $alterado->alternativaB = $request->b;
+
+        $alterado->alternativaC = $request->c;
+
+        $alterado->alternativaD = $request->d;
+
+        $alterado->alternativaE = $request->e;
+
+        $alterado->correta = $request->correta;
+        $alterado->nivel = $request->nivel;
+
+        $alterado->disciplina()->associate($request->disciplina);
+
+        if($alterado->save())
+        {
+            $request->session()->flash('alert-success', 'Questão alterada com sucesso!');
+            return redirect ('professor');
+        }
     }
 
     /**
@@ -106,11 +140,16 @@ class QuestaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
 
+    public function deletar(Request $request)
+    {
+        $questao_id = $request->questao_id;
+        $questao = Questao::find($questao_id);
+        $questao->delete();
+                
+        $request->session()->flash('alert-danger', 'Questão '. $questao->id.' deletada com sucesso!');
+        return redirect ('professor');   
+    }
     public function buscarQuestao()
     {
         

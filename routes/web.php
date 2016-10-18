@@ -71,10 +71,19 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 	Route::post('professor/avaliacao/{id}/gerar/salvar', 'Avaliacoes\AvaliacaoController@salvar');
 
 	Route::get('professor/avaliacao/{id}/gerar/adicionar', 'Avaliacoes\AvaliacaoController@receberQuestao');
+
+	Route::post('professor/{id}/questoes', 'Questoes\QuestaoController@index');
 	
+	Route::post('professor/questao/deletar/{id}', 'Questoes\QuestaoController@deletar');
+
+	Route::post('professor/questao/alterar/{id}', 'Questoes\QuestaoController@edit');
+	
+	Route::post('professor/questao/alterada', 'Questoes\QuestaoController@update');
+
 	Route::get('professor/logout', 'Professores\AuthController@logout');
 
 });
+
 
 
 

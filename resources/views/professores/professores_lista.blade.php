@@ -22,8 +22,8 @@
 		<table class="table">
 			@foreach($professores as $professor)
 				<tr>
-					<td>{{$professor->enrollment}}</td>
-					<td>{{$professor->name}}</td>
+					<td>{{$professor->matricula}}</td>
+					<td>{{$professor->nome}}</td>
 					<td>{{$professor->email}}</td>
 					<td><a href="/professor/detalhes/{{$professor->id}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></td>
 					<td><a href="/professores/{{$professor->id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
