@@ -283,12 +283,7 @@ class ComposerStaticInit401c39904328666e339d313dfea4cb02
     );
 
     public static $classMap = array (
-        'AddChaveEstrangeiraDisciplinaTabelaQuestoes' => __DIR__ . '/../..' . '/database/migrations/2016_10_06_141213_add_chave_estrangeira_disciplina_tabela_questoes.php',
-        'AdicionandoChaveEstrangeiraTurmaTabelaAvaliacoes' => __DIR__ . '/../..' . '/database/migrations/2016_10_12_193559_adicionando_chave_estrangeira_turma_tabela_avaliacoes.php',
-        'AdicionarChaveDisciplinaTabelaAvaliacao' => __DIR__ . '/../..' . '/database/migrations/2016_10_10_221454_adicionar_chave_disciplina_tabela_avaliacao.php',
-        'AdicionarChaveEstrangeiraDaTablaDisciplina' => __DIR__ . '/../..' . '/database/migrations/2016_10_01_161102_adicionar_chave_estrangeira_da_tabla_disciplina.php',
-        'AdicionarIdDoProfNaTabelaQuestoes' => __DIR__ . '/../..' . '/database/migrations/2016_10_03_233827_adicionar_id_do_prof_na_tabela_questoes.php',
-        'AdicionarTimestamps' => __DIR__ . '/../..' . '/database/migrations/2016_10_10_004946_adicionar_timestamps.php',
+        'AdicionarTimestampsAvaliacaoDisciplina' => __DIR__ . '/../..' . '/database/migrations/2016_10_15_184455_adicionar_timestamps_avaliacao_disciplina.php',
         'CreateAlunoDisciplina' => __DIR__ . '/../..' . '/database/migrations/2016_09_30_233718_create_aluno_disciplina.php',
         'CreateAlunos' => __DIR__ . '/../..' . '/database/migrations/2016_09_30_234026_create_alunos.php',
         'CreateClassroomSubjects' => __DIR__ . '/../..' . '/database/migrations/2016_09_15_234013_create_classroom_subjects.php',
@@ -307,9 +302,6 @@ class ComposerStaticInit401c39904328666e339d313dfea4cb02
         'CreateTurmaDisciplina' => __DIR__ . '/../..' . '/database/migrations/2016_09_30_234437_create_turma_disciplina.php',
         'CreateTurmas' => __DIR__ . '/../..' . '/database/migrations/2016_09_30_234342_create_turmas.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
-        'CriarTabelaAvaliacaoDisciplina' => __DIR__ . '/../..' . '/database/migrations/2016_10_10_003824_criar_tabela_avaliacao_disciplina.php',
-        'CriarTabelaAvaliacaoQuestao' => __DIR__ . '/../..' . '/database/migrations/2016_10_10_005522_criar_tabela_avaliacao_questao.php',
-        'CriarTabelaAvaliacoes' => __DIR__ . '/../..' . '/database/migrations/2016_10_10_003710_criar_tabela_avaliacoes.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
@@ -752,7 +744,6 @@ class ComposerStaticInit401c39904328666e339d313dfea4cb02
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
-        'RelacionamentooAvaliacaoTurma' => __DIR__ . '/../..' . '/database/migrations/2016_10_08_143450_relacionamentoo_avaliacao_turma.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',

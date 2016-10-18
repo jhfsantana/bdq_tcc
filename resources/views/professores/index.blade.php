@@ -38,6 +38,11 @@
 			<input type="submit" name="avaliacao" value="Avaliacao">
 		</form>
 
+		<form action="professor/{{Auth::user()->id}}/questoes" method="post">
+			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
+			<input type="submit" name="questoes" value="questoes">
+		</form>
+
 
 <form action="professor/logout">
 	<input type="submit" name="logout" value="logout">
