@@ -20,4 +20,9 @@ class Questao extends Model
     {
     	return $this->belongsToMany('App\Models\Avaliacao');
     }
+
+    public function professor()
+    {
+        return $this->belongsTo('App\Models\Professor');
+    }
 }

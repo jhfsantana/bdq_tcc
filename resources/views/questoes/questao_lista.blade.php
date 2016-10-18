@@ -72,7 +72,7 @@ function confirmDelete(e) {
 
 					<td><form id="formdeletar" method="post" action="/professor/questao/deletar/{{$questao->id}}">
                     		<input name="_token" type="hidden" value="{{ csrf_token() }}">
-							<input type="hidden" form="formdeletar" value="{{$questao->id}}" name="questao_id" id="questao_id" />
+							<input type="text" form="formdeletar" value="{{$questao->id}}" name="questao_id" id="questao_id" />
 							<button type="submit" onclick="confirmDelete(event)" name="deletar" id="deletar" class="btn btn-danger">
 								<i class="glyphicon glyphicon-trash"></i>
 							</button>
