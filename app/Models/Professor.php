@@ -28,4 +28,10 @@ class Professor extends User
     {
         return $this->hasMany('App\Models\Avaliacao');
     }
+
+    public function questoes()
+    {
+        return $this->hasMany('App\Models\Questao');
+    }
+
 }

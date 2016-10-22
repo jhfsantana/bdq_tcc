@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse as Redirection;
 use Auth;
 use Request;
+use Illuminate\Support\MessageBag;
 trait AuthenticatesUsers
 {
 
@@ -17,6 +18,7 @@ trait AuthenticatesUsers
 
     public function login(Request $request, Auth $auth): Redirection
     {
+        $errors = new MessageBag;
 
        	  $credentials = (Request::only('email','password'));
        	  //dd($credentials);
@@ -25,10 +27,13 @@ trait AuthenticatesUsers
 
             return redirect()->intended($this->redirectTo);
         }
-
-        return back()
-            ->with('authError', 'Email ou senha incorretos')
-            ->withInput(Request::except('password'));
+        else
+        {
+            $errors = new MessageBag(['password' => ['E-mail ou senha inválidos']]);
+            return back()
+            ->withErrors($errors);
+        }
+        
     }
 
     public function logout(Auth $auth): Redirection

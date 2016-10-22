@@ -147,7 +147,7 @@ class QuestaoController extends Controller
         $questao = Questao::find($questao_id);
         $questao->delete();
                 
-        $request->session()->flash('alert-danger', 'Questão '. $questao->id.' deletada com sucesso!');
+        $request->session()->flash('alert-danger', 'Questão '. $questao->id .' deletada com sucesso!');
         return redirect ('professor');   
     }
     public function buscarQuestao()
