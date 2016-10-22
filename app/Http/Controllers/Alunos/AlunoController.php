@@ -12,6 +12,10 @@ use App\Models\Aluno;
 
 use App\Models\Disciplina;
 
+use App\Models\Turma;
+
+use App\Models\Professor;
+
 use App\Http\Requests\FormRequest;
 
 class AlunoController extends Controller
@@ -52,8 +56,8 @@ class AlunoController extends Controller
         $aluno->matricula = $request->matricula;
         $aluno->nome = $request->nome;
         $aluno->email = $request->email;
-        $aluno->password = $request->password;
-
+        $cryptPassword = bcrypt($request->password);
+        $aluno->password = $cryptPassword;
         $aluno->save();
 
         $aluno->disciplinas()->sync($request->disciplinas, false);
@@ -109,5 +113,29 @@ class AlunoController extends Controller
         $aluno->delete();
 
         return redirect('alunos');
+    }
+
+    public function loginTela()
+    {
+        return view('alunos.auth');
+    }
+
+    public function bemvindo()
+    {
+        return view('alunos.index');
+    }
+
+    public function avaliacao($id)
+    {
+        $avaliacao = Turma::with('avaliacoes')->find($id)->avaliacoes;
+
+        return view('alunos.avaliacao')->with('avaliacao', $avaliacao);
+    }
+    
+    
+    public function avaliacoesDisponiveis($id)
+    {
+        $aluno = Aluno::find($id);
+        return view('alunos.avaliacao_disponivel')->withAluno($aluno);
     }
 }
