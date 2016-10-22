@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="/css/bg-blur.css">
+	<link rel="stylesheet" href="/css/loading.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
@@ -15,6 +15,11 @@
  $(document).ready(function() {
     var clicked = 0;
 
+    var res = {
+        loader : $('<div />', { class: 'loader'}),
+        container: $('#questao1')
+    }
+
     $("#buscar").click(function(e) {                
         e.preventDefault();
         e.stopPropagation();
@@ -27,8 +32,12 @@
         url: "/avaliacao/{id}/gerar/buscar/",
         data:  { "disciplina_id" : $('#disciplina_id').val(), "nivel_id" : $('#nivel').val()},
         dataType: "JSON",   //expect html to be returned                
+        
+        beforesend: function(){
+            res.container.append(res.loader);
+        },
         success: function(response){
-
+            res.container.find(res.loader).remove() ;
             var questao = "questao"
             var alternativaA = "alternativaA"
             var alternativaB = "alternativaB"
@@ -762,7 +771,9 @@ $(document).ready(function() {
         </div>
     </div>
 
-
+<div class="loader">
+    assa
+</div>
     <div class="container">    
         <div id="questaobox3" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
