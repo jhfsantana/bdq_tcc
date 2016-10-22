@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Professor;
 use App\Models\Turma;
 use App\Models\Disciplina;
 
 
-class Aluno extends Model
+class Aluno extends User
 {
-    protected $fillable = array('enrollment', 'name','email', 'password');
+    protected $fillable = array('matricula', 'nome','email', 'password');
     protected $guarded = ['id','password'];
 
 

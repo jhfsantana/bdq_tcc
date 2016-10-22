@@ -44,6 +44,7 @@ Route::get('/', function () {
 
 */
 use App\Models\Professor;
+use App\Models\Aluno;
 
 
 Route::get('professor/login','Professores\ProfessorController@logintela');
@@ -134,7 +135,19 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 
 });
 
+Route::group(['middleware'=> ['auth:web_students']], function ()
+{
+	Route::get('aluno', 'Alunos\AlunoController@bemvindo');
+	Route::get('aluno/logout', 'Alunos\AuthController@logout');
 
+	Route::post('aluno/avaliacoes/{id}', 'Alunos\AlunoController@avaliacoesDisponiveis');
+
+	Route::get('aluno/avaliacao/online/{id}', 'Alunos\AlunoController@avaliacao');
+
+});
+
+Route::get('aluno/login','Alunos\AlunoController@logintela');
+Route::post('aluno/login', 'Alunos\AuthController@login');
 
 
 

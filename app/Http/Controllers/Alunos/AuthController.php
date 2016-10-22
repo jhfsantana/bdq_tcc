@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Alunos;
 
-use Illuminate\Http\Request;
-
+use Illuminate\Contracts\View\View;
+use App\Http\Controllers\AuthenticatesUsers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
