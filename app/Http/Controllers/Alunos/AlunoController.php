@@ -17,6 +17,7 @@ use App\Models\Turma;
 use App\Models\Professor;
 
 use App\Models\Questao;
+use App\Models\Avaliacao;
 
 use Illuminate\Support\Facades\Input;
 
@@ -131,9 +132,12 @@ class AlunoController extends Controller
         return view('alunos.index');
     }
 
-    public function avaliacao($id)
+    public function avaliacao(Request $request)
     {
-        $avaliacao = Turma::with('avaliacoes')->find($id)->avaliacoes;
+        $avaliacao = Turma::with('avaliacoes')->find($request->turma_id)->avaliacoes->where('disciplina_id', '=', $request->disciplina_id);
+
+       // $avaliacao = Turma::with('avaliacoes')->find($request->turma_id)->avaliacoes;
+
 
         return view('alunos.avaliacao')->with('avaliacao', $avaliacao);
     }
@@ -249,7 +253,6 @@ class AlunoController extends Controller
             }
             
         }
-
 
         return view('alunos.resultado')->with('nota', $nota);
     }

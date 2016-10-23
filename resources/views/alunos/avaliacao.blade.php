@@ -10,10 +10,12 @@
 	</nav>
 <div class="container">
 <h2 style="text-align: center;">Avaliação</h2>
+
+
 @foreach($avaliacao as $avaliacao)
 	<?php $count=0; ?>
 
-<form action="/aluno/avaliacao/finalizada" method="post">
+<form action="/aluno/avaliacao/finalizada" method="post" form="avaliacao">
 	<table class="table">
 		@foreach($avaliacao->questoes as $questao)
 		<table>
@@ -82,7 +84,18 @@
 		@endforeach
 @endforeach
 	<input name="_token" type="hidden" value="{{ csrf_token() }}">
-<input class="btn btn-primary" type="submit" name="finalizar" value="Finalizar">
+
+
+@if(!count($avaliacao))
+	<div class="container">
+		<div class="alert alert-warning" style="text-align: center;">
+			<h1>Não existe avaliação para essa disciplina nesta turma</h1>
+			<input class="btn btn-primary" type="hidden" name="finalizar" value="Finalizar">
+		</div>
+	</div>
+@else
+	<input class="btn btn-primary" type="submit" name="finalizar" value="Finalizar">
+@endif
 </form>
 </table>
 </body>
