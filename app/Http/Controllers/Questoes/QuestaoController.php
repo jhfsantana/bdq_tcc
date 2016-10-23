@@ -11,6 +11,8 @@ use App\Models\Questao;
 use Validator;
 use Auth;
 use Illuminate\Support\Facades\Input;
+use DB;
+
 
 
 class QuestaoController extends Controller

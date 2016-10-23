@@ -31,7 +31,8 @@
 				<td>
 					<div class="radio">
 						<label>
-							<input type="radio" name="{{$count}}" value="a"> a) {{$questao->alternativaA}}
+							<input type="radio" name="q{{$count}}" value="a"> a) {{$questao->alternativaA}}
+							<input name="questao_id{{$count}}" type="hidden" value="{{ $questao->id }}">
 						</label>
 					</div>
 				</td>
@@ -41,7 +42,7 @@
 				<td>
 					<div class="radio">
 						<label>
-							<input type="radio" name="{{$count}}" value="b"> b) {{$questao->alternativaB}}
+							<input type="radio" name="q{{$count}}" value="b"> b) {{$questao->alternativaB}}
 
 						</label>
 					</div>
@@ -52,7 +53,7 @@
 				<td>
 					<div class="radio">
 						<label>
-							<input type="radio" name="{{$count}}" value="c"> c) {{$questao->alternativaC}}
+							<input type="radio" name="q{{$count}}" value="c"> c) {{$questao->alternativaC}}
 						</label>
 					</div>
 				</td>
@@ -62,7 +63,7 @@
 				<td>
 					<div class="radio">
 						<label>
-							<input type="radio" name="{{$count}}" value="d"> d) {{$questao->alternativaD}}
+							<input type="radio" name="q{{$count}}" value="d"> d) {{$questao->alternativaD}}
 						</label>
 					</div>
 				</td>
@@ -72,7 +73,7 @@
 				<td>
 					<div class="radio">
 						<label>
-							<input type="radio" name="{{$count}}" value="e"> e) {{$questao->alternativaE}}
+							<input type="radio" name="q{{$count}}" value="e"> e) {{$questao->alternativaE}}
 						</label>
 					</div>
 				</td>
@@ -80,7 +81,7 @@
 		</table>
 		@endforeach
 @endforeach
-
+	<input name="_token" type="hidden" value="{{ csrf_token() }}">
 <input class="btn btn-primary" type="submit" name="finalizar" value="Finalizar">
 </form>
 </table>
