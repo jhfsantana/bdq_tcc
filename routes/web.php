@@ -119,8 +119,8 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	Route::get('professor/novo','Professores\ProfessorController@create');
 	Route::get('professores','Professores\ProfessorController@index');
 	Route::post('teachers/', ['uses'=>'Professores\ProfessorController@store', 'as' => 'professor.store']);
-    Route::get('professor/detalhes/{id}','Professores\ProfessorController@show');
-    Route::get('professores/{id}','Professores\ProfessorController@destroy');
+    Route::post('professor/detalhes/{id}','Professores\ProfessorController@show');
+    Route::post('professores/{id}','Professores\ProfessorController@destroy');
 
 	Route::get('turma/novo','Turmas\TurmaController@create');
 	Route::post('classrooms','Turmas\TurmaController@store');
@@ -142,7 +142,7 @@ Route::group(['middleware'=> ['auth:web_students']], function ()
 
 	Route::post('aluno/avaliacoes/{id}', 'Alunos\AlunoController@avaliacoesDisponiveis');
 
-	Route::get('aluno/avaliacao/online/{id}', 'Alunos\AlunoController@avaliacao');
+	Route::post('aluno/avaliacao/online', 'Alunos\AlunoController@avaliacao');
 
 	Route::post('aluno/avaliacao/finalizada', 'Alunos\AlunoController@correcao');
 
