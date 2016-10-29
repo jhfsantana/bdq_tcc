@@ -94,7 +94,8 @@
 		</div>
 	</div>
 @else
-	<input class="btn btn-primary" type="submit" name="finalizar" value="Finalizar">
+	<input class="btn btn-primary" type="submit" name="finalizar">
+	<input type="hidden" name="avaliacao_id" value="{{$avaliacao->id}}">
 @endif
 </form>
 </table>

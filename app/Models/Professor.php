@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\hasMany;
 use App\Models\Disciplina;
 use App\Models\Turma;
 use App\Models\Aluno;
+use Illuminate\Support\Facades\DB;
 class Professor extends User
 {
     protected $table = 'professores';
@@ -34,4 +35,28 @@ class Professor extends User
         return $this->hasMany('App\Models\Questao');
     }
 
+    public static function totalProfessores()
+    {
+        $total = Professor::all()->count();
+
+        return $total;
+    }
+
+    public static function professorComMaiorNumeroDeQuestoes()
+    {
+        $query = "SELECT p.matricula
+                        ,p.nome
+                        ,p.email
+                        ,d.nome as disciplina_nome
+                        ,count(q.questao) as total_questoes
+                    FROM professores p
+                    JOIN questoes q on (q.professor_id = p.id)
+                    JOIN disciplinas d on (d.id = q.disciplina_id)
+                   GROUP BY p.matricula, p.nome, p.email, d.nome
+                   ORDER BY p.nome";
+
+        $resultado = DB::SELECT($query);
+
+        return $resultado;
+    }
 }

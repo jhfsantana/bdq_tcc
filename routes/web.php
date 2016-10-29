@@ -94,10 +94,7 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 Route::group(['middleware'=> ['auth:web_admins']], function ()
 {
 
-	Route::get('home', function ()
-	{
-		return view ('admin.index');
-	});
+	Route::get('home','Admins\AdminController@index');
 
 
 	Route::get('aluno/novo','Alunos\AlunoController@create');
@@ -130,6 +127,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	Route::get('disciplinas','Disciplinas\DisciplinaController@index');
 	Route::post('subjects','Disciplinas\DisciplinaController@store');
 
+	Route::get('/relatorio', 'Admins\AdminController@relatorio');
 
 
 
