@@ -162,6 +162,7 @@ class AlunoController extends Controller
         $questao8 = Questao::find(Input::get('questao_id8'));
         $questao9 = Questao::find(Input::get('questao_id9'));
         $questao10 = Questao::find(Input::get('questao_id10'));
+        $avaliacao = Avaliacao::find($request->avaliacao_id);
 
         
         if(isset($request->q1))
@@ -254,6 +255,6 @@ class AlunoController extends Controller
             
         }
 
-        return view('alunos.resultado')->with('nota', $nota);
+        return view('alunos.resultado')->with('nota', $nota)->with('questao1', $questao1)->withAvaliacao($avaliacao);
     }
 }

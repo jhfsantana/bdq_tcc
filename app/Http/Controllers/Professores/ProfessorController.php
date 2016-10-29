@@ -141,4 +141,5 @@ class ProfessorController extends Controller
     {
         return view('professores.auth');
     }
+
 }

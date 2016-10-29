@@ -143,13 +143,11 @@ class QuestaoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function deletar(Request $request)
+    public function deletar(Request $request, $id)
     {
-        $questao_id = $request->questao_id;
-        $questao = Questao::find($questao_id);
+        $questao = Questao::find($id);
         $questao->delete();
-                
-        $request->session()->flash('alert-danger', 'Questão '. $questao->id .' deletada com sucesso!');
+        $request->session()->flash('alert-danger', 'Questão '. $questao->questao .' deletada com sucesso!');
         return redirect ('professor');   
     }
     public function buscarQuestao()
