@@ -35,6 +35,11 @@ class Professor extends User
         return $this->hasMany('App\Models\Questao');
     }
 
+    public function resultados()
+    {
+        return $this->hasMany('App\Models\Resultado');
+    }
+
     public static function totalProfessores()
     {
         $total = Professor::all()->count();

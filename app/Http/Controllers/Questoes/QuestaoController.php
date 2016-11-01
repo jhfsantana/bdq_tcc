@@ -92,9 +92,11 @@ class QuestaoController extends Controller
      */
     public function edit(Request $request)
     {
+
         $questao_id = $request->id;
         $questao = Questao::find($questao_id);
         $professor_id = $request->professor_id;
+
         $professor = Professor::find($professor_id);
 
         return view('questoes.questao_alterar')->withQuestao($questao)->with('professor', $professor);

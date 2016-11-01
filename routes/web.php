@@ -143,7 +143,9 @@ Route::group(['middleware'=> ['auth:web_students']], function ()
 	Route::post('aluno/avaliacao/online', 'Alunos\AlunoController@avaliacao');
 
 	Route::post('aluno/avaliacao/finalizada', 'Alunos\AlunoController@correcao');
-
+	
+	Route::post('aluno/avaliacao/resultado/{id}', 'Avaliacoes\AvaliacaoController@paginaResultado');
+	
 });
 
 Route::get('aluno/login','Alunos\AlunoController@logintela');

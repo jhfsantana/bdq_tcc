@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Models\Avaliacao;
 use App\Models\Professor;
 use App\Models\Questao;
+use App\Models\Aluno;
 use Response;
 use DB;
 use Illuminate\Support\Facades\Input;
@@ -48,10 +49,11 @@ class AvaliacaoController extends Controller
     }
 
 
-    public function trazerQuestao(Request $request)
+    public function trazerQuestao()
     {
     	
     	$disciplina_id = Input::get('disciplina_id');
+        $professor_id = Input::get('professor_id');
         $nivel_id = Input::get('nivel_id');
         $nivelq2_id = Input::get('nivelq2_id');
         $nivelq3_id = Input::get('nivelq3_id');
@@ -62,25 +64,28 @@ class AvaliacaoController extends Controller
         $nivelq8_id = Input::get('nivelq8_id');
         $nivelq9_id = Input::get('nivelq9_id');
         $nivelq10_id = Input::get('nivelq10_id');
-        
+
+
 
 
     	$questao = DB::table('questoes')
 								    	->where('disciplina_id', '=', $disciplina_id)
-								    	->where('nivel', '=', $nivel_id)
-                                        ->orWhere('nivel', '=', $nivelq2_id)
-                                        ->orWhere('nivel', '=', $nivelq3_id)
-                                        ->orWhere('nivel', '=', $nivelq4_id)
-                                        ->orWhere('nivel', '=', $nivelq5_id)
-                                        ->orWhere('nivel', '=', $nivelq6_id)
-                                        ->orWhere('nivel', '=', $nivelq7_id)
-                                        ->orWhere('nivel', '=', $nivelq8_id)
-                                        ->orWhere('nivel', '=', $nivelq9_id)
-                                        ->orWhere('nivel', '=', $nivelq10_id)
+                                        ->orwhere('professor_id', '=', $professor_id)
+                                        ->where('nivel', '=', $nivel_id)
+                                        ->Where('nivel', '=', $nivelq2_id)
+                                        ->Where('nivel', '=', $nivelq3_id)
+                                        ->Where('nivel', '=', $nivelq4_id)
+                                        ->Where('nivel', '=', $nivelq5_id)
+                                        ->Where('nivel', '=', $nivelq6_id)
+                                        ->Where('nivel', '=', $nivelq7_id)
+                                        ->Where('nivel', '=', $nivelq8_id)
+                                        ->Where('nivel', '=', $nivelq9_id)
+                                        ->Where('nivel', '=', $nivelq10_id)
 								    	->InRandomOrder()
 								    	->first();
+      
 
-		return Response::json($questao);
+            return Response::json($questao);    
     }
 
 
@@ -135,5 +140,11 @@ class AvaliacaoController extends Controller
     {
         $avaliacao = Avaliacao::find($id);
         return view('avaliacao.finalizada')->withAvaliacao($avaliacao);
+    }
+
+    public function paginaResultado($id)
+    {
+        $id = Aluno::find($id);
+        return view('alunos.resultado')->withAluno($id);
     }
 }

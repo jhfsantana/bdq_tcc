@@ -30,7 +30,7 @@
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivel_id" : $('#nivel').val()},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivel_id" : $('#nivel').val(), "professor_id" : $('#prof').val()},
         dataType: "JSON",   //expect html to be returned                
         
         beforesend: function(){
@@ -75,7 +75,7 @@
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivel_id" : $('#nivel').val()},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivel_id" : $('#nivel').val(), "professor_id" : $('#prof').val()},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
                            
@@ -166,7 +166,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq2_id" : $('#nivelq2').val()},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq2_id" : $('#nivelq2').val(), "professor_id" : $('#prof').val()},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 

@@ -61,8 +61,8 @@ function confirmDelete(e) {
 					<td>{{$questao->disciplina->nome}}</td>
 					<td><form id="formalterar" method="post" action="/professor/questao/alterar/{{$questao->id}}">
                     		<input name="_token" type="hidden" value="{{ csrf_token() }}">
-							<input type="hidden" form="formalterar" value="{{$questao->id}}" name="questao_id"/>
-							<input type="hidden" form="formalterar" value="{{Auth::user()->id}}" name="professor_id" id="professor-id"/>
+							<input type="hidden"  value="{{$questao->id}}" name="questao_id"/>
+							<input type="hidden"  value="{{Auth::user()->id}}" name="professor_id" id="professor-id"/>
 							<button type="submit" name="alterar" id="alterar" class="btn btn-warning">
 								<i class="glyphicon glyphicon-pencil"></i>
 							</button>

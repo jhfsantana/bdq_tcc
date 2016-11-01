@@ -18,6 +18,82 @@ a {
 	text-decoration: none;
 }
 
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.alert h4 {
+  margin-top: 0;
+  color: inherit;
+}
+.alert .alert-link {
+  font-weight: bold;
+}
+.alert > p,
+.alert > ul {
+  margin-bottom: 0;
+}
+.alert > p + p {
+  margin-top: 5px;
+}
+.alert-dismissable,
+.alert-dismissible {
+  padding-right: 35px;
+}
+.alert-dismissable .close,
+.alert-dismissible .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  color: inherit;
+}
+.alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+.alert-success hr {
+  border-top-color: #c9e2b3;
+}
+.alert-success .alert-link {
+  color: #2b542c;
+}
+.alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.alert-info hr {
+  border-top-color: #a6e1ec;
+}
+.alert-info .alert-link {
+  color: #245269;
+}
+.alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+.alert-warning hr {
+  border-top-color: #f7e1b5;
+}
+.alert-warning .alert-link {
+  color: #66512c;
+}
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.alert-danger hr {
+  border-top-color: #e4b9c0;
+}
+.alert-danger .alert-link {
+  color: #843534;
+}
+
 div#header {
  width: 100%;
  height: 70px;
@@ -58,6 +134,40 @@ div#container {
 	height: 100%;
 	background:#171717;
 	float: left; 
+}
+
+.btn-link {
+  font-weight: normal;
+  color: #337ab7;
+  border-radius: 0;
+}
+.btn-link,
+.btn-link:active,
+.btn-link.active,
+.btn-link[disabled],
+fieldset[disabled] .btn-link {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.btn-link,
+.btn-link:hover,
+.btn-link:focus,
+.btn-link:active {
+  border-color: transparent;
+}
+.btn-link:hover,
+.btn-link:focus {
+  color: #23527c;
+  text-decoration: underline;
+  background-color: transparent;
+}
+.btn-link[disabled]:hover,
+fieldset[disabled] .btn-link:hover,
+.btn-link[disabled]:focus,
+fieldset[disabled] .btn-link:focus {
+  color: #777;
+  text-decoration: none;
 }
 
 ul#nav li input{
@@ -290,9 +400,29 @@ a.mobile:active{
    margin-left: 0;
 }
 
+
+div#box .box-top img{
+	width: 43px;
+	margin-top: 12px;
+	line-height: 100px;
+	background-size: 100%;	
+	float: left;
+} 
+div#box .box2-top img{
+	width: 43px;
+	margin-top: 12px;
+	line-height: 100px;
+	background-size: 100%;	
+	float: left;
+} 
+div#box .box3-top img{
+	width: auto;
+	margin-top: 12px;
+	line-height: 100px;
+	background-size: 100%;	
+	float: left;
+}
 div#box .box-top a{
-	float: right;
-	margin-right: 15px;
 	color: #ffffff;
 	margin-top: 0;
 	display: block;
@@ -333,10 +463,7 @@ div#box .box2-top {
 }
 
 div#box .box2-top a{
-	float: right;
-	margin-right: 15px;
 	color: #ffffff;
-	margin-top: 0;
 	display: block;
 	padding: 0px;
 	font-size: 0.8em;
@@ -358,10 +485,10 @@ div#box .box3-top {
 }
 
 div#box .box3-top a{
-	margin-left: 10px;
-	text-align: center; 
 	color: #ffffff;
-	font-size: 0.9em;
+	display: block;
+	padding: 0px;
+	font-size: 0.8em;
 } 
 
 

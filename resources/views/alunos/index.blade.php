@@ -29,6 +29,11 @@
 			<input type="submit" name="avaliacao" value="Avaliacao">
 		</form>
 
+		<form action="aluno/avaliacao/resultado/{{Auth::user()->id}}" method="post">
+			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
+			<input type="submit" name="resultado" value="Resultado">
+		</form>
+
 
 <form action="aluno/logout">
 	<input type="submit" name="logout" value="logout">

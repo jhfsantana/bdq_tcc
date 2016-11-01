@@ -18,6 +18,7 @@ use App\Models\Professor;
 
 use App\Models\Questao;
 use App\Models\Avaliacao;
+use App\Models\Resultado;
 
 use Illuminate\Support\Facades\Input;
 
@@ -163,8 +164,11 @@ class AlunoController extends Controller
         $questao9 = Questao::find(Input::get('questao_id9'));
         $questao10 = Questao::find(Input::get('questao_id10'));
         $avaliacao = Avaliacao::find($request->avaliacao_id);
-
         
+        $resultado = new Resultado;
+
+        $token = $request->_token;     
+
         if(isset($request->q1))
         {
             if($request->q1 == $questao1->correta)
@@ -255,6 +259,20 @@ class AlunoController extends Controller
             
         }
 
-        return view('alunos.resultado')->with('nota', $nota)->with('questao1', $questao1)->withAvaliacao($avaliacao);
+
+        $id = $request->aluno_id;
+        $aluno = Aluno::find($id);
+        $resultado->avaliacao()->associate($request->avaliacao_id);
+        $resultado->aluno()->associate($request->aluno_id);
+        $resultado->nota = $nota;
+        
+        if($resultado->save())
+        {            
+            $request->session()->flash('alert-success', 'Avaliação realizada com sucesso!!');
+            return redirect('aluno');
+        }
+
+
+       
     }
 }

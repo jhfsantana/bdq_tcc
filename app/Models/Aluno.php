@@ -20,6 +20,11 @@ class Aluno extends User
 		return $this->belongsToMany('App\Models\Disciplina');
     }
 
+    public function resultados()
+    {
+        return $this->hasMany('App\Models\Resultado');
+    }
+
     public static function totalAlunos()
     {
     	$alunos = Aluno::all()->count();
