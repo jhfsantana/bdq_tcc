@@ -64,4 +64,19 @@ class Professor extends User
 
         return $resultado;
     }
+
+    public static function notas($data, $disciplina)
+    {  
+
+       $notas = DB::table('avaliacoes')
+            ->join('turmas', 'avaliacoes.turma_id', '=', 'turmas.id')
+            ->join('aluno_resultado', 'avaliacoes.id', '=', 'aluno_resultado.avaliacao_id')
+            ->join('alunos as a', 'aluno_resultado.aluno_id', '=', 'a.id')
+            ->join('disciplinas', 'avaliacoes.disciplina_id', '=', 'disciplinas.id')
+            ->where('disciplinas.id', '=', $disciplina)
+            ->select('turmas.nome as turma_nome', 'aluno_resultado.nota', 'a.nome as aluno_nome', 'disciplinas.nome as disciplina_nome')
+            ->get();
+        
+        return $notas;
+    }
 }

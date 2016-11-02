@@ -12,17 +12,15 @@
 		<h1>RESULTADO</h1>
 
 		<div class="container">
-			@foreach($aluno->resultados as $resultado)
-				@if($aluno->nota >= 6)
-					<div class="alert alert-success">
-						<h1>Você tirou <i>{{$resultado->nota}}</i> na PROVA</h1>
-					</div>
-				@else
-					<div class="alert alert-danger">
-						<h1>Você tirou <i>{{$resultado->nota}}</i> na PROVA</h1>
-					</div>
-				@endif
-			@endforeach
+			@if($avaliacao->resultado->nota >= 5)
+			<div class="alert alert-success" style="background-color: #FFFFFF; border: none;">
+				<h1><i>Sua nota foi {{$avaliacao->resultado->nota}}</i> na avaliação de {{$avaliacao->disciplina->nome}}</h1>
+			</div>
+			@else
+			<div class="alert alert-danger" style="background-color: #FFFFFF; border: none;">
+					<h1>Sua nota foi <i>{{$avaliacao->resultado->nota}}</i> na avaliação de {{$avaliacao->disciplina->nome}}</h1>
+			</div>
+			@endif
 		</div>
 	</div>
 </body>

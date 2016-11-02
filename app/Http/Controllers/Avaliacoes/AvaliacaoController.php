@@ -144,7 +144,15 @@ class AvaliacaoController extends Controller
 
     public function paginaResultado($id)
     {
-        $id = Aluno::find($id);
-        return view('alunos.resultado')->withAluno($id);
+        $avaliacao = Avaliacao::find($id);
+        return view('alunos.resultado')->withAvaliacao($avaliacao);
     }
+
+
+    public function realizadas($id)
+    {
+        $aluno = Aluno::find($id);
+        return view('alunos.realizadas')->withAluno($aluno);
+    }
+
 }
