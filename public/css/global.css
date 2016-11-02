@@ -373,6 +373,10 @@ div#box .box2-panel {
 	border-bottom-right-radius: 10px;
 }
 
+div#chart_div {
+	text-align: center;
+}
+
 @media only screen and (max-width: 480px) {
 
 a.mobile {
@@ -424,8 +428,8 @@ div#box .box3-top img{
 }
 div#box .box-top a{
 	color: #ffffff;
-	margin-top: 0;
 	display: block;
+	margin-top: 6px;
 	padding: 0px;
 	font-size: 0.8em;
 } 

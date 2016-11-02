@@ -8,9 +8,6 @@
 
 </head>
 <body>
-
-
-
 	<div id="header">
 		<div class="logo">
 			<a href="#">BDQ - Avaliação<span>Online</span></a>

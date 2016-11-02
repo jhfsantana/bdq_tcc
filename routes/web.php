@@ -129,6 +129,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 
 	Route::get('/relatorio', 'Admins\AdminController@relatorio');
 
+	Route::get('/relatorio/{id}', 'Admins\AdminController@relatorio');
 
 
 });
@@ -136,6 +137,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 Route::group(['middleware'=> ['auth:web_students']], function ()
 {
 	Route::get('aluno', 'Alunos\AlunoController@bemvindo');
+	
 	Route::get('aluno/logout', 'Alunos\AuthController@logout');
 
 	Route::post('aluno/avaliacoes/{id}', 'Alunos\AlunoController@avaliacoesDisponiveis');
@@ -144,7 +146,9 @@ Route::group(['middleware'=> ['auth:web_students']], function ()
 
 	Route::post('aluno/avaliacao/finalizada', 'Alunos\AlunoController@correcao');
 	
-	Route::post('aluno/avaliacao/resultado/{id}', 'Avaliacoes\AvaliacaoController@paginaResultado');
+	Route::get('aluno/avaliacao/resultado/{id}', 'Avaliacoes\AvaliacaoController@paginaResultado');
+	
+	Route::post('aluno/avaliacoes/realizadas/{id}', 'Avaliacoes\AvaliacaoController@realizadas');
 	
 });
 

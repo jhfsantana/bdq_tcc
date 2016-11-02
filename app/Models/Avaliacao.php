@@ -38,6 +38,10 @@ class Avaliacao extends Model
         return $this->belongsTo('App\Models\Turma');
     }
 
+    public function resultado()
+    {
+        return $this->hasOne('App\Models\Resultado');
+    }
 
 
 }
