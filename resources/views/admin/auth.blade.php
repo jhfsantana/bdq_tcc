@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="/css/bootstrap.css">	
+    <link rel="stylesheet" href="/css/bootstrap.css">   
+    <link type="text/css" rel="stylesheet" href="/css/bg-admin.css" />
 	<title>Login</title>
 </head>
 <body>
-    <div class="container">    
+<div class="image" id="image">
+
+
+    <div class="container" style="margin-top:12%;">    
+
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             @if (count($errors) > 0)
                 <div class="alert alert-warning" role="alert-danger" id="formRequest">
@@ -16,9 +21,10 @@
                     </ul>
                 </div>
             @endif                     
-            <div class="panel panel-info" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Área Administrativa</div>
+            <div class="panel panel-default">
+                    <div class="panel-heading" style="background-color: #ecf0f1; border-color: #1abc9c;">
+                       <img src="images/user.png">
+                       <div class="panel-title" style="text-align: center; font-family: lato; "><h2>Área Administrativa</h2></div>
                     </div>     
 
                     <div style="padding-top:30px" class="panel-body" >
@@ -50,8 +56,7 @@
                     </div>  
         </div>
     </div>	
-    
-
+</div>
 </body>
 </html>
 

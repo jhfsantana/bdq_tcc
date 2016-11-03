@@ -52,8 +52,8 @@
 			<div id="box">
 				<div class="box-top">
 					<img src="images/professor_64px.png">
-					<h3 class="professores"> 30 </h3>
-					<a href="#">Total de professores</a>
+					<h3 class="professores"> {{$alunos->qtd_alunos}} </h3>
+					<a href="#">Total de alunos</a>
 				</div>
 
 				<div class="box2-top">

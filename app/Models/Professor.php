@@ -9,6 +9,7 @@ use App\Models\Disciplina;
 use App\Models\Turma;
 use App\Models\Aluno;
 use Illuminate\Support\Facades\DB;
+use Auth;
 class Professor extends User
 {
     protected $table = 'professores';
@@ -79,5 +80,23 @@ class Professor extends User
             ->get();
         
         return $notas;
+    }
+
+    public static function meusAlunos()
+    {
+        $professor_id = Auth::user()->id;
+
+        $sql = DB::table('alunos')
+                        ->join('aluno_disciplina', 'alunos.id', '=', 'aluno_disciplina.aluno_id')
+                        ->join('disciplinas', 'aluno_disciplina.disciplina_id', '=', 'disciplinas.id')
+                        ->join('disciplina_turma', 'disciplinas.id', '=', 'disciplina_turma.disciplina_id')
+                        ->join('turmas', 'disciplina_turma.turma_id', '=', 'turmas.id')
+                        ->join('disciplina_professor', 'disciplinas.id', '=', 'disciplina_professor.disciplina_id')
+                        ->join('professores', 'disciplina_professor.professor_id', '=', 'professores.id')
+                        ->where('professores.id', '=', $professor_id)
+                        ->select(DB::raw(count('alunos.id as qtd_alunos')), 'turmas.nome as turma_nome as turma_nome', 'disciplinas.nome as disciplina_nome', 'professores.nome as professor_nome', 'alunos.nome as aluno_nome', 'alunos.id as qtd_alunos')
+                        ->first();
+
+        return $sql;
     }
 }

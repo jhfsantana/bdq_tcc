@@ -20,7 +20,7 @@
 		<div class="sidebar">
 			<ul id="nav"> 
 			    <li><a href="/aluno">Inicio</a></li> 
-			    <li><input type="submit" name="avaliacao" value="Avaliações" form="formAvaliacao" class="btn btn-link"></li></a>
+			    <li><input type="submit" name="avaliacao" value="Avaliações" form="formAvaliacao" class="btn btn-link"></li>
 			      <ul> 
 			        <li><input type="submit" name="resultado" value="Provas realizadas" form="formRealizadas" class="btn btn-link"></li> 
 			      </ul> 

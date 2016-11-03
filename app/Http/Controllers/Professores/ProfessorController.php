@@ -27,7 +27,8 @@ class ProfessorController extends Controller
     
     public function bemvindo()
     {
-        return view('professores.index');
+        $alunos = Professor::meusAlunos();
+        return view('professores.index')->with('alunos', $alunos);
     }
 
 
