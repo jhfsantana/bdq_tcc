@@ -75,6 +75,7 @@ class Professor extends User
             ->join('disciplinas', 'avaliacoes.disciplina_id', '=', 'disciplinas.id')
             ->where('disciplinas.id', '=', $disciplina)
             ->select('turmas.nome as turma_nome', 'aluno_resultado.nota', 'a.nome as aluno_nome', 'disciplinas.nome as disciplina_nome')
+            ->orderBy('aluno_resultado.nota', 'desc')
             ->get();
         
         return $notas;

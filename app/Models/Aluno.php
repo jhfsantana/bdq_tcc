@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Professor;
+use App\Models\Resultado;
 use App\Models\Turma;
 use App\Models\Disciplina;
+use Auth;
 
 
 class Aluno extends User
@@ -29,5 +31,14 @@ class Aluno extends User
     {
     	$alunos = Aluno::all()->count();
     	return $alunos;
+    }
+
+    public static function ultimaNota()
+    {
+        $aluno = Auth::user();
+        $nota = Resultado::find($aluno->id)
+                                ->orderBy('nota', 'desc')->first();
+
+        return $nota;
     }
 }

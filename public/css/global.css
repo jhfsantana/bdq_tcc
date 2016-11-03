@@ -275,6 +275,9 @@ div#box .box-top .professores {
 	margin-bottom: 15px;
 } 
 
+
+
+
 div#box .box-panel {
 	width: 32%;
 	height: 30px;
@@ -493,6 +496,12 @@ div#box .box3-top a{
 	display: block;
 	padding: 0px;
 	font-size: 0.8em;
+} 
+
+div#box .box-top .alunos {
+	font-size: 1.1em;
+	float: right;
+	margin-bottom: 15px;
 } 
 
 
