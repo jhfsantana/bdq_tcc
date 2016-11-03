@@ -19,7 +19,7 @@
 	<div id="container">
 		<div class="sidebar">
 			<ul id="nav"> 
-			    <li><a href="/professor">Inicio</a></li> 
+			    <li><a href="/aluno">Inicio</a></li> 
 			    <li><input type="submit" name="avaliacao" value="Avaliações" form="formAvaliacao" class="btn btn-link"></li></a>
 			      <ul> 
 			        <li><input type="submit" name="resultado" value="Provas realizadas" form="formRealizadas" class="btn btn-link"></li> 
@@ -48,9 +48,9 @@
 			<p>resumo das informações</p>
 			<div id="box">
 				<div class="box-top">
-					<img src="images/professor_64px.png">
-					<h3 class="professores"> 30 </h3>
-					<a href="#">Total de professores</a>
+					<img src="images/notas.png">
+					<h3 class="alunos" style="float: right; margin-top: 13px;">{{$aluno->nota}} - {{$aluno->avaliacao->disciplina->nome}}</h3>
+					<a href="#" style="float: left;">Ultimo resultado</a>
 				</div>
 
 				<div class="box2-top">

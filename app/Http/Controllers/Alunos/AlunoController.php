@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Requests\FormRequest;
 
 use DB;
+use Auth;
 
 class AlunoController extends Controller
 {
@@ -130,7 +131,10 @@ class AlunoController extends Controller
 
     public function bemvindo()
     {
-        return view('alunos.index');
+    /*        $usuario = Auth::users();
+*/      $aluno = Aluno::ultimaNota();
+    
+        return view('alunos.index')->with('aluno', $aluno);
     }
 
     public function avaliacao(Request $request)
