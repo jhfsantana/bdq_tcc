@@ -156,7 +156,7 @@ class AlunoController extends Controller
 
     public function correcao(Request $request)
     {
-        $nota = 0;
+        $nota = 0.0;
         $questao1 = Questao::find(Input::get('questao_id1'));
         $questao2 = Questao::find(Input::get('questao_id2'));
         $questao3 = Questao::find(Input::get('questao_id3'));
@@ -171,13 +171,15 @@ class AlunoController extends Controller
         
         $resultado = new Resultado;
 
-        $token = $request->_token;     
+    switch ($request->qtd_questao) {
+       
+       case 5:
 
-        if(isset($request->q1))
+            if(isset($request->q1))
         {
             if($request->q1 == $questao1->correta)
             {
-                ++$nota;    
+                $nota+=2;    
             }
             
         }
@@ -186,7 +188,7 @@ class AlunoController extends Controller
         {
             if($request->q2 == $questao2->correta)
             {
-                ++$nota;    
+                $nota+=2;    
             }
             
         }
@@ -195,7 +197,7 @@ class AlunoController extends Controller
         {
             if($request->q3 == $questao3->correta)
             {
-                ++$nota;    
+                $nota+=2;    
             }
             
         }
@@ -204,7 +206,7 @@ class AlunoController extends Controller
         {
             if($request->q4 == $questao4->correta)
             {
-                ++$nota;    
+                $nota+=2;    
             }
             
         }
@@ -213,7 +215,7 @@ class AlunoController extends Controller
         {
             if($request->q5 == $questao5->correta)
             {
-                ++$nota;    
+                $nota+=2;    
             }
             
         }
@@ -222,7 +224,8 @@ class AlunoController extends Controller
         {
             if($request->q6 == $questao6->correta)
             {
-                ++$nota;    
+                $nota+=2;    
+
             }
             
         }
@@ -231,7 +234,104 @@ class AlunoController extends Controller
         {
             if($request->q7 == $questao7->correta)
             {
-                ++$nota;    
+                $nota+=2;    
+
+            }
+            
+        }
+
+        if(isset($request->q8))
+        {
+            if($request->q8 == $questao8->correta)
+            {
+                $nota+=2;    
+            }
+            
+        }
+        
+        if(isset($request->q9))
+        {
+            if($request->q9 == $questao9->correta)
+            {
+                $nota+=2;    
+            }
+            
+        }
+
+        if(isset($request->q10))
+        {
+            if($request->q10 == $questao10->correta)
+            {
+                $nota+=2;    
+            }
+            
+        }
+            
+        break;
+       
+       case 6:
+
+            if(isset($request->q1))
+        {
+            if($request->q1 == $questao1->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q2))
+        {
+            if($request->q2 == $questao2->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q3))
+        {
+            if($request->q3 == $questao3->correta)
+            {
+                $nota+=2;    
+            }
+            
+        }
+
+        if(isset($request->q4))
+        {
+            if($request->q4 == $questao4->correta)
+            {
+                $nota+=2;    
+            }
+            
+        }
+
+        if(isset($request->q5))
+        {
+            if($request->q5 == $questao5->correta)
+            {
+                $nota+=2;    
+            }
+            
+        }
+
+        if(isset($request->q6))
+        {
+            if($request->q6 == $questao6->correta)
+            {
+                $nota += 2;
+
+            }
+            
+        }
+
+        if(isset($request->q7))
+        {
+            if($request->q7 == $questao7->correta)
+            {
+                $nota += 2.5;
+
             }
             
         }
@@ -262,14 +362,394 @@ class AlunoController extends Controller
             }
             
         }
+        break;
+        case 7:
 
+            if(isset($request->q1))
+        {
+            if($request->q1 == $questao1->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q2))
+        {
+            if($request->q2 == $questao2->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q3))
+        {
+            if($request->q3 == $questao3->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q4))
+        {
+            if($request->q4 == $questao4->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q5))
+        {
+            if($request->q5 == $questao5->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q6))
+        {
+            if($request->q6 == $questao6->correta)
+            {
+                $nota += 2.5;
+
+            }
+            
+        }
+
+        if(isset($request->q7))
+        {
+            if($request->q7 == $questao7->correta)
+            {
+                $nota += 2.5;
+
+            }
+            
+        }
+
+        if(isset($request->q8))
+        {
+            if($request->q8 == $questao8->correta)
+            {
+                ++$nota;    
+            }
+            
+        }
+        
+        if(isset($request->q9))
+        {
+            if($request->q9 == $questao9->correta)
+            {
+                ++$nota;    
+            }
+            
+        }
+
+        if(isset($request->q10))
+        {
+            if($request->q10 == $questao10->correta)
+            {
+                ++$nota;    
+            }
+            
+        }
+        break;
+         case 8:
+
+            if(isset($request->q1))
+        {
+            if($request->q1 == $questao1->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q2))
+        {
+            if($request->q2 == $questao2->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q3))
+        {
+            if($request->q3 == $questao3->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q4))
+        {
+            if($request->q4 == $questao4->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q5))
+        {
+            if($request->q5 == $questao5->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q6))
+        {
+            if($request->q6 == $questao6->correta)
+            {
+                $nota+=1;    
+
+            }
+            
+        }
+
+        if(isset($request->q7))
+        {
+            if($request->q7 == $questao7->correta)
+            {
+                $nota+=2;    
+
+            }
+            
+        }
+
+        if(isset($request->q8))
+        {
+            if($request->q8 == $questao8->correta)
+            {
+                $nota+=2;    
+            }
+            
+        }
+        
+        if(isset($request->q9))
+        {
+            if($request->q9 == $questao9->correta)
+            {
+                $nota+=2;    
+            }
+            
+        }
+
+        if(isset($request->q10))
+        {
+            if($request->q10 == $questao10->correta)
+            {
+                $nota+=2;    
+            }
+            
+        }
+            
+        break;
+        case 9:
+
+            if(isset($request->q1))
+        {
+            if($request->q1 == $questao1->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q2))
+        {
+            if($request->q2 == $questao2->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q3))
+        {
+            if($request->q3 == $questao3->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q4))
+        {
+            if($request->q4 == $questao4->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q5))
+        {
+            if($request->q5 == $questao5->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q6))
+        {
+            if($request->q6 == $questao6->correta)
+            {
+                $nota+=1;    
+
+            }
+            
+        }
+
+        if(isset($request->q7))
+        {
+            if($request->q7 == $questao7->correta)
+            {
+                $nota+=1;    
+
+            }
+            
+        }
+
+        if(isset($request->q8))
+        {
+            if($request->q8 == $questao8->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+        
+        if(isset($request->q9))
+        {
+            if($request->q9 == $questao9->correta)
+            {
+                $nota+=2;    
+            }
+            
+        }
+
+        if(isset($request->q10))
+        {
+            if($request->q10 == $questao10->correta)
+            {
+                $nota+=2;    
+            }
+            
+        }
+            
+        break;
+        case 10:
+
+            if(isset($request->q1))
+        {
+            if($request->q1 == $questao1->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q2))
+        {
+            if($request->q2 == $questao2->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q3))
+        {
+            if($request->q3 == $questao3->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q4))
+        {
+            if($request->q4 == $questao4->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q5))
+        {
+            if($request->q5 == $questao5->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q6))
+        {
+            if($request->q6 == $questao6->correta)
+            {
+                $nota+=1;    
+
+            }
+            
+        }
+
+        if(isset($request->q7))
+        {
+            if($request->q7 == $questao7->correta)
+            {
+                $nota+=1;    
+
+            }
+            
+        }
+
+        if(isset($request->q8))
+        {
+            if($request->q8 == $questao8->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+        
+        if(isset($request->q9))
+        {
+            if($request->q9 == $questao9->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+
+        if(isset($request->q10))
+        {
+            if($request->q10 == $questao10->correta)
+            {
+                $nota+=1;    
+            }
+            
+        }
+            
+        break; 
+        } ##FIM DO SWITCH CASE###
 
         $id = $request->aluno_id;
         $aluno = Aluno::find($id);
         $resultado->avaliacao()->associate($request->avaliacao_id);
         $resultado->aluno()->associate($request->aluno_id);
         $resultado->nota = $nota;
-        
+        dd($nota);
         if($resultado->save())
         {            
             $request->session()->flash('alert-success', 'Avaliação realizada com sucesso!!');
