@@ -107,6 +107,7 @@
 		<input class="btn btn-primary" type="submit" name="finalizar">
 		<input type="hidden" name="avaliacao_id" value="{{$avaliacao->id}}">
 		<input type="hidden" name="aluno_id" value="{{Auth::user()->id}}">
+		<input type="hidden" name="qtd_questao" value="{{$avaliacao->qtd}}">
 		<input type="hidden" name="professor_id" value="{{$avaliacao->professor_id}}">
 		<input name="_token" type="hidden" value="{{ csrf_token() }}">
 

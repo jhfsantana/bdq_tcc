@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTurmas extends Migration
+class CriarTabelaPontos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateTurmas extends Migration
      */
     public function up()
     {
-        Schema::create('turmas', function (Blueprint $table) {
+        Schema::create('pontos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome');
-            $table->timestamps();
+            $table->float('valor');
         });
     }
 
@@ -27,6 +26,6 @@ class CreateTurmas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('turmas');
+        Schema::dropIfExists('pontos');
     }
 }

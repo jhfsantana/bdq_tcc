@@ -43,5 +43,4 @@ class Avaliacao extends Model
         return $this->hasOne('App\Models\Resultado');
     }
 
-
 }

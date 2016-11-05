@@ -10,6 +10,7 @@ use App\Models\Avaliacao;
 use App\Models\Professor;
 use App\Models\Questao;
 use App\Models\Aluno;
+use App\Models\Ponto;
 use Response;
 use DB;
 use Illuminate\Support\Facades\Input;
@@ -70,17 +71,25 @@ class AvaliacaoController extends Controller
 
     	$questao = DB::table('questoes')
 								    	->where('disciplina_id', '=', $disciplina_id)
-                                        ->orwhere('professor_id', '=', $professor_id)
                                         ->where('nivel', '=', $nivel_id)
-                                        ->Where('nivel', '=', $nivelq2_id)
-                                        ->Where('nivel', '=', $nivelq3_id)
-                                        ->Where('nivel', '=', $nivelq4_id)
-                                        ->Where('nivel', '=', $nivelq5_id)
-                                        ->Where('nivel', '=', $nivelq6_id)
-                                        ->Where('nivel', '=', $nivelq7_id)
-                                        ->Where('nivel', '=', $nivelq8_id)
-                                        ->Where('nivel', '=', $nivelq9_id)
-                                        ->Where('nivel', '=', $nivelq10_id)
+                                        ->orWhere('nivel', '=', $nivelq2_id)
+                                        ->where('disciplina_id', '=', $disciplina_id)
+                                        ->orWhere('nivel', '=', $nivelq3_id)
+                                        ->where('disciplina_id', '=', $disciplina_id)
+                                        ->orWhere('nivel', '=', $nivelq4_id)
+                                        ->where('disciplina_id', '=', $disciplina_id)
+                                        ->orWhere('nivel', '=', $nivelq5_id)
+                                        ->where('disciplina_id', '=', $disciplina_id)
+                                        ->orWhere('nivel', '=', $nivelq6_id)
+                                        ->where('disciplina_id', '=', $disciplina_id)
+                                        ->orWhere('nivel', '=', $nivelq7_id)
+                                        ->where('disciplina_id', '=', $disciplina_id)
+                                        ->orWhere('nivel', '=', $nivelq8_id)
+                                        ->where('disciplina_id', '=', $disciplina_id)
+                                        ->orWhere('nivel', '=', $nivelq9_id)
+                                        ->where('disciplina_id', '=', $disciplina_id)
+                                        ->orWhere('nivel', '=', $nivelq10_id)
+                                        ->where('disciplina_id', '=', $disciplina_id)
 								    	->InRandomOrder()
 								    	->first();
       
@@ -98,13 +107,115 @@ class AvaliacaoController extends Controller
     	# a questao referente a discplina e para todos, mas na hora de gerar a prova o professor
     	# deve adicionar a questão a turma para depois gerar a prova.
     	//$avaliacao->professor_id = $request->professor_id;
+        $avaliacao->qtd = $request->qtd;
         $avaliacao->professor()->associate($request->professor_id);
         $avaliacao->disciplina()->associate($request->disciplina);
         $avaliacao->turma()->associate($request->turma);
+       
+
+        if(isset($request->q1_pontos))
+        {
+            $pontos = new Ponto;
+            $pontos->valor = $request->q1_pontos;
+            $pontos->save();
+            $pontos->questoes()->sync($request->questao_id, false);
+        }
+        if(isset($request->q2_pontos))
+        {
+            $pontos = new Ponto;
+            $pontos->valor = $request->q2_pontos;
+            $pontos->save();
+            $pontos->questoes()->sync($request->questao2_id, false);
+        }
+        if(isset($request->q3_pontos))
+        {
+            $pontos = new Ponto;
+            $pontos->valor = $request->q3_pontos;
+            $pontos->save();
+            $pontos->questoes()->sync($request->questao3_id, false);
+        }
+        if(isset($request->q4_pontos))
+        {
+            $pontos = new Ponto;
+            $pontos->valor = $request->q4_pontos;
+            $pontos->save();
+            $pontos->questoes()->sync($request->questao4_id, false);
+        }
+        if(isset($request->q5_pontos))
+        {
+            $pontos = new Ponto;
+            $pontos->valor = $request->q5_pontos;
+            $pontos->save();
+            $pontos->questoes()->sync($request->questao5_id, false);
+        }
+        if(isset($request->q6_pontos))
+        {
+            $pontos = new Ponto;
+            $pontos->valor = $request->q6_pontos;
+            $pontos->save();
+            $pontos->questoes()->sync($request->questao6_id, false);
+        }
+        if(isset($request->q7_pontos))
+        {
+            $pontos = new Ponto;
+            $pontos->valor = $request->q7_pontos;
+            $pontos->save();
+            $pontos->questoes()->sync($request->questao7_id, false);
+        }
+        if(isset($request->q8_pontos))
+        {
+            $pontos = new Ponto;
+            $pontos->valor = $request->q8_pontos;
+            $pontos->save();
+            $pontos->questoes()->sync($request->questao8_id, false);
+        }
+        if(isset($request->q9_pontos))
+        {
+            $pontos = new Ponto;
+            $pontos->valor = $request->q9_pontos;
+            $pontos->save();
+            $pontos->questoes()->sync($request->questao9_id, false);
+        }
+        if(isset($request->q10_pontos))
+        {
+            $pontos = new Ponto;
+            $pontos->valor = $request->q10_pontos;
+            $pontos->save();
+            $pontos->questoes()->sync($request->questao10_id, false);
+        }
         
         
+
+                
         if($avaliacao->save())
         {
+            $zero[] = 0;
+
+            if(count($request->questao6_id)>0)
+            {
+                $avaliacao->questoes()->sync($zero, false);
+            }
+
+            if(count($request->questao7_id)>0)
+            {
+                $avaliacao->questoes()->sync($zero, false);
+            }
+
+            if(count($request->questao8_id)>0)
+            {
+                $avaliacao->questoes()->sync($zero, false);
+            }
+
+            if(count($request->questao9_id)>0)
+            {
+                $avaliacao->questoes()->sync($zero, false);
+            }
+
+            if(count($request->questao10_id)>0)
+            {
+                $avaliacao->questoes()->sync($zero, false);
+            }
+            
             $avaliacao->questoes()->sync($request->questao_id, false);
             $avaliacao->questoes()->sync($request->questao2_id, false);
             $avaliacao->questoes()->sync($request->questao3_id, false);
@@ -115,7 +226,9 @@ class AvaliacaoController extends Controller
             $avaliacao->questoes()->sync($request->questao8_id, false);
             $avaliacao->questoes()->sync($request->questao9_id, false);
             $avaliacao->questoes()->sync($request->questao10_id, false);
-            
+
+
+
             $request->session()->flash('alert-success', 'Avaliação salva com sucesso!');
             return redirect ('professor');
         }

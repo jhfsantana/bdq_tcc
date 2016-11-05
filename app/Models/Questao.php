@@ -25,4 +25,9 @@ class Questao extends Model
     {
         return $this->belongsTo('App\Models\Professor');
     }
+
+    public function pontos()
+    {
+        return $this->belongsToMany('App\Models\Ponto');
+    }
 }
