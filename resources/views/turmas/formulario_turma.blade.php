@@ -1,26 +1,82 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="/css/bootstrap.css">	
+@extends('templates.admin.template')
+	@section('scripts')
+	<link type="text/css" rel="stylesheet" href="/css/global.css" />
+	<link type="text/css" rel="stylesheet" href="/css/formularios.css" />
+	<meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+  	<script type="text/javascript">
+
+/*$(document).ready(function(){
+
+	$("#salvar").click(function(e) {                
+      e.preventDefault();
+      e.stopPropagation();
+
+      $.ajax({    //create an ajax request to load_page.php
+        type: "get",
+        url: "/turmas",
+        dataType: "JSON",   //expect html to be returned                
+        success: function(response){
+            console.log(response);    
+        	}
+    	});    
+	});
+});*/
+	</script>
 	<title>Cadastro de Turmas</title>
-</head>
-<body>
-	<nav class="navbar navbar-inverse">
-	<a class="navbar-brand" href="/home">Inicio</a>
-	</nav>
-<div class="container">
+	@stop
+	@section('content')
+		<!-- RESGATANDO MENSAGEM DE ERRO OU SUCESSO -->
+		<div class="flash-message">
+			@foreach (['danger', 'warning', 'success', 'info'] as $msg)
+				@if(Session::has('alert-' . $msg))
+					<p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+				@endif
+			@endforeach
+		</div>	
+		<!-- FIM DA MENSAGEM DE ERRO OU SUCESSO -->
+	<h2 style="text-al">Cadastro de turmas</h2>
+	<div class="container">    
+		    <div id="cadastroturmarbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+		        <div class="panel panel-default" >
+		            <div class="panel-heading">
+		                <div class="panel-title">Formulário para cadastro de turmas</div>
+		            </div>     
 
-	{!!Form::open(array('url' => 'classrooms', 'method' => 'post'))!!}
+		            <div style="padding-top:30px" class="panel-body" >			
 
-		{!!Form::label('nome','Nome:')!!}
+		            <form action="/classrooms" method="post">
+						<input name="_token" type="hidden" value="{{ csrf_token() }}">
+						
+						<label>
+							Nome
+							<input type="text" name="nome" class="form-control" placeholder="Digite o nome">
+						</label>
 
-		{{ Form::text('nome', '', array('class'=>'form-control', 'placeholder'=>'Turma')) }}
+						<input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" style="margin-top: 10px">
+					</form>
+				</div>
+			</div>
+		</div>
+		</div>
 
+			<table class="table table-striped">
+			  <tr>
+			      <td><strong>NÚMERO</strong></td>
+			      <td><strong>CRIADO EM</strong></td>
+			      <td><strong>MODIFICADO EM</strong></td>
+			  </tr>
+			  <tbody>
+			    <tr>
+			  @foreach($turmas as $turma)
 
-	    {{ Form::submit('Salvar', array('class' => 'btn btn-primary')) }}
-
-	{!!Form::close()!!}
-
-</div>
-</body>
-</html>
+			      <td>{{$turma->nome}}</td>
+			      <td>{{$turma->created_at}}</td>
+			      <td>{{$turma->updated_at}}</td>
+			    </tr>
+			  @endforeach
+			  </tbody>
+			</table>
+	@stop

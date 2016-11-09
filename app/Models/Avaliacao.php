@@ -43,4 +43,9 @@ class Avaliacao extends Model
         return $this->hasOne('App\Models\Resultado');
     }
 
+    public function pontos()
+    {
+        return $this->hasMany('App\Models\Ponto');
+    }
+
 }

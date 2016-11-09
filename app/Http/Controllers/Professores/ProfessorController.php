@@ -48,8 +48,9 @@ class ProfessorController extends Controller
     {
         $disciplinas = Disciplina::all();
         $turmas = Turma::all();
+        $matriculas = Professor::all();
 
-        return view('professores.formulario_professor')->with('disciplinas', $disciplinas)->with('turmas', $turmas);
+        return view('professores.formulario_professor')->with('disciplinas', $disciplinas)->with('turmas', $turmas)->with('matriculas', $matriculas);
     }
 
     /**

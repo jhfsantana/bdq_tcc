@@ -1,62 +1,80 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="/css/bootstrap.css">		
-	<title>Cadastro de alunos</title>
-</head>
-<body>
-	@if(!empty($errors->all()))
-	<div class="alert alert-danger" role="alert-danger" id="formRequest">
-		@foreach($errors->all() as $error)
-			<ul>
-				<li> {{$error}}</li>
-			</ul>
-		@endforeach
-	</div>
-	@endif
-	
-	<div class="container" style="text-align: center"><h1>Cadastro de alunos</h1></div>
+@extends('templates.admin.template')
+	@section('scripts')
+	<link type="text/css" rel="stylesheet" href="/css/global.css" />
+	<link type="text/css" rel="stylesheet" href="/css/formularios.css" />
+	<meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script>
+	function GetRandom()
+	{
+		var myElement = document.getElementById("matricula")
+	    myElement.value = Math.floor((Math.random() * 100000) + 100)
+	}
 
-<div class="container" style="margin-top: 80px">
-		<div class="row">
-		{!!Form::open(array('url' => 'students', 'method' => 'post'))!!}
-			
-			<script>
-			    function GetRandom()
-			    {
-			        var myElement = document.getElementById("matricula")
-			        myElement.value = Math.floor((Math.random() * 100000) + 100)
-			    }
-			</script>
+	$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+	});
+	</script>
+	@stop
+	@section('content')
+		<H2 style="text-align: center;">Cadastro de alunos</H2>
+		@if(!empty($errors->all()))
+			<div class="alert alert-danger" role="alert-danger" id="formRequest">
+				@foreach($errors->all() as $error)
+					<ul>
+						<li> {{$error}}</li>
+					</ul>
+				@endforeach
+			</div>
+		@endif
+		<div class="container">    
+			    <div id="cadastroalunobox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+			        <div class="panel panel-default" >
+			            <div class="panel-heading">
+			                <div class="panel-title">Formulário para cadastro de alunos</div>
+			            </div>     
 
-			{!!Form::label('matricula','Matricula:')!!}  <a href="#"><span class="glyphicon glyphicon-refresh" aria-hidden="true" onclick="GetRandom()" "></span></a>
+			            <div style="padding-top:30px" class="panel-body" >			
 
+			            <form action="/students" method="post">
+							<input name="_token" type="hidden" value="{{ csrf_token() }}">
+							<label>
+								Matricula 
+								<button data-toggle="tooltip" title="Gerar Matricula" type="button" id="matriculabuscar" class="btn btn-primary" onclick="GetRandom()" style="margin-bottom: 8px;">
+									<i class="glyphicon glyphicon-refresh" aria-hidden="true" "></i>		
+								</button>
+								<input type="text" id="matricula" name="matricula" class="form-control" placeholder="Matricula">
+							</label>
+							
+							<label>
+								Nome
+								<input type="text" name="nome" class="form-control" placeholder="Digite o nome">
+							</label>
 
+							<label>
+								Disciplinas
+								<select multiple class="form-control"  name ="disciplinas[]">
+							  		@foreach($disciplinas as $d)
+							  			<option value="{{$d->id}}">{{$d->nome}}</option> 
+							  		@endforeach
+								</select>
+							</label>
 
-	
-			{{ Form::text('matricula', '', array('class'=>'form-control', 'placeholder'=>'Matricula')) }}
+							<label>
+								E-mail
+								<input type="text" name="email" class="form-control" placeholder="Digite o email">
+							</label>
 
-			
-			{!!Form::label('nome','Nome:')!!}
-			{{ Form::text('nome', '', array('class'=>'form-control', 'placeholder'=>'Nome')) }}
-
-			
-			{!!Form::label('email','e-mail:')!!}
-			{{ Form::email('email', '', array('class'=>'form-control', 'placeholder'=>'E-mail')) }}
-
-			{!!Form::label('disciplina','Disciplina:')!!}
-			<select multiple class="form-control"  name ="disciplinas[]">
-				  @foreach($disciplinas as $d)
-				  <option value="{{$d->id}}"> {{$d->nome}} </option>
-				  @endforeach
-			</select>
-
-			{!!Form::label('password','Password:')!!}
-
-			{{ Form::password('password', '', array('class'=>'form-control', 'placeholder'=>'Password')) }}
-		   
-		    {{ Form::submit('Salvar', array('class' => 'btn btn-primary')) }}
-
-		{!!Form::close()!!}
-</body>
-</html>
+							<label>
+								Password
+								<input type="password" name="password" class="form-control" placeholder="Digite a senha">
+							</label>
+							<input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" style="margin-top: 10px">
+						</form>
+					</div>
+				</div>
+			</div>
+			</div>
+	@stop

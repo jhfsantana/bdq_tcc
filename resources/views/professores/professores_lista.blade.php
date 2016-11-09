@@ -1,8 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="/css/bootstrap.css">	
-	<title>Lista de Professores</title>
+@extends('templates.admin.template')
+
+	@section('scripts')
+	<link type="text/css" rel="stylesheet" href="/css/global.css" />
+	<link type="text/css" rel="stylesheet" href="/css/formularios.css" />
+	<meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  	
 	<script>
 	function confirmDelete(e) {
 	    if(confirm('Deseja confirmar a exclusão?')== true)
@@ -14,23 +18,11 @@
 	    }
 	}
 	</script>
-</head>
-<body>
-	<nav class="navbar navbar-inverse">
-			<a class="navbar-brand" href="/home">Inicio</a>
-			<a class="navbar-brand" href="/turma/novo">Lista de Professores</a>
-			<a class="navbar-brand" href="/professor/novo">Cadastro de professores</a>
-			<a class="navbar-brand" href="/disciplina/novo">Cadastro de disciplinas</a>
-			<a class="navbar-brand" href="/disciplinas">Lista de Disciplinas</a>
-			<a class="navbar-brand" href="/alunos">Lista de Alunos</a>
-			<a class="navbar-brand" href="/aluno/novo">Cadastro de Alunos</a>
-			<a class="navbar-brand" href="/turma/novo">Cadastro de Turma</a>
-
-
-
-	</nav>
+	@stop
+	@section('content')
 	<div class="container">
-		<table class="table">
+	<h2 style="text-align: center;">Lista de professores</h2>
+		<table class="table table-striped">
 			@foreach($professores as $professor)
 				<tr>
 					<td>{{$professor->matricula}}</td>
@@ -64,7 +56,4 @@
 					</td>
 				</tr>
 			@endforeach
-		</table>	
-	</div>
-</body>
-</html>
+		@stop

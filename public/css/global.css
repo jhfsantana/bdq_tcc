@@ -221,7 +221,7 @@ ul#nav li a:hover {
 .content {
 	width: auto;
 	height: 100%;
-	background: #ecf0f1;
+	background: #ffffff;
 	margin-left: 250px;
 	padding: 15px;
 }
@@ -504,6 +504,22 @@ div#box .box-top .alunos {
 	margin-bottom: 15px;
 } 
 
+div#header h3 {
+ display: none;
+}
+div#header img {
+ display: none;
+}
+
+.panel-heading img {
+ display: none;
+}
+
+.panel-heading b {
+ text-align: center;
+ margin-top: 0;
+ font-size: 0.8em;
+}
 
 }
 

@@ -45,6 +45,7 @@ Route::get('/', function () {
 */
 use App\Models\Professor;
 use App\Models\Aluno;
+use App\Models\Turma;
 
 
 Route::get('professor/login','Professores\ProfessorController@logintela');
@@ -108,7 +109,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	Route::get('administrador/logout', 'Admins\AuthController@logout');
 
 
-	Route::get('adm/create', 'Admins\AdminController@create');
+	Route::get('administrador/novo', 'Admins\AdminController@create');
 
 	Route::post('adm', 'Admins\AdminController@store');
 
@@ -130,6 +131,12 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	Route::get('/relatorio', 'Admins\AdminController@relatorio');
 
 	Route::get('/relatorio/{id}', 'Admins\AdminController@relatorio');
+
+/*	Route::get('/turmas', function () {
+	    $turmas = Turma::all();
+	    return view('turmas.formulario_turmas')->with('turmas', $turmas);
+	});
+*/
 
 
 });

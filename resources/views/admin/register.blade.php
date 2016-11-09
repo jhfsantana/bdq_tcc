@@ -1,78 +1,78 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="/css/bootstrap.css">	
-	<title>Registro de Adm</title>
-</head>
-<body>
-   <div class="container">    
-        <div id="registerbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-info" >
+@extends('templates.admin.template')
+    @section('scripts')
+    <link type="text/css" rel="stylesheet" href="/css/global.css" />
+    <link type="text/css" rel="stylesheet" href="/css/formularios.css" />
+    <meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script>
+    function GetRandom()
+    {
+        var data = new Date().getFullYear()
+        var myElement = document.getElementById("matricula")
+        myElement.value = "" + data + Math.floor((Math.random() * 100000) + 100)
+    }
+
+    
+
+    </script>
+    @stop
+    @section('content')
+    <H2 style="text-align: center;">Cadastro de Administrador</H2>
+    @if(!empty($errors->all()))
+    <div class="alert alert-danger" role="alert-danger" id="formRequest">
+        @foreach($errors->all() as $error)
+            <ul>
+                <li> {{$error}}</li>
+            </ul>
+        @endforeach
+    </div>
+    @endif
+        <div class="container">    
+            <div id="cadastroadmbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+                <div class="panel panel-default" >
                     <div class="panel-heading">
-                        <div class="panel-title">Cadastro de Administrador</div>
+                        <div class="panel-title">Formulário para cadastro de administradores</div>
                     </div>     
 
-                    <<!-- div style="padding-top:30px" class="panel-body" >
+                    <div style="padding-top:30px" class="panel-body" >          
 
-                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                            
-                        <form class="form-horizontal" role="form" method="post" action=""> -->
-							
+                    <form action="/adm" method="post">
+                        <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                        <label>
+                            Matricula 
+                            <button data-toggle="tooltip" title="Gerar Matricula" type="button" id="matriculabuscar" class="btn btn-primary" onclick="GetRandom()" style="margin-bottom: 8px;">
+                                <i class="glyphicon glyphicon-refresh" aria-hidden="true" "></i>        
+                            </button>
+                            <input type="text" id="matricula" name="matricula" class="form-control" placeholder="Matricula">
+                        </label>
+                        
+                        <label>
+                            Nome
+                            <input type="text" name="name" class="form-control" placeholder="Digite o nome">
+                        </label>
 
+                        <label>
+                            Sobrenome
+                            <input type="text" name="sobrenome" class="form-control" placeholder="Digite o Sobrenome">
+                        </label>
 
+                        <label>
+                            E-mail
+                            <input type="text" name="email" class="form-control" placeholder="Digite o email">
+                        </label>
 
-
-
-                            {!!Form::open(array('url' => 'adm', 'method' => 'post'))!!}
-
-                                {!!Form::label('name','Nome:')!!}
-
-                                {{ Form::text('name', '', array('class'=>'form-control', 'placeholder'=>'Nome')) }}
-
-                                {!!Form::label('email','Email:')!!}
-
-                                {{ Form::text('email', '', array('class'=>'form-control', 'placeholder'=>'Email')) }}
-
-                                {!!Form::label('password','Password:')!!}
-
-                                {{ Form::password('password', '', array('class'=>'form-control', 'placeholder'=>'Password')) }}
-
-
-                                {{ Form::submit('Salvar', array('class' => 'btn btn-primary')) }}
-                            
-                            {!!Form::close()!!}
-
-
-
-
-							<!-- <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-                            
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="register-username" type="text" class="form-control" name="name" placeholder="Nome">                                        
-                                    </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                        <input id="register-email" type="text" class="form-control" name="email" placeholder="E-mail">                                        
-                                    </div>
-                                
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input id="register-password" type="password" class="form-control" name="password" placeholder="password">
-                                    </div>
-
-                                <div style="margin-top:10px" class="form-group">
-                                                                    
-                                    <div class="col-sm-12 controls">
-                                    	<input type="submit"   class="btn btn-success">
-                                    </div> -->
-                                </div>
-                            </form> 
-                        </div>                     
-                    </div>  
+                        <label>
+                            Password
+                            <input type="password" name="password" class="form-control" placeholder="Digite a senha">
+                        </label>
+                        <input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" style="margin-top: 10px">
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>	
-    
-</body>
-</html>
+        </div>
+    @stop

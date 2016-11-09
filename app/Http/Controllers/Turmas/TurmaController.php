@@ -30,7 +30,8 @@ class TurmaController extends Controller
      */
     public function create()
     {
-        return view('turmas.formulario_turma');
+        $turmas = Turma::all();
+        return view('turmas.formulario_turma')->with('turmas', $turmas);
     }
 
     /**
@@ -45,9 +46,17 @@ class TurmaController extends Controller
 
         $turma->nome = $request->nome;
         
-        $turma->save();
+        if($turma->save())
+        {
+            $request->session()->flash('alert-success', 'Avaliação salva com sucesso!');
+            return redirect('/turma/novo');
+        }else
+        {
+            $request->session()->flash('alert-danger', 'Avaliação salva com sucesso!');
+            return redirect('/turma/novo');
+        }
+        
 
-        return redirect('/turma/novo');
     }
 
     /**

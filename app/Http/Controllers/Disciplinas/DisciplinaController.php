@@ -23,7 +23,7 @@ class DisciplinaController extends Controller
     {
 
         $disciplinas = Disciplina::all();
-        return view('disciplinas.index')->with('disciplinas', $disciplinas);
+        return view('disciplinas.disciplinas_lista')->with('disciplinas', $disciplinas);
     }
     /**
 

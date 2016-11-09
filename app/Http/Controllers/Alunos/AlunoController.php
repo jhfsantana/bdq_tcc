@@ -133,7 +133,10 @@ class AlunoController extends Controller
     {
     /*        $usuario = Auth::users();
 */      $aluno = Aluno::ultimaNota();
-    
+        foreach($aluno as $aluno)
+        {
+   
+        }
         return view('alunos.index')->with('aluno', $aluno);
     }
 
@@ -168,294 +171,334 @@ class AlunoController extends Controller
         $questao9 = Questao::find(Input::get('questao_id9'));
         $questao10 = Questao::find(Input::get('questao_id10'));
         $avaliacao = Avaliacao::find($request->avaliacao_id);
-        
         $resultado = new Resultado;
+
+        $ponto_questao1 = Questao::with('pontos')->find($request->questao_id1);
+        $ponto_questao2 = Questao::with('pontos')->find($request->questao_id2);
+        $ponto_questao3 = Questao::with('pontos')->find($request->questao_id3);
+        $ponto_questao4 = Questao::with('pontos')->find($request->questao_id4);
+        $ponto_questao5 = Questao::with('pontos')->find($request->questao_id5);
+        $ponto_questao6 = Questao::with('pontos')->find($request->questao_id6);
+        $ponto_questao7 = Questao::with('pontos')->find($request->questao_id7);
+        $ponto_questao8 = Questao::with('pontos')->find($request->questao_id8);
+        $ponto_questao9 = Questao::with('pontos')->find($request->questao_id9);
+        $ponto_questao10 = Questao::with('pontos')->find($request->questao_id10);
 
     switch ($request->qtd_questao) {
        
        case 5:
 
-            if(isset($request->q1))
+        if(isset($request->q1))
         {
-            if($request->q1 == $questao1->correta)
+            if(count($ponto_questao1->pontos) > 0)
             {
-                $nota+=2;    
+                if($request->q1 == $questao1->correta)
+                {  
+                    foreach($ponto_questao1->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
             }
-            
+            elseif(!count($ponto_questao1->pontos) > 0 && $request->q1 == $questao1->correta)
+            {
+                $nota+=2;
+            }     
         }
+            
 
         if(isset($request->q2))
         {
-            if($request->q2 == $questao2->correta)
+            if(count($ponto_questao2->pontos) > 0)
             {
-                $nota+=2;    
+                if($request->q2 == $questao2->correta)
+                {  
+                    foreach($ponto_questao2->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
+            elseif(!count($ponto_questao2->pontos) > 0 && $request->q2 == $questao2->correta)
+            {
+                $nota+=2;
             }
-            
         }
 
         if(isset($request->q3))
         {
-            if($request->q3 == $questao3->correta)
+            if(count($ponto_questao3->pontos) > 0)
             {
-                $nota+=2;    
+                if($request->q3 == $questao3->correta)
+                {  
+                    foreach($ponto_questao3->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
             }
-            
+            elseif(!count($ponto_questao3->pontos) > 0 && $request->q3 == $questao3->correta)
+            {
+                $nota+=2;
+            }     
         }
 
         if(isset($request->q4))
         {
-            if($request->q4 == $questao4->correta)
+            if(count($ponto_questao4->pontos) > 0)
             {
-                $nota+=2;    
+                if($request->q4 == $questao4->correta)
+                {  
+                    foreach($ponto_questao4->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
             }
-            
+            elseif(!count($ponto_questao4->pontos) > 0 && $request->q4 == $questao4->correta)
+            {
+                $nota+=2;
+            }     
         }
 
         if(isset($request->q5))
         {
-            if($request->q5 == $questao5->correta)
+            if(count($ponto_questao5->pontos) > 0)
             {
-                $nota+=2;    
+                if($request->q5 == $questao5->correta)
+                {  
+                    foreach($ponto_questao5->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
             }
-            
-        }
-
-        if(isset($request->q6))
-        {
-            if($request->q6 == $questao6->correta)
+            elseif(!count($ponto_questao5->pontos) > 0 && $request->q5 == $questao5->correta)
             {
-                $nota+=2;    
-
-            }
-            
+                $nota+=2;
+            }     
         }
-
-        if(isset($request->q7))
-        {
-            if($request->q7 == $questao7->correta)
-            {
-                $nota+=2;    
-
-            }
-            
-        }
-
-        if(isset($request->q8))
-        {
-            if($request->q8 == $questao8->correta)
-            {
-                $nota+=2;    
-            }
-            
-        }
-        
-        if(isset($request->q9))
-        {
-            if($request->q9 == $questao9->correta)
-            {
-                $nota+=2;    
-            }
-            
-        }
-
-        if(isset($request->q10))
-        {
-            if($request->q10 == $questao10->correta)
-            {
-                $nota+=2;    
-            }
-            
-        }
-            
+        ##FIM DO CASE 5 ##
         break;
        
        case 6:
 
-            if(isset($request->q1))
+        if(isset($request->q1))
         {
-            if($request->q1 == $questao1->correta)
+            if(count($ponto_questao1->pontos) > 0)
             {
-                $nota+=1;    
+                if($request->q1 == $questao1->correta)
+                {  
+                    foreach($ponto_questao1->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
             }
-            
+            elseif(!count($ponto_questao1->pontos) > 0 && $request->q1 == $questao1->correta)
+            {
+                $nota+=1;
+            }     
         }
 
         if(isset($request->q2))
         {
-            if($request->q2 == $questao2->correta)
+            if(count($ponto_questao2->pontos) > 0)
             {
-                $nota+=1;    
+                if($request->q2 == $questao2->correta)
+                {  
+                    foreach($ponto_questao2->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
+            elseif(!count($ponto_questao2->pontos) > 0 && $request->q2 == $questao2->correta)
+            {
+                $nota+=1;
             }
-            
         }
 
         if(isset($request->q3))
         {
-            if($request->q3 == $questao3->correta)
+            if(count($ponto_questao3->pontos) > 0)
             {
-                $nota+=2;    
+                if($request->q3 == $questao3->correta)
+                {  
+                    foreach($ponto_questao3->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
+            elseif(!count($ponto_questao3->pontos) > 0 && $request->q3 == $questao3->correta)
+            {
+                $nota+=2;
             }
-            
         }
 
         if(isset($request->q4))
         {
-            if($request->q4 == $questao4->correta)
+            if(count($ponto_questao4->pontos) > 0)
             {
-                $nota+=2;    
+                if($request->q4 == $questao4->correta)
+                {  
+                    foreach($ponto_questao4->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
+            elseif(!count($ponto_questao4->pontos) > 0 && $request->q4 == $questao4->correta)
+            {
+                $nota+=2;
             }
-            
         }
 
         if(isset($request->q5))
         {
-            if($request->q5 == $questao5->correta)
+            if(count($ponto_questao5->pontos) > 0)
             {
-                $nota+=2;    
+                if($request->q5 == $questao5->correta)
+                {  
+                    foreach($ponto_questao5->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
+            elseif(!count($ponto_questao5->pontos) > 0 && $request->q5 == $questao5->correta)
+            {
+                $nota+=2;
             }
-            
         }
 
         if(isset($request->q6))
         {
-            if($request->q6 == $questao6->correta)
+            if(count($ponto_questao6->pontos) > 0)
             {
-                $nota += 2;
-
+                if($request->q6 == $questao6->correta)
+                {  
+                    foreach($ponto_questao6->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
+            elseif(!count($ponto_questao6->pontos) > 0 && $request->q6 == $questao6->correta)
+            {
+                $nota+=2;
             }
-            
         }
 
-        if(isset($request->q7))
-        {
-            if($request->q7 == $questao7->correta)
-            {
-                $nota += 2.5;
-
-            }
-            
-        }
-
-        if(isset($request->q8))
-        {
-            if($request->q8 == $questao8->correta)
-            {
-                ++$nota;    
-            }
-            
-        }
-        
-        if(isset($request->q9))
-        {
-            if($request->q9 == $questao9->correta)
-            {
-                ++$nota;    
-            }
-            
-        }
-
-        if(isset($request->q10))
-        {
-            if($request->q10 == $questao10->correta)
-            {
-                ++$nota;    
-            }
-            
-        }
         break;
+        ##FIM DO CASE 6 ##
         case 7:
 
-            if(isset($request->q1))
+        if(isset($request->q1))
         {
-            if($request->q1 == $questao1->correta)
+            if(count($ponto_questao1->pontos) > 0)
             {
-                $nota+=1;    
-            }
-            
+                if($request->q1 == $questao1->correta)
+                {  
+                    foreach($ponto_questao1->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            }    
         }
 
         if(isset($request->q2))
         {
-            if($request->q2 == $questao2->correta)
+            if(count($ponto_questao2->pontos) > 0)
             {
-                $nota+=1;    
-            }
-            
+                if($request->q2 == $questao2->correta)
+                {  
+                    foreach($ponto_questao2->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
+
         }
 
         if(isset($request->q3))
         {
-            if($request->q3 == $questao3->correta)
+            if(count($ponto_questao3->pontos) > 0)
             {
-                $nota+=1;    
-            }
-            
+                if($request->q3 == $questao3->correta)
+                {  
+                    foreach($ponto_questao3->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
+
         }
 
         if(isset($request->q4))
         {
-            if($request->q4 == $questao4->correta)
+            if(count($ponto_questao4->pontos) > 0)
             {
-                $nota+=1;    
-            }
-            
+                if($request->q4 == $questao4->correta)
+                {  
+                    foreach($ponto_questao4->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
+
         }
 
         if(isset($request->q5))
         {
-            if($request->q5 == $questao5->correta)
+            if(count($ponto_questao5->pontos) > 0)
             {
-                $nota+=1;    
-            }
-            
+                if($request->q5 == $questao5->correta)
+                {  
+                    foreach($ponto_questao5->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
+
         }
 
         if(isset($request->q6))
         {
-            if($request->q6 == $questao6->correta)
+            if(count($ponto_questao6->pontos) > 0)
             {
-                $nota += 2.5;
+                if($request->q6 == $questao6->correta)
+                {  
+                    foreach($ponto_questao6->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
 
-            }
-            
         }
 
         if(isset($request->q7))
         {
-            if($request->q7 == $questao7->correta)
+            if(count($ponto_questao7->pontos) > 0)
             {
-                $nota += 2.5;
+                if($request->q7 == $questao7->correta)
+                {  
+                    foreach($ponto_questao7->pontos as $ponto)
+                    {
+                        $nota+=$ponto->valor;
+                    }
+                }
+            } 
 
-            }
-            
-        }
-
-        if(isset($request->q8))
-        {
-            if($request->q8 == $questao8->correta)
-            {
-                ++$nota;    
-            }
-            
-        }
-        
-        if(isset($request->q9))
-        {
-            if($request->q9 == $questao9->correta)
-            {
-                ++$nota;    
-            }
-            
         }
 
-        if(isset($request->q10))
-        {
-            if($request->q10 == $questao10->correta)
-            {
-                ++$nota;    
-            }
-            
-        }
         break;
          case 8:
 
@@ -749,7 +792,6 @@ class AlunoController extends Controller
         $resultado->avaliacao()->associate($request->avaliacao_id);
         $resultado->aluno()->associate($request->aluno_id);
         $resultado->nota = $nota;
-        dd($nota);
         if($resultado->save())
         {            
             $request->session()->flash('alert-success', 'Avaliação realizada com sucesso!!');

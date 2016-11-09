@@ -13,4 +13,9 @@ class Ponto extends Model
     {
     	return $this->belongsToMany('App\Models\Questao');
     }
+
+    public function avaliacao()
+    {
+    	return $this->belongsTo('App\Models\Avaliacao');
+    }
 }

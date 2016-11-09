@@ -8,6 +8,7 @@ use App\Models\Professor;
 use App\Models\Resultado;
 use App\Models\Turma;
 use App\Models\Disciplina;
+use Illuminate\Support\Facades\DB;
 use Auth;
 
 
@@ -36,9 +37,22 @@ class Aluno extends User
     public static function ultimaNota()
     {
         $aluno = Auth::user();
-        $nota = Resultado::find($aluno->id)
-                                ->orderBy('nota', 'desc')->first();
-
+        /*$notas = DB::table('aluno_resultado')
+            ->join('avaliacoes', 'aluno_resultado.avaliacao_id', '=', 'avaliacoes.id')
+            ->join('aluno_resultado', 'avaliacoes.id', '=', 'aluno_resultado.avaliacao_id')
+            ->join('disciplinas', 'avaliacoes.disciplina_id', '=', 'disciplinas.id')
+            ->where('aluno_resultado.aluno_id', '=', $aluno->id)
+            ->select('aluno_resultado.nota', 'disciplinas.nome')
+            ->orderBy('aluno_resultado.nota', 'desc')
+            ->get();*/
+        $sql = "select ar.nota
+                        ,d.nome
+                        from aluno_resultado ar
+                        join avaliacoes a on (a.id = ar.avaliacao_id)
+                        join disciplinas d on (d.id = a.disciplina_id)
+                       order by ar.nota desc";
+        $nota = DB::select($sql);
         return $nota;
     }
 }
+

@@ -14,7 +14,64 @@
 
 <script>
 
+function showQ(select){
+    if(select.value==5)
+    {
+        $("#q6_pontos").prop("disabled", true);
+        $("#q7_pontos").prop("disabled", true);
+        $("#q8_pontos").prop("disabled", true);
+        $("#q9_pontos").prop("disabled", true);
+        $("#q10_pontos").prop("disabled", true);
+    }
+    if(select.value==6)
+    {
+        $("#q6_pontos").prop("disabled", false);
 
+        $("#q7_pontos").prop("disabled", true);
+        $("#q8_pontos").prop("disabled", true);
+        $("#q9_pontos").prop("disabled", true);
+        $("#q10_pontos").prop("disabled", true);
+    }
+    if(select.value==7)
+    {   
+        $("#q6_pontos").prop("disabled", false);
+        $("#q7_pontos").prop("disabled", false);
+
+        $("#q8_pontos").prop("disabled", true);
+        $("#questao8_id").prop("disabled", true);
+        $("#q9_pontos").prop("disabled", true);
+        $("#questao9_id").prop("disabled", true);
+        $("#q10_pontos").prop("disabled", true);
+        $("#questao10_id").prop("disabled", true);
+
+    }
+    if(select.value==8)
+    {
+        $("#q6_pontos").prop("disabled", false);
+        $("#q7_pontos").prop("disabled", false);
+        $("#q8_pontos").prop("disabled", false);
+
+        $("#q9_pontos").prop("disabled", true);
+        $("#q10_pontos").prop("disabled", true);
+    }
+    if(select.value==9)
+    {
+        $("#q6_pontos").prop("disabled", false);
+        $("#q7_pontos").prop("disabled", false);
+        $("#q8_pontos").prop("disabled", false);
+        $("#q9_pontos").prop("disabled", false);
+
+        $("#q10_pontos").prop("disabled", true);
+    }
+    if(select.value==10)
+    {
+        $("#q6_pontos").prop("disabled", false);
+        $("#q7_pontos").prop("disabled", false);
+        $("#q8_pontos").prop("disabled", false);
+        $("#q9_pontos").prop("disabled", false);
+        $("#q10_pontos").prop("disabled", false);
+    }
+}
 
 </script>
 </head>
@@ -69,7 +126,7 @@
 
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-tasks"></i></span>
-                        <select class="form-control" name="qtd" onchange="showDiv(this)">
+                        <select class="form-control" name="qtd" onchange="showDiv(this); showQ(this)">
                             <option value="" selected disabled>Selecione a quantidade de questões desejada</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
@@ -142,10 +199,10 @@
                                     <span class="input-group-addon">
                                         <i>Deseja alterar a quantidade de pontos?
                                             <input type="radio" name="op" value="1"> Sim
-                                            <input type="radio" name="op" value="2"> Não
+                                            <input type="radio" name="op" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                <input  class="form-control"  form="avaliacaoform" type="text" name="q1_pontos" id="q1_pontos" placeholder="Pontos" disabled="true" />
+                                <input  class="form-control"  form="avaliacaoform" type="text" name="q1_pontos" id="q1_pontos" placeholder="Pontos" readonly="true" />
                                 </div>
                             </div>
 
@@ -246,10 +303,10 @@
                                     <span class="input-group-addon">
                                         <i>Deseja alterar a quantidade de pontos?
                                             <input type="radio" name="opq2" value="1"> Sim
-                                            <input type="radio" name="opq2" value="2"> Não
+                                            <input type="radio" name="opq2" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q2_pontos" id="q2_pontos" placeholder="Pontos" disabled="true" />
+                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q2_pontos" id="q2_pontos" placeholder="Pontos"  readonly="true"/>
                                 </div>
                             </div>
 
@@ -355,10 +412,10 @@
                                     <span class="input-group-addon">
                                         <i>Deseja alterar a quantidade de pontos?
                                             <input type="radio" name="opq3" value="1"> Sim
-                                            <input type="radio" name="opq3" value="2"> Não
+                                            <input type="radio" name="opq3" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q3_pontos" id="q3_pontos" placeholder="Pontos" disabled="true" />
+                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q3_pontos" id="q3_pontos" placeholder="Pontos"  readonly="true"/>
                                 </div>
                             </div>
 
@@ -460,10 +517,10 @@
                                     <span class="input-group-addon">
                                         <i>Deseja alterar a quantidade de pontos?
                                             <input type="radio" name="opq4" value="1"> Sim
-                                            <input type="radio" name="opq4" value="2"> Não
+                                            <input type="radio" name="opq4" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q4_pontos" id="q4_pontos" placeholder="Pontos" disabled="true" />
+                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q4_pontos" id="q4_pontos" placeholder="Pontos"  readonly="true"/>
                                 </div>
                             </div>
 
@@ -565,10 +622,10 @@
                                     <span class="input-group-addon">
                                         <i>Deseja alterar a quantidade de pontos?
                                             <input type="radio" name="opq5" value="1"> Sim
-                                            <input type="radio" name="opq5" value="2"> Não
+                                            <input type="radio" name="opq5" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q5_pontos" id="q5_pontos" placeholder="Pontos" disabled="true" />
+                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q5_pontos" id="q5_pontos" placeholder="Pontos"  readonly="true"/>
                                 </div>
                             </div>
 
@@ -671,10 +728,10 @@
                                     <span class="input-group-addon">
                                         <i>Deseja alterar a quantidade de pontos?
                                             <input type="radio" name="opq6" value="1"> Sim
-                                            <input type="radio" name="opq6" value="2"> Não
+                                            <input type="radio" name="opq6" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q6_pontos" id="q6_pontos" placeholder="Pontos" disabled="true" />
+                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q6_pontos" id="q6_pontos" placeholder="Pontos"  readonly="true"/>
                                 </div>
                             </div>
 
@@ -779,10 +836,10 @@
                                     <span class="input-group-addon">
                                         <i>Deseja alterar a quantidade de pontos?
                                             <input type="radio" name="opq7" value="1"> Sim
-                                            <input type="radio" name="opq7" value="2"> Não
+                                            <input type="radio" name="opq7" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q7_pontos" id="q7_pontos" placeholder="Pontos" disabled="true" />
+                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q7_pontos" id="q7_pontos" placeholder="Pontos"  readonly="true"/>
                                 </div>
                             </div>
 
@@ -887,10 +944,10 @@
                                     <span class="input-group-addon">
                                         <i>Deseja alterar a quantidade de pontos?
                                             <input type="radio" name="opq8" value="1"> Sim
-                                            <input type="radio" name="opq8" value="2"> Não
+                                            <input type="radio" name="opq8" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q8_pontos" id="q8_pontos" placeholder="Pontos" disabled="true" />
+                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q8_pontos" id="q8_pontos" placeholder="Pontos" readonly="true"/>
                                 </div>
                             </div>
 
@@ -994,10 +1051,10 @@
                                     <span class="input-group-addon">
                                         <i>Deseja alterar a quantidade de pontos?
                                             <input type="radio" name="opq9" value="1"> Sim
-                                            <input type="radio" name="opq9" value="2"> Não
+                                            <input type="radio" name="opq9" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control" form="avaliacaoform" type="text" name="q9_pontos" id="q9_pontos" placeholder="Pontos" disabled="true" />
+                                    <input  class="form-control" form="avaliacaoform" type="text" name="q9_pontos" id="q9_pontos" placeholder="Pontos" readonly="true" />
                                 </div>
                             </div>
 
@@ -1102,10 +1159,10 @@
                                     <span class="input-group-addon">
                                         <i>Deseja alterar a quantidade de pontos?
                                             <input type="radio" name="opq10" value="1"> Sim
-                                            <input type="radio" name="opq10" value="2"> Não
+                                            <input type="radio" name="opq10" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control" form="avaliacaoform" type="text" name="q10_pontos" id="q10_pontos" placeholder="Pontos" disabled="true" />
+                                    <input  class="form-control" form="avaliacaoform" type="text" name="q10_pontos" id="q10_pontos" placeholder="Pontos" readonly="true" />
                                 </div>
                             </div>
 
