@@ -50,8 +50,8 @@ class AdminController extends Controller
     public function store(Request $request)
     {
     	$admin = new Admin;
-
     	$admin->name = $request->name;
+        $admin->sobrenome = $request->sobrenome;
     	$admin->email = $request->email;
 
     	$cryptPassword = bcrypt($request->password);
@@ -59,7 +59,7 @@ class AdminController extends Controller
 
     	$admin ->save();
 
-    	return redirect('admin.auth');
+    	return redirect('/home');
     }
 
     public function relatorio($id)

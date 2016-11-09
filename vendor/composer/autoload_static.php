@@ -296,6 +296,10 @@ class ComposerStaticInit401c39904328666e339d313dfea4cb02
     );
 
     public static $classMap = array (
+        'AddChaveAvaliacaoNaTabelaPontos' => __DIR__ . '/../..' . '/database/migrations/2016_11_06_194353_add_chave_avaliacao_na_tabela_pontos.php',
+        'AddIdQuestaoOrdem' => __DIR__ . '/../..' . '/database/migrations/2016_11_07_150113_add_id_questao_ordem.php',
+        'AddSobrenomeAdmins' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_142322_add_sobrenome_admins.php',
+        'CriarOrdem' => __DIR__ . '/../..' . '/database/migrations/2016_11_07_145820_criar_ordem.php',
         'CriarPontoQuestao' => __DIR__ . '/../..' . '/database/migrations/2016_11_05_001854_criar_ponto_questao.php',
         'CriarTabelaPontos' => __DIR__ . '/../..' . '/database/migrations/2016_11_05_001751_criar_tabela_pontos.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',

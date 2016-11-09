@@ -32,8 +32,8 @@
         var options = {'title':'Número de questões adicionadas por professores',
         			   'is3D':true,
                        'width':750,
-                       'height':750,
-                       'backgroundColor': '#ecf0f1',
+                       'height':650,
+                       'backgroundColor': 'transparent',
                        'pieHole': 0,
                        'chartArea.width': 150};
 
@@ -55,19 +55,19 @@
 	<div id="container">
 		<div class="sidebar">
 			<ul id="nav"> 
-			    <li><a href="/home">Inicio</a></li> 
+			    <li><a href="/home">Inicio</a></li>
+			    <li><a href="/administrador/novo">Cadastro de administradores</a></li>
+			    <li><a href="/administrador/lista">Lista de administradores</a></li>
 			    <li><a href="/professor/novo">Cadastro de professores</a></li> 
 			    <li><a href="/professores">Lista de Professores</a>
 			      <ul> 
-			        <li><a href="/disciplina/novo">Cadastro de disciplinas</a></li> 
+			        <li><a href="/aluno/novo">Cadastro de Alunos</a></li>
 			        <li><a href="/alunos">Lista de Alunos</a></li> 
-			        <li><a href="/disciplinas">Lista de Disciplinas</a></li> 
-			        <li><a href="/aluno/novo">Cadastro de Alunos</a></li> 
+			        <li><a href="/disciplina/novo">Cadastro de disciplinas</a></li> 
+			        <li><a href="/disciplinas">Lista de Disciplinas</a></li>  
+			        <li><a href="/turma/novo">Cadastro de Turma</a></li> 
 			      </ul> 
 			    </li>
-
-			    <li><a href="/alunos">Lista de Alunos</a></li> 
-			    <li><a href="/turma/novo">Cadastro de Turma</a></li> 
 			    <li><a href="administrador/logout">Logout</a></li> 
 
 			 </ul>

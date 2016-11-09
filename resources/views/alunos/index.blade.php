@@ -49,8 +49,13 @@
 			<div id="box">
 				<div class="box-top">
 					<img src="images/notas.png">
-					<h3 class="alunos" style="float: right; margin-top: 13px;">{{$aluno->nota}} - {{$aluno->avaliacao->disciplina->nome}}</h3>
 					<a href="#" style="float: left;">Ultimo resultado</a>
+					<h3 class="alunos" style="float: right; margin-top: 13px;">
+						@if(count($aluno)>0)
+							{{$aluno->nota}} - {{$aluno->nome}}</h3>
+						@else
+							S/N
+						@endif
 				</div>
 
 				<div class="box2-top">
