@@ -7,6 +7,9 @@
 	@stop
 	
 	@section('content')
+	<br>
+	<br>
+	<br>
 		<div style="text-align:center">
 			<h1>Lista de Alunos</h1>
 

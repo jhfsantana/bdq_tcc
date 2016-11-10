@@ -18,6 +18,9 @@
 	</script>
 	@stop
 	@section('content')
+	<br>
+	<br>
+	<br>
 	<H2 style="text-align: center;">Cadastro de professores</H2>
 	@if(!empty($errors->all()))
 	<div class="alert alert-warning" role="alert-warning">

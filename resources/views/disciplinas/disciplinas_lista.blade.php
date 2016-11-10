@@ -7,6 +7,9 @@
   	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>	<title>Lista de disciplinas</title>
 	@stop
 	@section('content')
+	<br>
+	<br>
+	<br>
 	<div class="container">
 		<h2 style="text-align: center;">Lista de disciplinas</h2>
 		<br>

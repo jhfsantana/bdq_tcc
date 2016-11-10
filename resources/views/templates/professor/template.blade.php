@@ -4,14 +4,16 @@
 	@yield('head')
 </head>
 <body>
+
 	<div id="header">
 		<div class="logo">
-			<a href="#">BDQ - Avaliação<span>Online</span></a>
+			<a  href="#">BDQ - Avaliação<span>Online</span></a>
 		</div>
 		
 		<div class="headeruser">
-			<img src="/images/teacher-desk.png" style="float: left; margin-left: 50%; margin-top: 36px;">
-			<h3 style="float: right; color: #E7E7E7;margin-top: 45px; margin-right: 240px;">Você está logado como professor(a): {{Auth::guard('web_teachers')->user()->nome }}</h3>
+			<h3 style="float: right; color: #E7E7E7; margin: 0px; margin-top: 8px;">Você está logado como professor(a): {{Auth::guard('web_teachers')->user()->nome }}</h3>
+			<img src="/images/teacher-desk.png" style="float: right; margin-right: 10px;">
+
 		</div>
 	</div>
 	<a href="#" class="mobile">MENU</a>
@@ -32,7 +34,7 @@
 
 			 </ul>
 		</div>
-		<div class="content">
+		<div class="content" id="conteudo">
 		<p>
 		<br>
 			
@@ -50,6 +52,7 @@
 		@yield('content')
 		</div>
 	</div>
+
 
 	<script type="text/javascript">
 
@@ -85,7 +88,6 @@
 		<form action="/professor/{{Auth::user()->id}}/questoes" method="post" id="formQuestoes">
 			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
 		</form>
-
 </body>
 </html>
 

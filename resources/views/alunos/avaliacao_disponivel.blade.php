@@ -7,7 +7,9 @@
 </head>
 <body>					
 
-
+<br>
+<br>
+<br>
 <div class="container">
 	<h2>Aluno: {{Auth::user()->nome}}</h2>
 </div>
