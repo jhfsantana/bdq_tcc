@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="/css/bootstrap.css">		
+@extends('templates.aluno.template')
+	@section('head')
+	<link rel="stylesheet" href="/css/gloabal.css">		
+	<link rel="stylesheet" href="/css/formularios.css">		
 	<title>RESULTADO</title>
-</head>
-<body>
-	<nav class="navbar navbar-inverse">
-		<a class="navbar-brand" href="/aluno">Inicio</a>
-	</nav>
+	@stop
+	@section('content')
+	<br>
+	<br>
+	<br>
+	<br>
 	<div style="text-align:center">
 		<h1>RESULTADO</h1>
 
@@ -23,5 +24,4 @@
 			@endif
 		</div>
 	</div>
-</body>
-</html>
+	@stop

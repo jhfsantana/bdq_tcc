@@ -221,7 +221,7 @@ function showQ(select){
                                         
                          				<form id = "frmbuscar" action="" method="GET">
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar" type="submit" name="buscar-questao" value="Buscar Questao" class="form-control">
+                                            <input id = "buscar" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
                                         </form>
                                          
 
@@ -326,7 +326,7 @@ function showQ(select){
                                         
                                         <form id = "frmbuscar" action="" method="GET">
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar2" type="submit" name="buscar-questao" value="Buscar Questao" class="form-control">
+                                            <input id = "buscar2" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
                                         </form>
                                          
 
@@ -433,7 +433,7 @@ function showQ(select){
                                         
                                         <form id = "frmbuscar" action="" method="GET">
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar3" type="submit" name="buscar-questao" value="Buscar Questao" class="form-control">
+                                            <input id = "buscar3" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
                                         </form>
                                          
 
@@ -538,7 +538,7 @@ function showQ(select){
                                         
                                         <form id = "frmbuscar" action="" method="GET">
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar4" type="submit" name="buscar-questao" value="Buscar Questao" class="form-control">
+                                            <input id = "buscar4" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
                                         </form>
                                          
 
@@ -643,7 +643,7 @@ function showQ(select){
                                         
                                         <form id = "frmbuscar" action="" method="GET">
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar5" type="submit" name="buscar-questao" value="Buscar Questao" class="form-control">
+                                            <input id = "buscar5" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
                                         </form>
   
 
@@ -750,7 +750,7 @@ function showQ(select){
                                         
                                         <form id = "frmbuscar" action="" method="GET">
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar6" type="submit" name="buscar-questao" value="Buscar Questao" class="form-control">
+                                            <input id = "buscar6" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
                                         </form>
                                          
 
@@ -858,7 +858,7 @@ function showQ(select){
                                         
                                         <form id = "frmbuscar" action="" method="GET">
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar7" type="submit" name="buscar-questao" value="Buscar Questao" class="form-control">
+                                            <input id = "buscar7" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
                                         </form>
                                          
 
@@ -966,7 +966,7 @@ function showQ(select){
                                         
                                         <form id = "frmbuscar" action="" method="GET">
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar8" type="submit" name="buscar-questao" value="Buscar Questao" class="form-control">
+                                            <input id = "buscar8" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
                                         </form>
                                          
 
@@ -1073,7 +1073,7 @@ function showQ(select){
                                         
                                         <form id = "frmbuscar" action="" method="GET">
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar9" type="submit" name="buscar-questao" value="Buscar Questao" class="form-control">
+                                            <input id = "buscar9" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
                                         </form>
                                          
 
@@ -1180,7 +1180,7 @@ function showQ(select){
                                         
                                         <form id = "frmbuscar" action="" method="GET">
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar10" type="submit" name="buscar-questao" value="Buscar Questao" class="form-control">
+                                            <input id = "buscar10" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
                                         </form>
                                          
 

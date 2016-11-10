@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="/css/bootstrap.css">	
+@extends('templates.admin.template')
+	@section('scripts')
+	<link rel="stylesheet" href="/css/global.css">	
+	<link rel="stylesheet" href="/css/formularios.css">	
 	<title>Detalhes</title>
-</head>
-<body>
-	<nav class="navbar navbar-inverse">
-		<a class="navbar-brand" href="/home">Inicio</a>
-	</nav>
-	
+	@stop
+
+	@section('content')
+	<br>
+	<br>
+	<br>
 	<div style="text-align:center">
 		<h1>Detalhe do aluno  - {{$aluno->nome}}</h1>	
 	</div>
@@ -33,5 +33,4 @@
 			@endforeach
 			</td>
 	</table>
-</body>
-</html>
+	@stop
