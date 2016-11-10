@@ -21,7 +21,7 @@
 	@section('content')
 		<H2 style="text-align: center;">Cadastro de alunos</H2>
 		@if(!empty($errors->all()))
-			<div class="alert alert-danger" role="alert-danger" id="formRequest">
+			<div class="alert alert-warning" role="alert-warning">
 				@foreach($errors->all() as $error)
 					<ul>
 						<li> {{$error}}</li>
@@ -45,7 +45,7 @@
 								<button data-toggle="tooltip" title="Gerar Matricula" type="button" id="matriculabuscar" class="btn btn-primary" onclick="GetRandom()" style="margin-bottom: 8px;">
 									<i class="glyphicon glyphicon-refresh" aria-hidden="true" "></i>		
 								</button>
-								<input type="text" id="matricula" name="matricula" class="form-control" placeholder="Matricula">
+								<input type="text" id="matricula" name="matricula" class="form-control" placeholder="Matricula" readonly="true">
 							</label>
 							
 							<label>

@@ -29,16 +29,17 @@
 	@stop
 	@section('content')
 		<!-- RESGATANDO MENSAGEM DE ERRO OU SUCESSO -->
-		<div class="flash-message">
-			@foreach (['danger', 'warning', 'success', 'info'] as $msg)
-				@if(Session::has('alert-' . $msg))
-					<p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
-				@endif
-			@endforeach
-		</div>	
+		@if(!empty($errors->all()))
+			<div class="alert alert-warning" role="alert-warning">
+				@foreach($errors->all() as $error)
+					<ul>
+						<li> {{$error}}</li>
+					</ul>
+				@endforeach
+			</div>
+		@endif	
 		<!-- FIM DA MENSAGEM DE ERRO OU SUCESSO -->
-	<h2 style="text-al">Cadastro de turmas</h2>
-	<div class="container">    
+	<h2 style="text-align: center;">Cadastro de turmas</h2>
 		    <div id="cadastroturmarbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
 		        <div class="panel panel-default" >
 		            <div class="panel-heading">
@@ -60,8 +61,6 @@
 				</div>
 			</div>
 		</div>
-		</div>
-
 			<table class="table table-striped">
 			  <tr>
 			      <td><strong>NÚMERO</strong></td>

@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Models\Disciplina;
 use App\Models\Professor;
 use App\Models\Turma;
-use App\Http\Requests\FormRequest;
+use App\Http\Requests\Disciplina\DisciplinaRequest;
 
 
 class DisciplinaController extends Controller
@@ -43,7 +43,7 @@ class DisciplinaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DisciplinaRequest $request)
     {
       //  Subject::create($request->all());
 

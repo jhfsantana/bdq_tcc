@@ -9,6 +9,7 @@ return array(
     'AddChaveAvaliacaoNaTabelaPontos' => $baseDir . '/database/migrations/2016_11_06_194353_add_chave_avaliacao_na_tabela_pontos.php',
     'AddIdQuestaoOrdem' => $baseDir . '/database/migrations/2016_11_07_150113_add_id_questao_ordem.php',
     'AddSobrenomeAdmins' => $baseDir . '/database/migrations/2016_11_09_142322_add_sobrenome_admins.php',
+    'AddSobrenomeProfessores' => $baseDir . '/database/migrations/2016_11_09_215103_add_sobrenome_professores.php',
     'CriarOrdem' => $baseDir . '/database/migrations/2016_11_07_145820_criar_ordem.php',
     'CriarPontoQuestao' => $baseDir . '/database/migrations/2016_11_05_001854_criar_ponto_questao.php',
     'CriarTabelaPontos' => $baseDir . '/database/migrations/2016_11_05_001751_criar_tabela_pontos.php',

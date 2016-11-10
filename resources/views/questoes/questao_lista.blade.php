@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="/css/bootstrap.css">
+@extends('templates.professor.template')
+	
+	@section('head')
+	<link rel="stylesheet" href="/css/formularios.css">
+	<link rel="stylesheet" href="/css/global.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<title>Lista de Questões</title>
 	<script type="text/javascript"></script>
-
 	<script>
-
-
     // validation code here ...
 function confirmDelete(e) {
     if(confirm('Deseja excluir a questão?')== true)
@@ -47,13 +45,19 @@ function confirmDelete(e) {
 	// });
 
 	</script>
-</head>
-<body>
-	<nav class="navbar navbar-inverse">
-			<a class="navbar-brand" href="/professor">Inicio</a>
-	</nav>
-	<div class="container" id="questoes">
-		<table class="table">
+	@stop
+	@section('content')
+	<h2 style="text-align: center;"> Lista de questões</h2>
+	<div class="" id="questoes">
+	<br>
+	<br>
+		<table class="table table-striped">
+			<tr>
+				<td><strong>ID</strong></td>
+				<td><strong>Questão</strong></td>
+				<td><strong>Disciplina</strong></td>
+				<td><strong>Ação</strong></td>
+			</tr>
 			@foreach($questoes as $questao)
 				<tr>
 					<td>{{$questao->id}}</td>
@@ -81,5 +85,4 @@ function confirmDelete(e) {
 			@endforeach
 		</table>
 	</div>
-</body>
-</html>
+	@stop

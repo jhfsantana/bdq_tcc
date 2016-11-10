@@ -12,6 +12,7 @@ use App\Models\Disciplina;
 use App\Models\Aluno;
 use Charts;
 use Illuminate\Support\Facades\Input;
+use App\Http\Requests\AdminRequest;
 
 class AdminController extends Controller
 {
@@ -47,7 +48,7 @@ class AdminController extends Controller
         return view('admin.register');
     }
 
-    public function store(Request $request)
+    public function store(AdminRequest $request)
     {
     	$admin = new Admin;
     	$admin->name = $request->name;
