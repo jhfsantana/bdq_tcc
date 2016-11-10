@@ -1,0 +1,19 @@
+
+
+.image {
+	background-image: url('http://static.wixstatic.com/media/922da6_dd9841dda4164a46b7b8ac4b00abefd6~mv2.jpg');
+	background-color: #ecf0f1;
+
+}
+
+div#professor .image {
+  background-image: url('http://wallpapercave.com/wp/r5ITGSK.jpg');
+  background-color: #ecf0f1;
+
+}
+
+div .panel-heading img {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}

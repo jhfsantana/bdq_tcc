@@ -22,7 +22,7 @@ use App\Models\Resultado;
 
 use Illuminate\Support\Facades\Input;
 
-use App\Http\Requests\FormRequest;
+use App\Http\Requests\Aluno\AlunoRequest;
 
 use DB;
 use Auth;
@@ -58,7 +58,7 @@ class AlunoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AlunoRequest $request)
     {
         $aluno = new Aluno();
 

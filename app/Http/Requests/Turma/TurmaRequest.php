@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Turma;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuestaoRequest extends FormRequest
+class TurmaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,20 +24,14 @@ class QuestaoRequest extends FormRequest
     public function rules()
     {
         return [
-            'questao' => 'required'
+            'nome' => 'required',
         ];
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    public function messages()
+    {
+        return [
+            'nome.required' => 'Campo nome é obrigatório',
+        ];
+    }
 }

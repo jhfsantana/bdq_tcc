@@ -8,8 +8,16 @@
 		<title>Cadastro de Disciplinas</title>
 	@stop
 	@section('content')
-		<div class="container">
-			
+	@if(!empty($errors->all()))
+			<div class="alert alert-warning" role="alert-warning">
+				@foreach($errors->all() as $error)
+					<ul>
+						<li> {{$error}}</li>
+					</ul>
+				@endforeach
+			</div>
+		@endif
+		<div class="container">	
 			<h2 style="text-align: center;"> Cadastro de disciplinas </h2> <br>
 
 			{!!Form::open(array('url' => 'subjects', 'method' => 'post'))!!}

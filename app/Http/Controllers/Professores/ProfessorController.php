@@ -13,8 +13,11 @@ use App\Models\Professor;
 use App\Models\Turma;
 
 use App\Models\Disciplina;
+
 use Hash;
-use App\Http\Requests\FormRequest;
+
+use App\Http\Requests\Professor\ProfessorRequest;
+
 use DateTime;
 
 class ProfessorController extends Controller
@@ -59,7 +62,7 @@ class ProfessorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProfessorRequest $request)
     {
       
        // $subjects = Subject::find($request->id);
@@ -69,6 +72,7 @@ class ProfessorController extends Controller
         //$subject = $request->subjects;
         $professor->matricula = $request->matricula;
         $professor->nome = $request->nome;
+        $professor->sobrenome = $request->sobrenome;
         $professor->email = $request->email;
         
         $cryptPassword = bcrypt($request->password);

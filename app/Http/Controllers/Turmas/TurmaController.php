@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Turma;
 use App\Models\Disciplina;
-use App\Http\Requests\FormRequest;
+use App\Http\Requests\Turma\TurmaRequest;
 
 
 class TurmaController extends Controller
@@ -40,7 +40,7 @@ class TurmaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TurmaRequest $request)
     {
         $turma = new Turma;
 
