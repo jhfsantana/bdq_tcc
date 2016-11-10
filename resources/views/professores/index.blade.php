@@ -36,7 +36,7 @@
 		<br>
 		<br>
 		<br>
-		<h1>Olá, {{Auth::guard('web_teachers')->user()->nome }}</h1> <p>
+		<h1>Olá, Professor(a): {{Auth::guard('web_teachers')->user()->nome }}</h1> <p>
 <p>
 		<br>
 			

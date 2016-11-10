@@ -10,6 +10,9 @@
 	<title>Detalhes</title>
 	@stop
 	@section('content')
+	<br>
+	<br>
+	<br>
 		<div class="container">
 		<h3>Detalhes do professor(a) {{$professor->nome}}</h3> <br>
 			<table class="table">

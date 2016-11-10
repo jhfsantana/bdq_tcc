@@ -1,10 +1,7 @@
 <html>
 <head>
+		@yield('head')
 		<title>BDQ - Avaliação Online</title>
-	<link type="text/css" rel="stylesheet" href="/css/global.css" />
-	<meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
 </head>
 <body>
 
@@ -24,16 +21,12 @@
 			      <ul> 
 			        <li><input type="submit" name="resultado" value="Provas realizadas" form="formRealizadas" class="btn btn-link"></li> 
 			      </ul> 
-			    <li><a href="aluno/logout">Logout</a></li> 
+			    <li><a href="/aluno/logout">Logout</a></li> 
 
 			 </ul>
 		</div>
-		<br>
-		<br>
-		<br>
 		<div class="content">
-		<h1>Olá, {{Auth::guard('web_students')->user()->nome }}</h1> <p>
-<p>
+		@yield('content')
 		<br>
 			
 			<!-- MENSAGEM DE SUCESSO -->
@@ -47,32 +40,6 @@
 				 </div>	
 
 			<!-- FIM DA MENSAGEM DE SUCESSO -->
-		<h2>Painel de Informações</h2>
-			<p>resumo das informações</p>
-			<div id="box">
-				<div class="box-top">
-					<img src="images/notas.png">
-					<a href="#" style="float: left;">Ultimo resultado</a>
-					<h3 class="alunos" style="float: right; margin-top: 13px;">
-						@if(count($aluno)>0)
-							{{$aluno->nota}} - {{$aluno->nome}}</h3>
-						@else
-							S/N
-						@endif
-				</div>
-
-				<div class="box2-top">
-					<img src="images/estudantes_64.png">
-					<h3 class="estudantes">4</h3>
-					<a href="#">Turmas matriculadas</a>
-				</div>
-
-				<div class="box3-top">
-					<img src="images/estatistica_64.png">
-					<a href="#">Estatisticas</a>
-				</div>
-				
-			</div>
 
 
 		</div>
@@ -97,11 +64,11 @@
 </script>
 		
 		<!-- FORMULARIO PARA CADASTRAR, GERAR VISUALIZAR AVALIACAO E LISTA DE QUESTOES -->
-		<form action="aluno/avaliacoes/{{Auth::user()->id}}" method="post" id="formAvaliacao">
+		<form action="/aluno/avaliacoes/{{Auth::user()->id}}" method="post" id="formAvaliacao">
 			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
 		</form>
 
-		<form action="aluno/avaliacoes/realizadas/{{Auth::user()->id}}" method="post" id="formRealizadas">
+		<form action="/aluno/avaliacoes/realizadas/{{Auth::user()->id}}" method="post" id="formRealizadas">
 			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
 		</form>
 

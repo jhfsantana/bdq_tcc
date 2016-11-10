@@ -64,6 +64,7 @@ class AlunoController extends Controller
 
         $aluno->matricula = $request->matricula;
         $aluno->nome = $request->nome;
+        $aluno->sobrenome = $request->sobrenome;
         $aluno->email = $request->email;
         $cryptPassword = bcrypt($request->password);
         $aluno->password = $cryptPassword;
