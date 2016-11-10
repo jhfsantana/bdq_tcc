@@ -65,8 +65,10 @@
 						<label>
 							Disciplinas
 							<select multiple class="form-control"  name ="disciplinas[]">
-						  		@foreach($disciplinas as $d)
-						  			<option value="{{$d->id}}">{{$d->nome}}</option> 
+						  		@foreach($disciplinas as $disciplina)
+						  			@foreach($disciplina->turmas as $turma)
+						  			<option value="{{$disciplina->id}}">{{$disciplina->nome}} - {{$turma->nome}}</option>
+						  			@endforeach
 						  		@endforeach
 							</select>
 						</label>

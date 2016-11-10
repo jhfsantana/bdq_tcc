@@ -57,7 +57,7 @@
 			<ul id="nav"> 
 			    <li><a href="/home">Inicio</a></li>
 			    <li><a href="/administrador/novo">Cadastro de administradores</a></li>
-			    <li><a href="/administrador/lista">Lista de administradores</a></li>
+			    <li><a href="#">Lista de administradores</a></li>
 			    <li><a href="/professor/novo">Cadastro de professores</a></li> 
 			    <li><a href="/professores">Lista de Professores</a>
 			      <ul> 

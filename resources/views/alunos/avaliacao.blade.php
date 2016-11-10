@@ -1,22 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="/css/bootstrap.css">	
+@extends('templates.aluno.template')
+	@section('head')
+	<link rel="stylesheet" href="/css/global.css">	
+	<link rel="stylesheet" href="/css/formularios.css">	
 	<title>Lista de avaliacoes</title>
-</head>
-<body>
-	<nav class="navbar navbar-inverse">
-	<a class="navbar-brand" href="/aluno">Inicio</a>
-	</nav>
+	@stop
+	@section('content')
+<br>
+<br>
+<br>
 <div class="container">
 <h2 style="text-align: center;">Avaliação</h2>
 
 
+<table class="table">
+	<tr>
+		<td>Nome: {{Auth::user()->nome}}</td>
+	</tr>
+
+</table>
 @foreach($avaliacao as $avaliacao)
 	<?php $count=0; ?>
-
 	@if(!isset($avaliacao->resultado))
-
 		<form action="/aluno/avaliacao/finalizada" method="post" form="avaliacao">
 			<table class="table">
 				@foreach($avaliacao->questoes as $questao)
@@ -114,5 +118,4 @@
 	@endif
 </form>
 </table>
-</body>
-</html>
+@stop

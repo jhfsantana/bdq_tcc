@@ -1,15 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="/css/bootstrap.css">		
+@extends('templates.aluno.template')
+	@section('head')
+	<link rel="stylesheet" href="/css/global.css">		
+	<link rel="stylesheet" href="/css/formularios.css">		
 	<title>Avaliações realizadas</title>
-</head>
-<body>
-	<nav class="navbar navbar-inverse">
-		<a class="navbar-brand" href="/aluno">Inicio</a>
-	</nav>
+	@stop
+	@section('content')
+	<br>
+	<br>
+	<br>
+
+
 	<div style="text-align:center">
 		<h1>Avaliações realizadas</h1>
+		<br>
+		<br>
 
 		<div class="container">
 			<table class="table table-bordered">
@@ -29,5 +33,4 @@
 		</div>
 
 	</div>
-</body>
-</html>
+	@stop

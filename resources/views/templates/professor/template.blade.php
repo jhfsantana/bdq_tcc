@@ -30,7 +30,7 @@
 			    </li>
 
 			    <li><a href="#">Lista de Alunos</a></li> 
-			    <li><a href="professor/logout">Logout</a></li> 
+			    <li><a href="/professor/logout">Logout</a></li> 
 
 			 </ul>
 		</div>
