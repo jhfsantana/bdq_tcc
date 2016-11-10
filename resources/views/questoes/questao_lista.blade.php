@@ -47,6 +47,9 @@ function confirmDelete(e) {
 	</script>
 	@stop
 	@section('content')
+	<br>
+	<br>
+	<br>
 	<h2 style="text-align: center;"> Lista de questões</h2>
 	<div class="" id="questoes">
 	<br>

@@ -28,6 +28,9 @@
 	<title>Cadastro de Turmas</title>
 	@stop
 	@section('content')
+	<br>
+	<br>
+	<br>
 		<!-- RESGATANDO MENSAGEM DE ERRO OU SUCESSO -->
 		@if(!empty($errors->all()))
 			<div class="alert alert-warning" role="alert-warning">

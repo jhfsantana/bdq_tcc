@@ -8,6 +8,9 @@
 		<title>Cadastro de Disciplinas</title>
 	@stop
 	@section('content')
+	<br>
+	<br>
+	<br>
 	@if(!empty($errors->all()))
 			<div class="alert alert-warning" role="alert-warning">
 				@foreach($errors->all() as $error)

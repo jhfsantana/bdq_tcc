@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
+@extends('templates.professor.template')
+    @section('head')
 	<link rel="stylesheet" href="/css/loading.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -9,10 +8,12 @@
   <script src="/js/qtd_questao.js"></script>
   <script src="/js/buscar_questoes.js"></script>
 
-    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/formularios.css">
 	<title>Formulario para gerar avaliação</title>
 
 <script>
+
 
 function showQ(select){
     if(select.value==5)
@@ -74,18 +75,21 @@ function showQ(select){
 }
 
 </script>
-</head>
-<body>
+@stop
+@section('content')
 
-
-<div class="container">    
-    <div id="avaliacaobox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+<div class="container" style="margin-top: 50px;">
+<h2 style="text-align: center;">Formulario para gerar avaliação</h2> 
+<br>
+<br>
+<br>
+    <div id="avaliacaobox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
         <div class="panel panel-info" >
             <div class="panel-heading">
                 <div class="panel-title">Selecione a disciplina para buscar as questões</div>
             </div>     
 
-            <div style="padding-top:30px" class="panel-body" >
+            <div style="padding-top:15px" class="panel-body" >
 
                 <form id="avaliacaoform" class="form-group" role="form"  method="POST" action="gerar/salvar">
                     <input name="_token" type="hidden" value="{{ csrf_token() }}">
@@ -99,7 +103,7 @@ function showQ(select){
                             </select>
                     </div> -->
                     
-                    <div style="margin-bottom: 25px" class="input-group">
+                    <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
                                 <select class="form-control" name="disciplina" id="disciplina_id">
                                     @foreach($professor->disciplinas as $disciplinas)
@@ -113,7 +117,7 @@ function showQ(select){
                             <div class="panel-title">Para qual turma deseja criar a Avaliação?</div>
                         </div> 
                     </div>
-                    <div style="margin-bottom: 25px" class="input-group">
+                    <div style="margin-bottom: 15px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <select class="form-control"  name ="turma">
                             @foreach($professor->disciplinas as $disciplina)    
@@ -124,7 +128,7 @@ function showQ(select){
                         </select>
                     </div>
 
-                    <div style="margin-bottom: 25px" class="input-group">
+                    <div style="margin-bottom: 15px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-tasks"></i></span>
                         <select class="form-control" name="qtd" onchange="showDiv(this); showQ(this)">
                             <option value="" selected disabled>Selecione a quantidade de questões desejada</option>
@@ -153,7 +157,7 @@ function showQ(select){
 
 
 	<div class="container" id="questao1">    
-        <div id="questaobox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        <div id="questaobox"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
                         <div class="panel-title">Questão 1</div>
@@ -1220,10 +1224,8 @@ function showQ(select){
         </div>
 
     </div>
-                    <div class="container" style="margin-right:60px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-                        <input type="submit" form="avaliacaoform" value="Criar Avaliação"  class="btn btn-success">
-                    </div> 
+    
+        <input  style="margin-right: auto;margin-left: 540px;display: block;" type="submit" form="avaliacaoform" value="Criar Avaliação"  class="btn btn-success">
+                        
 </form>
-                       
-</body>
-</html>
+@stop

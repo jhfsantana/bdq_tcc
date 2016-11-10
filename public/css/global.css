@@ -11,6 +11,7 @@
 
 body {
 	font-family: 'Source Serif Pro';
+	overflow: auto;
 }
 
 a {
@@ -99,7 +100,9 @@ div#header {
  height: 70px;
  font-family: 'Play';
  background-color: #34495e; 
- margin: 0 auto;	
+ margin: 0 auto;
+ position: fixed !important;
+    z-index:100;
 }
 
 .logo img {
@@ -130,10 +133,18 @@ div#container {
 
 
 .sidebar {
+	padding: 0px;
+	margin: 0px;
 	width: 250px;
 	height: 100%;
-	background:#171717;
-	float: left; 
+	background: #171717;
+    margin-top:70px;
+    position:fixed;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -o-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 .btn-link {
@@ -223,7 +234,9 @@ ul#nav li a:hover {
 	height: 100%;
 	background: #ffffff;
 	margin-left: 250px;
-	padding: 15px;
+	padding: 35px;
+
+
 }
 
 .content p {
@@ -388,7 +401,7 @@ a.mobile {
 	color: #fff;
 	background: #000;
 	text-align: center;
-	padding: 7px; 
+	padding: 8px; 
 	cursor: pointer;
 }
 
@@ -401,10 +414,13 @@ a.mobile:active{
 	width: 100%;
 	display: none;
 	height: auto;
-}
+	margin: 0;
+	position: absolute;
+	}
 
 .content {
    margin-left: 0;
+   min-height: 100%;
 }
 
 
@@ -521,8 +537,11 @@ div#header img {
  font-size: 0.8em;
 }
 
+div#header {
+ position: relative !important;
 }
 
+}
 
 
 @media only screen and (min-width: 480px) {

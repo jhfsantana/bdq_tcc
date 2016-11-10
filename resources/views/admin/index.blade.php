@@ -73,6 +73,9 @@
 			 </ul>
 		</div>
 		<div class="content">
+		<br>
+		<br>
+		<br>
 		<h1>Olá, {{Auth::guard('web_admins')->user()->name }}</h1>
 		<br>
 		<h2>Painel de Informações</h2>

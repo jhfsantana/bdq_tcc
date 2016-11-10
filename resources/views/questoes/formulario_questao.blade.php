@@ -5,11 +5,14 @@
 	<title>Formulario de Questões</title>
     @stop
     @section('content')
-	<div class="container">    
-        <div id="questaobox" style="margin-top:0px; border-color: #ccc" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+	<div class="container">
+    <br>
+    <br>
+    <br>
+        <div id="questaobox" style="margin-top:0px; border-color: #ccc" class="mainbox col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-default" >
                     <div class="panel-heading">
-                        <div class="panel-title">Cadastro de Questões</div>
+                        <div class="panel-title"><h3 style="text-align: center;">Cadastro de Questões</h3></div>
                     </div>     
 
                     <div style="padding-top:10px; border-color: #ccc;" class="panel-body" >
@@ -79,7 +82,7 @@
                                 <div style="margin-top:10px" class="form-group">
                                                                     
                                     <div class="col-sm-12 controls">
-                                    	<input type="submit" value="Salvar"  class="btn btn-success">
+                                    	<input type="submit" value="Salvar"  class="btn btn-primary">
                                     </div>
                                 </div>
                             </form> 

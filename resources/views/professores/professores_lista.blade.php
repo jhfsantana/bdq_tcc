@@ -20,6 +20,9 @@
 	</script>
 	@stop
 	@section('content')
+	<br>
+	<br>
+	<br>
 	<div class="container">
 	<h2 style="text-align: center;">Lista de professores</h2>
 		<table class="table table-striped">

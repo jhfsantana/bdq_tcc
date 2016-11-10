@@ -15,8 +15,8 @@
 			<a href="#">BDQ - Avaliação<span>Online</span></a>
 		</div>
 		<div class="headeruser">
-			<img src="/images/admin-header.png" style="float: left; margin-left: 47%; margin-top: 41px;">
-			<h3 style="float: right; color: #E7E7E7;margin-top: 45px; margin-right: 240px;">Você está logado como administrador(a): {{Auth::guard('web_admins')->user()->name }}</h3>
+			<h3 style="float: right; color: #E7E7E7; margin: 0px; margin-top: 8px;">Você está logado como administrador(a): {{Auth::guard('web_admins')->user()->name }}</h3>
+			<img src="/images/admin-header.png" style="float: right; margin-right: 10px; margin-top: 5px">
 		</div>
 	</div>
 	<a href="#" class="mobile">MENU</a>

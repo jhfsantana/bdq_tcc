@@ -14,6 +14,7 @@ use App\Models\Ponto;
 use Response;
 use DB;
 use Illuminate\Support\Facades\Input;
+use App\Http\Requests\Avaliacao\AvaliacaoRequest;
 class AvaliacaoController extends Controller
 {
     
@@ -111,8 +112,6 @@ class AvaliacaoController extends Controller
         $avaliacao->professor()->associate($request->professor_id);
         $avaliacao->disciplina()->associate($request->disciplina);
         $avaliacao->turma()->associate($request->turma);
-
-               dd($request); 
         if($avaliacao->save())
         {
             $zero[] = 0;
@@ -326,13 +325,13 @@ class AvaliacaoController extends Controller
 
     }
 
-    public function receberQuestao(Request $request)
+/*    public function receberQuestao(Request $request)
     {
     	$avaliacao = new Avaliacao;
     	$avaliacao->professor_id = $request->professor_id;
     	$avaliacao->save();
 
-    }
+    }*/
 
     public function mostrar($id)
     {
