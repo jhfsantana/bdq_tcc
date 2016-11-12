@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Avaliacao;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
 class AvaliacaoRequest extends FormRequest
 {
@@ -11,9 +12,14 @@ class AvaliacaoRequest extends FormRequest
      *
      * @return bool
      */
+
+
     public function authorize()
     {
-        return true;
+        
+
+            return true;
+
     }
 
     /**
@@ -24,14 +30,14 @@ class AvaliacaoRequest extends FormRequest
     public function rules()
     {
         return [
-            'avaliacaoform' => 'required', 
+            'questao2' => 'required', 
         ];
     }
 
     public function messages()
     {
         return [
-            'qtd.required' => 'Campo quantidade é obrigatório',
+            'questao2.required' => 'Preencher questao2 é obrigatorio',
 
         ];
     }

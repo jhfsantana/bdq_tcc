@@ -1,20 +1,29 @@
 @extends('templates.professor.template')
     @section('head')
-	<link rel="stylesheet" href="/css/loading.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap -->
+    <link href="/css/formularios.css" rel="stylesheet">
+    <script src="/js/jquery-3.1.1.js"></script>
   <script src="/js/pontos.js"></script>
   <script src="/js/qtd_questao.js"></script>
   <script src="/js/buscar_questoes.js"></script>
-
+    <script src="/js/bootstrap.js"></script>
     <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/formularios.css">
 	<title>Formulario para gerar avaliação</title>
+@stop
 
 <script>
 
+function validar()
+{
+    var questao1 = $('#q1_pontos').val();
 
+    if(questao1 > 3)
+    {
+        window.alert("Passou do valor máximo da questão.")
+        return false;
+    }
+}
 function showQ(select){
     if(select.value==5)
     {
@@ -75,8 +84,16 @@ function showQ(select){
 }
 
 </script>
-@stop
 @section('content')
+    @if(!empty($errors->all()))
+    <div class="alert alert-warning" role="alert-warning">
+        @foreach($errors->all() as $error)
+            <ul>
+                <li> {{$error}}</li>
+            </ul>
+        @endforeach
+    </div>
+    @endif
 
 <div class="container" style="margin-top: 50px;">
 <h2 style="text-align: center;">Formulario para gerar avaliação</h2> 
@@ -91,17 +108,10 @@ function showQ(select){
 
             <div style="padding-top:15px" class="panel-body" >
 
-                <form id="avaliacaoform" class="form-group" role="form"  method="POST" action="gerar/salvar">
+                <form  id="avaliacaoform" data-toggle="validator"  role="form" method="POST" action="gerar/salvar">
                     <input name="_token" type="hidden" value="{{ csrf_token() }}">
                     <input name="professor_id" type="hidden" value="{{Auth::user()->id}}"> 
-                    <!-- <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                            <select class="form-control" name="disciplina" id="disciplina_id">
-                                @foreach($professor->disciplinas as $disciplinas)
-                                    <option value="{{$disciplinas->id}}">{{$disciplinas->nome}}</option>
-                                @endforeach
-                            </select>
-                    </div> -->
+      
                     
                     <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
@@ -144,18 +154,6 @@ function showQ(select){
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 	<div class="container" id="questao1">    
         <div id="questaobox"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
@@ -206,55 +204,56 @@ function showQ(select){
                                             <input type="radio" name="op" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                <input  class="form-control"  form="avaliacaoform" type="text" name="q1_pontos" id="q1_pontos" placeholder="Pontos" readonly="true" />
+                                    <div class="col-md-6">
+                                        <input  class="form-control" type="text" name="q1_pontos" id="q1_pontos" style="text-align: right;" readonly="true" />
+                                    </div>
                                 </div>
                             </div>
 
                             <br>
                             <br>
-                        <textarea form="avaliacaoform" id="questao_id" type="textarea" value="" rows="1" class="form-control" name="questao_id[]" id="questao_id" " style="display: none;"></textarea>
+                        <textarea id="questao_id" type="textarea" value="{{old('questao_id[]')}}" rows="1" class="form-control" name="questao_id[]" id="questao_id" " style="display: none;"></textarea>
 
                            <div style="margin-bottom: 25px" class="input-group">
                                         <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
+                                        <textarea id="questao-area" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required 
+                                        ></textarea>
+                                        <div class="help-block with-errors"></div>
 
                                         
-                         				<form id = "frmbuscar" action="" method="GET">
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
                                             <input id = "buscar" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        </form>
                                          
 
 											<input name="_token" type="hidden" value="{{ csrf_token() }}">
-                                            <input form="provaform" name="professor_id" id="prof" type="hidden" value="{{Auth::user()->id}}">  
 
 
 
 							</div>
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "a" id="alternativaA" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                                        <textarea  name = "a" id="alternativaA" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
 
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "b" id="alternativaB" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                                        <textarea  name = "b" id="alternativaB" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "c" id="alternativaC" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                                        <textarea  name = "c" id="alternativaC" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "d" id="alternativaD" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                                        <textarea  name = "d" id="alternativaD" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "e" id="alternativaE" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                                        <textarea  name = "e" id="alternativaE" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
                             </div>
                       </div>
                   </div>
@@ -310,59 +309,56 @@ function showQ(select){
                                             <input type="radio" name="opq2" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q2_pontos" id="q2_pontos" placeholder="Pontos"  readonly="true"/>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" type="text" name="q2_pontos" id="q2_pontos" style="text-align: right;" readonly="true" />
+                                    </div>
                                 </div>
                             </div>
 
                             <br>
                             <br>
-                        <textarea form="avaliacaoform" id="questao2_id" type="textarea" value="" rows="1" class="form-control" name="questao2_id[]"  style="display: none;" ></textarea>
+                        <textarea  id="questao2_id" type="textarea" value="" rows="1" class="form-control" name="questao2_id[]"  style="display: none;" ></textarea>
                         
 
                              <div style="margin-bottom: 25px" class="input-group">
                                         <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area2" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
+                                        <textarea id="questao-area2" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required  ></textarea>
 
                                         
-                                        <form id = "frmbuscar" action="" method="GET">
+                                        
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
                                             <input id = "buscar2" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        </form>
+                                        
                                          
 
 
-                            </div>
-							 
- 
-                        </form>
-
-                                
+                            </div>                             
                             
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "a" id="alternativaA2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                                        <textarea  name = "a" id="alternativaA2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
 
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "b" id="alternativaB2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                                        <textarea  name = "b" id="alternativaB2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "c" id="alternativaC2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                                        <textarea  name = "c" id="alternativaC2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "d" id="alternativaD2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                                        <textarea  name = "d" id="alternativaD2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "e" id="alternativaE2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                                        <textarea  name = "e" id="alternativaE2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
                             </div>
                         </div>                     
                     </div>  
@@ -419,22 +415,24 @@ function showQ(select){
                                             <input type="radio" name="opq3" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q3_pontos" id="q3_pontos" placeholder="Pontos"  readonly="true"/>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" type="text" name="q3_pontos" id="q3_pontos" style="text-align: right;" readonly="true" />
+                                    </div>
                                 </div>
                             </div>
 
                             <br>
                             <br>
-                            <textarea form="avaliacaoform" id="questao3_id" type="textarea" value="" rows="1" class="form-control" name="questao3_id[]" style="display: none;"></textarea>
+                            <textarea  id="questao3_id" type="textarea" value="" rows="1" class="form-control" name="questao3_id[]" style="display: none;"></textarea>
                            <div style="margin-bottom: 25px" class="input-group">
                                         <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area3" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
+                                        <textarea id="questao-area3" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
 
                                         
-                                        <form id = "frmbuscar" action="" method="GET">
+                                        
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
                                             <input id = "buscar3" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        </form>
+                                        
                                          
 
                             </div>
@@ -446,28 +444,28 @@ function showQ(select){
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "a" id="alternativaA3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                                        <textarea  name = "a" id="alternativaA3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
 
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "b" id="alternativaB3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                                        <textarea  name = "b" id="alternativaB3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "c" id="alternativaC3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                                        <textarea  name = "c" id="alternativaC3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "d" id="alternativaD3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                                        <textarea  name = "d" id="alternativaD3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "e" id="alternativaE3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                                        <textarea  name = "e" id="alternativaE3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
                             </div>
                         </div>                     
                     </div>  
@@ -524,22 +522,24 @@ function showQ(select){
                                             <input type="radio" name="opq4" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q4_pontos" id="q4_pontos" placeholder="Pontos"  readonly="true"/>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" type="text" name="q4_pontos" id="q4_pontos" style="text-align: right;" readonly="true" />
+                                    </div>
                                 </div>
                             </div>
 
                             <br>
                             <br>
-                            <textarea form="avaliacaoform" id="questao4_id" type="textarea" value="" rows="1" class="form-control" name="questao4_id[]"  style="display: none;" ></textarea>
+                            <textarea  id="questao4_id" type="textarea" value="" rows="1" class="form-control" name="questao4_id[]"  style="display: none;" ></textarea>
                            <div style="margin-bottom: 25px" class="input-group">
                                         <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area4" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
+                                        <textarea id="questao-area4" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
 
                                         
-                                        <form id = "frmbuscar" action="" method="GET">
+                                        
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
                                             <input id = "buscar4" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        </form>
+                                        
                                          
 
 
@@ -552,28 +552,28 @@ function showQ(select){
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "a" id="alternativaA4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                                        <textarea  name = "a" id="alternativaA4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
 
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "b" id="alternativaB4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                                        <textarea  name = "b" id="alternativaB4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "c" id="alternativaC4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                                        <textarea  name = "c" id="alternativaC4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "d" id="alternativaD4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                                        <textarea  name = "d" id="alternativaD4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "e" id="alternativaE4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                                        <textarea  name = "e" id="alternativaE4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
                             </div>
                         </div>                     
                     </div>  
@@ -629,22 +629,24 @@ function showQ(select){
                                             <input type="radio" name="opq5" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q5_pontos" id="q5_pontos" placeholder="Pontos"  readonly="true"/>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" type="text" name="q5_pontos" id="q5_pontos" style="text-align: right;" readonly="true" />
+                                    </div>
                                 </div>
                             </div>
 
                             <br>
                             <br>
-                            <textarea form="avaliacaoform" id="questao5_id" type="textarea" value="" rows="1" class="form-control" name="questao5_id[]"  style="display: none;"></textarea>
+                            <textarea  id="questao5_id" type="textarea" value="" rows="1" class="form-control" name="questao5_id[]"  style="display: none;"></textarea>
                            <div style="margin-bottom: 25px" class="input-group">
                                         <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area5" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
+                                        <textarea id="questao-area5" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
 
                                         
-                                        <form id = "frmbuscar" action="" method="GET">
+                                        
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
                                             <input id = "buscar5" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        </form>
+                                        
   
 
 
@@ -657,28 +659,28 @@ function showQ(select){
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "a" id="alternativaA5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                                        <textarea  name = "a" id="alternativaA5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
 
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "b" id="alternativaB5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                                        <textarea  name = "b" id="alternativaB5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "c" id="alternativaC5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                                        <textarea  name = "c" id="alternativaC5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "d" id="alternativaD5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                                        <textarea  name = "d" id="alternativaD5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "e" id="alternativaE5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                                        <textarea  name = "e" id="alternativaE5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
                             </div>
                         </div>                     
                     </div>  
@@ -735,23 +737,25 @@ function showQ(select){
                                             <input type="radio" name="opq6" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q6_pontos" id="q6_pontos" placeholder="Pontos"  readonly="true"/>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" type="text" name="q6_pontos" id="q6_pontos" style="text-align: right;" readonly="true" />
+                                    </div>
                                 </div>
                             </div>
 
                             <br>
                             <br>                           
 
-                            <textarea form="avaliacaoform" id="questao6_id" type="textarea" value="" rows="1" class="form-control" name="questao6_id[]"  style="display: none;"></textarea>
+                            <textarea  id="questao6_id" type="textarea" value="" rows="1" class="form-control" name="questao6_id[]"  style="display: none;"></textarea>
                            <div style="margin-bottom: 25px" class="input-group">
                                         <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area6" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
+                                        <textarea id="questao-area6" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
 
                                         
-                                        <form id = "frmbuscar" action="" method="GET">
+                                        
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
                                             <input id = "buscar6" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        </form>
+                                        
                                          
 
 
@@ -764,28 +768,28 @@ function showQ(select){
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "a" id="alternativaA6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                                        <textarea  name = "a" id="alternativaA6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
 
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "b" id="alternativaB6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                                        <textarea  name = "b" id="alternativaB6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "c" id="alternativaC6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                                        <textarea  name = "c" id="alternativaC6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "d" id="alternativaD6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                                        <textarea  name = "d" id="alternativaD6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "e" id="alternativaE6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                                        <textarea  name = "e" id="alternativaE6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
                             </div>
                         </div>                     
                     </div>  
@@ -843,23 +847,25 @@ function showQ(select){
                                             <input type="radio" name="opq7" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q7_pontos" id="q7_pontos" placeholder="Pontos"  readonly="true"/>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" type="text" name="q7_pontos" id="q7_pontos" style="text-align: right;" readonly="true" />
+                                    </div>
                                 </div>
                             </div>
 
                             <br>
                             <br>                        
 
-                            <textarea form="avaliacaoform" id="questao7_id" type="textarea" value="" rows="1" class="form-control" name="questao7_id[]"  style="display: none;"></textarea>
+                            <textarea id="questao7_id" type="textarea" value="" rows="1" class="form-control" name="questao7_id[]"  style="display: none;"></textarea>
                            <div style="margin-bottom: 25px" class="input-group">
                                         <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area7" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
+                                        <textarea id="questao-area7" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
 
                                         
-                                        <form id = "frmbuscar" action="" method="GET">
+                                        
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
                                             <input id = "buscar7" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        </form>
+                                        
                                          
 
 
@@ -872,28 +878,28 @@ function showQ(select){
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "a" id="alternativaA7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                                        <textarea  name = "a" id="alternativaA7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
 
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "b" id="alternativaB7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                                        <textarea  name = "b" id="alternativaB7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "c" id="alternativaC7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                                        <textarea  name = "c" id="alternativaC7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "d" id="alternativaD7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                                        <textarea  name = "d" id="alternativaD7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "e" id="alternativa7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                                        <textarea  name = "e" id="alternativa7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
                             </div>
                         </div>                     
                     </div>  
@@ -951,23 +957,25 @@ function showQ(select){
                                             <input type="radio" name="opq8" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control"  form="avaliacaoform" type="text" name="q8_pontos" id="q8_pontos" placeholder="Pontos" readonly="true"/>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" type="text" name="q8_pontos" id="q8_pontos" style="text-align: right;" readonly="true" />
+                                    </div>
                                 </div>
                             </div>
 
                             <br>
                             <br>                        
 
-                            <textarea form="avaliacaoform" id="questao8_id" type="textarea" value="" rows="1" class="form-control" name="questao8_id[]"  style="display: none;"></textarea>
+                            <textarea  id="questao8_id" type="textarea" value="" rows="1" class="form-control" name="questao8_id[]"  style="display: none;"></textarea>
                            <div style="margin-bottom: 25px" class="input-group">
                                         <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area8" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
+                                        <textarea id="questao-area8" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
 
                                         
-                                        <form id = "frmbuscar" action="" method="GET">
+                                        
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
                                             <input id = "buscar8" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        </form>
+                                        
                                          
 
 
@@ -980,28 +988,28 @@ function showQ(select){
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "a" id="alternativaA8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                                        <textarea  name = "a" id="alternativaA8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
 
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "b" id="alternativaB8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                                        <textarea  name = "b" id="alternativaB8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "c" id="alternativaC8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                                        <textarea  name = "c" id="alternativaC8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "d" id="alternativaD8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                                        <textarea  name = "d" id="alternativaD8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "e" id="alternativaE8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                                        <textarea  name = "e" id="alternativaE8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
                             </div>
                         </div>                     
                     </div>  
@@ -1058,23 +1066,25 @@ function showQ(select){
                                             <input type="radio" name="opq9" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control" form="avaliacaoform" type="text" name="q9_pontos" id="q9_pontos" placeholder="Pontos" readonly="true" />
+                                    <div class="col-md-6">
+                                        <input  class="form-control" type="text" name="q9_pontos" id="q9_pontos" style="text-align: right;" readonly="true" />
+                                    </div>
                                 </div>
                             </div>
 
                             <br>
                             <br>                    
 
-                            <textarea form="avaliacaoform" id="questao9_id" type="textarea" value="" rows="1" class="form-control" name="questao9_id[]"  style="display: none;"></textarea>
+                            <textarea  id="questao9_id" type="textarea" value="" rows="1" class="form-control" name="questao9_id[]"  style="display: none;"></textarea>
                            <div style="margin-bottom: 25px" class="input-group">
                                         <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area9" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
+                                        <textarea id="questao-area9" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
 
                                         
-                                        <form id = "frmbuscar" action="" method="GET">
+                                        
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
                                             <input id = "buscar9" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        </form>
+                                        
                                          
 
 
@@ -1087,28 +1097,28 @@ function showQ(select){
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "a" id="alternativaA9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                                        <textarea  name = "a" id="alternativaA9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
 
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "b" id="alternativaB9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                                        <textarea  name = "b" id="alternativaB9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "c" id="alternativaC9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                                        <textarea  name = "c" id="alternativaC9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "d" id="alternativaD9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                                        <textarea  name = "d" id="alternativaD9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "e" id="alternativaE9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                                        <textarea  name = "e" id="alternativaE9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
                             </div>
                         </div>                     
                     </div>  
@@ -1166,22 +1176,24 @@ function showQ(select){
                                             <input type="radio" name="opq10" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <input  class="form-control" form="avaliacaoform" type="text" name="q10_pontos" id="q10_pontos" placeholder="Pontos" readonly="true" />
+                                    <div class="col-md-6">
+                                        <input  class="form-control" type="text" name="q10_pontos" id="q10_pontos" style="text-align: right;" readonly="true" />
+                                    </div>
                                 </div>
                             </div>
 
                             <br>
                             <br>
-                            <textarea form="avaliacaoform" id="questao10_id" type="textarea" value="" rows="1" class="form-control" name="questao10_id[]"  style="display: none;"></textarea>
+                            <textarea  id="questao10_id" type="textarea" value="" rows="1" class="form-control" name="questao10_id[]"  style="display: none;"></textarea>
                            <div style="margin-bottom: 25px" class="input-group">
                                         <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area10" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
+                                        <textarea id="questao-area10" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required  ></textarea>
 
                                         
-                                        <form id = "frmbuscar" action="" method="GET">
+                                        
                                             <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
                                             <input id = "buscar10" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        </form>
+                                        
                                          
 
 
@@ -1194,28 +1206,28 @@ function showQ(select){
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "a" id="alternativaA10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                                        <textarea  name = "a" id="alternativaA10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
 
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "b" id="alternativaB10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                                        <textarea  name = "b" id="alternativaB10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "c" id="alternativaC10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                                        <textarea  name = "c" id="alternativaC10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "d" id="alternativaD10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                                        <textarea  name = "d" id="alternativaD10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
-                                        <textarea form="provaform" name = "e" id="alternativaE10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                                        <textarea  name = "e" id="alternativaE10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
                             </div>
                           
                        </div>                     
@@ -1225,7 +1237,10 @@ function showQ(select){
 
     </div>
     
-        <input  style="margin-right: auto;margin-left: 540px;display: block;" type="submit" form="avaliacaoform" value="Criar Avaliação"  class="btn btn-success">
-                        
+        <input  style="margin-right: auto;margin-left: 540px;display: block;" type="submit"  value="Criar Avaliação" form="avaliacaoform" class="btn btn-success" onclick="return validar();">
+ 
+
 </form>
+
+
 @stop

@@ -10,6 +10,7 @@ use App\Models\Admin;
 use App\Models\Professor;
 use App\Models\Disciplina;
 use App\Models\Aluno;
+use App\Models\Questao;
 use Charts;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\AdminRequest;
@@ -69,11 +70,13 @@ class AdminController extends Controller
         $data = '2016-10-30';
         $resultado = Professor::professorComMaiorNumeroDeQuestoes();
         $notas = Professor::notas($data, $id);
+        $qtdQuestao = Questao::topQuestoes();
 
         return view('admin.relatorios')
                     ->with('professores_top_questao', $resultado)
                     ->with('notas', $notas)
-                    ->with('disciplinas', $disciplinas);
+                    ->with('disciplinas', $disciplinas)
+                    ->with('qtdQuestao', $qtdQuestao);
     }
     
 
