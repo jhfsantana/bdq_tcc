@@ -46,7 +46,8 @@ Route::get('/', function () {
 use App\Models\Professor;
 use App\Models\Aluno;
 use App\Models\Turma;
-
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 Route::get('professor/login','Professores\ProfessorController@logintela');
 
@@ -131,6 +132,35 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	Route::get('/relatorio', 'Admins\AdminController@relatorio');
 
 	Route::get('/relatorio/{id}', 'Admins\AdminController@relatorio');
+	
+	
+	Route::post('/verificando/matricula/professor', function ()
+		{
+			
+			$matricula = Input::get('matricula');
+			$resultado = DB::select( DB::raw("SELECT * FROM professores WHERE matricula = :matricula"), array('matricula' => $matricula,));
+
+			return Response::json($resultado);
+		});
+
+	
+	Route::post('/verificando/matricula/aluno', function ()
+		{
+			
+			$matricula = Input::get('matricula');
+			$resultado = DB::select( DB::raw("SELECT * FROM alunos WHERE matricula = :matricula"), array('matricula' => $matricula,));
+
+			return Response::json($resultado);
+		});
+
+	Route::post('/verificando/matricula/adm', function ()
+		{
+			
+			$matricula = Input::get('matricula');
+			$resultado = DB::select( DB::raw("SELECT * FROM admins WHERE matricula = :matricula"), array('matricula' => $matricula,));
+
+			return Response::json($resultado);
+		});
 
 /*	Route::get('/turmas', function () {
 	    $turmas = Turma::all();

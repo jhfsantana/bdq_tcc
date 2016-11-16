@@ -17,7 +17,39 @@
     }
 
     
+$(document).ready(function(){
+    
+    $("#matriculabuscar").click(function(e) {                
+        e.preventDefault();
+        e.stopPropagation();
+        var mat = 62256;
 
+    $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+      $.ajax({
+        type: "post",
+        url: "/verificando/matricula/adm",
+        data:  { "matricula" : $('#matricula').val()},
+        dataType: "JSON",
+        success: function(response){
+            var length = Object.keys(response).length; 
+            
+            if(length >= 1)
+            {
+                window.alert("Matricula ja existe");
+                $("#salvar").prop("disabled", true);
+                return false;
+            }else
+            {
+                $("#salvar").prop("disabled", false);
+            }
+            console.log(response);   
+        }
+    });
+  });
+});
     </script>
     @stop
     @section('content')

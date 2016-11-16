@@ -5,6 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<meta name="_token" content="{{ csrf_token() }}"/>
+
 
 
 	<script>
@@ -15,6 +17,39 @@
 	    myElement.value = "" + data + Math.floor((Math.random() * 100000) + 100)
 	}
 
+ $(document).ready(function(){
+    
+    $("#matriculabuscar").click(function(e) {                
+        e.preventDefault();
+        e.stopPropagation();
+        var mat = 62256;
+
+	$.ajaxSetup({
+	   headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+	});
+
+      $.ajax({
+        type: "post",
+        url: "/verificando/matricula/professor",
+        data:  { "matricula" : $('#matricula').val()},
+        dataType: "JSON",
+        success: function(response){
+        	var length = Object.keys(response).length; 
+            
+        	if(length >= 1)
+        	{
+        		window.alert("Matricula ja existe");
+        		$("#salvar").prop("disabled", true);
+        		return false;
+        	}else
+        	{
+        		$("#salvar").prop("disabled", false);
+        	}
+            console.log(response);   
+        }
+    });
+  });
+});
 	</script>
 	@stop
 	@section('content')
@@ -46,10 +81,10 @@
 						<input name="_token" type="hidden" value="{{ csrf_token() }}">
 						<label>
 							Matricula 
-							<button data-toggle="tooltip" title="Gerar Matricula" type="button" id="matriculabuscar" class="btn btn-primary" onclick="GetRandom()" style="margin-bottom: 8px;">
+							<button data-toggle="tooltip" title="Gerar Matricula" type="button" id="matriculabuscar" class="btn btn-primary" onclick="GetRandom();"  style="margin-bottom: 8px;">
 								<i class="glyphicon glyphicon-refresh" aria-hidden="true" "></i>		
 							</button>
-							<input type="text" id="matricula" name="matricula" class="form-control" placeholder="Matricula" readonly="true">
+							<input type="text" id="matricula" name="matricula" class="form-control" placeholder="Matricula" readonly="true" >
 						</label>
 						
 						<label>
