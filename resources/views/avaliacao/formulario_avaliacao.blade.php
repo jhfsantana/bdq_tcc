@@ -12,7 +12,7 @@
 	<title>Formulario para gerar avaliação</title>
 @stop
 
-<script>
+<script>        
 
 function validar()
 {

@@ -12,38 +12,22 @@
 <body>
 <nav class="navbar navbar-inverse">
 	<a class="navbar-brand" href="/home">Inicio</a>
-	</nav>
+	<ul class="nav navbar-nav">
+      <li><a href="/relatorio/questao">Questões</a></li>
+      <li><a href="/relatorio/">Professores</a></li> 
+      <li><a href="/relatorio/notas">Notas</a></li> 
+    </ul>
+</nav>
+
 <div class="container" style="text-align: center;">
 	<h1>Relatórios</h1>
-
-	<table class="table table-striped">
-		
-	<tr>
-		<td><strong>Matricula</strong></td>
-		<td><strong>Nome</strong></td>
-		<td><strong>Email</strong></td>
-		<td><strong>Disciplina</strong></td>
-		<td><strong>Total de Questoes</strong></td>
-	</tr>
-		@foreach($professores_top_questao as $professores)
-		<tr>
-			<td>{{$professores->matricula}}</td>
-			<td>{{$professores->nome}}</td>
-			<td>{{$professores->email}}</td>
-			<td>{{$professores->disciplina_nome}}</td>
-			<td>{{$professores->total_questoes}}</td>
-		</tr>
-		@endforeach
-	</table>
-
-
 
   <div class="dropdown" style="float: right;">
     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="border-color: #0011FF">Disciplinas 
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
     	@foreach($disciplinas as $disciplina)
-    		<li><a href="/relatorio/{{$disciplina->id}}">{{$disciplina->nome}}</a></li>
+    		<li><a href="/relatorio/notas/{{$disciplina->id}}">{{$disciplina->nome}}</a></li>
     	@endforeach
     </ul>
   </div>
@@ -65,24 +49,5 @@
 		@endforeach
 	</table>
 </div>
-
-<h3 style="text-align: center;">Questão usadas com mais frequencia</h3>
-
-<table class="table table-striped">
-	<tr>
-		<td>DISCIPLINA</td>
-		<td>ID DA QUESTÃO</td>
-		<td>QUESTÃO</td>
-		<td>QUANTIDADE UTILIZADA</td>
-	</tr>
-	
-	@foreach($qtdQuestao as $qtd)
-		<tr>
-			<td>{{$qtd->disciplina_nome}}</td>
-			<td>{{$qtd->questao_id}}</td>
-			<td>{{$qtd->questao_nome}}</td>
-		</tr>
-	@endforeach
-</table>
 </body>
 </html>

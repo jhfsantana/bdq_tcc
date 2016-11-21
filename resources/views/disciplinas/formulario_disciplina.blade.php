@@ -26,7 +26,7 @@
 			{!!Form::open(array('url' => 'subjects', 'method' => 'post'))!!}
 			
 
-				{!!Form::label('nome','Nome:')!!}
+				{!!Form::label('nome','Nome:')!!}<i style="color: #FF0000">*</i>
 
 				{{ Form::text('nome', '', array('class'=>'form-control', 'placeholder'=>'Digite o nome da disciplina')) }}
 				
@@ -34,7 +34,7 @@
 				<div class="alert alert-warning" style="border-color: #ccc">
 					Escolha uma ou mais turmas para associar a esta disciplina (Pressionando CTRL)
 				</div>
-				{!!Form::label('turma','Turma:')!!}
+				{!!Form::label('turma','Turma:')!!}<i style="color: #FF0000">*</i>
 				<select multiple class="form-control"  name ="turmas[]">
 					  @foreach($turmas as $t)
 					  <option value="{{$t->id}}"> {{$t->nome}} </option>

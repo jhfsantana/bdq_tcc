@@ -95,7 +95,7 @@
 
 				<div class="box3-top">
 					<img src="images/estatistica_64.png">
-					<a href="/relatorio/1">Relatórios</a>
+					<a href="/relatorio/">Relatórios</a>
 				</div>
 				
 				<div id="chart_div" style="float: right; margin-right: 450px;"></div>

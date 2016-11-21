@@ -54,17 +54,34 @@ class AdminController extends Controller
     	$admin = new Admin;
     	$admin->name = $request->name;
         $admin->sobrenome = $request->sobrenome;
+        $admin->cpf = $request->cpf;
     	$admin->email = $request->email;
 
     	$cryptPassword = bcrypt($request->password);
     	$admin->password = $cryptPassword;
 
-    	$admin ->save();
+    	if($admin ->save())
+        {
+            $request->session()->flash('alert-success', 'Administrador salvo com sucesso!');
+            return redirect('/home');
+        }
 
-    	return redirect('/home');
     }
 
-    public function relatorio($id)
+    public function relatorio()  
+    {   
+        $disciplinas = Disciplina::all();
+        $data = '2016-10-30';
+        $resultado = Professor::professorComMaiorNumeroDeQuestoes();
+        $qtdQuestao = Questao::topQuestoes();
+
+        return view('admin.relatorio_qtd_prof_questao')
+                    ->with('professores_top_questao', $resultado)
+                    ->with('disciplinas', $disciplinas)
+                    ->with('qtdQuestao', $qtdQuestao);
+    }
+
+    public function relatorioNotas($id)  
     {   
         $disciplinas = Disciplina::all();
         $data = '2016-10-30';
@@ -72,9 +89,22 @@ class AdminController extends Controller
         $notas = Professor::notas($data, $id);
         $qtdQuestao = Questao::topQuestoes();
 
-        return view('admin.relatorios')
+        return view('admin.relatorio_nota_disciplina')
                     ->with('professores_top_questao', $resultado)
                     ->with('notas', $notas)
+                    ->with('disciplinas', $disciplinas)
+                    ->with('qtdQuestao', $qtdQuestao);
+    }
+    
+    public function relatorioQuestao()  
+    {   
+        $disciplinas = Disciplina::all();
+        $data = '2016-10-30';
+        $resultado = Professor::professorComMaiorNumeroDeQuestoes();
+        $qtdQuestao = Questao::topQuestoes();
+
+        return view('admin.relatorio_qtd_questao_av')
+                    ->with('professores_top_questao', $resultado)
                     ->with('disciplinas', $disciplinas)
                     ->with('qtdQuestao', $qtdQuestao);
     }

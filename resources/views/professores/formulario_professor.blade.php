@@ -47,24 +47,25 @@
 						<input name="_token" type="hidden" value="{{ csrf_token() }}">
 						<label>
 							Matricula 
+						</label><i style="color: #FF0000">*</i>
 							<button data-toggle="tooltip" title="Gerar Matricula" type="button" id="matriculabuscar" class="btn btn-primary" onclick="GetRandom()" style="margin-bottom: 8px;">
 								<i class="glyphicon glyphicon-refresh" aria-hidden="true" "></i>		
 							</button>
 							<input type="text" id="matricula" name="matricula" class="form-control" placeholder="Matricula" readonly="true">
-						</label>
 						
 						<label>
 							Nome
+						</label><i style="color: #FF0000">*</i>
 							<input type="text" name="nome" class="form-control" placeholder="Digite o nome">
-						</label>
 						
 						<label>
 							Sobrenome
+						</label><i style="color: #FF0000">*</i>
 							<input type="text" name="sobrenome" class="form-control" placeholder="Digite o sobrenome">
-						</label>
 
 						<label>
 							Disciplinas
+						</label><i style="color: #FF0000">*</i>
 							<select multiple class="form-control"  name ="disciplinas[]">
 						  		@foreach($disciplinas as $disciplina)
 						  			@foreach($disciplina->turmas as $turma)
@@ -72,17 +73,17 @@
 						  			@endforeach
 						  		@endforeach
 							</select>
-						</label>
 
 						<label>
 							E-mail
+						</label><i style="color: #FF0000">*</i>
 							<input type="text" name="email" class="form-control" placeholder="Digite o email">
 						</label>
 
 						<label>
 							Password
+						</label><i style="color: #FF0000">*</i>
 							<input type="password" name="password" class="form-control" placeholder="Digite a senha">
-						</label>
 						<input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" style="margin-top: 10px">
 					</form>
 				</div>

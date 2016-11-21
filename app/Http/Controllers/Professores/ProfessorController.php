@@ -73,6 +73,7 @@ class ProfessorController extends Controller
         $professor->matricula = $request->matricula;
         $professor->nome = $request->nome;
         $professor->sobrenome = $request->sobrenome;
+        $professor->cpf = $request->cpf;
         $professor->email = $request->email;
         
         $cryptPassword = bcrypt($request->password);

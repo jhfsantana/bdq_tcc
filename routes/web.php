@@ -130,7 +130,12 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 
 	Route::get('/relatorio', 'Admins\AdminController@relatorio');
 
-	Route::get('/relatorio/{id}', 'Admins\AdminController@relatorio');
+	
+	Route::get('/relatorio/questao', 'Admins\AdminController@relatorioQuestao');
+	
+	Route::get('/relatorio/notas/{id}', 'Admins\AdminController@relatorioNotas');
+	
+	Route::get('/relatorio/notas', 'Admins\AdminController@relatorioNotas');
 
 /*	Route::get('/turmas', function () {
 	    $turmas = Turma::all();
