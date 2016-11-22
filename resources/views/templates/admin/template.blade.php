@@ -1,8 +1,7 @@
 <html>
-<head>
-		<title>BDQ - Avaliação Online</title>
+<head>    
+	<title>BDQ - Avaliação Online</title>
 	@yield('scripts')
-    
     <script type="text/javascript">
     @yield('grafico')
     </script>

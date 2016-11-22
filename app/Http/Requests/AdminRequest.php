@@ -25,9 +25,10 @@ class AdminRequest extends FormRequest
     {
         return [
             'matricula' => 'required|numeric',
-            'nome' => 'required',
+            'name' => 'required',
             'sobrenome' => 'required',
-            'email' => 'required',
+            'cpf' => 'required|unique:admins',
+            'email' => 'required|unique:admins',
             'password' => 'required',
         ];
     }
@@ -38,7 +39,10 @@ class AdminRequest extends FormRequest
             'matricula.required' => 'Campo matricula é obrigatório',
             'nome.required' => 'Campo nome é obrigatório',
             'sobrenome.required' => 'Campo sobrenome é obrigatório',
+            'cpf.required' => 'Campo cpf é obrigatório',
+            'cpf.unique' => 'CPF já cadastrado!',
             'email.required' => 'Campo email é obrigatório',
+            'email.unique' => 'Já existe um usuário com esse email!',
             'password.required' => 'Campo password é obrigatório',
         ];
     }

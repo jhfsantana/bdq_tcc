@@ -76,6 +76,17 @@
 		<br>
 		<br>
 		<br>
+			<!-- MENSAGEM DE SUCESSO -->
+		<div class="flash-message">
+		    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+		      @if(Session::has('alert-' . $msg))
+
+		      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+		      @endif
+		    @endforeach
+		 </div>	
+
+	<!-- FIM DA MENSAGEM DE SUCESSO -->
 		<h1>Olá, {{Auth::guard('web_admins')->user()->name }}</h1>
 		<br>
 		<h2>Painel de Informações</h2>

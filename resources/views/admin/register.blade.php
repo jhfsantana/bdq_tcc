@@ -6,9 +6,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.maskedinput.js" type="text/javascript"></script>
 
-
+<script type="text/javascript">
+jQuery(function($){
+   $("#cpf").mask("999.999.999-99",{placeholder:" "});
+});</script>
     <script>
+
     function GetRandom()
     {
         var data = new Date().getFullYear()
@@ -66,7 +71,7 @@
                         <label>
                             CPF
                         </label><i style="color: #FF0000">*</i>
-                            <input type="text" name="cpf" class="form-control" placeholder="Digite o CPF">
+                            <input type="text" name="cpf" id="cpf" class="form-control" placeholder="Digite o CPF">
 
                         <label>
                             E-mail
@@ -83,4 +88,6 @@
             </div>
         </div>
         </div>
+
+
     @stop

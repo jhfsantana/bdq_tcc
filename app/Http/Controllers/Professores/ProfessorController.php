@@ -80,9 +80,13 @@ class ProfessorController extends Controller
         $professor->password = $cryptPassword;
         
        // $professor->subjects()->sync($request->subjects, false);
-        $professor->save();
+        
+        if($professor->save())
+        {
+            $request->session()->flash('alert-success', 'Professor salvo com sucesso!');
+            $professor->disciplinas()->sync($request->disciplinas, false);
+        }
 
-        $professor->disciplinas()->sync($request->disciplinas, false);
         
         // $professor->classrooms()->sync($request->classrooms, false); ------ ATTACH PARA RELACIONAR TURMA COM PROFESSOR
 
