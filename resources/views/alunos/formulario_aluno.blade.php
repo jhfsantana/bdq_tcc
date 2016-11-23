@@ -33,7 +33,6 @@
 			</div>
 		@endif
 		<div class="container">    
-			    <div id="cadastroalunobox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
 			        <div class="panel panel-default" >
 			            <div class="panel-heading">
 			                <div class="panel-title">Formulário para cadastro de alunos</div>
@@ -47,7 +46,7 @@
 								Matricula 
 							</label><i style="color: #FF0000">*</i>
 								<button data-toggle="tooltip" title="Gerar Matricula" type="button" id="matriculabuscar" class="btn btn-primary" onclick="GetRandom()" style="margin-bottom: 8px;">
-									<i class="glyphicon glyphicon-refresh" aria-hidden="true" "></i>		
+									<i class="glyphicon glyphicon-refresh" aria-hidden="true" ></i>		
 								</button>
 								<input type="text" id="matricula" name="matricula" class="form-control" placeholder="Matricula" readonly="true">
 							

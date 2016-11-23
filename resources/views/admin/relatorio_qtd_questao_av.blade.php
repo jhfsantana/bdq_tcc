@@ -36,6 +36,7 @@
 			<td>{{$qtd->disciplina_nome}}</td>
 			<td>{{$qtd->questao_id}}</td>
 			<td>{{$qtd->questao_nome}}</td>
+			<td>{{$qtd->qtd}}</td>
 		</tr>
 	@endforeach
 </table>

@@ -36,10 +36,11 @@ class Questao extends Model
     {
         $resultado = DB::table('avaliacoes')
                 ->join('avaliacao_questao', 'avaliacoes.id', '=', 'avaliacao_questao.avaliacao_id')
-                ->join('disciplinas', 'avaliacoes.disciplina_id', '=', 'disciplinas.id')
                 ->join('questoes', 'avaliacao_questao.questao_id', '=', 'questoes.id')
-                ->select(DB::raw(count('questoes.questao as qtd')), 'disciplinas.nome as disciplina_nome', 'questoes.id as questao_id', 'questoes.questao as questao_nome')
-                ->orderBy(DB::raw(count('questoes.questao')), 'desc')
+                ->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
+                ->select(DB::raw('COUNT(questoes.id) as qtd'), 'disciplinas.nome as disciplina_nome', 'questoes.id as questao_id', 'questoes.questao as questao_nome')
+                ->groupby('questoes.id')
+                ->orderBy('qtd', 'desc')
                 ->get();
         return $resultado;
     }

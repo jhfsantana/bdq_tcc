@@ -31,12 +31,12 @@
         // Set chart options
         var options = {'title':'Número de questões adicionadas por professores',
         			   'is3D':true,
-                       'width':750,
-                       'height':650,
+                       'width':450,
+                       'height':450,
                        'backgroundColor': 'transparent',
                        'pieHole': 0,
-                       'chartArea.width': 150};
-
+                       'chartArea.width': 150,
+                       'legend': {'position': 'top'}};
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
@@ -89,9 +89,10 @@
 	<!-- FIM DA MENSAGEM DE SUCESSO -->
 		<h1>Olá, {{Auth::guard('web_admins')->user()->name }}</h1>
 		<br>
+		<div class="chart_div" id="chart_div" style="margin-right: 260px; margin-top: 0;"></div>
 		<h2>Painel de Informações</h2>
 			<p>resumo das informações</p>
-			<div id="box">
+
 				<div class="box-top">
 					<img src="images/professor_64px.png">
 					<h3 class="professores"> {{$professores}}</h3>
@@ -108,10 +109,6 @@
 					<img src="images/estatistica_64.png">
 					<a href="/relatorio/">Relatórios</a>
 				</div>
-				
-				<div id="chart_div" style="float: right; margin-right: 450px;"></div>
-
-			</div>
 		</div>
 	</div>
 
