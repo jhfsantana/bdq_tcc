@@ -2,6 +2,8 @@
 <head>    
 	<title>BDQ - Avaliação Online</title>
 	@yield('scripts')
+	 <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/formularios.css">
     <script type="text/javascript">
     @yield('grafico')
     </script>

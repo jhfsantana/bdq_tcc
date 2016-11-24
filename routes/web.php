@@ -137,6 +137,20 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	
 	Route::get('/relatorio/notas', 'Admins\AdminController@relatorioNotas');
 
+	
+	Route::get('/admin/questao/novo', 'Questoes\QuestaoController@adminFormQuestao');
+
+	Route::post('/admin/questao/adicionada', 'Questoes\QuestaoController@adminQuestaoSalvar');
+
+	Route::get('/admin/questoes', 'Questoes\QuestaoController@listaTotalQuestoes');
+
+
+	Route::post('/admin/questao/deletar', 'Questoes\QuestaoController@deletar');
+
+	Route::post('admin/questao/alterar/{id}', 'Questoes\QuestaoController@edit');
+
+	Route::post('admin/questao/alterada', 'Questoes\QuestaoController@update');
+
 /*	Route::get('/turmas', function () {
 	    $turmas = Turma::all();
 	    return view('turmas.formulario_turmas')->with('turmas', $turmas);

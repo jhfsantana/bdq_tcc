@@ -66,6 +66,8 @@
 			        <li><a href="/disciplina/novo">Cadastro de disciplinas</a></li> 
 			        <li><a href="/disciplinas">Lista de Disciplinas</a></li>  
 			        <li><a href="/turma/novo">Cadastro de Turma</a></li> 
+			        <li><a href="/admin/questoes"> Questões </a></li>
+
 			      </ul> 
 			    </li>
 			    <li><a href="administrador/logout">Logout</a></li> 

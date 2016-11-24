@@ -1,38 +1,49 @@
 @extends('templates.admin.template')
-	@section('head')
-    <link rel="stylesheet" href="/css/global.css">
-	<link rel="stylesheet" href="/css/formularios.css">
-	<title>Alterar questão</title>
+    @section('head')
+  
+	<title>Formulario de Questões</title>
     @stop
     @section('content')
+	<div class="container">
     <br>
     <br>
     <br>
-	<div class="container " style="display: block;">    
-        <div id="questaobox" style="margin-top:0px; border-color: #ccc" class="mainbox col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+    	@if(!empty($errors->all()))
+				<div class="alert alert-warning" role="alert-warning">
+					@foreach($errors->all() as $error)
+						<ul>
+							<li> {{$error}}</li>
+						</ul>
+					@endforeach
+				</div>
+				@endif
             <div class="panel panel-default" >
                     <div class="panel-heading">
-                        <div class="panel-title" style="text-align: center;"><strong>Formulário para alterar questão</strong></div>
+                        <div class="panel-title"><h3 style="text-align: center;">Cadastro de Questões</h3></div>
                     </div>     
+				
+			
 
-                    <div style="padding-top:10px" class="panel-body" >
+                    <div style="padding-top:10px; border-color: #ccc;" class="panel-body" >
 
                             
-                        <form id="questaoform" class="form-horizontal" role="form" method="post" @if(Auth::guard('web_admins')) action="/admin/questao/alterada" @else action="/professor/questao/alterada" @endif>
+                        <form id="questaoform" class="form-horizontal" role="form" method="post" action="/admin/questao/adicionada">
 							
 							<input name="_token" type="hidden" value="{{ csrf_token() }}">
-                            <input name="professor_id" type="hidden" value="{{Auth::user()->id }}"> 
-                            <input name="questao_id" type="hidden" value="{{$questao->id }}"> 
+                            <input name="admin_id" type="hidden" value="{{Auth::user()->id }}"> 
 
 							
 							<div style="margin-bottom: 15px" class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
 	                            <select class="form-control" name="disciplina">
-                                        <option value="{{$questao->disciplina->id}}">{{$questao->disciplina->nome}}</option>
+									@foreach($disciplinas as $disciplina)
+	  									<option value="{{$disciplina->id}}">{{$disciplina->nome}}</option>
+									@endforeach
 								</select>
+
 							</div>
 
-							<div style="margin-bottom: 15px" class="input-group">
+							<div style="margin-bottom: 15px" class="input-group"> 
 								<span class="input-group-addon"><i class="glyphicon glyphicon-sort"></i></span>
 	                            <select class="form-control" name="nivel">
 	  								<option value="1">Facil</option>
@@ -44,43 +55,43 @@
 
                             <div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                                        <textarea id="questao-area" type="textarea" rows="10" class="form-control" name="questao" placeholder="Questão">{{$questao->questao}}</textarea>
+                                        <textarea id="questao-area" type="textarea" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
                                      
                             </div>
                                 
                             <div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i>										      	  
-                                        <input id="questao-alternativa-a" value="{{$questao->alternativaA}}" type="text" class="form-control" name="a" placeholder="Alternativa A">
+                                        <input id="questao-alternativa-a" type="text" class="form-control" name="a" placeholder="Alternativa A">
                                         <label><input type="checkbox"  value="a" name="correta"> Alternativa Correta</span></label>
                            	</div>
 
                            	<div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i>										      	  
-                                        <input id="questao-alternativa-b" value="{{$questao->alternativaB}}" type="text" class="form-control" name="b" placeholder="Alternativa B">
+                                        <input id="questao-alternativa-b" type="text" class="form-control" name="b" placeholder="Alternativa B">
                                         <label><input type="checkbox"  value="b" name="correta"> Alternativa Correta</span></label>
                            	</div>
 
                            	<div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i>										      	  
-                                        <input id="questao-alternativa-c" value="{{$questao->alternativaC}}" type="text" class="form-control" name="c" placeholder="Alternativa C">
+                                        <input id="questao-alternativa-c" type="text" class="form-control" name="c" placeholder="Alternativa C">
                                         <label><input type="checkbox" value="c" name="correta"> Alternativa Correta</span></label>
                            	</div>
 
                            	<div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i>										      	  
-                                        <input id="questao-alternativa-d" value="{{$questao->alternativaD}}" type="text" class="form-control" name="d" placeholder="Alternativa D">
+                                        <input id="questao-alternativa-d" type="text" class="form-control" name="d" placeholder="Alternativa D">
                                         <label><input type="checkbox" value="d" name="correta"> Alternativa Correta</span></label>
                            	</div>
 
                            	<div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i>										      	  
-                                        <input id="questao-alternativa-e" value="{{$questao->alternativaE}}" type="text" class="form-control" name="e" placeholder="Alternativa E">
+                                        <input id="questao-alternativa-e" type="text" class="form-control" name="e" placeholder="Alternativa E">
                                         <label><input type="checkbox" value="e" name="correta"> Alternativa Correta</span></label>
                            	</div>
                                 <div style="margin-top:10px" class="form-group">
                                                                     
                                     <div class="col-sm-12 controls">
-                                    	<input type="submit" value="Alterar"  class="btn btn-primary">
+                                    	<input type="submit" value="Salvar"  class="btn btn-primary">
                                     </div>
                                 </div>
                             </form> 
