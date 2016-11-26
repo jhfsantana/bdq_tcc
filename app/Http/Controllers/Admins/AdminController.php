@@ -72,42 +72,31 @@ class AdminController extends Controller
     {   
         $disciplinas = Disciplina::all();
         $data = '2016-10-30';
-        $resultado = Professor::professorComMaiorNumeroDeQuestoes();
-        $qtdQuestao = Questao::topQuestoes();
+        $professores = Professor::professorComMaiorNumeroDeQuestoes();
 
         return view('admin.relatorio_qtd_prof_questao')
-                    ->with('professores_top_questao', $resultado)
                     ->with('disciplinas', $disciplinas)
-                    ->with('qtdQuestao', $qtdQuestao);
+                    ->with('professores_top_questao', $professores);
     }
 
     public function relatorioNotas($id)  
     {   
         $disciplinas = Disciplina::all();
         $data = '2016-10-30';
-        $resultado = Professor::professorComMaiorNumeroDeQuestoes();
         $notas = Professor::notas($data, $id);
-        $qtdQuestao = Questao::topQuestoes();
 
         return view('admin.relatorio_nota_disciplina')
-                    ->with('professores_top_questao', $resultado)
                     ->with('notas', $notas)
-                    ->with('disciplinas', $disciplinas)
-                    ->with('qtdQuestao', $qtdQuestao);
+                    ->with('disciplinas', $disciplinas);
     }
     
-    public function relatorioQuestao()  
+    public function relatorioQuestao($limite)  
     {   
-        $disciplinas = Disciplina::all();
-        $data = '2016-10-30';
-        $resultado = Professor::professorComMaiorNumeroDeQuestoes();
-        $qtdQuestao = Questao::topQuestoes();
+        $qtdQuestao = Questao::topQuestoes($limite);
+
 
         return view('admin.relatorio_qtd_questao_av')
-                    ->with('professores_top_questao', $resultado)
-                    ->with('disciplinas', $disciplinas)
                     ->with('qtdQuestao', $qtdQuestao);
-    }
-    
+    }    
 
 }

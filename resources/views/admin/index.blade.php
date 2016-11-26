@@ -58,14 +58,11 @@
 			    <li><a href="/home">Inicio</a></li>
 			    <li><a href="/administrador/novo">Cadastro de administradores</a></li>
 			    <li><a href="#">Lista de administradores</a></li>
-			    <li><a href="/professor/novo">Cadastro de professores</a></li> 
-			    <li><a href="/professores">Lista de Professores</a>
+			    <li><a href="/professores"> Professores</a>
 			      <ul> 
-			        <li><a href="/aluno/novo">Cadastro de Alunos</a></li>
-			        <li><a href="/alunos">Lista de Alunos</a></li> 
-			        <li><a href="/disciplina/novo">Cadastro de disciplinas</a></li> 
-			        <li><a href="/disciplinas">Lista de Disciplinas</a></li>  
-			        <li><a href="/turma/novo">Cadastro de Turma</a></li> 
+			        <li><a href="/alunos">Alunos</a></li> 
+			        <li><a href="/disciplinas">Disciplinas</a></li>  
+			        <li><a href="/turma/novo">Turmas</a></li> 
 			        <li><a href="/admin/questoes"> Questões </a></li>
 
 			      </ul> 
@@ -109,7 +106,7 @@
 
 				<div class="box3-top">
 					<img src="images/estatistica_64.png">
-					<a href="/relatorio/">Relatórios</a>
+					<a href="/relatorio/">Relatórios<img id="seta" src="images/seta.png"></a>
 				</div>
 		</div>
 	</div>

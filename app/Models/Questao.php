@@ -37,7 +37,7 @@ class Questao extends Model
         return $this->belongsTo('App\Models\Admin');
     }
 
-    public static function topQuestoes()
+    public static function topQuestoes($limite)
     {
         $resultado = DB::table('avaliacoes')
                 ->join('avaliacao_questao', 'avaliacoes.id', '=', 'avaliacao_questao.avaliacao_id')
@@ -46,7 +46,9 @@ class Questao extends Model
                 ->select(DB::raw('COUNT(questoes.id) as qtd'), 'disciplinas.nome as disciplina_nome', 'questoes.id as questao_id', 'questoes.questao as questao_nome')
                 ->groupby('questoes.id','disciplinas.nome','questoes.questao')
                 ->orderBy('qtd', 'desc')
+                ->limit($limite)
                 ->get();
+       
         return $resultado;
     }
 }

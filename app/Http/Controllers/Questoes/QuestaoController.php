@@ -51,10 +51,10 @@ class QuestaoController extends Controller
     public function store(Request $request)
     {
         
-        
         $questao = new Questao();
 
         $questao->questao = $request->questao;
+        $questao->disciplina_nome = $request->disciplina_nome;
         $questao->alternativaA = $request->a;
         $questao->alternativaB = $request->b;
         $questao->alternativaC = $request->c;
@@ -210,6 +210,7 @@ class QuestaoController extends Controller
         $questao = new Questao();
 
         $questao->questao = $request->questao;
+        $questao->disciplina_nome = $request->disciplina_nome;
         $questao->alternativaA = $request->a;
         $questao->alternativaB = $request->b;
         $questao->alternativaC = $request->c;

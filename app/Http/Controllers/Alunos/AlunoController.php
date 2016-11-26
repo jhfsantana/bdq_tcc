@@ -95,9 +95,11 @@ class AlunoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function formularioAlterar($id)
     {
-        //
+        $aluno = Aluno::find($id);
+        $disciplinas = Disciplina::all();
+        return view('alunos.formulario_alterar_aluno')->withAluno($aluno)->with('disciplinas', $disciplinas);
     }
 
     /**
@@ -107,9 +109,36 @@ class AlunoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $aluno = Aluno::find($request->aluno_id);
+
+        $aluno->nome = $request->nome;
+        $aluno->sobrenome = $request->sobrenome;
+        $aluno->cpf = $request->cpf;
+        $aluno->email = $request->email;
+
+        
+        if($aluno->push())
+        {
+            $aluno->disciplinas()->sync($request->disciplinas, false);
+
+            $request->session()->flash('alert-success', 'Aluno '.$aluno->nome. ' alterado com sucesso');
+            return redirect('/alunos');
+        }
+
+
+    }
+    public function desassociarDisciplina(Request $request)
+    {
+        $aluno = Aluno::find($request->aluno_id);
+
+        $disciplina = [];
+        $disciplina[] = $request->disciplina_id;
+
+        $aluno->disciplinas()->detach($disciplina);
+        return redirect()->back();
+    
     }
 
     /**
@@ -121,9 +150,11 @@ class AlunoController extends Controller
     public function destroy($id)
     {
         $aluno = Aluno::find($id);
-        $aluno->delete();
 
-        return redirect('alunos');
+        if($aluno->delete())
+        {
+            return redirect('/alunos')->with('msg', 'O aluno ' . $aluno->nome .' removido com sucesso');
+        }
     }
 
     public function loginTela()

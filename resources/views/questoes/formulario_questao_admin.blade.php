@@ -1,6 +1,6 @@
 @extends('templates.admin.template')
     @section('head')
-  
+	
 	<title>Formulario de Questões</title>
     @stop
     @section('content')
@@ -23,7 +23,6 @@
                     </div>     
 				
 			
-
                     <div style="padding-top:10px; border-color: #ccc;" class="panel-body" >
 
                             
@@ -35,11 +34,12 @@
 							
 							<div style="margin-bottom: 15px" class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-	                            <select class="form-control" name="disciplina">
+	                            <select class="form-control" name="disciplina" onchange="document.getElementById('disciplina_nome').value=this.options[this.selectedIndex].text">
 									@foreach($disciplinas as $disciplina)
 	  									<option value="{{$disciplina->id}}">{{$disciplina->nome}}</option>
 									@endforeach
 								</select>
+							<input type="hidden" name="disciplina_nome" id="disciplina_nome" value=""/>
 
 							</div>
 

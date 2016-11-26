@@ -93,7 +93,7 @@ class ProfessorController extends Controller
 
 
 
-        return redirect ('professores');
+        return redirect ('/professores');
     }
 
     /**

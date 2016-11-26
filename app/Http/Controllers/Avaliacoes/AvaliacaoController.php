@@ -54,7 +54,8 @@ class AvaliacaoController extends Controller
     public function trazerQuestao()
     {
     	
-    	$disciplina_id = Input::get('disciplina_id');
+        $disciplina_id = Input::get('disciplina_id');
+        $disciplina_nome = Input::get('disciplina_nome');
         $professor_id = Input::get('professor_id');
         $nivel_id = Input::get('nivel_id');
         $nivelq2_id = Input::get('nivelq2_id');
@@ -71,26 +72,27 @@ class AvaliacaoController extends Controller
 
 
     	$questao = DB::table('questoes')
-								    	->where('disciplina_id', '=', $disciplina_id)
+                                        ->where('disciplina_id', '=', $disciplina_id)
+                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
                                         ->where('nivel', '=', $nivel_id)
-                                        ->orWhere('nivel', '=', $nivelq2_id)
-                                        ->where('disciplina_id', '=', $disciplina_id)
-                                        ->orWhere('nivel', '=', $nivelq3_id)
-                                        ->where('disciplina_id', '=', $disciplina_id)
-                                        ->orWhere('nivel', '=', $nivelq4_id)
-                                        ->where('disciplina_id', '=', $disciplina_id)
-                                        ->orWhere('nivel', '=', $nivelq5_id)
-                                        ->where('disciplina_id', '=', $disciplina_id)
-                                        ->orWhere('nivel', '=', $nivelq6_id)
-                                        ->where('disciplina_id', '=', $disciplina_id)
-                                        ->orWhere('nivel', '=', $nivelq7_id)
-                                        ->where('disciplina_id', '=', $disciplina_id)
-                                        ->orWhere('nivel', '=', $nivelq8_id)
-                                        ->where('disciplina_id', '=', $disciplina_id)
-                                        ->orWhere('nivel', '=', $nivelq9_id)
-                                        ->where('disciplina_id', '=', $disciplina_id)
-                                        ->orWhere('nivel', '=', $nivelq10_id)
-                                        ->where('disciplina_id', '=', $disciplina_id)
+                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->Where('nivel', '=', $nivelq2_id)
+                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->Where('nivel', '=', $nivelq3_id)
+                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->Where('nivel', '=', $nivelq4_id)
+                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->Where('nivel', '=', $nivelq5_id)
+                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->Where('nivel', '=', $nivelq6_id)
+                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->Where('nivel', '=', $nivelq7_id)
+                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)                                        
+                                        ->Where('nivel', '=', $nivelq8_id)
+                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->Where('nivel', '=', $nivelq9_id)
+                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->Where('nivel', '=', $nivelq10_id)
 								    	->InRandomOrder()
 								    	->first();
       

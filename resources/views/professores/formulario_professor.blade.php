@@ -6,7 +6,12 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap.js"></script>
-
+    <script src="/js/jquery.maskedinput.js" type="text/javascript"></script>
+<script type="text/javascript">
+	jQuery(function($){
+   $("#cpf").mask("999.999.999-99",{placeholder:" "});
+	});
+</script>
 
 	<script>
 	function GetRandom()
@@ -62,6 +67,12 @@
 						</label><i style="color: #FF0000">*</i>
 							<input type="text" name="sobrenome" class="form-control" placeholder="Digite o sobrenome">
 
+                        <label>
+                            CPF
+                        </label><i style="color: #FF0000">*</i>
+                            <input type="text" name="cpf" id="cpf" class="form-control" placeholder="Digite o CPF">
+
+                        <label>
 						<label>
 							Disciplinas
 						</label><i style="color: #FF0000">*</i>
@@ -76,7 +87,7 @@
 						<label>
 							E-mail
 						</label><i style="color: #FF0000">*</i>
-							<input type="text" name="email" class="form-control" placeholder="Digite o email">
+							<input type="text" name="email" class="form-control" placeholder="Digite o email" required="true">
 						</label>
 
 						<label>

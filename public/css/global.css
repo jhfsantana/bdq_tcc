@@ -362,6 +362,13 @@ div#box {
 	float: left;
 } 
 
+.box3-top img#seta{
+	margin-top: 0;
+	background-size: 100%;	
+	float: right;
+	height: auto;
+} 
+
 .box3-top a{
 	float: right;
 	margin-right: 15px;
