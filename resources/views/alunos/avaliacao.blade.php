@@ -103,9 +103,7 @@
 	@endif
 
 @endforeach
-</div>
-{{$avaliacao->id}}
-	
+</div>	
 	@if(!count($avaliacao))
 		<div class="container">
 			<div class="alert alert-warning" style="text-align: center;">
