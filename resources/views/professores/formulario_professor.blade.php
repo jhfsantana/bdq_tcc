@@ -6,7 +6,12 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap.js"></script>
-
+    <script src="/js/jquery.maskedinput.js" type="text/javascript"></script>
+<script type="text/javascript">
+	jQuery(function($){
+   $("#cpf").mask("999.999.999-99",{placeholder:" "});
+	});
+</script>
 
 	<script>
 	function GetRandom()
@@ -33,7 +38,6 @@
 	</div>
 	@endif
 		<div class="container">    
-		    <div id="cadastroprofessorbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
 		        <div class="panel panel-default" >
 		            <div class="panel-heading">
 		                <div class="panel-title" style="height: 56px;">
@@ -47,24 +51,31 @@
 						<input name="_token" type="hidden" value="{{ csrf_token() }}">
 						<label>
 							Matricula 
+						</label><i style="color: #FF0000">*</i>
 							<button data-toggle="tooltip" title="Gerar Matricula" type="button" id="matriculabuscar" class="btn btn-primary" onclick="GetRandom()" style="margin-bottom: 8px;">
 								<i class="glyphicon glyphicon-refresh" aria-hidden="true" "></i>		
 							</button>
 							<input type="text" id="matricula" name="matricula" class="form-control" placeholder="Matricula" readonly="true">
-						</label>
 						
 						<label>
 							Nome
+						</label><i style="color: #FF0000">*</i>
 							<input type="text" name="nome" class="form-control" placeholder="Digite o nome">
-						</label>
 						
 						<label>
 							Sobrenome
+						</label><i style="color: #FF0000">*</i>
 							<input type="text" name="sobrenome" class="form-control" placeholder="Digite o sobrenome">
-						</label>
 
+                        <label>
+                            CPF
+                        </label><i style="color: #FF0000">*</i>
+                            <input type="text" name="cpf" id="cpf" class="form-control" placeholder="Digite o CPF">
+
+                        <label>
 						<label>
 							Disciplinas
+						</label><i style="color: #FF0000">*</i>
 							<select multiple class="form-control"  name ="disciplinas[]">
 						  		@foreach($disciplinas as $disciplina)
 						  			@foreach($disciplina->turmas as $turma)
@@ -72,17 +83,17 @@
 						  			@endforeach
 						  		@endforeach
 							</select>
-						</label>
 
 						<label>
 							E-mail
-							<input type="text" name="email" class="form-control" placeholder="Digite o email">
+						</label><i style="color: #FF0000">*</i>
+							<input type="text" name="email" class="form-control" placeholder="Digite o email" required="true">
 						</label>
 
 						<label>
 							Password
+						</label><i style="color: #FF0000">*</i>
 							<input type="password" name="password" class="form-control" placeholder="Digite a senha">
-						</label>
 						<input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" style="margin-top: 10px">
 					</form>
 				</div>

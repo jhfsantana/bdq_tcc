@@ -3,14 +3,11 @@
 namespace App\Http\Requests\Disciplina;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Input;
 
 class DisciplinaRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return true;
@@ -23,10 +20,11 @@ class DisciplinaRequest extends FormRequest
      */
     public function rules()
     {
+        $disciplina = Input::get('nome');
         return [
-            'nome' => 'required',
-            'turmas' => 'required',
-        ];
+                'nome' => 'required',
+                'turmas' => 'required',
+                ];
     }
 
     public function messages()

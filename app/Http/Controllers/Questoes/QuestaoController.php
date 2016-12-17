@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Questoes;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests\QuestaoRequest;
+use App\Http\Requests\Questao\QuestaoRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Professor;
 use App\Models\Questao;
+use App\Models\Disciplina;
 use Validator;
 use Auth;
 use Illuminate\Support\Facades\Input;
@@ -50,10 +51,10 @@ class QuestaoController extends Controller
     public function store(Request $request)
     {
         
-        
         $questao = new Questao();
 
         $questao->questao = $request->questao;
+        $questao->disciplina_nome = $request->disciplina_nome;
         $questao->alternativaA = $request->a;
         $questao->alternativaB = $request->b;
         $questao->alternativaC = $request->c;
@@ -61,7 +62,16 @@ class QuestaoController extends Controller
         $questao->alternativaE = $request->e;
         $questao->correta = $request->correta;
         $questao->nivel = $request->nivel;
-        $questao->professor()->associate($request->professor_id);
+        
+        if(isset($request->professor_id))
+        {
+            $questao->professor()->associate($request->professor_id);
+        }
+
+        if(isset($request->admin_id))
+        {
+            $questao->professor()->associate($request->professor_id);
+        }
 
 
         $questao->disciplina()->associate($request->disciplina);
@@ -99,7 +109,16 @@ class QuestaoController extends Controller
 
         $professor = Professor::find($professor_id);
 
-        return view('questoes.questao_alterar')->withQuestao($questao)->with('professor', $professor);
+
+        if(Auth::guard('web_admins'))
+        {
+            $disciplinas = Disciplina::all();
+            return view('questoes.questao_alterar')->withQuestao($questao)->with('professor', $professor)->with('disciplinas', $disciplinas);
+        }
+        else
+        {
+            return view('questoes.questao_alterar')->withQuestao($questao)->with('professor', $professor);
+        }
     }
 
     /**
@@ -131,10 +150,22 @@ class QuestaoController extends Controller
 
         $alterado->disciplina()->associate($request->disciplina);
 
-        if($alterado->save())
+        
+        if(Auth::guard('web_admins'))
         {
-            $request->session()->flash('alert-success', 'Questão alterada com sucesso!');
-            return redirect ('professor');
+            if($alterado->save())
+            {
+                $request->session()->flash('alert-success', 'Questão alterada com sucesso!');
+                return redirect ('/home');
+            }
+        }
+        else
+        {
+            if($alterado->save())
+            {
+                $request->session()->flash('alert-success', 'Questão alterada com sucesso!');
+                return redirect ('/professor');
+            }
         }
     }
 
@@ -145,17 +176,69 @@ class QuestaoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function deletar(Request $request, $id)
+    public function deletar(Request $request)
     {
-        $questao = Questao::find($id);
+        $questao = Questao::find($request->questao_id);
         $questao->delete();
         $request->session()->flash('alert-danger', 'Questão '. $questao->questao .' deletada com sucesso!');
-        return redirect ('professor');   
+
+        if(Auth::guard('web_admins'))
+        {
+            return redirect ('/home');   
+        }
+        else
+        {
+            return redirect ('professor');   
+        }
     }
     public function buscarQuestao()
     {
         
         /*$questao = Questao::find($disciplina_id);
         $questao = Questao::orderByRaw('RAND()')->take(1)->where($disciplina_id)->get();*/
+    }
+
+    public function adminFormQuestao()
+    {
+        $disciplinas = Disciplina::all();
+        return view('questoes.formulario_questao_admin')->with('disciplinas', $disciplinas);
+    }
+
+    public function adminQuestaoSalvar(QuestaoRequest $request)
+    {
+
+        $questao = new Questao();
+
+        $questao->questao = $request->questao;
+        $questao->disciplina_nome = $request->disciplina_nome;
+        $questao->alternativaA = $request->a;
+        $questao->alternativaB = $request->b;
+        $questao->alternativaC = $request->c;
+        $questao->alternativaD = $request->d;
+        $questao->alternativaE = $request->e;
+        $questao->correta = $request->correta;
+        $questao->nivel = $request->nivel;
+
+
+        if(isset($request->admin_id))
+        {
+            $questao->admin()->associate($request->admin_id);
+        }
+
+
+        $questao->disciplina()->associate($request->disciplina);
+
+        if($questao->save())
+        {
+            $request->session()->flash('alert-success', 'Questão salva com sucesso!');
+            return redirect ('/home');
+        }
+    }
+
+    public function listaTotalQuestoes()
+    {
+        $questoes = Questao::all();
+
+        return view('questoes.questao_lista_admin')->with('questoes', $questoes);
     }
 }

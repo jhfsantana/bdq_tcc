@@ -11,30 +11,32 @@
 	<br>
 	<br>
 	<br>
-	@if(!empty($errors->all()))
-			<div class="alert alert-warning" role="alert-warning">
-				@foreach($errors->all() as $error)
-					<ul>
-						<li> {{$error}}</li>
-					</ul>
-				@endforeach
-			</div>
-		@endif
+			<!-- MENSAGEM DE SUCESSO -->
+		<div class="flash-message">
+		    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+		      @if(Session::has('alert-' . $msg))
+
+		      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+		      @endif
+		    @endforeach
+		 </div>	
+
+	<!-- FIM DA MENSAGEM DE SUCESSO -->
 		<div class="container">	
 			<h2 style="text-align: center;"> Cadastro de disciplinas </h2> <br>
 
 			{!!Form::open(array('url' => 'subjects', 'method' => 'post'))!!}
 			
 
-				{!!Form::label('nome','Nome:')!!}
+				{!!Form::label('nome','Nome:')!!}<i style="color: #FF0000">*</i>
 
 				{{ Form::text('nome', '', array('class'=>'form-control', 'placeholder'=>'Digite o nome da disciplina')) }}
 				
 				<br>
 				<div class="alert alert-warning" style="border-color: #ccc">
-					Escolha uma ou mais turmas para associar a esta disciplina (Pressionando CTRL)
+					Escolha uma turma para associar a esta disciplina 
 				</div>
-				{!!Form::label('turma','Turma:')!!}
+				{!!Form::label('turma','Turma:')!!}<i style="color: #FF0000">*</i>
 				<select multiple class="form-control"  name ="turmas[]">
 					  @foreach($turmas as $t)
 					  <option value="{{$t->id}}"> {{$t->nome}} </option>

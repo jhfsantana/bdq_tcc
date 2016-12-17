@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\hasMany;
-
+use Illuminate\Support\Facades\DB;
 
 class Avaliacao extends Model
 {
@@ -46,6 +46,19 @@ class Avaliacao extends Model
     public function pontos()
     {
         return $this->hasMany('App\Models\Ponto');
+    }
+
+    public static function checarSeAvaliacaoExiste($professor_id, $turma_id, $disciplina_id, $statusDisponivel, $statusPendente)
+    {
+        $sql = "SELECT * 
+                FROM avaliacoes 
+                where professor_id = :professor_id 
+                and turma_id = :turma_id 
+                and disciplina_id = :disciplina_id";
+        
+        $results = DB::select('select * from avaliacoes where professor_id = ? and turma_id = ? and disciplina_id = ? and status in (?, ?)', array($professor_id, $turma_id, $disciplina_id, $statusDisponivel, $statusPendente));
+
+        return $results;
     }
 
 }

@@ -45,7 +45,19 @@ class DisciplinaController extends Controller
      */
     public function store(DisciplinaRequest $request)
     {
-      //  Subject::create($request->all());
+
+        $disciplina = $request->nome;
+        $turma = $request->turmas;
+        
+        $turmaDisponivel = Disciplina::checarTurmaDisponivel($disciplina, $turma);
+        
+        if(count($turmaDisponivel) > 0)
+        {
+            $request->session()->flash('alert-danger', 'Disciplina já associada a esta turma');
+            return redirect()->back();
+
+        }
+
 
         $disciplina = new Disciplina;
        
@@ -57,8 +69,11 @@ class DisciplinaController extends Controller
 
         $disciplina -> turmas()->sync($request->turmas, false);
 
-        return redirect ('disciplina/novo');
-
+        if($disciplina->save())
+        {
+            $request->session()->flash('alert-success', 'Disciplina cadastrada com sucesso');
+            return redirect ('/disciplinas');
+        }
         //$teacher->subjects()->attach($request->subjects);
 
     }

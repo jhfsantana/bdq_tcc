@@ -1,6 +1,6 @@
 @extends('templates.aluno.template')
 	@section('head')
-	<link rel="stylesheet" href="/css/gloabal.css">		
+	<link rel="stylesheet" href="/css/global.css">		
 	<link rel="stylesheet" href="/css/formularios.css">		
 	<title>RESULTADO</title>
 	@stop

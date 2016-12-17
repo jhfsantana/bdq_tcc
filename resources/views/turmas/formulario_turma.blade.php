@@ -55,9 +55,9 @@
 						<input name="_token" type="hidden" value="{{ csrf_token() }}">
 						
 						<label>
-							Nome
-							<input type="text" name="nome" class="form-control" placeholder="Digite o nome">
-						</label>
+							Código
+						</label><i style="color: #FF0000">*</i>
+							<input type="text" name="nome" class="form-control" placeholder="Digite o código da nova turma">
 
 						<input type="submit" name="salvar" id="salvar" value="Salvar" class="btn btn-success" style="margin-top: 10px">
 					</form>
@@ -66,7 +66,7 @@
 		</div>
 			<table class="table table-striped">
 			  <tr>
-			      <td><strong>NÚMERO</strong></td>
+			      <td><strong>CÓDIGO DA TURMA</strong></td>
 			      <td><strong>CRIADO EM</strong></td>
 			      <td><strong>MODIFICADO EM</strong></td>
 			  </tr>

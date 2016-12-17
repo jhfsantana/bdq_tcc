@@ -26,15 +26,23 @@
 					<tr>
 					<td style="text-align: center;">{{$disciplinas->nome}}</td>
 					@foreach ($disciplinas->turmas as $turma)
-						<td style="text-align: center;"><form id="formAvaliacaoDisponivel" method="post" action="/aluno/avaliacao/online">
-		                		<input name="_token" type="hidden" value="{{ csrf_token() }}">
-								<input type="hidden"  name="disciplina_id" value="{{$disciplinas->id}}"/>
-								<input type="hidden"  name="turma_id" value="{{$turma->id}}">
-								<button type="submit" name="avaliacoes" id="avaliacoes" class="btn btn-success">
-									<i class="glyphicon glyphicon-education"></i> {{$turma->nome}}
-								</button>
-							</form>
-						</td>				
+					<td>
+						@foreach($disciplinas->avaliacao as $avaliacao)
+							<tr>
+								<td style="text-align: center;">
+									<form id="formAvaliacaoDisponivel" method="post" action="/aluno/avaliacao/online">
+				                		<input name="_token" type="hidden" value="{{ csrf_token() }}">
+										<input type="hidden"  name="disciplina_id" value="{{$disciplinas->id}}"/>
+										<input type="hidden"  name="turma_id" value="{{$turma->id}}">
+										<input type="hidden"  name="avaliacao_id" value="{{$avaliacao->id}}">
+										<button type="submit" name="avaliacoes" id="avaliacoes" class="btn btn-success">
+											<i class="glyphicon glyphicon-education"></i>{{$avaliacao->id}} - Avaliação - {{$avaliacao->created_at->format('d/m/Y')}}
+										</button>
+									</form>
+								</td>
+							</tr>		
+						@endforeach
+					</td>
 					@endforeach
 				@endforeach
 				</td>

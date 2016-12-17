@@ -28,7 +28,14 @@
 			<td> Turma
 				@foreach ($disciplinas->turmas as $turmas)
 					<td>{{ $turmas->nome }}</td>
-
+					<td> 
+					<form action="/aluno/disciplina/desassociar" method="post">
+						<input type="hidden" name="disciplina_id" value="{{$disciplinas->id}}">
+						<input type="hidden" name="aluno_id" value="{{$aluno->id}}">
+						<input name="_token" type="hidden" value="{{ csrf_token() }}">
+						<button class="btn btn-danger"> Desassociar</button>
+					</form>
+					</td>
 				@endforeach
 			@endforeach
 			</td>

@@ -31,12 +31,12 @@
         // Set chart options
         var options = {'title':'Número de questões adicionadas por professores',
         			   'is3D':true,
-                       'width':750,
-                       'height':650,
+                       'width':450,
+                       'height':450,
                        'backgroundColor': 'transparent',
                        'pieHole': 0,
-                       'chartArea.width': 150};
-
+                       'chartArea.width': 150,
+                       'legend': {'position': 'top'}};
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
@@ -58,14 +58,13 @@
 			    <li><a href="/home">Inicio</a></li>
 			    <li><a href="/administrador/novo">Cadastro de administradores</a></li>
 			    <li><a href="#">Lista de administradores</a></li>
-			    <li><a href="/professor/novo">Cadastro de professores</a></li> 
-			    <li><a href="/professores">Lista de Professores</a>
+			    <li><a href="/professores"> Professores</a>
 			      <ul> 
-			        <li><a href="/aluno/novo">Cadastro de Alunos</a></li>
-			        <li><a href="/alunos">Lista de Alunos</a></li> 
-			        <li><a href="/disciplina/novo">Cadastro de disciplinas</a></li> 
-			        <li><a href="/disciplinas">Lista de Disciplinas</a></li>  
-			        <li><a href="/turma/novo">Cadastro de Turma</a></li> 
+			        <li><a href="/alunos">Alunos</a></li> 
+			        <li><a href="/disciplinas">Disciplinas</a></li>  
+			        <li><a href="/turma/novo">Turmas</a></li> 
+			        <li><a href="/admin/questoes"> Questões </a></li>
+
 			      </ul> 
 			    </li>
 			    <li><a href="administrador/logout">Logout</a></li> 
@@ -76,11 +75,23 @@
 		<br>
 		<br>
 		<br>
+			<!-- MENSAGEM DE SUCESSO -->
+		<div class="flash-message">
+		    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+		      @if(Session::has('alert-' . $msg))
+
+		      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+		      @endif
+		    @endforeach
+		 </div>	
+
+	<!-- FIM DA MENSAGEM DE SUCESSO -->
 		<h1>Olá, {{Auth::guard('web_admins')->user()->name }}</h1>
 		<br>
+		<div class="chart_div" id="chart_div" style="margin-right: 260px; margin-top: 0;"></div>
 		<h2>Painel de Informações</h2>
 			<p>resumo das informações</p>
-			<div id="box">
+
 				<div class="box-top">
 					<img src="images/professor_64px.png">
 					<h3 class="professores"> {{$professores}}</h3>
@@ -95,12 +106,8 @@
 
 				<div class="box3-top">
 					<img src="images/estatistica_64.png">
-					<a href="/relatorio/1">Relatórios</a>
+					<a href="/relatorio/">Relatórios<img id="seta" src="images/seta.png"></a>
 				</div>
-				
-				<div id="chart_div" style="float: right; margin-right: 450px;"></div>
-
-			</div>
 		</div>
 	</div>
 
