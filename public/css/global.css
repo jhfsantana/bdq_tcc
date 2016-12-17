@@ -248,15 +248,13 @@ div#box {
 	margin-top: 15px;
 }
 
-div#box .box-top {
+.box-top {
 	width: 31%;
 	height: 100px;
-	float: left;
 	color: #fff;
 	text-shadow: 0 1px #000;
 	background: #2980b9;
-	padding: 5px;
-	padding-left: 15px;
+	margin-top: 25px;
 	font-weight: 300;
 	overflow: hidden;
 	border-radius: 10px;
@@ -264,15 +262,16 @@ div#box .box-top {
 	text-align: center;
 } 
 
-div#box .box-top img{
+.box-top img{
 	width: auto;
 	margin-top: 12px;
 	line-height: 100px;
+	margin-left: 9px;
 	background-size: 100%;	
 	float: left;
 } 
 
-div#box .box-top a{
+.box-top a{
 	float: right;
 	margin-right: 15px;
 	color: #ffffff;
@@ -282,7 +281,7 @@ div#box .box-top a{
 	font-size: 1.4em;
 } 
 
-div#box .box-top .professores {
+.box-top .professores {
 	font-size: 2.3em;
 	float: right;
 	margin-bottom: 15px;
@@ -291,7 +290,7 @@ div#box .box-top .professores {
 
 
 
-div#box .box-panel {
+.box-panel {
 	width: 32%;
 	height: 30px;
 	background: #fff;
@@ -303,31 +302,29 @@ div#box .box-panel {
 }
 
 
-div#box .box2-top {
+.box2-top {
 	width: 31%;
 	height: 100px;
-	margin-left: 10px;
-	float: left;
+	margin-top: 25px;
 	color: #fff;
 	text-shadow: 0 1px #000;
 	background: #f39c12;
-	padding: 5px;
-	padding-left: 15px;
 	font-weight: 300;
 	overflow: hidden;
 	border-radius: 10px;
 	text-align: center;
 }
 
-div#box .box2-top img{
+.box2-top img{
 	width: auto;
 	margin-top: 12px;
 	line-height: 100px;
+	margin-left: 9px;
 	background-size: 100%;	
 	float: left;
 } 
 
-div#box .box2-top a{
+.box2-top a{
 	float: right;
 	margin-right: 15px;
 	color: #ffffff;
@@ -337,37 +334,42 @@ div#box .box2-top a{
 	font-size: 1.4em;
 } 
 
-div#box .box2-top .estudantes {
+.box2-top .estudantes {
 	font-size: 2.3em;
 	float: right;
 	margin-bottom: 20px;
 } 
 
-div#box .box3-top {
+.box3-top {
 	width: 31%;
 	height: 100px;
-	margin-left: 10px;
-	float: left;
+	margin-top: 25px;
 	color: #fff;
 	text-shadow: 0 1px #000;
 	background: #27ae60;
-	padding: 5px;
-	padding-left: 15px;
 	font-weight: 300;
 	overflow: hidden;
 	border-radius: 10px;
 	text-align: center;
 }
 
-div#box .box3-top img{
+.box3-top img{
 	width: auto;
 	margin-top: 12px;
 	line-height: 100px;
+	margin-left: 9px;
 	background-size: 100%;	
 	float: left;
 } 
 
-div#box .box3-top a{
+.box3-top img#seta{
+	margin-top: 0;
+	background-size: 100%;	
+	float: right;
+	height: auto;
+} 
+
+.box3-top a{
 	float: right;
 	margin-right: 15px;
 	color: #ffffff;
@@ -378,7 +380,7 @@ div#box .box3-top a{
 } 
 
 
-div#box .box2-panel {
+.box2-panel {
 	width: 25%;
 	height: 30px;
 	background: #fff;
@@ -389,8 +391,8 @@ div#box .box2-panel {
 	border-bottom-right-radius: 10px;
 }
 
-div#chart_div {
-	text-align: center;
+.chart_div {
+	float: right;
 }
 
 @media only screen and (max-width: 480px) {
@@ -424,28 +426,29 @@ a.mobile:active{
 }
 
 
-div#box .box-top img{
+.box-top img{
+	width: 43px;
+	margin-top: 12px;
+	line-height: 100px;
+	margin-left: 0;
+	background-size: 100%;	
+	
+} 
+.box2-top img{
 	width: 43px;
 	margin-top: 12px;
 	line-height: 100px;
 	background-size: 100%;	
-	float: left;
+	margin-left: 0;
 } 
-div#box .box2-top img{
-	width: 43px;
-	margin-top: 12px;
-	line-height: 100px;
-	background-size: 100%;	
-	float: left;
-} 
-div#box .box3-top img{
+.box3-top img{
 	width: auto;
 	margin-top: 12px;
 	line-height: 100px;
 	background-size: 100%;	
 	float: left;
 }
-div#box .box-top a{
+.box-top a{
 	color: #ffffff;
 	display: block;
 	margin-top: 6px;
@@ -453,7 +456,7 @@ div#box .box-top a{
 	font-size: 0.8em;
 } 
 
-div#box .box-top {
+.box-top {
 	width: 31%;
 	height: 130px;
 	float: left;
@@ -469,7 +472,7 @@ div#box .box-top {
 	text-align: center;
 }
 
-div#box .box2-top {
+.box2-top {
 	width: 31%;
 	height: 130px;
 	margin-left: 10px;
@@ -485,14 +488,14 @@ div#box .box2-top {
 	text-align: center;
 }
 
-div#box .box2-top a{
+.box2-top a{
 	color: #ffffff;
 	display: block;
 	padding: 0px;
 	font-size: 0.8em;
 } 
 
-div#box .box3-top {
+.box3-top {
 	width: 31%;
 	height: 130px;
 	margin-left: 10px;
@@ -507,18 +510,25 @@ div#box .box3-top {
 	border-radius: 10px;
 }
 
-div#box .box3-top a{
+.box3-top a{
 	color: #ffffff;
 	display: block;
 	padding: 0px;
 	font-size: 0.8em;
 } 
 
-div#box .box-top .alunos {
+.box-top .alunos {
 	font-size: 1.1em;
 	float: right;
 	margin-bottom: 15px;
 } 
+
+div#chart_div {
+	display: none;
+	width: 35px;
+	height: 35px;
+	float: left;
+}
 
 div#header h3 {
  display: none;

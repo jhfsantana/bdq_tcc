@@ -24,7 +24,7 @@
 			    <li><input type="submit" form="formQuestoes" name="questoes" value="questoes" class="btn btn-link"></li> 
 			    <li><input type="submit" name="avaliacao" value="Avaliacao" form="formAvaliacao" class="btn btn-link"></a>
 			      <ul> 
-			        <li><input type="submit" name="gerar-avaliacao" value="Gerar Avaliacao" form="formGerar" class="btn btn-link"></li> 
+			        <li><input type="submit"  value="Gerar Avaliacao" form="formGerar" class="btn btn-link"></li> 
 			        <li><input type="submit" name="cadastrar-questao" value="Cadastrar Questão" form="formCadastrarQ" class="btn btn-link"></li> 
 			      </ul> 
 			    </li>
@@ -56,21 +56,22 @@
 
 	<script type="text/javascript">
 
-	$(document).ready(function(){
-     $("a.mobile").click(function(){
-      $(".sidebar").slideToggle('slow');
-     });
+		$(document).ready(function(){
+	     $("a.mobile").click(function(){
+	      $(".sidebar").slideToggle('slow');
+	     });
 
-    window.onresize = function(event) {
-      if($(window).width() > 480){
-      	$(".sidebar").show();
-      }
-    };
+	    window.onresize = function(event) {
+	      if($(window).width() > 480){
+	      	$(".sidebar").show();
+	      }
+	    };
 
 
-	});
+		});
 
-</script>
+	</script>
+
 		
 		<!-- FORMULARIO PARA CADASTRAR, GERAR VISUALIZAR AVALIACAO E LISTA DE QUESTOES -->
 		<form action="/professor/{{Auth::user()->id}}/questao" method="post" id="formCadastrarQ">

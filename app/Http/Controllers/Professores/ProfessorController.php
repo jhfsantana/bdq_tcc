@@ -20,6 +20,8 @@ use App\Http\Requests\Professor\ProfessorRequest;
 
 use DateTime;
 
+use App\Models\Util;
+
 class ProfessorController extends Controller
 {
     /**
@@ -73,22 +75,27 @@ class ProfessorController extends Controller
         $professor->matricula = $request->matricula;
         $professor->nome = $request->nome;
         $professor->sobrenome = $request->sobrenome;
+        $professor->cpf = Util::somenteNumeros($request->cpf);
         $professor->email = $request->email;
         
         $cryptPassword = bcrypt($request->password);
         $professor->password = $cryptPassword;
         
        // $professor->subjects()->sync($request->subjects, false);
-        $professor->save();
+        
+        if($professor->save())
+        {
+            $request->session()->flash('alert-success', 'Professor salvo com sucesso!');
+            $professor->disciplinas()->sync($request->disciplinas, false);
+        }
 
-        $professor->disciplinas()->sync($request->disciplinas, false);
         
         // $professor->classrooms()->sync($request->classrooms, false); ------ ATTACH PARA RELACIONAR TURMA COM PROFESSOR
 
 
 
 
-        return redirect ('professores');
+        return redirect ('/professores');
     }
 
     /**

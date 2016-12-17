@@ -18,12 +18,12 @@ $(document).ready(function(){
         e.stopPropagation();
         
         var nivel_selecionado = $('input[name="nivel"]:checked').val();
-
+        var disciplina_nome = $('#disciplina_id').text().replace(/\s/g, "");
 
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivel_id" : nivel_selecionado, "professor_id" : $('#prof').val()},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivel_id" : nivel_selecionado, "professor_id" : $('#prof').val(), "disciplina_nome" : disciplina_nome},
         dataType: "JSON",   //expect html to be returned                
         
         beforesend: function(){
@@ -46,7 +46,7 @@ $(document).ready(function(){
             var questao_id = "id"
             $("#questao_id").html(JSON.stringify(response[questao_id]));
 
-            console.log(response);
+            console.log(disciplina_nome);
 
             
         }
@@ -58,53 +58,7 @@ $(document).ready(function(){
 });
 });
 
- $(document).ready(function() {
-        var clique = 0;
-
-    $("#substituir").click(function(e) {   
-        clique++;             
-        e.preventDefault();
-        e.stopPropagation();
-      $.ajax({    //create an ajax request to load_page.php
-        type: "get",
-        url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivel_id" : $('#nivel').val(), "professor_id" : $('#prof').val()},
-        dataType: "JSON",   //expect html to be returned                
-        success: function(response){
-                           
-            var questao = "questao"
-            var alternativaA = "alternativaA"
-            var alternativaB = "alternativaB"
-            var alternativaC = "alternativaC"
-            var alternativaD = "alternativaD"
-            var alternativaE = "alternativaE"
-            $("#questao-area").html(JSON.stringify(response[questao]));
-            $("#alternativaA").html(JSON.stringify(response[alternativaA]));
-            $("#alternativaB").html(JSON.stringify(response[alternativaB]));
-            $("#alternativaC").html(JSON.stringify(response[alternativaC]));
-            $("#alternativaD").html(JSON.stringify(response[alternativaD]));
-            $("#alternativaE").html(JSON.stringify(response[alternativaE]));
-            var questao_id = "id"
-            $("#questao_id").html(JSON.stringify(response[questao_id]));
-            var disciplina_id = "disciplina_id"
-            $("#disciplina_id").html(JSON.stringify(response[disciplina_id]));
-
-            console.log(response);
-         
-                return false;
-          
-        }
-
-    });
-        if(clique == 3){
-            $(this).attr('disabled', 'disabled');
-            alert("Você já substituiu " +clique+" vezes)!");
-            setTimeout(enableButton, 60000);
-            return true;
-        }
-});
-});
-
+ 
 
 /*$(document).ready(function() {
 */    $("#avaliacaoform").click(function(e) {                
@@ -155,11 +109,12 @@ $(document).ready(function() {
         
      //make sure default click event happens
     var nivel_selecionado = $('input[name="nivelq2_id"]:checked').val();  
+    var disciplina_nome = $('#disciplina_id').text().replace(/\s/g, "");
 
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq2_id" : nivel_selecionado, "professor_id" : $('#prof').val()},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq2_id" : nivel_selecionado, "professor_id" : $('#prof').val(),  "disciplina_nome" : disciplina_nome},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -193,7 +148,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var clicked = 0;
-
+    var disciplina_nome = $('#disciplina_id').text().replace(/\s/g, "");
     $("#buscar3").click(function(e) {                
         e.preventDefault();
         e.stopPropagation();
@@ -205,7 +160,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq3_id" :nivel_selecionado},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq3_id" :nivel_selecionado, "disciplina_nome" : disciplina_nome},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -238,7 +193,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var clicked = 0;
-
+    var disciplina_nome = $('#disciplina_id').text().replace(/\s/g, "");
     $("#buscar4").click(function(e) {                
         e.preventDefault();
         e.stopPropagation();
@@ -250,7 +205,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq4_id" :nivel_selecionado},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq4_id" :nivel_selecionado, "disciplina_nome" : disciplina_nome},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -283,7 +238,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var clicked = 0;
-
+    var disciplina_nome = $('#disciplina_id').text().replace(/\s/g, "");
     $("#buscar5").click(function(e) {                
         e.preventDefault();
         e.stopPropagation();
@@ -295,7 +250,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq5_id" : nivel_selecionado},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq5_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -328,7 +283,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var clicked = 0;
-
+    var disciplina_nome = $('#disciplina_id').text().replace(/\s/g, "");
     $("#buscar6").click(function(e) {                
         e.preventDefault();
         e.stopPropagation();
@@ -341,7 +296,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq6_id" : nivel_selecionado},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq6_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -374,7 +329,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var clicked = 0;
-
+    var disciplina_nome = $('#disciplina_id').text().replace(/\s/g, "");
     $("#buscar7").click(function(e) {                
         e.preventDefault();
         e.stopPropagation();
@@ -386,7 +341,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq7_id" : nivel_selecionado},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq7_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -419,7 +374,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var clicked = 0;
-
+    var disciplina_nome = $('#disciplina_id').text().replace(/\s/g, "");
     $("#buscar8").click(function(e) {                
         e.preventDefault();
         e.stopPropagation();
@@ -432,7 +387,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq8_id" : nivel_selecionado},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq8_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -465,7 +420,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var clicked = 0;
-
+    var disciplina_nome = $('#disciplina_id').text().replace(/\s/g, "");
     $("#buscar9").click(function(e) {                
         e.preventDefault();
         e.stopPropagation();
@@ -478,7 +433,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq9_id" : nivel_selecionado},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq9_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -511,7 +466,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var clicked = 0;
-
+    var disciplina_nome = $('#disciplina_id').text().replace(/\s/g, "");
     $("#buscar10").click(function(e) {                
         e.preventDefault();
         e.stopPropagation();
@@ -524,7 +479,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq10_id" :nivel_selecionado},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq10_id" :nivel_selecionado, "disciplina_nome" : disciplina_nome},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 

@@ -1,4 +1,4 @@
-@extends('templates.professor.template')
+@extends('templates.admin.template')
 	@section('head')
     <link rel="stylesheet" href="/css/global.css">
 	<link rel="stylesheet" href="/css/formularios.css">
@@ -18,7 +18,7 @@
                     <div style="padding-top:10px" class="panel-body" >
 
                             
-                        <form id="questaoform" class="form-horizontal" role="form" method="post" action="/professor/questao/alterada">
+                        <form id="questaoform" class="form-horizontal" role="form" method="post" @if(Auth::guard('web_admins')) action="/admin/questao/alterada" @else action="/professor/questao/alterada" @endif>
 							
 							<input name="_token" type="hidden" value="{{ csrf_token() }}">
                             <input name="professor_id" type="hidden" value="{{Auth::user()->id }}"> 
@@ -28,9 +28,7 @@
 							<div style="margin-bottom: 15px" class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
 	                            <select class="form-control" name="disciplina">
-									@foreach($professor->disciplinas as $disciplinas)
-	  									<option value="{{$disciplinas->id}}">{{$disciplinas->nome}}</option>
-									@endforeach
+                                        <option value="{{$questao->disciplina->id}}">{{$questao->disciplina->nome}}</option>
 								</select>
 							</div>
 

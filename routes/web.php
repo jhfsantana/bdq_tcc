@@ -82,6 +82,8 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 	Route::post('professor/questao/alterar/{id}', 'Questoes\QuestaoController@edit');
 	
 	Route::post('professor/questao/alterada', 'Questoes\QuestaoController@update');
+	
+	Route::post('/avaliacao/status', 'Avaliacoes\AvaliacaoController@status');
 
 	Route::get('professor/logout', 'Professores\AuthController@logout');
 
@@ -103,10 +105,13 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	Route::post('students','Alunos\AlunoController@store');
 	Route::get('alunos','Alunos\AlunoController@index');
 	Route::get('aluno/detalhes/{id}','Alunos\AlunoController@show');
-	Route::get('alunos/{id}','Alunos\AlunoController@destroy');
+	Route::post('alunos/{id}','Alunos\AlunoController@destroy');
 
+	Route::get('/aluno/alterar/{id}','Alunos\AlunoController@formularioAlterar');
+	
+	Route::post('/aluno/dados/alterados','Alunos\AlunoController@update');
 
-
+	Route::post('/aluno/disciplina/desassociar', 'Alunos\AlunoController@desassociarDisciplina');
 	Route::get('administrador/logout', 'Admins\AuthController@logout');
 
 
@@ -131,6 +136,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 
 	Route::get('/relatorio', 'Admins\AdminController@relatorio');
 
+<<<<<<< HEAD
 	Route::get('/relatorio/{id}', 'Admins\AdminController@relatorio');
 	
 	
@@ -161,7 +167,36 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 
 			return Response::json($resultado);
 		});
+=======
+	
+	Route::get('/relatorio/questao', 'Admins\AdminController@relatorioQuestao');
+	
+	Route::get('/relatorio/notas/{id}', 'Admins\AdminController@relatorioNotas');
+	
+	Route::get('/relatorio/notas', 'Admins\AdminController@relatorioNotas');
+		
+	Route::get('/relatorio/questao/{limite}', 'Admins\AdminController@relatorioQuestao');
+	
 
+	
+	Route::get('/admin/questao/novo', 'Questoes\QuestaoController@adminFormQuestao');
+>>>>>>> 82d3831f9f7c471bf3756e70a3788ab6394a790c
+
+	Route::post('/admin/questao/adicionada', 'Questoes\QuestaoController@adminQuestaoSalvar');
+
+	Route::get('/admin/questoes', 'Questoes\QuestaoController@listaTotalQuestoes');
+
+
+	Route::post('/admin/questao/deletar', 'Questoes\QuestaoController@deletar');
+
+	Route::post('admin/questao/alterar/{id}', 'Questoes\QuestaoController@edit');
+
+	Route::post('admin/questao/alterada', 'Questoes\QuestaoController@update');
+
+	Route::get('/verificar/turma/disponivel', function(){
+
+		
+	});
 /*	Route::get('/turmas', function () {
 	    $turmas = Turma::all();
 	    return view('turmas.formulario_turmas')->with('turmas', $turmas);

@@ -26,4 +26,9 @@ class Admin extends User
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function questoes()
+    {
+        return $this->belongsToMany('App\Models\Questao');
+    }
 }

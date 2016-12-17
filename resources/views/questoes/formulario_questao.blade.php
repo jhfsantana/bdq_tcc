@@ -34,7 +34,7 @@
 
 							</div>
 
-							<div style="margin-bottom: 15px" class="input-group">
+							<div style="margin-bottom: 15px" class="input-group"> 
 								<span class="input-group-addon"><i class="glyphicon glyphicon-sort"></i></span>
 	                            <select class="form-control" name="nivel">
 	  								<option value="1">Facil</option>

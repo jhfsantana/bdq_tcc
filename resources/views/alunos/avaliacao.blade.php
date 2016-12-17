@@ -1,14 +1,26 @@
 @extends('templates.aluno.template')
 	@section('head')
+    <script src="/js/jquery-3.1.1.js"></script>
 	<link rel="stylesheet" href="/css/global.css">	
 	<link rel="stylesheet" href="/css/formularios.css">	
-	<title>Lista de avaliacoes</title>
+	<title>BDQ - AVALIACAO ONLINE</title>
+<script type="text/javascript">
+	
+		$(document).ready(function(){
+		@foreach($avaliacao as $av)
+			<?php if($av->status == 'pendente' || $av->status == 'finalizada' || $av->resultado): ?>
+				document.getElementById('conteudo').style.display = "none";
+				$('#conteudo').find('input, textarea, button, select').prop('disabled', true);
+			<?php endif ?>
+		@endforeach
+	});
+</script>
 	@stop
 	@section('content')
 <br>
 <br>
 <br>
-<div class="container">
+<div class="container" id="conteudo">
 <h2 style="text-align: center;">Avaliação</h2>
 
 
@@ -16,11 +28,11 @@
 	<tr>
 		<td>Nome: {{Auth::user()->nome}}</td>
 	</tr>
-
 </table>
 @foreach($avaliacao as $avaliacao)
-	<?php $count=0; ?>
-	@if(!isset($avaliacao->resultado))
+	<?php $count=0; ?> 
+
+	@if(!isset($avaliacao->resultado) || $avaliacao->status == 'disponivel')
 		<form action="/aluno/avaliacao/finalizada" method="post" form="avaliacao">
 			<table class="table">
 				@foreach($avaliacao->questoes as $questao)
@@ -91,7 +103,9 @@
 	@endif
 
 @endforeach
-
+</div>
+{{$avaliacao->id}}
+	
 	@if(!count($avaliacao))
 		<div class="container">
 			<div class="alert alert-warning" style="text-align: center;">
@@ -107,6 +121,20 @@
 				<input class="btn btn-primary" type="hidden" name="finalizar" value="Finalizar">
 			</div>
 		</div>
+	@elseif($avaliacao->status == 'pendente')
+		<div class="container">
+			<div class="alert alert-warning" style="text-align: center;">
+				<h1>Avaliação pendente, converse com o Professor responsável</h1>
+				<input class="btn btn-primary" type="hidden" name="finalizar" value="Finalizar">
+			</div>
+		</div>
+	@elseif($avaliacao->status == 'finalizada')
+		<div class="container">
+			<div class="alert alert-warning" style="text-align: center;">
+				<h1>Avaliação já finalizada pelo Professor</h1>
+				<input class="btn btn-primary" type="hidden" name="finalizar" value="Finalizar">
+			</div>
+		</div>
 	@else
 		<input class="btn btn-primary" type="submit" name="finalizar">
 		<input type="hidden" name="avaliacao_id" value="{{$avaliacao->id}}">
@@ -118,4 +146,5 @@
 	@endif
 </form>
 </table>
+
 @stop

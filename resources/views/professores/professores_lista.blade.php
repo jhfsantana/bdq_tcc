@@ -1,11 +1,10 @@
 @extends('templates.admin.template')
 
 	@section('scripts')
+	<script src="https://code.jquery.com/jquery-1.12.3.js"></script>	
 	<link type="text/css" rel="stylesheet" href="/css/global.css" />
 	<link type="text/css" rel="stylesheet" href="/css/formularios.css" />
 	<meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   	
 	<script>
 	function confirmDelete(e) {
@@ -24,10 +23,49 @@
 	<br>
 	<br>
 	<div class="container">
+				<!-- MENSAGEM DE SUCESSO -->
+				<div class="flash-message">
+				    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+				      @if(Session::has('alert-' . $msg))
+
+				      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+				      @endif
+				    @endforeach
+				 </div>	
+
+			<!-- FIM DA MENSAGEM DE SUCESSO -->
 	<h2 style="text-align: center;">Lista de professores</h2>
-		<table class="table table-striped">
+	<form action="/professor/novo">
+		<button class="btn btn-primary" style="float: right;">
+			<img src="/images/novo.png"><i>Novo Professor</i>
+		</button>
+	</form>
+	<br>
+	<br>
+	<table id="professores" class="table table-striped" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Matricula</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Editar</th>
+                <th>Remover</th>
+                <th>Detalhes</th>
+	            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Matricula</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Editar</th>
+                <th>Remover</th>
+                <th>Detalhes</th>
+            </tr>
+        </tfoot>
+        <tbody>
 			@foreach($professores as $professor)
-				<tr>
+	            <tr>
 					<td>{{$professor->matricula}}</td>
 					<td>{{$professor->nome}}</td>
 					<td>{{$professor->email}}</td>
@@ -57,6 +95,26 @@
 							</button>
 						</form>
 					</td>
-				</tr>
-			@endforeach
+	            </tr>
+        	@endforeach
+        </tbody>
+    </table>
+
+    	<script src="/js/jquery.datatables.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="/css/dataTables.bootstrap.min.css" />
+	<script type="text/javascript">
+	$(document).ready(function() {
+    $('#professores').DataTable( {
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "Nenhuma informação encontrada :(",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "Não encontramos nada :(",
+            "infoFiltered": "(total de  _MAX_ registros)",
+            "search": "Pesquisar"
+        }
+    } );	
+} );	
+	
+	</script>
 		@stop

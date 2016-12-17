@@ -82,10 +82,9 @@ class Professor extends User
         return $notas;
     }
 
-    public static function meusAlunos()
+   public static function meusAlunos()
     {
         $professor_id = Auth::user()->id;
-
         $sql = DB::table('alunos')
                         ->join('aluno_disciplina', 'alunos.id', '=', 'aluno_disciplina.aluno_id')
                         ->join('disciplinas', 'aluno_disciplina.disciplina_id', '=', 'disciplinas.id')
@@ -96,7 +95,6 @@ class Professor extends User
                         ->where('professores.id', '=', $professor_id)
                         ->select(DB::raw(count('alunos.id as qtd_alunos')), 'turmas.nome as turma_nome as turma_nome', 'disciplinas.nome as disciplina_nome', 'professores.nome as professor_nome', 'alunos.nome as aluno_nome', 'alunos.id as qtd_alunos')
                         ->first();
-
         return $sql;
     }
 }

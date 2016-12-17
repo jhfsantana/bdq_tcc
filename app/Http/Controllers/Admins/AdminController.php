@@ -10,6 +10,7 @@ use App\Models\Admin;
 use App\Models\Professor;
 use App\Models\Disciplina;
 use App\Models\Aluno;
+use App\Models\Questao;
 use Charts;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\AdminRequest;
@@ -53,28 +54,49 @@ class AdminController extends Controller
     	$admin = new Admin;
     	$admin->name = $request->name;
         $admin->sobrenome = $request->sobrenome;
+        $admin->cpf = Util::somenteNumeros($request->cpf);
     	$admin->email = $request->email;
 
     	$cryptPassword = bcrypt($request->password);
     	$admin->password = $cryptPassword;
 
-    	$admin ->save();
+    	if($admin ->save())
+        {
+            $request->session()->flash('alert-success', 'Administrador salvo com sucesso!');
+            return redirect('/home');
+        }
 
-    	return redirect('/home');
     }
 
-    public function relatorio($id)
+    public function relatorio()  
     {   
         $disciplinas = Disciplina::all();
         $data = '2016-10-30';
-        $resultado = Professor::professorComMaiorNumeroDeQuestoes();
+        $professores = Professor::professorComMaiorNumeroDeQuestoes();
+
+        return view('admin.relatorio_qtd_prof_questao')
+                    ->with('disciplinas', $disciplinas)
+                    ->with('professores_top_questao', $professores);
+    }
+
+    public function relatorioNotas($id)  
+    {   
+        $disciplinas = Disciplina::all();
+        $data = '2016-10-30';
         $notas = Professor::notas($data, $id);
 
-        return view('admin.relatorios')
-                    ->with('professores_top_questao', $resultado)
+        return view('admin.relatorio_nota_disciplina')
                     ->with('notas', $notas)
                     ->with('disciplinas', $disciplinas);
     }
     
+    public function relatorioQuestao($limite)  
+    {   
+        $qtdQuestao = Questao::topQuestoes($limite);
+
+
+        return view('admin.relatorio_qtd_questao_av')
+                    ->with('qtdQuestao', $qtdQuestao);
+    }    
 
 }
