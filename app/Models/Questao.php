@@ -51,4 +51,15 @@ class Questao extends Model
        
         return $resultado;
     }
+
+    public static function pegarPontos($questao_id, $avaliacao_id)
+    {
+        $resultado = DB::table('pontos')
+        ->join('ponto_questao', 'pontos.id', '=', 'ponto_questao.ponto_id')
+        ->where('ponto_questao.questao_id', '=', $questao_id)
+        ->where('pontos.avaliacao_id', '=', $avaliacao_id)
+        ->get();
+
+        return $resultado;
+    }
 }

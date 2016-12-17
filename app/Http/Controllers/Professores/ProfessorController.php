@@ -20,6 +20,8 @@ use App\Http\Requests\Professor\ProfessorRequest;
 
 use DateTime;
 
+use App\Models\Util;
+
 class ProfessorController extends Controller
 {
     /**
@@ -73,7 +75,7 @@ class ProfessorController extends Controller
         $professor->matricula = $request->matricula;
         $professor->nome = $request->nome;
         $professor->sobrenome = $request->sobrenome;
-        $professor->cpf = $request->cpf;
+        $professor->cpf = Util::somenteNumeros($request->cpf);
         $professor->email = $request->email;
         
         $cryptPassword = bcrypt($request->password);

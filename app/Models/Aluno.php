@@ -36,7 +36,6 @@ class Aluno extends User
 
     public static function ultimaNota()
     {
-        $aluno = Auth::user();
         /*$notas = DB::table('aluno_resultado')
             ->join('avaliacoes', 'aluno_resultado.avaliacao_id', '=', 'avaliacoes.id')
             ->join('aluno_resultado', 'avaliacoes.id', '=', 'aluno_resultado.avaliacao_id')
@@ -45,13 +44,19 @@ class Aluno extends User
             ->select('aluno_resultado.nota', 'disciplinas.nome')
             ->orderBy('aluno_resultado.nota', 'desc')
             ->get();*/
-        $sql = "select ar.nota
+/*        $sql = "select ar.nota
                         ,d.nome
                         from aluno_resultado ar
                         join avaliacoes a on (a.id = ar.avaliacao_id)
                         join disciplinas d on (d.id = a.disciplina_id)
-                       order by ar.nota desc";
-        $nota = DB::select($sql);
+                       order by ar.created_at desc";
+        $nota = DB::select($sql)->first();*/
+
+        $nota = DB::table('aluno_resultado')
+        ->join('avaliacoes', 'aluno_resultado.avaliacao_id', '=', 'avaliacoes.id')
+        ->join('disciplinas', 'avaliacoes.disciplina_id', '=', 'disciplinas.id')
+        ->orderBy('aluno_resultado.created_at', 'desc')
+        ->first();
         return $nota;
     }
 }

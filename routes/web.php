@@ -81,6 +81,8 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 	Route::post('professor/questao/alterar/{id}', 'Questoes\QuestaoController@edit');
 	
 	Route::post('professor/questao/alterada', 'Questoes\QuestaoController@update');
+	
+	Route::post('/avaliacao/status', 'Avaliacoes\AvaliacaoController@status');
 
 	Route::get('professor/logout', 'Professores\AuthController@logout');
 

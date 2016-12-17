@@ -54,7 +54,7 @@ class AdminController extends Controller
     	$admin = new Admin;
     	$admin->name = $request->name;
         $admin->sobrenome = $request->sobrenome;
-        $admin->cpf = $request->cpf;
+        $admin->cpf = Util::somenteNumeros($request->cpf);
     	$admin->email = $request->email;
 
     	$cryptPassword = bcrypt($request->password);

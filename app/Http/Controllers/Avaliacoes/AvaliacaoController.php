@@ -73,25 +73,24 @@ class AvaliacaoController extends Controller
 
     	$questao = DB::table('questoes')
                                         ->where('disciplina_id', '=', $disciplina_id)
-                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
                                         ->where('nivel', '=', $nivel_id)
-                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->orwhere('disciplina_id', '=', $disciplina_id)
                                         ->Where('nivel', '=', $nivelq2_id)
-                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->orwhere('disciplina_id', '=', $disciplina_id)
                                         ->Where('nivel', '=', $nivelq3_id)
-                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->orwhere('disciplina_id', '=', $disciplina_id)
                                         ->Where('nivel', '=', $nivelq4_id)
-                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->orwhere('disciplina_id', '=', $disciplina_id)
                                         ->Where('nivel', '=', $nivelq5_id)
-                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->orwhere('disciplina_id', '=', $disciplina_id)
                                         ->Where('nivel', '=', $nivelq6_id)
-                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->orwhere('disciplina_id', '=', $disciplina_id)
                                         ->Where('nivel', '=', $nivelq7_id)
-                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)                                        
+                                        ->orwhere('disciplina_id', '=', $disciplina_id)
                                         ->Where('nivel', '=', $nivelq8_id)
-                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->orwhere('disciplina_id', '=', $disciplina_id)
                                         ->Where('nivel', '=', $nivelq9_id)
-                                        ->orwhere('disciplina_nome', '=', $disciplina_nome)
+                                        ->orwhere('disciplina_id', '=', $disciplina_id)
                                         ->Where('nivel', '=', $nivelq10_id)
 								    	->InRandomOrder()
 								    	->first();
@@ -114,6 +113,16 @@ class AvaliacaoController extends Controller
         $avaliacao->professor()->associate($request->professor_id);
         $avaliacao->disciplina()->associate($request->disciplina);
         $avaliacao->turma()->associate($request->turma);
+        $resultado = Avaliacao::checarSeAvaliacaoExiste($request->professor_id, $request->turma, $request->disciplina, 'disponivel', 'pendente');
+        
+        foreach($resultado as $resultado)
+        {
+            if(count($resultado) > 0 && $resultado->status == 'pendente' || $resultado->status == 'disponivel' )
+            {
+                $request->session()->flash('alert-danger', 'Já existe uma Avaliação criada para esta turma!');
+                return redirect('professor');
+            }
+        }
         if($avaliacao->save())
         {
             $zero[] = 0;
@@ -319,12 +328,6 @@ class AvaliacaoController extends Controller
             return redirect ('professor');
         }
 
-        
-
-
-
-        
-
     }
 
 /*    public function receberQuestao(Request $request)
@@ -352,6 +355,19 @@ class AvaliacaoController extends Controller
     {
         $aluno = Aluno::find($id);
         return view('alunos.realizadas')->withAluno($aluno);
+    }
+
+    public function status(Request $request)
+    {
+        $avaliacao = Avaliacao::find($request->id);
+
+        $avaliacao->status = $request->status;
+        
+        if($avaliacao->save())
+        {
+            $request->session()->flash('alert-success', 'Status alterado com sucesso!');
+            return redirect('/professor');
+        }
     }
 
 }
