@@ -122,7 +122,7 @@
 	@elseif($avaliacao->status == 'pendente')
 		<div class="container">
 			<div class="alert alert-warning" style="text-align: center;">
-				<h1>Avaliação pendente, converse com o Professor responsável</h1>
+				<h1>Avaliação pendente!</h1>
 				<input class="btn btn-primary" type="hidden" name="finalizar" value="Finalizar">
 			</div>
 		</div>
