@@ -21,32 +21,47 @@
 <br>
 <br>
 <div class="container" id="conteudo">
-<h2 style="text-align: center;">Avaliação</h2>
-
-
-<table class="table">
-	<tr>
-		<td>Nome: {{Auth::user()->nome}}</td>
-	</tr>
-</table>
+<h2 style="text-align: center;">Avaliação Online</h2>
+<br>
+<br>
+<br>
+	<div style="border-style: ridge; border-width: 3px;">
+		<table class="table table-striped">
+			<tr>
+			<td>Aluno: {{Auth::user()->matricula}} - {{Auth::user()->nome}}</td>
+				@foreach($avaliacao as $av)
+					<tr>
+						<td>Professor:{{$av->professor->nome}}</td>
+					</tr>
+					<tr>
+						<td>Disciplina:{{$av->disciplina->nome}}</td>
+					</tr>
+					<tr>
+						<td>Data de criação:{{date_format($av->created_at, 'd-m-Y h:m:s')}}</td>	
+					</tr>
+				@endforeach
+			</tr>
+		</table>
+	</div>
 @foreach($avaliacao as $avaliacao)
 	<?php $count=0; ?> 
-
 	@if(!isset($avaliacao->resultado) || $avaliacao->status == 'disponivel')
 		<form action="/aluno/avaliacao/finalizada" method="post" form="avaliacao">
-			<table class="table">
+			<div style="border-style: dashed; border-width: 1px;padding: 15px">
+			<table>
 				@foreach($avaliacao->questoes as $questao)
-				<table>
+					@foreach($questao->pontos as $pontos)
+					@endforeach
 					<tr>
 						<td>
-							<div>
+							<div style="width: auto;">
 								<label>
-									<h3>{{++$count}}) {{$questao->questao}}</h3>
+									<h4>{{++$count}}) {{$questao->questao}} - Cod:{{$questao->id}} <span style="font-size: 0.9em;">(<strong><span style="color: #A2A389; text-align: right;">Pontos: </span>{{$pontos->valor}}</strong>)</span></h4>
 								</label>
 							</div>
 						</td>
 					</tr>
-
+					
 					<tr>
 						<td>
 							<div class="radio">
@@ -98,12 +113,12 @@
 							</div>
 						</td>
 					</tr>
+				@endforeach	
+				</div>	
 				</table>
-				@endforeach
 	@endif
-
-@endforeach
-</div>	
+</div>
+@endforeach	
 	@if(!count($avaliacao))
 		<div class="container">
 			<div class="alert alert-warning" style="text-align: center;">
@@ -134,7 +149,7 @@
 			</div>
 		</div>
 	@else
-		<input class="btn btn-primary" type="submit" name="finalizar">
+		<input class="btn btn-primary" type="submit" name="finalizar" value="Finalizar" style="margin-top: 20px;">
 		<input type="hidden" name="avaliacao_id" value="{{$avaliacao->id}}">
 		<input type="hidden" name="aluno_id" value="{{Auth::user()->id}}">
 		<input type="hidden" name="qtd_questao" value="{{$avaliacao->qtd}}">
