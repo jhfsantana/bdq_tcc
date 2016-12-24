@@ -50,7 +50,35 @@ class Professor extends User
 
     public static function professorComMaiorNumeroDeQuestoes()
     {
-        $query = "SELECT p.matricula
+        /*$query = "SELECT p.matricula
+                        ,p.nome
+                        ,p.email
+                        ,d.nome as disciplina_nome
+                        ,count(q.questao) as total_questoes
+                    FROM professores p
+                    JOIN questoes q on (q.professor_id = p.id)
+                    JOIN disciplinas d on (d.id = q.disciplina_id)
+                   GROUP BY p.matricula, p.nome, p.email, d.nome
+                   ORDER BY p.nome";*/
+/*
+       $query = DB::table('professores')
+            ->join('questoes', 'professores.id', '=', 'questoes.professor_id')
+            ->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
+            ->select(DB::raw('COUNT(questoes.id) as total_questoes'), 'professores.nome')            
+            ->groupBy('professores.nome')
+            ->orderBy('professores.nome')
+            ->get();*/
+
+        $query = self::join('questoes', 'questoes.professor_id', '=', 'professores.id')
+            ->groupBy('professores.nome', 'questoes.created_at')
+            ->get(['professores.nome', 'questoes.created_at', DB::raw('count(questoes.id) as total_questoes')]);
+
+        return $query;
+    }
+
+    public static function professorTopQuestoes()
+    {
+         $query = "SELECT p.matricula
                         ,p.nome
                         ,p.email
                         ,d.nome as disciplina_nome
@@ -60,11 +88,12 @@ class Professor extends User
                     JOIN disciplinas d on (d.id = q.disciplina_id)
                    GROUP BY p.matricula, p.nome, p.email, d.nome
                    ORDER BY p.nome";
-
-        $resultado = DB::SELECT($query);
-
+                   
+        $resultado = DB::select($query);
         return $resultado;
     }
+
+
 
     public static function notas($data, $disciplina)
     {  

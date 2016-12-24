@@ -40,10 +40,10 @@
 				@foreach($aluno->disciplinas as $disciplinas)
 					<tr>
 					@foreach ($disciplinas->turmas as $turma)
-					<td>
 						@foreach($disciplinas->avaliacao as $avaliacao)
 							<tr> 
 								<td>{{$disciplinas->nome}}</td>
+								<td>{{$turma->nome}}</td>
 								@if($avaliacao->resultado || $avaliacao->status == 'finalizada')
 									<td style="text-align: center;">
 									<form id="formAvaliacaoDisponivel" method="post" action="/aluno/avaliacao/online">
@@ -84,7 +84,6 @@
 								@endif
 							</tr>		
 						@endforeach
-					</td>
 					@endforeach
 				@endforeach
 				</td>

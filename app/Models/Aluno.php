@@ -30,9 +30,16 @@ class Aluno extends User
 
     public static function totalAlunos()
     {
-    	$alunos = Aluno::all()->count();
-    	return $alunos;
+        $alunos = Aluno::all()->count();
+        return $alunos;
     }
+    
+    public  function alternativas()
+    {
+        return $this->belongsToMany('App\Models\Alternativa', 'aluno_alternativa','aluno_id','alternativa_id');
+    }
+
+
 
     public static function ultimaNota()
     {

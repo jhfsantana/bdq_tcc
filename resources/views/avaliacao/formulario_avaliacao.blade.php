@@ -8,7 +8,6 @@
   <script src="/js/qtd_questao.js"></script>
   <script src="/js/buscar_questoes.js"></script>
     <script src="/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="/css/global.css">
 	<title>Formulario para gerar avaliação</title>
 @stop
 

@@ -47,7 +47,10 @@ class Avaliacao extends Model
     {
         return $this->hasMany('App\Models\Ponto');
     }
-
+    public function alternativas()
+    {
+        return $this->hasMany('App\Models\Alternativa');
+    }
     public static function checarSeAvaliacaoExiste($professor_id, $turma_id, $disciplina_id, $statusDisponivel, $statusPendente)
     {
         $sql = "SELECT * 
@@ -59,6 +62,20 @@ class Avaliacao extends Model
         $results = DB::select('select * from avaliacoes where professor_id = ? and turma_id = ? and disciplina_id = ? and status in (?, ?)', array($professor_id, $turma_id, $disciplina_id, $statusDisponivel, $statusPendente));
 
         return $results;
+    }
+
+    public static function checarStatusAvaliacao()
+    {
+        $sql = DB::table('avaliacoes')->where('status', '=', 'disponivel');
+
+        if($sql)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

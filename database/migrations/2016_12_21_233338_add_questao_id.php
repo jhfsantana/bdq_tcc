@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSobrenomeAdmins extends Migration
+class AddQuestaoId extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddSobrenomeAdmins extends Migration
      */
     public function up()
     {
-        Schema::table('admins', function (Blueprint $table) {
-            $table->string('sobrenome');
+        Schema::table('aluno_alternativa', function (Blueprint $table) {
+            $table->integer('questao_id')->unsigned()->after('avaliacao_id');
+
+            $table->foreign('questao_id')->references('id')->on('questoes')
+            ->onUpdate('cascade');
         });
     }
 
@@ -25,8 +28,6 @@ class AddSobrenomeAdmins extends Migration
      */
     public function down()
     {
-        Schema::table('admins', function (Blueprint $table) {
-            $table->dropColumn('sobrenome');
-        });
+        Schema::dropIfExists('aluno_alternativa');
     }
 }

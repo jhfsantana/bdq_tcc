@@ -1,5 +1,5 @@
 
-    @extends('templates.admin.template')
+    @extends('templates.professor.template')
 	@section('head')
     <link rel="stylesheet" href="/css/global.css">
 	<link rel="stylesheet" href="/css/formularios.css">
@@ -19,7 +19,7 @@
                     <div style="padding-top:10px" class="panel-body" >
 
                             
-                        <form id="questaoform" class="form-horizontal" role="form" method="post" action="/admin/questao/alterada">
+                        <form id="questaoform" class="form-horizontal" role="form" method="post" action="/professor/questao/alterada">
 							
 							<input name="_token" type="hidden" value="{{ csrf_token() }}">
                             <input name="professor_id" type="hidden" value="{{Auth::user()->id }}"> 

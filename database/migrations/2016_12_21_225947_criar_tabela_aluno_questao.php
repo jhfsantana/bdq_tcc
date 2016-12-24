@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CriarOrdem extends Migration
+class CriarTabelaAlunoQuestao extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,16 @@ class CriarOrdem extends Migration
      */
     public function up()
     {
-        Schema::create('ordem_questao;', function (Blueprint $table) {
+        Schema::create('aluno_questao', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('num_questao');
+            $table->integer('aluno_id')->unsigned();
+            $table->integer('avaliacao_id')->unsigned();
+            $table->string('alternativa_marcada');
+            $table->timestamps();
 
-            $table->integer('avaliacao_id')->unsigned();        
+            $table->foreign('aluno_id')->references('id')->on('alunos')
+            ->onUpdate('cascade');            
+
             $table->foreign('avaliacao_id')->references('id')->on('avaliacoes')
             ->onUpdate('cascade');
         });
@@ -30,6 +35,6 @@ class CriarOrdem extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ordem_questao;');
+        Schema::dropIfExists('aluno_questao');
     }
 }

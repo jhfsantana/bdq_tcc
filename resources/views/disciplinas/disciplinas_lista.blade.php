@@ -58,7 +58,18 @@
             "info": "Mostrando página _PAGE_ de _PAGES_",
             "infoEmpty": "Não encontramos nada :(",
             "infoFiltered": "(total de  _MAX_ registros)",
-            "search": "Pesquisar"
+            "search": "Pesquisar",
+            "next": "Proxíma",
+            "oPaginate":{
+					        "sNext": "Próximo",
+					        "sPrevious": "Anterior",
+					        "sFirst": "Primeiro",
+					        "sLast": "Último"
+	    				},
+	  	    "oAria": {
+	        "sSortAscending": ": Ordenar colunas de forma ascendente",
+	        "sSortDescending": ": Ordenar colunas de forma descendente"
+	    			}
         }
     } );	
 } );	

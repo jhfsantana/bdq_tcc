@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Play');
-@import url('https://fonts.googleapis.com/css?family=Source Serif Pro');
 
-
+a {
+    color: inherit;
+}
 
 * {
 	margin: 0;
@@ -10,7 +11,7 @@
 }
 
 body {
-	font-family: 'Source Serif Pro';
+	font-family: 'Play';
 	overflow: auto;
 }
 
@@ -252,14 +253,16 @@ div#box {
 	width: 31%;
 	height: 100px;
 	color: #fff;
-	text-shadow: 0 1px #000;
-	background: #2980b9;
+	background: #FFFFFF;
 	margin-top: 25px;
 	font-weight: 300;
 	overflow: hidden;
 	border-radius: 10px;
 	overflow: hidden;
+	float: left;
 	text-align: center;
+	border-style: solid;
+	border-color: #2980b9;
 } 
 
 .box-top img{
@@ -274,7 +277,7 @@ div#box {
 .box-top a{
 	float: right;
 	margin-right: 15px;
-	color: #ffffff;
+	color: #2980b9;
 	margin-top: 0;
 	display: block;
 	padding: 10px;
@@ -285,6 +288,8 @@ div#box {
 	font-size: 2.3em;
 	float: right;
 	margin-bottom: 15px;
+	margin-right: 15px;
+	color: #2980b9;
 } 
 
 
@@ -306,12 +311,15 @@ div#box {
 	width: 31%;
 	height: 100px;
 	margin-top: 25px;
+	margin-left: 15px;
 	color: #fff;
-	text-shadow: 0 1px #000;
-	background: #f39c12;
+	background: #FFFFFF;
 	font-weight: 300;
 	overflow: hidden;
+	float: left;
 	border-radius: 10px;
+	border-style: solid;
+	border-color: #f39c12;
 	text-align: center;
 }
 
@@ -327,7 +335,7 @@ div#box {
 .box2-top a{
 	float: right;
 	margin-right: 15px;
-	color: #ffffff;
+	color: #f39c12;
 	margin-top: 0;
 	display: block;
 	padding: 10px;
@@ -338,18 +346,23 @@ div#box {
 	font-size: 2.3em;
 	float: right;
 	margin-bottom: 20px;
+	color: #f39c12;
+	margin-right: 15px;
 } 
 
 .box3-top {
 	width: 31%;
 	height: 100px;
 	margin-top: 25px;
+	margin-left: 15px;
 	color: #fff;
-	text-shadow: 0 1px #000;
-	background: #27ae60;
+	background: #FFFFFF;
 	font-weight: 300;
 	overflow: hidden;
+	float: left;
 	border-radius: 10px;
+	border-style: solid;
+	border-color: #27ae60;
 	text-align: center;
 }
 
@@ -372,7 +385,7 @@ div#box {
 .box3-top a{
 	float: right;
 	margin-right: 15px;
-	color: #ffffff;
+	color: #27ae60;
 	margin-top: 0;
 	display: block;
 	padding: 10px;
@@ -461,7 +474,6 @@ a.mobile:active{
 	height: 130px;
 	float: left;
 	color: #fff;
-	text-shadow: 0 1px #000;
 	background: #2980b9;
 	padding: 5px;
 	padding-left: 15px;

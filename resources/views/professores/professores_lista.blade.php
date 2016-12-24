@@ -1,7 +1,8 @@
 @extends('templates.admin.template')
 
 	@section('scripts')
-	<script src="https://code.jquery.com/jquery-1.12.3.js"></script>	
+	<script src="https://code.jquery.com/jquery-1.12.3.js"></script>
+	<link type="text/css" rel="stylesheet" href="/css/dataTables.bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="/css/global.css" />
 	<link type="text/css" rel="stylesheet" href="/css/formularios.css" />
 	<meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
@@ -42,7 +43,7 @@
 	</form>
 	<br>
 	<br>
-	<table id="professores" class="table table-striped" cellspacing="0" width="100%">
+	<table id="professores" class="table table-striped">
         <thead>
             <tr>
                 <th>Matricula</th>
@@ -101,7 +102,6 @@
     </table>
 
     	<script src="/js/jquery.datatables.min.js"></script>
-	<link type="text/css" rel="stylesheet" href="/css/dataTables.bootstrap.min.css" />
 	<script type="text/javascript">
 	$(document).ready(function() {
     $('#professores').DataTable( {

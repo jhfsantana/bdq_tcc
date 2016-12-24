@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddIdQuestaoOrdem extends Migration
+class Cria2rTabelaAlunoQuestao extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class AddIdQuestaoOrdem extends Migration
      */
     public function up()
     {
-        Schema::table('ordem_questao;', function (Blueprint $table) {
-            $table->integer('questao_id')->unsigned();        
+        Schema::create('aluno_questao', function (Blueprint $table) {
+            $table->integer('aluno_id')->unsigned();
+            $table->integer('questao_id')->unsigned();
+
+            $table->foreign('aluno_id')->references('id')->on('alunos')
+            ->onUpdate('cascade');            
+
             $table->foreign('questao_id')->references('id')->on('questoes')
             ->onUpdate('cascade');
         });
@@ -27,8 +32,6 @@ class AddIdQuestaoOrdem extends Migration
      */
     public function down()
     {
-        Schema::table('ordem_questao;', function (Blueprint $table) {
-            $table->dropColumn('questao_id');
-        });
+        Schema::dropIfExists('aluno_questao');
     }
 }

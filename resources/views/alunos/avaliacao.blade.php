@@ -28,16 +28,16 @@
 	<div style="border-style: ridge; border-width: 3px;">
 		<table class="table table-striped">
 			<tr>
-			<td>Aluno: {{Auth::user()->matricula}} - {{Auth::user()->nome}}</td>
+			<td><span style="color: #A2A389;"><strong>Aluno:</strong></span><strong>{{Auth::user()->matricula}} - {{Auth::user()->nome}}</strong></td>
 				@foreach($avaliacao as $av)
 					<tr>
-						<td>Professor:{{$av->professor->nome}}</td>
+						<td><span style="color: #A2A389;"><strong>Professor:</strong></span><strong>{{$av->professor->nome}}</strong></td>
 					</tr>
 					<tr>
-						<td>Disciplina:{{$av->disciplina->nome}}</td>
+						<td><span style="color: #A2A389;"><strong>Disciplina:</strong></span><strong>{{$av->disciplina->nome}}</strong></td>
 					</tr>
 					<tr>
-						<td>Data de criação:{{date_format($av->created_at, 'd-m-Y h:m:s')}}</td>	
+						<td><span style="color: #A2A389;"><strong>Data de criação:</strong></span><strong>{{date_format($av->created_at, 'd-m-Y h:m:s')}}</strong></td>	
 					</tr>
 				@endforeach
 			</tr>
@@ -56,7 +56,7 @@
 						<td>
 							<div style="width: auto;">
 								<label>
-									<h4>{{++$count}}) {{$questao->questao}} - Cod:{{$questao->id}} <span style="font-size: 0.9em;">(<strong><span style="color: #A2A389; text-align: right;">Pontos: </span>{{$pontos->valor}}</strong>)</span></h4>
+									<h4>{{++$count}}) {{$questao->questao}} (Cod:{{$questao->id}}) <span style="font-size: 0.9em;"><strong><span style="color: #A2A389; text-align: right;"><u>Pontos: </span>{{$pontos->valor}}</u></strong></span></h4>
 								</label>
 							</div>
 						</td>
@@ -118,6 +118,7 @@
 				</table>
 	@endif
 </div>
+</div>
 @endforeach	
 	@if(!count($avaliacao))
 		<div class="container">
@@ -149,7 +150,9 @@
 			</div>
 		</div>
 	@else
-		<input class="btn btn-primary" type="submit" name="finalizar" value="Finalizar" style="margin-top: 20px;">
+		<div class="container">
+			<input class="btn btn-primary" type="submit" name="finalizar" value="Finalizar" style="margin-top: 20px;">
+		</div>
 		<input type="hidden" name="avaliacao_id" value="{{$avaliacao->id}}">
 		<input type="hidden" name="aluno_id" value="{{Auth::user()->id}}">
 		<input type="hidden" name="qtd_questao" value="{{$avaliacao->qtd}}">

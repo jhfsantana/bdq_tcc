@@ -37,6 +37,11 @@ class Questao extends Model
         return $this->belongsTo('App\Models\Admin');
     }
 
+    public function alternativas()
+    {
+        return $this->hasMany('App\Models\Alternativa');
+    }
+
     public static function topQuestoes($limite)
     {
         $resultado = DB::table('avaliacoes')

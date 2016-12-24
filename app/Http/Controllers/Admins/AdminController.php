@@ -24,18 +24,15 @@ class AdminController extends Controller
         $professores = Professor::professorComMaiorNumeroDeQuestoes();
         $total = Professor::totalProfessores();
         $alunos = ALuno::totalAlunos();
-        
-        foreach($professores as $profs){
-               
-        $chart = Charts::create('pie', 'highcharts')
-                ->setTitle('Estatísticas')
-                ->setLabels(['nome', $profs->nome])
-                ->setValues([$profs->total_questoes])
-                ->setDimensions(1000,500)
-                ->setResponsive(true); 
+                       
+        $chart = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'bar', 'highcharts')
+            ->setTitle('Quantidade de questões adicionadas ao BDQ')
+            ->setElementLabel("Total de questões")
+            ->setDimensions(1280, 500)
+            ->setResponsive(false)
+            ->groupBy('nome');
 
-        }
-        
+                
 
         return view ('admin.index')->with('professores', $total)
                                    ->with('alunos', $alunos)
@@ -72,7 +69,7 @@ class AdminController extends Controller
     {   
         $disciplinas = Disciplina::all();
         $data = '2016-10-30';
-        $professores = Professor::professorComMaiorNumeroDeQuestoes();
+        $professores = Professor::professorTopQuestoes();
 
         return view('admin.relatorio_qtd_prof_questao')
                     ->with('disciplinas', $disciplinas)

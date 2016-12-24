@@ -19,6 +19,7 @@ use App\Models\Professor;
 use App\Models\Questao;
 use App\Models\Avaliacao;
 use App\Models\Resultado;
+use App\Models\Alternativa;
 
 use Illuminate\Support\Facades\Input;
 
@@ -202,6 +203,57 @@ class AlunoController extends Controller
         $questao10 = Questao::find(Input::get('questao_id10'));
         $avaliacao = Avaliacao::find($request->avaliacao_id);
         $resultado = new Resultado;
+        
+        if(isset($request->q1))
+        {
+            $alternativa = new Alternativa;
+            $alternativa->alternativa_marcada = $request->q1;
+            $alternativa->aluno()->associate($request->aluno_id);
+            $alternativa->avaliacao()->associate($request->avaliacao_id);
+            $alternativa->questao()->associate($request->questao_id1);
+            $alternativa->save();
+        }
+
+        if(isset($request->q2))
+        {
+            $alternativa = new Alternativa;
+            $alternativa->alternativa_marcada = $request->q2;
+            $alternativa->aluno()->associate($request->aluno_id);
+            $alternativa->avaliacao()->associate($request->avaliacao_id);
+            $alternativa->questao()->associate($request->questao_id2);
+            $alternativa->save();
+        }
+
+        if(isset($request->q3))
+        {
+            $alternativa = new Alternativa;
+            $alternativa->alternativa_marcada = $request->q3;
+            $alternativa->aluno()->associate($request->aluno_id);
+            $alternativa->avaliacao()->associate($request->avaliacao_id);
+            $alternativa->questao()->associate($request->questao_id3);
+            $alternativa->save();
+        }
+
+        if(isset($request->q4))
+        {
+            $alternativa = new Alternativa;
+            $alternativa->alternativa_marcada = $request->q4;
+            $alternativa->aluno()->associate($request->aluno_id);
+            $alternativa->avaliacao()->associate($request->avaliacao_id);
+            $alternativa->questao()->associate($request->questao_id4);
+            $alternativa->save();
+        }
+
+        if(isset($request->q5))
+        {
+            $alternativa = new Alternativa;
+            $alternativa->alternativa_marcada = $request->q5;
+            $alternativa->aluno()->associate($request->aluno_id);
+            $alternativa->avaliacao()->associate($request->avaliacao_id);
+            $alternativa->questao()->associate($request->questao_id5);
+            $alternativa->save();
+        }
+
 
 /*        $ponto_questao1 = Questao::with('pontos')->find($request->questao_id1)->where('avaliacao_id', '=', $request->avaliacao_id);
         $ponto_questao2 = Questao::with('pontos')->find($request->questao_id2)->where('avaliacao_id', '=', $request->avaliacao_id);
@@ -223,7 +275,6 @@ class AlunoController extends Controller
        
 
     switch ($request->qtd_questao) {
-       
        case 5:
 
         if(isset($request->q1))

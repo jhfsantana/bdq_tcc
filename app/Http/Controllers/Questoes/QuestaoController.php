@@ -102,22 +102,17 @@ class QuestaoController extends Controller
      */
     public function edit(Request $request)
     {
-
-        $questao_id = $request->id;
-        $questao = Questao::find($questao_id);
-        $professor_id = $request->professor_id;
-
-        $professor = Professor::find($professor_id);
-
-
-        if(Auth::guard('web_admins'))
+        $questao = Questao::find($request->id);
+        $professor = Professor::find($request->professor_id);
+               
+       if(Auth::guard('web_admins')->check())
         {
             $disciplinas = Disciplina::all();
             return view('questoes.questao_alterar')->withQuestao($questao)->with('professor', $professor)->with('disciplinas', $disciplinas);
         }
-        else
+        elseif(Auth::guard('web_teachers')->check())
         {
-            return view('questoes.questao_alterar')->withQuestao($questao)->with('professor', $professor);
+            return view('questoes.professor.questao_alterar')->withQuestao($questao)->with('professor', $professor);
         }
     }
 
@@ -150,16 +145,16 @@ class QuestaoController extends Controller
 
         $alterado->disciplina()->associate($request->disciplina);
 
-        
-        if(Auth::guard('web_admins'))
-        {
+        if(Auth::guard('web_admins')->check())
+        {  
             if($alterado->save())
             {
+
                 $request->session()->flash('alert-success', 'Questão alterada com sucesso!');
                 return redirect ('/home');
             }
         }
-        else
+        elseif(Auth::guard('web_teachers')->check())
         {
             if($alterado->save())
             {
@@ -167,6 +162,28 @@ class QuestaoController extends Controller
                 return redirect ('/professor');
             }
         }
+        /*$usuario = Auth::guard();
+        dd($usuario);
+        switch($usuario)
+        {
+            case 'web_admins':
+                if($alterado->save())
+                {
+                    $request->session()->flash('alert-success', 'Questão alterada com sucesso!');
+                    return redirect ('/home');
+                }
+                break;
+
+            case 'web_teachers':
+                if($alterado->save())
+                {
+                    $request->session()->flash('alert-success', 'Questão alterada com sucesso!');
+                    return redirect ('/professor');
+                }
+                break;
+            default;
+            echo('a');*/
+        
     }
 
     /**

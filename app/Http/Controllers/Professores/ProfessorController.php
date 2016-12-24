@@ -155,4 +155,10 @@ class ProfessorController extends Controller
         return view('professores.auth');
     }
 
+    public function alunos($professor_id)
+    {
+        $disciplina = Disciplina::with('professores')->find($professor_id);
+        return view('professores.alunos')->with('disciplina', $disciplina);
+    }
+
 }

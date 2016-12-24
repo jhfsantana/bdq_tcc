@@ -347,7 +347,8 @@ class AvaliacaoController extends Controller
     public function paginaResultado($id)
     {
         $avaliacao = Avaliacao::find($id);
-        return view('alunos.resultado')->withAvaliacao($avaliacao);
+        $alternativas = \App\Models\Avaliacao::find($id)->alternativas;
+        return view('alunos.resultado')->withAvaliacao($avaliacao)->with('alternativas', $alternativas);
     }
 
 
@@ -360,14 +361,25 @@ class AvaliacaoController extends Controller
     public function status(Request $request)
     {
         $avaliacao = Avaliacao::find($request->id);
+        $av = Avaliacao::all();
 
         $avaliacao->status = $request->status;
         
-        if($avaliacao->save())
+        if(!Avaliacao::checarStatusAvaliacao())
         {
-            $request->session()->flash('alert-success', 'Status alterado com sucesso!');
-            return redirect('/professor');
+            if($avaliacao->save())
+            {
+                $request->session()->flash('alert-success', 'Status alterado com sucesso!');
+                return redirect('/professor');
+            }
         }
+        else
+        {
+            $request->session()->flash('alert-warning', 'Status não pode ser alterado para disponível, já existe uma avaliação disponível!');
+            return redirect('/professor');        
+        }
+
+
     }
 
 }

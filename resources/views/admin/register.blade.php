@@ -1,11 +1,12 @@
 @extends('templates.admin.template')
     @section('scripts')
     <link type="text/css" rel="stylesheet" href="/css/global.css" />
+
     <link type="text/css" rel="stylesheet" href="/css/formularios.css" />
+
     <meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/jquery.maskedinput.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -31,7 +32,7 @@ jQuery(function($){
     <br>
     <H2 style="text-align: center;">Cadastro de Administrador</H2>
     @if(!empty($errors->all()))
-    <div class="alert alert-warning" role="alert-warning">
+    <div class="alert alertp-warning" role="alert-warning">
         @foreach($errors->all() as $error)
             <ul>
                 <li> {{$error}}</li>

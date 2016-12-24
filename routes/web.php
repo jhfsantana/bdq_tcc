@@ -84,6 +84,8 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 	
 	Route::post('/avaliacao/status', 'Avaliacoes\AvaliacaoController@status');
 
+	Route::post('/professor/{professor_id}/alunos', 'Professores\ProfessorController@alunos');
+
 	Route::get('professor/logout', 'Professores\AuthController@logout');
 
 });

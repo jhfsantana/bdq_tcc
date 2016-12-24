@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CriarTabelaPontos extends Migration
+class MudarNomeTabelaAlunoQuestao extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CriarTabelaPontos extends Migration
      */
     public function up()
     {
-        Schema::create('pontos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->float('valor');
+        Schema::table('aluno_alternativa', function (Blueprint $table) {
+            //
         });
     }
 
@@ -26,6 +25,8 @@ class CriarTabelaPontos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pontos');
+        Schema::table('aluno_questao', function (Blueprint $table) {
+            //
+        });
     }
 }
