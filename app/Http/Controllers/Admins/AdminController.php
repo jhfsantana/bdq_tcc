@@ -11,6 +11,7 @@ use App\Models\Professor;
 use App\Models\Disciplina;
 use App\Models\Aluno;
 use App\Models\Questao;
+use App\Models\Util;
 use Charts;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\AdminRequest;
@@ -24,11 +25,12 @@ class AdminController extends Controller
         $professores = Professor::professorComMaiorNumeroDeQuestoes();
         $total = Professor::totalProfessores();
         $alunos = ALuno::totalAlunos();
+        $diames = Util::pegarDiaSemana();
                        
         $chart = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'bar', 'highcharts')
             ->setTitle('Quantidade de questões adicionadas ao BDQ')
             ->setElementLabel("Total de questões")
-            ->setDimensions(1280, 500)
+            ->setDimensions(1000, 300)
             ->setResponsive(false)
             ->groupBy('nome');
 
@@ -37,7 +39,8 @@ class AdminController extends Controller
         return view ('admin.index')->with('professores', $total)
                                    ->with('alunos', $alunos)
                                    ->with('chart', $chart)
-                                   ->with('top', $professores);
+                                   ->with('top', $professores)
+                                   ->with('diames', $diames);
     }
 
 
