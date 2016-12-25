@@ -26,17 +26,18 @@
 	<div id="container">
 		<div class="sidebar">
 			<ul id="nav"> 
-			    <li><a href="/home">Inicio</a></li>
-			    <li><a href="/administrador/novo">Cadastro de administradores</a></li>
-			    <li><a href="#">Lista de administradores</a></li>
-			    <li><a href="/professores">Lista de Professores</a>
+			    <li><a href="/home"><img src="/images/home.png"> Inicio</a></li>
+			    <li><a href="/administrador/novo"><img src="/images/admin-nav.png"> Administradores</a></li>
+			    <li><a href="/professores"><img src="/images/teacher-nav.png"> Professores</a>
 			      <ul> 
-			        <li><a href="/alunos">Alunos</a></li> 
-			        <li><a href="/disciplinas">Disciplinas</a></li>  
-			        <li><a href="/turma/novo">Turmas</a></li> 
+			        <li><a href="/alunos"><img src="/images/student.png"> Alunos</a></li> 
+			        <li><a href="/disciplinas"><img src="/images/books-subjects.png"> Disciplinas</a></li>  
+			        <li><a href="/turma/novo"><img src="/images/classroom-nav.png"> Turmas</a></li> 
+			        <li><a href="/admin/questoes"><img src="/images/test-results.png"> Questões </a></li>
+
 			      </ul> 
 			    </li>
-			    <li><a href="/administrador/logout">Logout</a></li> 
+			    <li><a href="administrador/logout"><img src="/images/logout.png" style="line-height: -2px;"> Logout</a></li> 
 
 			 </ul>
 		</div>

@@ -60,7 +60,6 @@
 			<ul id="nav"> 
 			    <li><a href="/home"><img src="/images/home.png"> Inicio</a></li>
 			    <li><a href="/administrador/novo"><img src="/images/admin-nav.png"> Administradores</a></li>
-			    <li><a href="#">Lista de administradores</a></li>
 			    <li><a href="/professores"><img src="/images/teacher-nav.png"> Professores</a>
 			      <ul> 
 			        <li><a href="/alunos"><img src="/images/student.png"> Alunos</a></li> 

@@ -165,9 +165,9 @@ class AlunoController extends Controller
 
     public function bemvindo()
     {
-    /*        $usuario = Auth::users();
-*/      $aluno = Aluno::ultimaNota();
-        return view('alunos.index')->with('aluno', $aluno);
+        $usuario = Aluno::find(Auth::user()->id);
+        $aluno = Aluno::ultimaNota();
+        return view('alunos.index')->with('aluno', $aluno)->withAluno($usuario);
     }
 
     public function avaliacao(Request $request)
