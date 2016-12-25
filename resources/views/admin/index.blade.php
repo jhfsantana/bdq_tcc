@@ -53,6 +53,11 @@
 		<div class="logo">
 			<a href="#">BDQ - Avaliação<span>Online</span></a>
 		</div>
+
+		<div class="headeruser">
+			<h3 style="float: right; color: #E7E7E7; margin: 0px; margin-top: 8px;">{{$diames}}</h3>
+			<img src="/images/data.png" style="float: right; margin-right: 10px; margin-top: 5px">
+		</div>
 	</div>
 	<a href="#" class="mobile">MENU</a>
 	<div id="container">
@@ -77,7 +82,6 @@
 		<div class="content">
 		<br>
 		<br>
-		<br>
 			<!-- MENSAGEM DE SUCESSO -->
 		<div class="flash-message">
 		    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -90,7 +94,6 @@
 
 	<!-- FIM DA MENSAGEM DE SUCESSO -->
 		<h1>Olá, {{Auth::guard('web_admins')->user()->name }}</h1>
-		<br>
 
 		<h2>Painel de Informações</h2>
 			<p>resumo das informações</p>
@@ -113,8 +116,8 @@
 				</div>
 				
 				<div class="row">
-				    <div class="col-md-4 col-md-offset-6">
-						<div class="chart_div" id="chart_div" style="margin-top: 50px;">
+				    <div class="col-md-4 col-md-offset-7">
+						<div class="chart_div" id="chart_div" style="margin-top: 24px;">
 							{!! $chart->render() !!}
 						</div>
 					</div>

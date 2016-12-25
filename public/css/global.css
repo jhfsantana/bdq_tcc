@@ -232,10 +232,10 @@ ul#nav li a:hover {
 
 .content {
 	width: auto;
-	height: 100%;
-	background: #ffffff;
+	height: auto;
+	background: #EDEDED;
 	margin-left: 250px;
-	padding: 35px;
+	padding: 25px;
 
 
 }
@@ -282,6 +282,7 @@ div#box {
 	display: block;
 	padding: 10px;
 	font-size: 1.4em;
+	line-height: 101px;
 } 
 
 .box-top .professores {
@@ -289,6 +290,7 @@ div#box {
 	float: right;
 	margin-bottom: 15px;
 	margin-right: 15px;
+	line-height: 75px;
 	color: #2980b9;
 } 
 
@@ -340,6 +342,7 @@ div#box {
 	display: block;
 	padding: 10px;
 	font-size: 1.4em;
+	line-height: 101px;
 } 
 
 .box2-top .estudantes {
@@ -348,6 +351,7 @@ div#box {
 	margin-bottom: 20px;
 	color: #f39c12;
 	margin-right: 15px;
+	line-height: 75px;
 } 
 
 .box3-top {
@@ -376,10 +380,10 @@ div#box {
 } 
 
 .box3-top img#seta{
-	margin-top: 0;
 	background-size: 100%;	
 	float: right;
 	height: auto;
+	margin-top: 40px;
 } 
 
 .box3-top a{
@@ -390,6 +394,7 @@ div#box {
 	display: block;
 	padding: 10px;
 	font-size: 1.4em;
+	line-height: 101px;
 } 
 
 
