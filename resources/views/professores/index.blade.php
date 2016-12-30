@@ -20,38 +20,34 @@
 			<ul id="nav"> 
 			    <li><a href="/professor">Inicio</a></li> 
 			    <li><input type="submit" form="formQuestoes" name="questoes" value="Questões" class="btn btn-link"></li> 
-			    <li><input type="submit" name="avaliacao" value="Avaliações" form="formAvaliacao" class="btn btn-link"></a>
-			      <ul> 
-			        <li><input type="submit" value="Gerar Avaliacao" form="formGerar" class="btn btn-link"></li> 
-			        <li><input type="submit" name="cadastrar-questao" value="Cadastrar Questão" form="formCadastrarQ" class="btn btn-link"></li> 
-			        <li><input type="submit" name="alunos" value="Lista de Alunos" form="formAlunos" class="btn btn-link"></li> 
-			      </ul> 
-			    </li>
+			    <li><input type="submit" name="avaliacao" value="Avaliações" form="formAvaliacao" class="btn btn-link"></li> 
+		        <li><input type="submit" value="Gerar Avaliacao" form="formGerar" class="btn btn-link"></li> 
+		        <li><input type="submit" name="cadastrar-questao" value="Cadastrar Questão" form="formCadastrarQ" class="btn btn-link"></li> 
+		        <li><input type="submit" name="alunos" value="Lista de Alunos" form="formAlunos" class="btn btn-link"></li> 
 			    <li><a href="professor/logout">Logout</a></li> 
-
 			 </ul>
 		</div>
+		
 		<div class="content" >
 		<br>
 		<br>
 		<br>
 		<br>
-		<h1>Olá, Professor(a): {{Auth::guard('web_teachers')->user()->nome }}</h1> <p>
-<p>
+		<h1>Olá, Professor(a): {{Auth::guard('web_teachers')->user()->nome }}</h1>
 		<br>
 			
 			<!-- MENSAGEM DE SUCESSO -->
-				<div class="flash-message">
-				    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-				    	@if(Session::has('alert-' . $msg))
-							<h3><p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p></h3>
-				      @endif
-				    @endforeach
-				 </div>	
+		<div class="flash-message">
+		    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+		    	@if(Session::has('alert-' . $msg))
+					<h3><p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p></h3>
+		      @endif
+		    @endforeach
+		</div>	
 
 			<!-- FIM DA MENSAGEM DE SUCESSO -->
 		<h2>Painel de Informações</h2>
-			<p>resumo das informações</p>
+		<p>resumo das informações</p>
 			<div id="box">
 				<div class="box-top">
 					<img src="images/professor_64px.png">
@@ -69,10 +65,7 @@
 					<img src="images/estatistica_64.png">
 					<a href="#">Estatisticas</a>
 				</div>
-				
 			</div>
-
-
 		</div>
 	</div>
 

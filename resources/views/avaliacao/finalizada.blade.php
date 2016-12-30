@@ -3,7 +3,6 @@
 	<link rel="stylesheet" href="/css/global.css">	
 	<link rel="stylesheet" href="/css/formularios.css">	
 	<title>Lista de avaliacoes</title>
-	@stop
 
 	@section('content')
 	<br>
@@ -26,31 +25,32 @@
 
 		<table class="table">
 			@foreach($avaliacao->questoes as $questao)
-			<table>
-				<tr>
-					<td><h3>{{++$count}}) {{$questao->questao}}</h3></td>
-				</tr>
+				<table>
+					<tr>
+						<td><h3>{{++$count}}) {{$questao->questao}}</h3></td>
+					</tr>
 
-				<tr>
-					<td>a) {{$questao->alternativaA}}</td>
-				</tr>
+					<tr>
+						<td>a) {{$questao->alternativaA}}</td>
+					</tr>
 
-				<tr>
-					<td>b) {{$questao->alternativaB}}</td>
-				</tr>
+					<tr>
+						<td>b) {{$questao->alternativaB}}</td>
+					</tr>
 
-				<tr>
-					<td>c) {{$questao->alternativaC}}</td>
-				</tr>
+					<tr>
+						<td>c) {{$questao->alternativaC}}</td>
+					</tr>
 
-				<tr>
-					<td>d) {{$questao->alternativaD}}</td>
-				</tr>
+					<tr>
+						<td>d) {{$questao->alternativaD}}</td>
+					</tr>
 
-				<tr>
-					<td>e) {{$questao->alternativaE}}</td>
-				</tr>
-			</table>
+					<tr>
+						<td>e) {{$questao->alternativaE}}</td>
+					</tr>
+				</table>
 			@endforeach
 		</table>
-	@stop
+	@endsection
+		</div>

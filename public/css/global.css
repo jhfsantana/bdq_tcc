@@ -232,10 +232,11 @@ ul#nav li a:hover {
 
 .content {
 	width: auto;
-	height: auto;
+	height: 100%;
 	background: #EDEDED;
 	margin-left: 250px;
 	padding: 25px;
+	overflow: auto;
 
 
 }

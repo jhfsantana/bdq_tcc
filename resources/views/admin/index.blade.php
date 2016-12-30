@@ -115,7 +115,7 @@
 				</div>
 				
 				<div class="row">
-				    <div class="col-md-4 col-md-offset-7">
+				    <div class="col-md-6 col-md-offset-3">
 						<div class="chart_div" id="chart_div" style="margin-top: 24px;">
 							{!! $chart->render() !!}
 						</div>
