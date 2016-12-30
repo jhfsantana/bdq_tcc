@@ -251,10 +251,10 @@ div#box {
 }
 
 .box-top {
-	width: 31%;
+	width: 25%;
 	height: 100px;
 	color: #fff;
-	background: #FFFFFF;
+	background: #2980b9;
 	margin-top: 25px;
 	font-weight: 300;
 	overflow: hidden;
@@ -278,7 +278,7 @@ div#box {
 .box-top a{
 	float: right;
 	margin-right: 15px;
-	color: #2980b9;
+	color: #ecf0f1;
 	margin-top: 0;
 	display: block;
 	padding: 10px;
@@ -292,7 +292,7 @@ div#box {
 	margin-bottom: 15px;
 	margin-right: 15px;
 	line-height: 75px;
-	color: #2980b9;
+	color: #ecf0f1;
 } 
 
 
@@ -311,12 +311,12 @@ div#box {
 
 
 .box2-top {
-	width: 31%;
+	width: 25%;
 	height: 100px;
 	margin-top: 25px;
 	margin-left: 15px;
 	color: #fff;
-	background: #FFFFFF;
+	background: #f39c12;
 	font-weight: 300;
 	overflow: hidden;
 	float: left;
@@ -338,7 +338,7 @@ div#box {
 .box2-top a{
 	float: right;
 	margin-right: 15px;
-	color: #f39c12;
+	color: #ecf0f1;
 	margin-top: 0;
 	display: block;
 	padding: 10px;
@@ -350,18 +350,18 @@ div#box {
 	font-size: 2.3em;
 	float: right;
 	margin-bottom: 20px;
-	color: #f39c12;
+	color: #ecf0f1;
 	margin-right: 15px;
 	line-height: 75px;
 } 
 
 .box3-top {
-	width: 31%;
+	width: 25%;
 	height: 100px;
 	margin-top: 25px;
 	margin-left: 15px;
 	color: #fff;
-	background: #FFFFFF;
+	background: #27ae60;
 	font-weight: 300;
 	overflow: hidden;
 	float: left;
@@ -390,7 +390,7 @@ div#box {
 .box3-top a{
 	float: right;
 	margin-right: 15px;
-	color: #27ae60;
+	color: #ecf0f1;
 	margin-top: 0;
 	display: block;
 	padding: 10px;

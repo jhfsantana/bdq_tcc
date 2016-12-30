@@ -23,19 +23,34 @@ class AdminController extends Controller
     public function index()
     {        
         $professores = Professor::professorComMaiorNumeroDeQuestoes();
+        $professore2s = Professor::professorTopQuestoes();
+        $questoes = Questao::topQuestoes();
+
+           
+      
         $total = Professor::totalProfessores();
         $alunos = ALuno::totalAlunos();
         $diames = Util::pegarDiaSemana();
                        
-        $chart = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'bar', 'highcharts')
+        $chart[] = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'bar', 'highcharts')
             ->setTitle('Quantidade de questões adicionadas ao BDQ')
             ->setElementLabel("Total de questões")
-            ->setDimensions(1000, 300)
+            ->setDimensions(700, 300)
             ->setResponsive(false)
             ->groupBy('nome');
 
-                
-
+        $chart[] = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'pie', 'highcharts')
+                    ->setTitle('Quantidade de questões adicionadas ao BDQ')
+                    ->setElementLabel("Total de questões")
+                    ->setDimensions(700, 300)
+                    ->setResponsive(false)
+                    ->groupBy('nome');
+/*
+        $chart[] = Charts::database(Questao::topQuestoes(), 'pie', 'highcharts')
+                    ->setTitle('Questões mais utilizadas em Avaliações')
+                    ->setElementLabel("Total de questões")
+                    ->groupBy('questao_id', 'created_at');*/
+        
         return view ('admin.index')->with('professores', $total)
                                    ->with('alunos', $alunos)
                                    ->with('chart', $chart)
@@ -90,9 +105,9 @@ class AdminController extends Controller
                     ->with('disciplinas', $disciplinas);
     }
     
-    public function relatorioQuestao($limite)  
+    public function relatorioQuestao()  
     {   
-        $qtdQuestao = Questao::topQuestoes($limite);
+        $qtdQuestao = Questao::topQuestoes();
 
 
         return view('admin.relatorio_qtd_questao_av')

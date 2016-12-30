@@ -42,18 +42,25 @@ class Questao extends Model
         return $this->hasMany('App\Models\Alternativa');
     }
 
-    public static function topQuestoes($limite)
+    public static function topQuestoes()
     {
+        /*$resultado = DB::table('avaliacoes')
+                ->join('avaliacao_questao', 'avaliacoes.id', '=', 'avaliacao_questao.avaliacao_id')
+                ->join('questoes', 'avaliacao_questao.questao_id', '=', 'questoes.id')
+                ->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
+                ->select(DB::raw('COUNT(questoes.id) as qtd'), 'disciplinas.nome as disciplina_nome', 'questoes.id as questao_id', 'questoes.questao as questao_nome', 'questoes.created_at')
+                ->groupby('questoes.id','disciplinas.nome','questoes.questao', 'questoes.created_at')
+                ->orderBy('qtd', 'desc')
+                ->get();*/
+       
+
         $resultado = DB::table('avaliacoes')
                 ->join('avaliacao_questao', 'avaliacoes.id', '=', 'avaliacao_questao.avaliacao_id')
                 ->join('questoes', 'avaliacao_questao.questao_id', '=', 'questoes.id')
                 ->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
-                ->select(DB::raw('COUNT(questoes.id) as qtd'), 'disciplinas.nome as disciplina_nome', 'questoes.id as questao_id', 'questoes.questao as questao_nome')
-                ->groupby('questoes.id','disciplinas.nome','questoes.questao')
-                ->orderBy('qtd', 'desc')
-                ->limit($limite)
-                ->get();
-       
+                ->groupBy('questoes.id', 'questoes.created_at')
+                ->get(['questoes.id as questao_id', 'questoes.created_at', DB::raw('COUNT(questoes.id) as qtd')]);
+
         return $resultado;
     }
 
