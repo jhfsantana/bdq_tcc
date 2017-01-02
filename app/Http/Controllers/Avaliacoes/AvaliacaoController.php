@@ -364,8 +364,8 @@ class AvaliacaoController extends Controller
         $av = Avaliacao::all();
 
         $avaliacao->status = $request->status;
-        
-        if(!Avaliacao::checarStatusAvaliacao())
+
+        if(!Avaliacao::checarStatusAvaliacao($avaliacao->professor_id, $avaliacao->id))
         {
             if($avaliacao->save())
             {

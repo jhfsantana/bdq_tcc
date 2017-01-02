@@ -15,11 +15,14 @@
 </head>
 
 <body>
-		<div id="header" style="width: 100%; height: 115px;background-color: #7f8c8d;">
-			<div class="headeruser">
-				<i style="float: right; color: #E7E7E7; margin: 0px; margin-top: 8px;">{{$diames}}</i>
-				<img src="/images/data.png" style="float: right; margin-right: 10px; margin-top: 5px">
-			</div>
+		<div id="header" style="width: 100%; height: 135px;background-color: #34495e;">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-5" ">
+          <div class="logo" style="margin-left: 65px; margin-top: 0; margin-bottom: 155px;">
+            <img src="/images/Untitled-4.svg/">
+          </div>
+        </div>
+      </div>
 		</div>
 
       <div id="wrapper">
@@ -83,7 +86,7 @@
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+                    <a href="administrador/logout"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
                 </li>
             </ul>
         </nav>
@@ -107,21 +110,23 @@
 	<!-- FIM DA MENSAGEM DE SUCESSO -->
         		{!! Charts::assets() !!}
 				<div class="row">
-					<div class="col-md-12 col-md-offset-1" style="margin-top: 20px;">
-						<h3>Olá, {{Auth::guard('web_admins')->user()->name }}</h3>
-						<h4>Painel de Informações</h4>
-						<p>Resumo das informações</p>
+					<div class="col-md-12 col-md-offset-1" style="margin-top: 35px; padding-left: 35px;">
+						
+            <h3>Olá, {{Auth::guard('web_admins')->user()->name }} </h3>
+              <i class="fa fa-fw fa-calendar"></i><em>{{$diames}}</em>
+
+						<h4>Resumo das informações</h4>
 
 						<div class="box-top">
 							<img src="images/professor_64px.png">
 							<h3 class="professores"> {{$professores}}</h3>
-							<a href="#">Total de professores</a>
+							<a href="#">Nº Professores</a>
 						</div>
 
 						<div class="box2-top">
 							<img src="images/estudantes_64.png">
 							<h3 class="estudantes"> {{$alunos}} </h3>
-							<a href="#">Total de estudantes</a>
+							<a href="#">Nº Estudantes</a>
 						</div>
 
 						<div class="box3-top">
@@ -130,20 +135,26 @@
 						</div>
 						@foreach($chart as $c)
 						<div class="row" style="float: left;">
-						    <div class="col-md-6 col-md-offset-6" >
-								<div class="chart_div" id="chart_div" style="margin-top: 24px; float: right; padding: 15px;">
+						    <div class="col-md-6 col-md-offset-7" >
+								<div class="chart_div" id="chart_div" style="margin-top: 24px; float: right; padding-left: 15px;">
 										{!! $c->render() !!}
 								</div>
 							</div>
 						</div>
 						@endforeach
+            <div class="row" style="float: left; margin-top: 10px;">
+                <div class="col-md-12 col-md-offset-6" >              
+                  <div class="realtime">
+                    {!! $realtime->render() !!}
+                  </div>
+                </div>
 					</div>
 				</div>
         </div>
         <!-- /#page-content-wrapper -->
     </div>
     <!-- /#wrapper -->
-<div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
+<div class="footer">Banco de Questões e Avaliação Online / <strong>BDQ - Avaliação Online</strong>. <p>Desenvolvido por Jorge Henrique F. Santana</p></div>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 

@@ -64,9 +64,10 @@ class Avaliacao extends Model
         return $results;
     }
 
-    public static function checarStatusAvaliacao()
+    public static function checarStatusAvaliacao($professor_id, $avaliacao_id)
     {
-        $sql = DB::table('avaliacoes')->where('status', '=', 'disponivel');
+    /*        $sql = self::where('status', '=', 'disponivel')->where('professor_id', '=', $professor_id);
+*/      $sql = DB::select("select * from avaliacoes where professor_id = ? and status = 'disponivel' and id <> ?", array($professor_id, $avaliacao_id));
 
         if($sql)
         {
@@ -76,6 +77,23 @@ class Avaliacao extends Model
         {
             return false;
         }
+    }
+
+    public static function mediaAvaliacao()
+    {
+        $sql = "SELECT AVG(ar.nota) as media
+                  FROM avaliacoes a
+                  join aluno_resultado ar on (ar.avaliacao_id = a.id);";
+/*        $results = DB::select($sql);
+*/
+        $results = self::join('aluno_resultado', 'aluno_resultado.avaliacao_id', '=', 'avaliacoes.id')->get([DB::raw('AVG(aluno_resultado.nota) as media')]);
+        
+        foreach ($results as $r) 
+        {
+            $r->media;
+        }
+        
+        return  $r->media;
     }
 
 }

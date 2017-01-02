@@ -310,3 +310,10 @@ body a {
 body a:hover {
   color: #ccc;
 }
+
+div#header .logo img {
+  height: 175px;
+  width: 175px;
+  margin: 0;
+}
+

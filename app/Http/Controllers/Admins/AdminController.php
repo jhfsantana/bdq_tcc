@@ -11,6 +11,7 @@ use App\Models\Professor;
 use App\Models\Disciplina;
 use App\Models\Aluno;
 use App\Models\Questao;
+use App\Models\Avaliacao;
 use App\Models\Util;
 use Charts;
 use Illuminate\Support\Facades\Input;
@@ -25,7 +26,7 @@ class AdminController extends Controller
         $professores = Professor::professorComMaiorNumeroDeQuestoes();
         $professore2s = Professor::professorTopQuestoes();
         $questoes = Questao::topQuestoes();
-
+        $media = Avaliacao::mediaAvaliacao();
            
       
         $total = Professor::totalProfessores();
@@ -35,16 +36,23 @@ class AdminController extends Controller
         $chart[] = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'bar', 'highcharts')
             ->setTitle('Quantidade de questões adicionadas ao BDQ')
             ->setElementLabel("Total de questões")
-            ->setDimensions(700, 300)
-            ->setResponsive(false)
+            ->setDimensions(500, 250)
+            ->setResponsive(true)
             ->groupBy('nome');
-
+/*
         $chart[] = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'pie', 'highcharts')
                     ->setTitle('Quantidade de questões adicionadas ao BDQ')
                     ->setElementLabel("Total de questões")
-                    ->setDimensions(700, 300)
-                    ->setResponsive(false)
-                    ->groupBy('nome');
+                    ->setDimensions(500, 250)
+                    ->setResponsive(true)
+                    ->groupBy('nome');*/
+
+        $realtime = Charts::realtime(route('media'), 1000, 'gauge', 'google')
+                    ->setTitle('Média das notas dos alunos')
+                    ->setlabels(['Third'])
+                    ->setValues([0, 0, 10])
+                    ->setResponsive(false);
+;
 /*
         $chart[] = Charts::database(Questao::topQuestoes(), 'pie', 'highcharts')
                     ->setTitle('Questões mais utilizadas em Avaliações')
@@ -55,7 +63,8 @@ class AdminController extends Controller
                                    ->with('alunos', $alunos)
                                    ->with('chart', $chart)
                                    ->with('top', $professores)
-                                   ->with('diames', $diames);
+                                   ->with('diames', $diames)
+                                   ->with('realtime', $realtime);
     }
 
 

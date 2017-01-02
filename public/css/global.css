@@ -252,10 +252,10 @@ div#box {
 
 .box-top {
 	width: 25%;
-	height: 100px;
+	height: 95px;
 	color: #fff;
 	background: #2980b9;
-	margin-top: 25px;
+	margin-top: 14px;
 	font-weight: 300;
 	overflow: hidden;
 	border-radius: 10px;
@@ -312,8 +312,8 @@ div#box {
 
 .box2-top {
 	width: 25%;
-	height: 100px;
-	margin-top: 25px;
+	height: 95px;
+	margin-top: 14px;
 	margin-left: 15px;
 	color: #fff;
 	background: #f39c12;
@@ -357,8 +357,8 @@ div#box {
 
 .box3-top {
 	width: 25%;
-	height: 100px;
-	margin-top: 25px;
+	height: 95px;
+	margin-top: 14px;
 	margin-left: 15px;
 	color: #fff;
 	background: #27ae60;
@@ -541,12 +541,6 @@ a.mobile:active{
 	margin-bottom: 15px;
 } 
 
-div#chart_div {
-	display: none;
-	width: 35px;
-	height: 35px;
-	float: left;
-}
 
 div#header h3 {
  display: none;
@@ -583,5 +577,57 @@ a.mobile {
 	display: none;
 }
 
+
+}
+
+@media only screen and (max-width: 1366px) {
+	
+	body {
+		height: 100%;
+		overflow: auto;
+	}
+	
+	h3 {
+		font-size: 1.1em;
+	}
+
+	h4 {
+		font-size: 1.0em;
+	}
+
+	p {
+		font-size: 1.0em;
+	}
+
+
+	.chart_div{
+		width: 500px;
+		height: 50px;
+		margin-top: 3px;
+		padding-right: 70px;
+	}
+
+	.footer {
+		width: 100%;
+	}
+	
+	.box-top a {
+		font-size: 1.2em;
+	}
+
+	.box2-top a {
+		font-size: 1.2em;
+	}
+
+	.box3-top a {
+		font-size: 1.2em;
+	}
+
+	.realtime {
+	  height: 30px;
+	  margin-top: 0;
+	  margin-left: 0;
+	  margin-right: 40px;
+	}
 
 }
