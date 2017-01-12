@@ -36,7 +36,7 @@ class AdminController extends Controller
         $chart[] = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'bar', 'highcharts')
             ->setTitle('Quantidade de questões adicionadas ao BDQ')
             ->setElementLabel("Total de questões")
-            ->setDimensions(500, 250)
+            ->setDimensions(425, 250)
             ->setResponsive(true)
             ->groupBy('nome');
 /*
@@ -49,22 +49,22 @@ class AdminController extends Controller
 
         $realtime = Charts::realtime(route('media'), 1000, 'gauge', 'google')
                     ->setTitle('Média das notas dos alunos')
-                    ->setlabels(['Third'])
                     ->setValues([0, 0, 10])
                     ->setResponsive(false);
 ;
-/*
-        $chart[] = Charts::database(Questao::topQuestoes(), 'pie', 'highcharts')
+
+        $chartPizza = Charts::database(Questao::topQuestoes(), 'pie', 'highcharts')
                     ->setTitle('Questões mais utilizadas em Avaliações')
                     ->setElementLabel("Total de questões")
-                    ->groupBy('questao_id', 'created_at');*/
+                    ->groupBy('questao_id', 'created_at');
         
         return view ('admin.index')->with('professores', $total)
                                    ->with('alunos', $alunos)
                                    ->with('chart', $chart)
                                    ->with('top', $professores)
-                                   ->with('diames', $diames)
-                                   ->with('realtime', $realtime);
+                                   ->with('realtime', $realtime)
+                                   ->with('chartPizza', $chartPizza)
+                                   ->with('diames', $diames);
     }
 
 

@@ -16,7 +16,7 @@ class AuthController extends Controller
     protected $loginArea = 'professor/login';
 
    
-    public function index(): View
+    public function index()
     {
     	return view('professores.index');
     }

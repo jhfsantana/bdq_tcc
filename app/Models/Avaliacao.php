@@ -81,11 +81,6 @@ class Avaliacao extends Model
 
     public static function mediaAvaliacao()
     {
-        $sql = "SELECT AVG(ar.nota) as media
-                  FROM avaliacoes a
-                  join aluno_resultado ar on (ar.avaliacao_id = a.id);";
-/*        $results = DB::select($sql);
-*/
         $results = self::join('aluno_resultado', 'aluno_resultado.avaliacao_id', '=', 'avaliacoes.id')->get([DB::raw('AVG(aluno_resultado.nota) as media')]);
         
         foreach ($results as $r) 

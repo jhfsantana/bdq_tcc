@@ -98,6 +98,17 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 
 Route::group(['middleware'=> ['auth:web_admins']], function ()
 {
+	Route::get('/api/professores/{id?}', 'Professores\ProfessorController@indexAPI');
+	Route::post('/api/professores', 'Professores\ProfessorController@store');
+    Route::post('/api/professores/{id}', 'Professores\ProfessorController@update');
+    Route::delete('/api/professores/{id}', 'Professores\ProfessorController@destroy');
+    
+    Route::get('/api/disciplinas', function()
+    {
+		return \App\Models\Disciplina::with('turmas')->get();
+    });
+
+
 
 	Route::get('home','Admins\AdminController@index');
 

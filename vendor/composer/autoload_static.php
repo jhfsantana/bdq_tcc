@@ -905,6 +905,7 @@ class ComposerStaticInit401c39904328666e339d313dfea4cb02
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
+        'Teste' => __DIR__ . '/../..' . '/database/migrations/2017_01_08_211011_teste.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
     );
 

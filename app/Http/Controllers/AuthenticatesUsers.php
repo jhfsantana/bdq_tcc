@@ -16,7 +16,7 @@ trait AuthenticatesUsers
         $this->middleware("guest:$this->guard", ['except' => 'logout']);
     }
 
-    public function login(Request $request, Auth $auth): Redirection
+    public function login(Request $request, Auth $auth)
     {
         $errors = new MessageBag;
 
@@ -36,7 +36,7 @@ trait AuthenticatesUsers
         
     }
 
-    public function logout(Auth $auth): Redirection
+    public function logout(Auth $auth)
     {
         Auth::guard($this->guard)->logout();
         

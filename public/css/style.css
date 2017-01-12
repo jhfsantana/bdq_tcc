@@ -317,3 +317,25 @@ div#header .logo img {
   margin: 0;
 }
 
+/*.modal-backdrop{
+  opacity:0; transition:opacity .2s;
+}
+.modal-backdrop {
+    opacity:0.5 !important;
+}
+
+
+.modal-backdrop.in{
+  opacity:.7;
+}*/
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+  background-color: #333333;
+  opacity:0.8;
+}

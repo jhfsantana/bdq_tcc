@@ -2,6 +2,7 @@
 <html >
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
   <title>BDQ - Avaliação Online / Página inicial Administrativa</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -9,7 +10,6 @@
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
       <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="css/global.css">
-      <link rel="stylesheet" href="css/footer.css">
 
   
 </head>
@@ -57,7 +57,7 @@
                     <li class="dropdown-header">Dropdown heading</li>
                     <li><a href="#">Cadastrar Professor</a></li>
                     <li><a href="#">Alterar Professor</a></li>
-                    <li><a href="#">Listar Professores</a></li>
+                    <li><a href="professores">Listar Professores</a></li>
 
                   </ul>
                 </li>
@@ -109,52 +109,64 @@
 
 	<!-- FIM DA MENSAGEM DE SUCESSO -->
         		{!! Charts::assets() !!}
-				<div class="row">
-					<div class="col-md-12 col-md-offset-1" style="margin-top: 35px; padding-left: 35px;">
-						
-            <h3>Olá, {{Auth::guard('web_admins')->user()->name }} </h3>
-              <i class="fa fa-fw fa-calendar"></i><em>{{$diames}}</em>
+				<div class="conteudo">
+          <div class="row">
+  					<div class="col-md-10 col-md-offset-1" style="margin-top: 45px;">
+  						
+              <h3>Olá, {{Auth::guard('web_admins')->user()->name }} </h3>
+                <i class="fa fa-fw fa-calendar"></i><em>{{$diames}}</em>
 
-						<h4>Resumo das informações</h4>
+  						<h4>Resumo das informações</h4>
 
-						<div class="box-top">
-							<img src="images/professor_64px.png">
-							<h3 class="professores"> {{$professores}}</h3>
-							<a href="#">Nº Professores</a>
-						</div>
+  						<div class="box-top">
+  							<img src="images/professor_64px.png">
+  							<h3 class="professores"> {{$professores}}</h3>
+  							<a href="#">Nº Professores</a>
+  						</div>
 
-						<div class="box2-top">
-							<img src="images/estudantes_64.png">
-							<h3 class="estudantes"> {{$alunos}} </h3>
-							<a href="#">Nº Estudantes</a>
-						</div>
+  						<div class="box2-top">
+  							<img src="images/estudantes_64.png">
+  							<h3 class="estudantes"> {{$alunos}} </h3>
+  							<a href="#">Nº Estudantes</a>
+  						</div>
 
-						<div class="box3-top">
-							<img src="images/estatistica_64.png">
-							<a href="/relatorio/"><u>Relatórios <i class="fa fa-fw fa-arrow-right"></i></u></a>
-						</div>
-						@foreach($chart as $c)
-						<div class="row" style="float: left;">
-						    <div class="col-md-6 col-md-offset-7" >
-								<div class="chart_div" id="chart_div" style="margin-top: 24px; float: right; padding-left: 15px;">
-										{!! $c->render() !!}
-								</div>
-							</div>
-						</div>
-						@endforeach
-            <div class="row" style="float: left; margin-top: 10px;">
-                <div class="col-md-12 col-md-offset-6" >              
-                  <div class="realtime">
-                    {!! $realtime->render() !!}
+  						<div class="box3-top">
+  							<img src="images/estatistica_64.png">
+  							<a href="/relatorio/"><u>Relatórios <i class="fa fa-fw fa-arrow-right"></i></u></a>
+  						</div>
+  						@foreach($chart as $c)
+                  <div class="chart_div" id="chart_div" style="width: 100%; margin-top:25px; ">
+                    {!! $c->render() !!}
+                    <div style="float: left;">
+                      {!! $realtime->render() !!}
+                    </div>
+                    <div style="float: right; margin-top: 15px; margin-left: 15px;">
+                      {!! $chartPizza->render() !!}
+                    </div>
                   </div>
-                </div>
-					</div>
-				</div>
+              @endforeach
+  				  </div>
+          </div>
+
+
+
         </div>
         <!-- /#page-content-wrapper -->
     </div>
     <!-- /#wrapper -->
-<div class="footer">Banco de Questões e Avaliação Online / <strong>BDQ - Avaliação Online</strong>. <p>Desenvolvido por Jorge Henrique F. Santana</p></div>
+  
+    <!-- /#footer -->
+
+<!--   <div class="navbar navbar-default navbar-fixed-bottom" style="text-align: center; background-color: #ccc; position: fixed;">
+    <div class="container">
+      <p>© 2016 Banco de Questões e Avaliação Online 
+           <p>BDQ - Avaliação Online</p>
+      </p>
+    </div>
+  </div> -->
+
+      <!-- /#final footer -->
+
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 

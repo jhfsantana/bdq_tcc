@@ -16,7 +16,7 @@ class AuthController extends Controller
     protected $loginArea = 'aluno/login';
 
    
-    public function index(): View
+    public function index()
     {
     	return view('aluno.index');
     }

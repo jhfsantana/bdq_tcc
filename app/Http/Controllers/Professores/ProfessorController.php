@@ -38,10 +38,23 @@ class ProfessorController extends Controller
 
 
 
-    public function index()
+    public function indexAPI($id = null)
     {
-        $professores = Professor::all();
-        return view('professores.professores_lista')->with('professores', $professores);
+        if($id == null)
+        {
+            return $profesores = Professor::orderBy('id', 'desc')->get();
+        }
+        else
+        {
+            return $this->show($id);
+        }
+/*        $professores = Professor::all();
+        return view('professores.professores_lista')->with('professores', $professores);*/
+    }
+
+    public function index()
+    {   $disciplinas = Disciplina::all();
+        return view('professores.professores_lista')->with('disciplinas', $disciplinas);
     }
 
     /**
@@ -70,24 +83,21 @@ class ProfessorController extends Controller
        // $subjects = Subject::find($request->id);
        //dd($request);
         $professor = new Professor;
-       
         //$subject = $request->subjects;
-        $professor->matricula = $request->matricula;
-        $professor->nome = $request->nome;
-        $professor->sobrenome = $request->sobrenome;
-        $professor->cpf = Util::somenteNumeros($request->cpf);
-        $professor->email = $request->email;
+        $professor->matricula = $request->input('matricula');
+        $professor->nome = $request->input('nome');
+        $professor->sobrenome = $request->input('sobrenome');
+        $professor->cpf = Util::somenteNumeros($request->input('cpf'));
+        $professor->email = $request->input('email');
         
-        $cryptPassword = bcrypt($request->password);
+        $cryptPassword = bcrypt($request->input('password'));
         $professor->password = $cryptPassword;
         
        // $professor->subjects()->sync($request->subjects, false);
         
-        if($professor->save())
-        {
-            $request->session()->flash('alert-success', 'Professor salvo com sucesso!');
-            $professor->disciplinas()->sync($request->disciplinas, false);
-        }
+        $professor->save();
+        $professor->disciplinas()->sync($request->input('disciplinas'), false);
+        return 'salvou'.$professor->id;
 
         
         // $professor->classrooms()->sync($request->classrooms, false); ------ ATTACH PARA RELACIONAR TURMA COM PROFESSOR
@@ -95,7 +105,6 @@ class ProfessorController extends Controller
 
 
 
-        return redirect ('/professores');
     }
 
     /**
@@ -106,12 +115,12 @@ class ProfessorController extends Controller
      */
     public function show($id)
     {
-        $professor = Professor::find($id);
+       return $professor = Professor::find($id);
 
        #TO-DO RELACIONAR PROFESSOR COM TURMA PARA CORRIGIR BUG DO PROFESSOR EM TODAS AS TURMAS.
 
-        return view('professores.detalhes')->withProfessor($professor);   
-    }
+/*        return view('professores.detalhes')->withProfessor($professor);   
+*/    }
 
     /**
      * Show the form for editing the specified resource.
@@ -133,7 +142,21 @@ class ProfessorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $professor = Professor::find($id);
+        //$subject = $request->subjects;
+        $professor->matricula = $request->input('matricula');
+        $professor->nome = $request->input('nome');
+        $professor->sobrenome = $request->input('sobrenome');
+        $professor->cpf = Util::somenteNumeros($request->input('cpf'));
+        $professor->email = $request->input('email');
+        
+        $cryptPassword = bcrypt($request->input('password'));
+        $professor->password = $cryptPassword;
+        
+       // $professor->subjects()->sync($request->subjects, false);
+        $professor->save();
+        $professor->disciplinas()->sync($request->input('disciplinas'), false);
+        return 'alterou com sucesso'.$professor->id;
     }
 
     /**
@@ -144,11 +167,12 @@ class ProfessorController extends Controller
      */
     public function destroy($id)
     {
-        $professor = Professor::find($id);
-        $professor->delete();
+        $professor = Professor::find($id)->delete();
 
-        return redirect('professores');
+        return 'Professor deletado com sucesso!';
 
+/*        return redirect('professores');
+*/
     }
     public function logintela()
     {
