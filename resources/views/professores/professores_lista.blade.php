@@ -26,7 +26,7 @@
 			<div class="container" style="margin-top: 150px;">
 			<h3 style="text-align: center;">Lista de Professores</h3>
 				<div ng-controller="ProfessorController">
-					<table class="table table-striped">
+					<table class="table table-striped table-responsive">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -36,12 +36,12 @@
 								<th>CPF</th>
 								<th>E-MAIL</th>
 								<th>
-									<button id="btn-add" class="btn btn-success btn-xs" ng-click="toggle('add', 0)">Novo Professor</button>
+									<button id="btn-add" class="btn btn-success btn-md" ng-click="toggle('add', 0)">Novo Professor</button>
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<div class="input-group col-xs-3">
+							<div class="input-group col-xs-4">
 								<span class="input-group-addon" id="sizing-addon2" style="background-color: #ccc;"><i class="glyphicon glyphicon-search"></i></span>
 								<input type="text" class="form-control" placeholder="Buscar" aria-describedby="sizing-addon2" ng-model="buscar">
 							</div>
@@ -53,11 +53,11 @@
 								<td>@{{ professor.cpf }}</td>
 								<td>@{{ professor.email }}</td>
 								<td>
-									<button class="btn btn-warning btn-xs btn-detail" ng-click="toggle('edit', professor.id)">
+									<button class="btn btn-warning btn-sm btn-detail" ng-click="toggle('edit', professor.id)">
 										<span class="glyphicon glyphicon-edit"></span>
 									</button>
 
-									<button class="btn btn-danger btn-xs btn-delete" ng-click="confirmDelete(professor.id)">
+									<button class="btn btn-danger btn-sm btn-delete" ng-click="confirmDelete(professor.id)">
 										<span class="glyphicon glyphicon-trash"></span>
 									</button>
 
@@ -123,7 +123,6 @@
 											<label class="col-sm-3 control-label">Turma e Disciplina</label>
 											<div class="col-sm-9">
 												<div ng-controller="DisciplinaController" ng-model="professor.disciplinas">
-												@{{professor}}
 <!-- 												<select multiple class="form-control" ng-model="professor.disciplinas" ng-options="disciplina.id as disciplina.nome for disciplina in disciplinas">
 												</select>
  -->
