@@ -57,10 +57,9 @@
 										<span class="glyphicon glyphicon-edit"></span>
 									</button>
 
-									<button class="btn btn-danger btn-sm btn-delete" ng-click="confirmDelete(professor.id)">
+									<button class="btn btn-danger btn-sm btn-delete" ng-click="confirmDelete(professor.id)" style="margin-left: 10px;">
 										<span class="glyphicon glyphicon-trash"></span>
 									</button>
-
 								</td>
 							</tr>
 						</tbody>

@@ -38,7 +38,7 @@
                 </li>
                 
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+                    <a href="/home"><i class="fa fa-fw fa-home"></i> Home</a>
                 </li>
                 
                 <li>
