@@ -40,15 +40,15 @@
                 </li>
 
                 <li>
-                  <a href="/administradores"><i class="fa fa-fw fa-cog"></i> Administradores</span></a>
+                  <a href="/administradores"><i class="fa fa-fw fa-cog"></i> Administradores</a>
                 </li>
 
                 <li>
-                  <a href="/professores"><i class="fa fa-fw fa-group"></i> Professores</span></a>
+                  <a href="/professores"><i class="fa fa-fw fa-group"></i> Professores</a>
                 </li>
 
                 <li>
-                  <a href="/alunos"><i class="fa fa-fw fa-graduation-cap"></i> Alunos></span></a>
+                  <a href="/alunos"><i class="fa fa-fw fa-graduation-cap"></i> Alunos</a>
                 </li>
 
                 <li>

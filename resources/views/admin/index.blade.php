@@ -36,57 +36,37 @@
                        MENU
                     </a>
                 </li>
+                
                 <li>
                     <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
                 </li>
-
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-cog"></i> Administradores <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-header">Dropdown heading</li>
-                    <li><a href="#">Cadastrar Administrador</a></li>
-                    <li><a href="#">Alterar Administrador</a></li>
-                    <li><a href="#">Listar Administradores</a></li>
-
-                  </ul>
-                </li>
-
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-group"></i> Professores <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-header">Dropdown heading</li>
-                    <li><a href="#">Cadastrar Professor</a></li>
-                    <li><a href="#">Alterar Professor</a></li>
-                    <li><a href="professores">Listar Professores</a></li>
-
-                  </ul>
-                </li>
-
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-graduation-cap"></i> Alunos <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-header">Dropdown heading</li>
-                    <li><a href="#">Cadastrar Aluno</a></li>
-                    <li><a href="#">Alterar Aluno</a></li>
-                    <li><a href="#">Listar Alunos</a></li>
-
-                  </ul>
+                
+                <li>
+                  <a href="/administradores"><i class="fa fa-fw fa-cog"></i> Administradores</a>
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-book"></i> Disciplinas</a>
+                  <a href="/professores"><i class="fa fa-fw fa-group"></i> Professores</a>
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-pencil"></i> Turmas</a>
+                  <a href="/alunos"><i class="fa fa-fw fa-graduation-cap"></i> Alunos</a>
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-pie-chart"></i> Relatórios</a>
+                    <a href="/disciplinas"><i class="fa fa-fw fa-book"></i> Disciplinas</a>
                 </li>
 
                 <li>
-                    <a href="administrador/logout"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+                    <a href="/turmas"><i class="fa fa-fw fa-pencil"></i> Turmas</a>
+                </li>
+
+                <li>
+                    <a href="/relatorio"><i class="fa fa-fw fa-pie-chart"></i> Relatórios</a>
+                </li>
+
+                <li>
+                    <a href="/administrador/logout"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
                 </li>
             </ul>
         </nav>
