@@ -14,10 +14,11 @@
 </head>
 
 <body>
+
 		<div id="header" style="width: 100%; height: 135px;background-color: #34495e;">
       <div class="row">
         <div class="col-md-8 col-md-offset-5" ">
-          <div class="logo" style="margin-left: 65px; margin-top: 0; margin-bottom: 155px;">
+          <div class="logo" style="margin-left: 65px; margin-top: 0">
             <img src="/images/Untitled-4.svg/">
           </div>
         </div>
@@ -36,7 +37,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+                    <a href="/home"><i class="fa fa-fw fa-home"></i> Home</a>
                 </li>
 
                 <li>
@@ -89,11 +90,11 @@
         		{!! Charts::assets() !!}
 		<div class="conteudo">
 			<div class="row">
-				<div class="col-md-10 col-md-offset-1" style="margin-top: 45px;">
-  				@yield('content')		
-  				</div>
-          	</div>
-        </div>
+				<div class="col-md-10 col-md-offset-1" style="margin-top: 29px;">
+  			   @yield('content')
+  			</div>
+      </div>
+    </div>
         <!-- /#page-content-wrapper -->
     </div>
     <!-- /#wrapper -->

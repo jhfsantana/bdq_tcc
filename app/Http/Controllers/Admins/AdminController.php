@@ -68,6 +68,11 @@ class AdminController extends Controller
     }
 
 
+    public function loginTela()
+    {
+        return view('admin.auth');
+    }
+
     public function create()
     {
         return view('admin.register');

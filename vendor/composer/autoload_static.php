@@ -344,11 +344,8 @@ class ComposerStaticInit401c39904328666e339d313dfea4cb02
     );
 
     public static $classMap = array (
-        'AddQuestaoId' => __DIR__ . '/../..' . '/database/migrations/2016_12_21_233338_add_questao_id.php',
+        'Alternativa' => __DIR__ . '/../..' . '/database/migrations/2017_01_13_230713_alternativa.php',
         'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
-        'Cria2rTabelaAlunoAlternativa' => __DIR__ . '/../..' . '/database/migrations/2016_12_22_210450_cria2r_tabela_aluno_alternativa.php',
-        'Cria2rTabelaAlunoQuestao' => __DIR__ . '/../..' . '/database/migrations/2016_12_21_230614_cria2r_tabela_aluno_questao.php',
-        'CriarTabelaAlunoQuestao' => __DIR__ . '/../..' . '/database/migrations/2016_12_21_225947_criar_tabela_aluno_questao.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
@@ -454,7 +451,6 @@ class ComposerStaticInit401c39904328666e339d313dfea4cb02
         'Maatwebsite\\Excel\\Readers\\LaravelExcelReader' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Readers/LaravelExcelReader.php',
         'Maatwebsite\\Excel\\Writers\\CellWriter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/CellWriter.php',
         'Maatwebsite\\Excel\\Writers\\LaravelExcelWriter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/LaravelExcelWriter.php',
-        'MudarNomeTabelaAlunoQuestao' => __DIR__ . '/../..' . '/database/migrations/2016_12_21_230428_mudar_nome_tabela_aluno_questao.php',
         'PHPUnit\\Framework\\TestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestCase.php',
         'PHPUnit_Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit_Extensions_GroupTestSuite' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
@@ -905,7 +901,6 @@ class ComposerStaticInit401c39904328666e339d313dfea4cb02
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
-        'Teste' => __DIR__ . '/../..' . '/database/migrations/2017_01_08_211011_teste.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
     );
 

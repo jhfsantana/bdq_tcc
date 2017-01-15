@@ -231,10 +231,9 @@ Route::post('aluno/login', 'Alunos\AuthController@login');
 
 ################
 
-Route::get('admin', function ()
-{
-	return view('admin.auth');
-});
+
+Route::get('/admin', ['uses' => 'Admins\AdminController@loginTela', 'as' => 'admin.login']);
+
 
 Route::post('admin', 'Admins\AuthController@login');
 

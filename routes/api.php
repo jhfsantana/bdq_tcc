@@ -21,5 +21,5 @@ Route::get('/user', function (Request $request) {
 Route::get('/media', function()
 {
 	$media = Avaliacao::mediaAvaliacao();
-	return ['value' => $media];
+	return ['value' => rand(0, 10)];
 })->name('media');

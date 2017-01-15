@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Cria2rTabelaAlunoQuestao extends Migration
+class Alternativa extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,17 @@ class Cria2rTabelaAlunoQuestao extends Migration
      */
     public function up()
     {
-        Schema::create('aluno_questao', function (Blueprint $table) {
+        Schema::create('alternativas', function (Blueprint $table) {
+            $table->string('alternativa_marcaada');
             $table->integer('aluno_id')->unsigned();
+            $table->integer('avaliacao_id')->unsigned();
             $table->integer('questao_id')->unsigned();
 
             $table->foreign('aluno_id')->references('id')->on('alunos')
             ->onUpdate('cascade');            
+
+            $table->foreign('avaliacao_id')->references('id')->on('avaliacoes')
+            ->onUpdate('cascade');
 
             $table->foreign('questao_id')->references('id')->on('questoes')
             ->onUpdate('cascade');
@@ -32,6 +37,6 @@ class Cria2rTabelaAlunoQuestao extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aluno_questao');
+        Schema::dropIfExists('alternativas');
     }
 }

@@ -59,7 +59,7 @@ class Questao extends Model
                 ->join('questoes', 'avaliacao_questao.questao_id', '=', 'questoes.id')
                 ->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
                 ->groupBy('questoes.id', 'questoes.created_at')
-                ->get(['questoes.id as questao_id', 'questoes.created_at', DB::raw('COUNT(questoes.id) as qtd')]);
+                ->get(['questoes.id as questao_id', 'questoes.created_at', 'disciplinas.nome as disciplina_nome', 'questoes.questao as questao_nome' , DB::raw('COUNT(questoes.id) as qtd')]);
 
         return $resultado;
     }

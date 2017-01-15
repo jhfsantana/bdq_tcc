@@ -1,6 +1,8 @@
-app.controller('ProfessorController', function($scope, $http, API_URL)
+app.controller('ProfessorController', function($scope, $http, API_URL, professorAPI)
 	{
-		$http.get(API_URL + "professores")
+		$scope.pageSize = 5;
+		$scope.currentPage = 1;
+		professorAPI.getProfessores()
 		.success(function(response)
 		{
 			$scope.professores = response;
@@ -31,30 +33,37 @@ app.controller('ProfessorController', function($scope, $http, API_URL)
 		$scope.save = function(modalstate, id) {
 			var url = API_URL + "professores";
 			if (modalstate === 'edit') {
-			  url += "/" + id;
+				url += "/" + id;
+				$http({
+				  method: 'POST',
+				  url: url,
+				  data: $.param($scope.professor),
+				  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+				}).success(function(response){
+				  console.log(response);
+				  location.reload();
+				}).error(function(response){
+				  console.log(response);
+				  alert('ocorreu um erro, verifique o log');
+				});
 			}
-			$http({
-			  method: 'POST',
-			  url: url,
-			  data: $.param($scope.professor),
-			  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-			}).success(function(response){
-			  console.log(response);
-			  location.reload();
-			}).error(function(response){
-			  console.log(response);
-			  alert('ocorreu um erro, verifique o log');
-			});
+			else
+			{
+				professorAPI.saveProfessor($scope.professor).success(function(response){
+				  console.log(response);
+				  location.reload();
+				}).error(function(response){
+				  console.log(response);
+				  alert('ocorreu um erro, verifique o log');
+				});
+			}
 		}
 
 	 // delete supplier record
 		$scope.confirmDelete = function(id) {
 			var isConfirmDelete = confirm('Tem certeza que deseja excluir esse professor?');
 			if (isConfirmDelete) {
-			 $http({
-			   method: 'DELETE',
-			   url: API_URL + 'professores/' + id
-			 }).success(function(data){
+			 professorAPI.deleteProfessor(id).success(function(data){
 			   console.log(data);
 			   location.reload();
 			 }).error(function(data){

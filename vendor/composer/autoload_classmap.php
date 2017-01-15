@@ -6,11 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AddQuestaoId' => $baseDir . '/database/migrations/2016_12_21_233338_add_questao_id.php',
+    'Alternativa' => $baseDir . '/database/migrations/2017_01_13_230713_alternativa.php',
     'Cpdf' => $vendorDir . '/dompdf/dompdf/lib/Cpdf.php',
-    'Cria2rTabelaAlunoAlternativa' => $baseDir . '/database/migrations/2016_12_22_210450_cria2r_tabela_aluno_alternativa.php',
-    'Cria2rTabelaAlunoQuestao' => $baseDir . '/database/migrations/2016_12_21_230614_cria2r_tabela_aluno_questao.php',
-    'CriarTabelaAlunoQuestao' => $baseDir . '/database/migrations/2016_12_21_225947_criar_tabela_aluno_questao.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
@@ -116,7 +113,6 @@ return array(
     'Maatwebsite\\Excel\\Readers\\LaravelExcelReader' => $vendorDir . '/maatwebsite/excel/src/Maatwebsite/Excel/Readers/LaravelExcelReader.php',
     'Maatwebsite\\Excel\\Writers\\CellWriter' => $vendorDir . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/CellWriter.php',
     'Maatwebsite\\Excel\\Writers\\LaravelExcelWriter' => $vendorDir . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/LaravelExcelWriter.php',
-    'MudarNomeTabelaAlunoQuestao' => $baseDir . '/database/migrations/2016_12_21_230428_mudar_nome_tabela_aluno_questao.php',
     'PHPUnit\\Framework\\TestCase' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/TestCase.php',
     'PHPUnit_Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit_Extensions_GroupTestSuite' => $vendorDir . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
@@ -567,6 +563,5 @@ return array(
     'SebastianBergmann\\ResourceOperations\\ResourceOperations' => $vendorDir . '/sebastian/resource-operations/src/ResourceOperations.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
-    'Teste' => $baseDir . '/database/migrations/2017_01_08_211011_teste.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
 );
