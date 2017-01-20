@@ -1,58 +1,57 @@
-app.controller('ProfessorController', function($scope, $http, API_URL, professorAPI)
+app.controller('AlunoController', function($scope, $http, API_URL, alunoAPI)
 	{
 		$scope.pageSize = 5;
 		$scope.currentPage = 1;
-		professorAPI.getProfessores()
+		alunoAPI.getAlunos()
 		.success(function(response)
 		{
-			$scope.professores = response;
+			$scope.alunos = response;
 		});
-// show modal Form
+
 		$scope.toggle = function(modalstate, id) {
 		  $scope.modalstate = modalstate;
 		  switch(modalstate) {
 		    case 'add':
-		      $scope.form_title = "Cadastrar novo Professor";
+		      $scope.form_title = "Cadastrar novo Aluno";
 		      break;
 		    case 'edit':
-		      $scope.form_title = "Alterar Professor";
+		      $scope.form_title = "Alterar Aluno";
 		      $scope.id = id;
-		      $http.get(API_URL + 'professores/' + id).success(function(response){
-		      $scope.professor = response;
+		      $http.get(API_URL + 'alunos/' + id).success(function(response){
+		      $scope.aluno = response;
 		      console.log(response);
 		      });
 		      break;
- 			case 'details':
+			case 'details':
 		      $scope.form_title = "Detalhes";
 		      $scope.id = id;
-		      $http.get(API_URL + 'professores/' + id).success(function(response){
-		      $scope.professor = response;
+		      $http.get(API_URL + 'alunos/' + id).success(function(response){
+		      $scope.aluno = response;
 		      console.log(response);
-		  		$('#detailsModal').modal('show');
-
 		      });
 		      break;
 		    default:
 		      break;
 		  }
+		  
 		  if(modalstate === 'add' || modalstate === 'edit')
 		  {
 		  	$('#myModal').modal('show');
-		  }else
+		  }
+		  else
 		  {
 		  	$('#detailsModal').modal('show');
 		  }
 		}
 
-		// save new supplier and update existing supplier
 		$scope.save = function(modalstate, id) {
-			var url = API_URL + "professores";
+			var url = API_URL + "alunos";
 			if (modalstate === 'edit') {
 				url += "/" + id;
 				$http({
-				  method: 'POST',
+				  method: 'post',
 				  url: url,
-				  data: $.param($scope.professor),
+				  data: $.param($scope.aluno),
 				  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 				}).success(function(response){
 				  console.log(response);
@@ -64,7 +63,7 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
 			}
 			else
 			{
-				professorAPI.saveProfessor($scope.professor).success(function(response){
+				alunoAPI.saveAluno($scope.aluno).success(function(response){
 				  console.log(response);
 				  location.reload();
 				}).error(function(response){
@@ -73,12 +72,11 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
 				});
 			}
 		}
-
-	 // delete supplier record
+		
 		$scope.confirmDelete = function(id) {
-			var isConfirmDelete = confirm('Tem certeza que deseja excluir esse professor?');
+			var isConfirmDelete = confirm('Tem certeza que deseja excluir esse aluno?');
 			if (isConfirmDelete) {
-			 professorAPI.deleteProfessor(id).success(function(data){
+			 alunoAPI.deleteAluno(id).success(function(data){
 			   console.log(data);
 			   location.reload();
 			 }).error(function(data){
@@ -92,6 +90,7 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
 
 		$scope.$on('modal.hidden', function() {
   		// Execute action
-  		$scope.professor = {};
+  		$scope.aluno = {};
 		});
-	});
+
+});

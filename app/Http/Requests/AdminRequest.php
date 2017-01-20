@@ -27,8 +27,8 @@ class AdminRequest extends FormRequest
             'matricula' => 'required|numeric',
             'name' => 'required',
             'sobrenome' => 'required',
-            'cpf' => 'required|unique:admins',
-            'email' => 'required|unique:admins|email',
+            'cpf' => 'required',
+            'email' => 'required',
             'password' => 'required',
         ];
     }

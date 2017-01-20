@@ -1,11 +1,11 @@
 @extends('templates.admin.template')
 	@section('scripts')
 	<link type="text/css" rel="stylesheet" href="/css/global.css" />
-	<link type="text/css" rel="stylesheet" href="/css/formularios.css" />
 	<meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 	<title>Detalhes</title>
 	@stop
@@ -35,4 +35,19 @@
 						</td>
 		</table>
 		</div>
+
+  <div class="details">
+  <div class="details-header">
+    <div class="details-photo">
+      <div class="details-pic">
+        <a href="#">
+          <div class="button-position"></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="info">
+</div>
 	@stop

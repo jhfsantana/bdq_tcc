@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.bootstrap'])
+var app = angular.module('app', ['ui.bootstrap', 'ngMaterial', 'ngMessages'])
 				 .constant('API_URL', 'http://bq-tcc.dev/api/')
 				 .filter('comecarEm', function()
 				 	{

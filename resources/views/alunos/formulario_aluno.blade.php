@@ -1,11 +1,6 @@
 @extends('templates.admin.template')
 	@section('scripts')
-	<link type="text/css" rel="stylesheet" href="/css/global.css" />
-	<link type="text/css" rel="stylesheet" href="/css/formularios.css" />
-	<meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 	<script>
 	function GetRandom()
 	{

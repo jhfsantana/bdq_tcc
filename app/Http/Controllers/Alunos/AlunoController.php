@@ -42,6 +42,18 @@ class AlunoController extends Controller
        return view('alunos.alunos_lista')->with('alunos', $alunos);
     }
 
+    public function indexAPI($id = null)
+    {
+        if($id == null)
+        {
+            return Aluno::orderBy('id', 'desc')->get();
+        }
+        else
+        {
+            return $this->show($id);
+        }
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -66,7 +78,7 @@ class AlunoController extends Controller
         $aluno->matricula = $request->matricula;
         $aluno->nome = $request->nome;
         $aluno->sobrenome = $request->sobrenome;
-        $aluno->cpf = Util::somenteNumeros($request->cpf);
+        $aluno->cpf = \App\Models\Util::somenteNumeros($request->cpf);
         $aluno->email = $request->email;
         $cryptPassword = bcrypt($request->password);
         $aluno->password = $cryptPassword;
@@ -85,9 +97,7 @@ class AlunoController extends Controller
      */
     public function show($id)
     {
-        $aluno = Aluno::find($id);
-
-        return view ('alunos.detalhes')->withAluno($aluno);
+        return Aluno::find($id);
     }
 
     /**
@@ -110,23 +120,23 @@ class AlunoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $aluno = Aluno::find($request->aluno_id);
-
-        $aluno->nome = $request->nome;
-        $aluno->sobrenome = $request->sobrenome;
-        $aluno->cpf = $request->cpf;
-        $aluno->email = $request->email;
-
+        $aluno = Aluno::find($id);
+        //$subject = $request->subjects;
+        $aluno->matricula = $request->input('matricula');
+        $aluno->nome = $request->input('nome');
+        $aluno->sobrenome = $request->input('sobrenome');
+        $aluno->cpf = \App\Models\Util::somenteNumeros($request->input('cpf'));
+        $aluno->email = $request->input('email');
         
-        if($aluno->push())
-        {
-            $aluno->disciplinas()->sync($request->disciplinas, false);
-
-            $request->session()->flash('alert-success', 'Aluno '.$aluno->nome. ' alterado com sucesso');
-            return redirect('/alunos');
-        }
+        $cryptPassword = bcrypt($request->input('password'));
+        $aluno->password = $cryptPassword;
+        
+       // $professor->subjects()->sync($request->subjects, false);
+        $aluno->save();
+        $aluno->disciplinas()->sync($request->input('disciplinas'), false);
+        return 'alterou com sucesso id = '.$aluno->id;
 
 
     }
@@ -150,12 +160,8 @@ class AlunoController extends Controller
      */
     public function destroy($id)
     {
-        $aluno = Aluno::find($id);
-
-        if($aluno->delete())
-        {
-            return redirect('/alunos')->with('msg', 'O aluno ' . $aluno->nome .' removido com sucesso');
-        }
+        $aluno = Aluno::find($id)->delete();
+        return 'aluno deletado';
     }
 
     public function loginTela()

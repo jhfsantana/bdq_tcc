@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\DB;
 
 class Admin extends User
 {
@@ -15,7 +16,7 @@ class Admin extends User
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','cpf', 'matricula',
     ];
 
     /**
@@ -24,11 +25,37 @@ class Admin extends User
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token',
     ];
 
     public function questoes()
     {
         return $this->belongsToMany('App\Models\Questao');
+    }
+
+    public static function validarCPF($cpf)
+    {
+        $sql = DB::select("select * from admins where cpf = ?", array($cpf));
+        if($sql)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static function validarEmail($email)
+    {
+        $sql = DB::select("select * from admins where email = ?", array($email));
+        if($sql)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

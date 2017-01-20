@@ -46,7 +46,9 @@ Route::get('/', function () {
 use App\Models\Professor;
 use App\Models\Aluno;
 use App\Models\Turma;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 Route::get('professor/login','Professores\ProfessorController@logintela');
 
@@ -98,6 +100,7 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 
 Route::group(['middleware'=> ['auth:web_admins']], function ()
 {
+	//API DOS PROFESSORES 
 	Route::get('/api/professores/{id?}', 'Professores\ProfessorController@indexAPI');
 	Route::post('/api/professores', 'Professores\ProfessorController@store');
     Route::post('/api/professores/{id}', 'Professores\ProfessorController@update');
@@ -107,8 +110,24 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
     {
 		return \App\Models\Disciplina::with('turmas')->get();
     });
+    // API PARA ALUNOS
+
+    Route::get('/api/alunos/{id?}', 'Alunos\AlunoController@indexAPI');
+    Route::post('/api/alunos', 'Alunos\AlunoController@store');
+    Route::post('/api/alunos/{id}', 'Alunos\AlunoController@update');
+    Route::delete('/api/alunos/{id}', 'Alunos\AlunoController@destroy');
+
+/*    API ADMINISTRADORES
+*/
+	Route::get('/api/administradores/{id?}', 'Admins\AdminController@indexAPI');
+    Route::post('/api/administradores', 'Admins\AdminController@store');
+    Route::put('/api/administradores/{id}', 'Admins\AdminController@update');
+    Route::delete('/api/administradores/{id}', 'Admins\AdminController@destroy');
+    Route::get('/api/administradores/cpf/{cpf}', 'Admins\AdminController@validarCPF');
 
 
+
+#####################################################################################
 
 	Route::get('home','Admins\AdminController@index');
 
@@ -164,6 +183,8 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	Route::post('/admin/questao/adicionada', 'Questoes\QuestaoController@adminQuestaoSalvar');
 
 	Route::get('/admin/questoes', 'Questoes\QuestaoController@listaTotalQuestoes');
+	
+	Route::get('/administradores', 'Admins\AdminController@lista');
 
 
 	Route::post('/admin/questao/deletar', 'Questoes\QuestaoController@deletar');

@@ -339,3 +339,72 @@ div#header .logo img {
   background-color: #333333;
   opacity:0.8;
 }
+
+/*modal do detalhe*/
+
+.details {
+  width  : 573px;
+  height : 550px;
+  margin-left  : auto;
+  margin-right : auto;
+  border-radius: 0.3em 0.3em 2px 2px;
+-webkit-box-shadow: -4px 9px 24px -2px rgba(0,0,0,0.75);
+-moz-box-shadow: -4px 9px 24px -2px rgba(0,0,0,0.75);
+box-shadow: -4px 9px 24px -2px rgba(0,0,0,0.75);
+}
+
+.details-header {
+  width  : 100%;
+  height : 160px;
+  background-color : #ccc;
+  border-radius: 0.3em 0.3em 2px 2px;
+  background-image: url('https://tatica.fedorapeople.org/Themes/F12/background.png');
+}
+
+.details-photo {
+  left : 50%;
+  position : absolute;
+}
+
+.details-pic {
+  width  : 199px;
+  height : 199px;
+  border-radius : 50%;
+  background-color : grey;
+  left : -50%;
+  position : relative;
+  margin-top : 20px;
+  background-image : url('http://image.flaticon.com/icons/svg/149/149071.svg');
+  border : solid white 4px;
+}
+
+.button-position {
+  width : 50px;
+  height : 50px;
+  background-color: blue;
+  border-radius : 50%;
+  left : 75%;
+  bottom : 5%;
+  position:absolute;
+  background-image : url('http://image.flaticon.com/icons/svg/261/261936.svg');
+}
+
+.info {
+  width  : 573px;
+  height : 250px;
+  margin-left  : auto;
+  margin-right : auto;
+  border-radius: 2px 2px 0.3em 0.3em;
+  border-radius: 0.3em 0.3em 2px 2px;
+  margin-top: 10px;
+  -webkit-box-shadow: -14px 22px 26px -12px rgba(0,0,0,0.75);
+  -moz-box-shadow: -14px 22px 26px -12px rgba(0,0,0,0.75);
+  box-shadow: -14px 22px 26px -12px rgba(0,0,0,0.75);
+}
+
+.modal .modal-dialog{
+  width:650px;
+  position: absolute;
+  top:0; bottom: 0; left: 0; right: 0;
+  margin: auto
+}

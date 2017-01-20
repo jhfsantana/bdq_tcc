@@ -116,27 +116,11 @@ class ProfessorController extends Controller
     public function show($id)
     {
        return $professor = Professor::find($id);
-
-       #TO-DO RELACIONAR PROFESSOR COM TURMA PARA CORRIGIR BUG DO PROFESSOR EM TODAS AS TURMAS.
-
-/*        return view('professores.detalhes')->withProfessor($professor);   
-*/    }
+    }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.r
-     *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

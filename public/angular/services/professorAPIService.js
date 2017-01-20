@@ -1,11 +1,10 @@
-angular.module('app')
-		.factory('professorAPI', function($http, API_URL){
+angular.module('app').factory('professorAPI', function($http, API_URL){
 			
 			var _getProfessores = function(){
 				return $http.get(API_URL + 'professores');
 			};
 			var _saveProfessor = function(professor){
-				return $http.post('http://bq-tcc.dev/api/professores', professor);
+				return $http.post(API_URL + 'professores', professor);
 			};
 			var _deleteProfessor = function(id){
 				return $http.delete(API_URL + 'professores/' + id);

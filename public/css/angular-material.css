@@ -1,0 +1,23 @@
+
+
+   md-input-container .md-input {
+     -webkit-order: 2;
+         -ms-flex-order: 2;
+             order: 2;
+     display: block;
+     margin-top: 0;
+     background: none;
+     padding-top: 2px;
+     padding-bottom: 2px;
+     padding-left: 2px;
+     padding-right: 2px;
+     border-width: 1px 1px 1px 1px ;
+     line-height: 26px;
+     height: 30px;
+     -ms-flex-preferred-size: 26px;
+     border-radius: 5px;
+     border-style: solid;
+     width: 100%;
+     box-sizing: border-box;
+     float: left; }
+

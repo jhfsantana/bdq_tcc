@@ -15,6 +15,7 @@ use App\Models\Avaliacao;
 use App\Models\Util;
 use Charts;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AdminRequest;
 
 class AdminController extends Controller
@@ -67,7 +68,37 @@ class AdminController extends Controller
                                    ->with('diames', $diames);
     }
 
+    public function indexAPI($id = null)
+    {
+        if($id == null)
+        {
+            return Admin::orderBy('id', 'desc')->get();
+        }
+        else
+        {
+            return $this->show($id);
+        }
+    }
 
+    public function validarCPF($cpf)
+    {   
+        if(Input::has('cpf'))
+        {
+            $cpf = Input::get('cpf');
+        }
+        else
+        {
+            $sql = Admin::where('cpf', $cpf)->get();
+        }
+
+        return json_encode($sql);
+    }
+
+    public function show($id)
+    {
+        return Admin::find($id);
+    }
+    
     public function loginTela()
     {
         return view('admin.auth');
@@ -80,21 +111,67 @@ class AdminController extends Controller
 
     public function store(AdminRequest $request)
     {
-    	$admin = new Admin;
-    	$admin->name = $request->name;
-        $admin->sobrenome = $request->sobrenome;
-        $admin->cpf = Util::somenteNumeros($request->cpf);
-    	$admin->email = $request->email;
-
-    	$cryptPassword = bcrypt($request->password);
-    	$admin->password = $cryptPassword;
-
-    	if($admin ->save())
+       
+        $admin = new Admin;
+        $admin->matricula = $request->input('matricula');
+        $admin->name = $request->input('name');
+        $admin->sobrenome = $request->input('sobrenome');
+        
+        if(!Admin::validarCPF($request->input('cpf')))
         {
-            $request->session()->flash('alert-success', 'Administrador salvo com sucesso!');
-            return redirect('/home');
+            $admin->cpf = Util::somenteNumeros($request->input('cpf'));
+        }
+        else
+        {
+            $request->session()->flash('alert-danger', 'CPF JÁ EXISTENTE!');
+            return redirect('/administradores');
         }
 
+        if(!Admin::validarEmail($request->input('email')))
+        {
+            $admin->email = $request->input('email');
+
+        }
+        else
+        {
+            $request->session()->flash('alert-danger', 'EMAIL JÁ EXISTENTE!');
+            return redirect('/administradores');
+        }
+        
+        $cryptPassword = bcrypt($request->input('password'));
+        $admin->password = $cryptPassword;
+        
+       // $professor->subjects()->sync($request->subjects, false);
+        
+        $professor->save();
+        return 'salvou';
+
+    }
+
+    public function update(AdminRequest $request, $id)
+    {
+        $admin = Admin::find($id);
+        //$subject = $request->subjects;
+        $admin->matricula = $request->input('matricula');
+        $admin->name = $request->input('name');
+        $admin->sobrenome = $request->input('sobrenome');
+        $admin->cpf = Util::somenteNumeros($request->input('cpf'));
+        $admin->email = $request->input('email');
+        
+        $cryptPassword = bcrypt($request->input('password'));
+        $admin->password = $cryptPassword;
+        
+       // $professor->subjects()->sync($request->subjects, false);
+        
+        $admin ->save();
+        return 'alterou';
+
+
+    }
+
+    public function destroy($id)
+    {
+        return Admin::find($id)->delete();
     }
 
     public function relatorio()  
@@ -126,6 +203,10 @@ class AdminController extends Controller
 
         return view('admin.relatorio_qtd_questao_av')
                     ->with('qtdQuestao', $qtdQuestao);
-    }    
+    }
 
+    public function lista()
+    {
+        return view('admin.admin_lista');
+    }
 }
