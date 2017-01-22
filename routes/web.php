@@ -123,7 +123,8 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
     Route::post('/api/administradores', 'Admins\AdminController@store');
     Route::put('/api/administradores/{id}', 'Admins\AdminController@update');
     Route::delete('/api/administradores/{id}', 'Admins\AdminController@destroy');
-    Route::get('/api/administradores/cpf/{cpf}', 'Admins\AdminController@validarCPF');
+    Route::get('/api/administradores/cpf/{dado?}', 'Admins\AdminController@validarDados');
+    Route::post('/api/administradores/cpf/', 'Admins\AdminController@validarCPF');
 
 
 

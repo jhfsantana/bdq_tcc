@@ -138,7 +138,7 @@
 									<md-input-container class="md-block">
 										<label>Matricula</label>
 										<div class="col-sm-9">
-											<input required md-no-asterisk type="number" name="matricula" value="@{{ administrador.matricula }}" ng-model="administrador.matricula" minlength="11"/>
+											<input required unique-data md-no-asterisk type="number" name="matricula" value="@{{ administrador.matricula }}" ng-model="administrador.matricula" minlength="11"/>
 											<div ng-messages="frmAdmin.matricula.$error">
           										<div ng-message="required">
           											Campo matricula é obrigatório.
@@ -146,12 +146,19 @@
          										<div ng-message="minlength">
           											Tamanho da matricula deve ser no minimo 11 caracteres.
           										</div>
+         										<div ng-message="unique">
+          											Matricula já existente.
+          										</div>
+												<span class="text-success" ng-show="frmAdmin.matricula.$valid">
+													Matricula disponível.
+												</span>
 											</div>
 										</div>
 									</md-input-container>
 								</div>
 		
-								
+		
+							
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
 										<label>Nome</label>
@@ -182,32 +189,39 @@
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
 										<label>CPF</label>
-											<input unique-username="" required md-no-asterisk type="text" name="cpf" value="@{{ administrador.cpf }}" ng-model="administrador.cpf" maxlength="11" minlength="11"/>
-											<div ng-messages="frmAdmin.$submitted && frmAdmin.cpf.$error">
+											<input unique-data required md-no-asterisk type="text" name="cpf" value="@{{ administrador.cpf }}" ng-model="administrador.cpf" maxlength="11" minlength="11"/>
+											<div ng-messages="frmAdmin.cpf.$error">
           										<div ng-message="required">
           											Campo cpf é obrigatório.
           										</div>
          										<div ng-message="minlength">
-          											Tamanho do campo cpf deve ter no minimo 11 caracteres.
+          											Tamanho da cpf deve ser no minimo 11 caracteres.
           										</div>
-         										<div ng-message="maxlength">
-          											Tamanho do campo cpf deve ter no máximo 11 caracteres.
+         										<div ng-message="unique">
+          											cpf já existente.
           										</div>
-												<span class="hide-while-in-focus" 
-												     ng-show="frmAdmin.cpf.$error.unique">Username taken!</span>
+												<span class="text-success" ng-show="frmAdmin.cpf.$valid">
+													cpf disponível.
+												</span>
 											</div>
 									</md-input-container>
 
 									<md-input-container class="md-block" flex="50">
-										<label>E-mal</label>
-											<input required md-no-asterisk type="email" name="email" value="@{{ administrador.email }}" ng-model="administrador.email" maxlength="30"/>
-											<div ng-messages="frmAdmin.$submitted && frmAdmin.email.$error">
+										<label>E-mail</label>
+											<input required unique-data md-no-asterisk type="email" name="email" value="@{{ administrador.email }}" ng-model="administrador.email" maxlength="30"/>
+											<div ng-messages="frmAdmin.email.$error">
           										<div ng-message="required">
           											Campo email é obrigatório.
           										</div>
-         										<div ng-message="maxlength">
-          											Tamanho do campo email deve ter no máximo 30 caracteres.
+         										<div ng-message="minlength">
+          											Tamanho da email deve ser no minimo 11 caracteres.
           										</div>
+         										<div ng-message="unique">
+          											email já existente.
+          										</div>
+												<span class="text-success" ng-show="frmAdmin.email.$valid">
+													email disponível.
+												</span>
 											</div>
 									</md-input-container>
 								</div>

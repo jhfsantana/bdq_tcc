@@ -17,6 +17,7 @@ use Charts;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AdminRequest;
+use Response;
 
 class AdminController extends Controller
 {
@@ -80,18 +81,23 @@ class AdminController extends Controller
         }
     }
 
-    public function validarCPF($cpf)
-    {   
-        if(Input::has('cpf'))
+    public function validarDados($dado)
+    {  
+
+        if(Input::has('dado'))
         {
-            $cpf = Input::get('cpf');
+            $cpf = Input::get('dado');
         }
         else
         {
-            $sql = Admin::where('cpf', $cpf)->get();
+            $sql = Admin::where('email', $dado)->orWhere('cpf', $dado)->orWhere('matricula', $dado)->get();
         }
 
-        return json_encode($sql);
+        if(count($sql) > 0)
+        {
+            return json_encode(true);
+        }
+
     }
 
     public function show($id)
@@ -143,7 +149,7 @@ class AdminController extends Controller
         
        // $professor->subjects()->sync($request->subjects, false);
         
-        $professor->save();
+        $admin->save();
         return 'salvou';
 
     }
