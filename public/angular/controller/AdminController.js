@@ -18,7 +18,8 @@ app.controller('AdminController', function($scope, $http, API_URL, adminAPI)
 		      $scope.form_title = "Alterar Administrador";
 		      $scope.id = id;
 		      $http.get(API_URL + 'administradores/' + id).success(function(response){
-		      $scope.administrador = response;
+		      $scope.administrador = angular.copy(response);
+		      $scope.delete;
 		      console.log(response);
 		      });
 		      break;
@@ -92,6 +93,6 @@ app.controller('AdminController', function($scope, $http, API_URL, adminAPI)
 
 		$scope.$on('modal.hidden', function() {
   		// Execute action
-  		$scope.administrador = {};
+		      $scope.delete;
 		});
 	});

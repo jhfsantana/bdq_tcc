@@ -21,9 +21,9 @@ class DisciplinaController extends Controller
      */
     public function index()
     {
-
         $disciplinas = Disciplina::all();
-        return view('disciplinas.disciplinas_lista')->with('disciplinas', $disciplinas);
+        $turmas = Turma::all();
+        return view('disciplinas.disciplinas_lista')->with('turmas', $turmas)->with('disciplinas', $disciplinas);
     }
     /**
 
@@ -33,8 +33,8 @@ class DisciplinaController extends Controller
      */
     public function create()
     {
-        $turmas = Turma::all();
-        return view('disciplinas.formulario_disciplina')->with('turmas', $turmas);
+        $disciplinas = Disciplina::all();
+        return view('disciplinas.formulario_disciplina')->with('turmas', $turmas)->with('disciplinas', $disciplinas);
     }
 
     /**
@@ -44,12 +44,8 @@ class DisciplinaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(DisciplinaRequest $request)
-    {
-
-        $disciplina = $request->nome;
-        $turma = $request->turmas;
-        
-        $turmaDisponivel = Disciplina::checarTurmaDisponivel($disciplina, $turma);
+    {   
+        $turmaDisponivel = Disciplina::checarTurmaDisponivel($request->nome, $request->turmas);
         
         if(count($turmaDisponivel) > 0)
         {
@@ -65,12 +61,10 @@ class DisciplinaController extends Controller
         $disciplina->nome = $request->nome;
     
        // $teacher->subjects()->sync($request->subjects, false);
-        $disciplina->save();
-
-        $disciplina -> turmas()->sync($request->turmas, false);
 
         if($disciplina->save())
         {
+            $disciplina -> turmas()->sync($request->turmas, false);
             $request->session()->flash('alert-success', 'Disciplina cadastrada com sucesso');
             return redirect ('/disciplinas');
         }

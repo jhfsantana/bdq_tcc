@@ -13,94 +13,54 @@ use App\Http\Requests\Turma\TurmaRequest;
 
 class TurmaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-
+        return view('turmas.formulario_turma');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function indexAPI($id = null)
+    {
+        if($id == null)
+        {
+            return Turma::all();
+        }
+        else
+        {
+            return $this->show($id);
+        }
+    }
+
     public function create()
     {
         $turmas = Turma::all();
         return view('turmas.formulario_turma')->with('turmas', $turmas);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(TurmaRequest $request)
     {
-        $turma = new Turma;
-
+        $turma = new Turma();
         $turma->nome = $request->nome;
-        
-        if($turma->save())
-        {
-            $request->session()->flash('alert-success', 'Avaliação salva com sucesso!');
-            return redirect('/turma/novo');
-        }else
-        {
-            $request->session()->flash('alert-danger', 'Avaliação salva com sucesso!');
-            return redirect('/turma/novo');
-        }
-        
+        $turma->save();
 
+        return 'turma criada';
+        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return Turma::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $turma = Turma::find($id);
+        $turma->nome = $request->nome;
+        $turma->save();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+        return 'turma alterada id = '.$id;
+    }
     public function destroy($id)
     {
-        //
+        return Turma::find($id)->delete();
     }
 }

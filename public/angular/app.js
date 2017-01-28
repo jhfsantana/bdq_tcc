@@ -14,30 +14,45 @@ var app = angular.module('app', ['ui.bootstrap', 'ngMaterial', 'ngMessages'])
 						uibPaginationConfig.nextText="Próxima";
 						uibPaginationConfig.firstText="Primeira";
 						uibPaginationConfig.lastText="Última";
-					}]).directive('uniqueData', validarDados); 
+					}]).directive('dadoUnico', function($http, $q, API_URL) {
+					    return {
+					        require: 'ngModel',	
+					        link: function(scope, elem, attrs, ngModel) {
+								ngModel.$asyncValidators.dadoUnico = function(modelValue, viewValue) {
+									return $http.post(API_URL + 'administradores/cpf/' + elem.val()).then(function(response) {
+										return response.data == 'true' ? $q.reject(response.data.errorMessage) : true;
+								    });
+								};
+					        } 
+					    };
+					});
+
+
+
+/*.directive('uniqueData', validarDados); 
 					
-					function validarDados($http, API_URL)
-					{
-						return {
-							restrict: 'A',
-							require: 'ngModel',
-							link : function(scope, elem, attrs, ctrl, ngModel)
-							{
-								 elem.on('change', function(evt){
-									scope.$apply(function(){
-										var request = $http.get(API_URL + 'administradores/cpf/' + elem.val());
-										request.then(function(response){
-											if(response.data == 'true')
-											{
-												ctrl.$setValidity('unique', false);
-											}else{
-												ctrl.$setValidity('unique', !false);
-											}
-										}, function(error){
-											alert(error.data);
-										});
-									});
-								});
-							}
+function validarDados($http, API_URL)
+{
+	return {
+		restrict: 'A',
+		require: 'ngModel',
+		link : function(scope, elem, attrs, ctrl)
+		{
+			 elem.on('change', function(evt){
+				scope.$apply(function(){
+					var request = $http.get(API_URL + 'administradores/cpf/' + elem.val());
+					request.then(function(response){
+						if(response.data == 'true')
+						{
+							ctrl.$setValidity('unique', false);
+						}else{
+							ctrl.$setValidity('unique', !false);
 						}
-					};
+					}, function(error){
+						alert(error.data);
+					});
+				});
+			});
+		}
+	}
+};*/

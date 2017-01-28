@@ -123,10 +123,23 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
     Route::post('/api/administradores', 'Admins\AdminController@store');
     Route::put('/api/administradores/{id}', 'Admins\AdminController@update');
     Route::delete('/api/administradores/{id}', 'Admins\AdminController@destroy');
-    Route::get('/api/administradores/cpf/{dado?}', 'Admins\AdminController@validarDados');
-    Route::post('/api/administradores/cpf/', 'Admins\AdminController@validarCPF');
+    Route::post('/api/administradores/cpf/{dado?}', 'Admins\AdminController@validarDados');
 
+/*    API TURMAS
+*/
+	Route::get('/api/turmas/{id?}', 'Turmas\TurmaController@indexAPI');
+    Route::post('/api/turmas', 'Turmas\TurmaController@store');
+    Route::post('/api/turmas/{id}', 'Turmas\TurmaController@update');
+    Route::delete('/api/turmas/{id}', 'Turmas\TurmaController@destroy');
+    Route::post('/api/turmas/cpf/{dado?}', 'Turmas\TurmaController@validarDados');
 
+/*    API DISCIPLINAS
+*/
+	Route::get('/api/disciplinas/{id?}', 'Disciplinas\DisciplinaController@indexAPI');
+    Route::post('/api/disciplinas', 'Disciplinas\DisciplinaController@store');
+    Route::post('/api/disciplinas/{id}', 'Disciplinas\DisciplinaController@update');
+    Route::delete('/api/disciplinas/{id}', 'Disciplinas\DisciplinaController@destroy');
+    Route::post('/api/disciplinas/cpf/{dado?}', 'Disciplinas\DisciplinaController@validarDados');
 
 #####################################################################################
 
@@ -158,9 +171,8 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
     Route::post('professor/detalhes/{id}','Professores\ProfessorController@show');
     Route::post('professores/{id}','Professores\ProfessorController@destroy');
 
-	Route::get('turma/novo','Turmas\TurmaController@create');
+	Route::get('/turmas','Turmas\TurmaController@index');
 	Route::post('classrooms','Turmas\TurmaController@store');
-
 
 	Route::get('disciplina/novo','Disciplinas\DisciplinaController@create');
 	Route::get('disciplinas','Disciplinas\DisciplinaController@index');

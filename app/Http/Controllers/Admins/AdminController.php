@@ -84,14 +84,7 @@ class AdminController extends Controller
     public function validarDados($dado)
     {  
 
-        if(Input::has('dado'))
-        {
-            $cpf = Input::get('dado');
-        }
-        else
-        {
-            $sql = Admin::where('email', $dado)->orWhere('cpf', $dado)->orWhere('matricula', $dado)->get();
-        }
+        $sql = Admin::where('email', $dado)->orWhere('cpf', $dado)->orWhere('matricula', $dado)->get();
 
         if(count($sql) > 0)
         {

@@ -1,33 +1,33 @@
-app.controller('DisciplinaController', function($scope, $http, API_URL, disciplinaAPI)
+app.controller('TurmaController', function($scope, $http, API_URL, turmaAPI)
 	{
 		$scope.pageSize = 5;
 		$scope.currentPage = 1;
-
-		disciplinaAPI.getDisciplinas()
+		
+		turmaAPI.getTurmas()
 		.success(function(response)
 		{
-			$scope.disciplinas = response;
+			$scope.turmas = response;
 		});
 
-	$scope.toggle = function(modalstate, id) {
+		$scope.toggle = function(modalstate, id) {
 		  $scope.modalstate = modalstate;
 		  switch(modalstate) {
 		    case 'add':
-		      $scope.form_title = "Cadastrar nova Disciplina";
+		      $scope.form_title = "Cadastrar nova Turma";
 		      break;
 		    case 'edit':
-		      $scope.form_title = "Alterar Disciplina";
+		      $scope.form_title = "Alterar Turma";
 		      $scope.id = id;
-		      $http.get(API_URL + 'disciplinas/' + id).success(function(response){
-		      $scope.disciplina = response;
+		      $http.get(API_URL + 'turmas/' + id).success(function(response){
+		      $scope.turma = response;
 		      console.log(response);
 		      });
 		      break;
 			case 'details':
 		      $scope.form_title = "Detalhes";
 		      $scope.id = id;
-		      $http.get(API_URL + 'disciplinas/' + id).success(function(response){
-		      $scope.disciplina = response;
+		      $http.get(API_URL + 'turmas/' + id).success(function(response){
+		      $scope.turma = response;
 		      console.log(response);
 		      });
 		      break;
@@ -46,13 +46,13 @@ app.controller('DisciplinaController', function($scope, $http, API_URL, discipli
 		}
 
 		$scope.save = function(modalstate, id) {
-			var url = API_URL + "disciplinas";
+			var url = API_URL + "turmas";
 			if (modalstate === 'edit') {
 				url += "/" + id;
 				$http({
 				  method: 'post',
 				  url: url,
-				  data: $.param($scope.disciplina),
+				  data: $.param($scope.turma),
 				  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 				}).success(function(response){
 				  console.log(response);
@@ -64,7 +64,7 @@ app.controller('DisciplinaController', function($scope, $http, API_URL, discipli
 			}
 			else
 			{
-				disciplinaAPI.saveDisciplina($scope.disciplina).success(function(response){
+				turmaAPI.saveTurma($scope.turma).success(function(response){
 				  console.log(response);
 				  location.reload();
 				}).error(function(response){
@@ -75,9 +75,9 @@ app.controller('DisciplinaController', function($scope, $http, API_URL, discipli
 		}
 		
 		$scope.confirmDelete = function(id) {
-			var isConfirmDelete = confirm('Tem certeza que deseja excluir essa disciplina?');
+			var isConfirmDelete = confirm('Tem certeza que deseja excluir esse turma?');
 			if (isConfirmDelete) {
-			 disciplinaAPI.deleteDisciplina(id).success(function(data){
+			 turmaAPI.deleteTurma(id).success(function(data){
 			   console.log(data);
 			   location.reload();
 			 }).error(function(data){
@@ -91,7 +91,7 @@ app.controller('DisciplinaController', function($scope, $http, API_URL, discipli
 
 		$scope.$on('modal.hidden', function() {
   		// Execute action
-  		$scope.disciplina = {};
+  		$scope.turma = {};
 		});
 
 });

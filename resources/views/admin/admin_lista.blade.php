@@ -130,7 +130,7 @@
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">×</span>
 					        </button>
-					        <h4 class="modal-title" id="myModalLabel">@{{form_title}}</h4>
+					        <h4 class="modal-title" id="myModalLabel" style="text-align: center;">@{{form_title}}</h4>
 					      </div>
 					      <div class="modal-body">
 							<form name="frmAdmin" class="form-horizontal" novalidate=""> 
@@ -138,7 +138,7 @@
 									<md-input-container class="md-block">
 										<label>Matricula</label>
 										<div class="col-sm-9">
-											<input required unique-data md-no-asterisk type="number" name="matricula" value="@{{ administrador.matricula }}" ng-model="administrador.matricula" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="number" name="matricula" value="@{{ administrador.matricula }}" ng-model="administrador.matricula" minlength="11"/>
 											<div ng-messages="frmAdmin.matricula.$error">
           										<div ng-message="required">
           											Campo matricula é obrigatório.
@@ -146,12 +146,15 @@
          										<div ng-message="minlength">
           											Tamanho da matricula deve ser no minimo 11 caracteres.
           										</div>
-         										<div ng-message="unique">
+         										<div ng-message="dadoUnico">
           											Matricula já existente.
           										</div>
 												<span class="text-success" ng-show="frmAdmin.matricula.$valid">
 													Matricula disponível.
 												</span>
+												<span ng-if="frmAdmin.matricula.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
 											</div>
 										</div>
 									</md-input-container>
@@ -163,12 +166,12 @@
 									<md-input-container class="md-block" flex="50">
 										<label>Nome</label>
 											<input required md-no-asterisk type="text" name="name" value="@{{ administrador.name }}" ng-model="administrador.name" maxlength="30"/>
-											<div ng-messages="frmAdmin.$submitted && frmAdmin.name.$error">
+											<div ng-messages="frmAdmin.name.$error">
           										<div ng-message="required">
-          											Campo name é obrigatório.
+          											Campo nome é obrigatório.
           										</div>
-         										<div ng-message="maxlength">
-          											Tamanho do campo name deve ter no máximo 30 caracteres.
+         										<div ng-message="minlength">
+          											Tamanho do nome deve ser no minimo 11 caracteres.
           										</div>
 											</div>
 									</md-input-container>
@@ -176,7 +179,7 @@
 									<md-input-container class="md-block" flex="50">
 										<label>Sobrenome</label>
 											<input required md-no-asterisk type="text" name="sobrenome" value="@{{ administrador.sobrenome }}" ng-model="administrador.sobrenome" maxlength="30"/>
-											<div ng-messages="frmAdmin.$submitted && frmAdmin.sobrenome.$error">
+											<div ng-messages="frmAdmin.sobrenome.$error">
           										<div ng-message="required">
           											Campo sobrename é obrigatório.
           										</div>
@@ -189,7 +192,7 @@
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
 										<label>CPF</label>
-											<input unique-data required md-no-asterisk type="text" name="cpf" value="@{{ administrador.cpf }}" ng-model="administrador.cpf" maxlength="11" minlength="11"/>
+											<input dado-unico required md-no-asterisk type="text" name="cpf" value="@{{ administrador.cpf }}" ng-model="administrador.cpf" maxlength="11" minlength="11"/>
 											<div ng-messages="frmAdmin.cpf.$error">
           										<div ng-message="required">
           											Campo cpf é obrigatório.
@@ -197,9 +200,12 @@
          										<div ng-message="minlength">
           											Tamanho da cpf deve ser no minimo 11 caracteres.
           										</div>
-         										<div ng-message="unique">
+         										<div ng-message="dadoUnico">	
           											cpf já existente.
           										</div>
+												<span ng-if="frmAdmin.cpf.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
 												<span class="text-success" ng-show="frmAdmin.cpf.$valid">
 													cpf disponível.
 												</span>
@@ -208,7 +214,7 @@
 
 									<md-input-container class="md-block" flex="50">
 										<label>E-mail</label>
-											<input required unique-data md-no-asterisk type="email" name="email" value="@{{ administrador.email }}" ng-model="administrador.email" maxlength="30"/>
+											<input required dado-unico md-no-asterisk type="email" name="email" value="@{{ administrador.email }}" ng-model="administrador.email" maxlength="30"/>
 											<div ng-messages="frmAdmin.email.$error">
           										<div ng-message="required">
           											Campo email é obrigatório.
@@ -216,12 +222,15 @@
          										<div ng-message="minlength">
           											Tamanho da email deve ser no minimo 11 caracteres.
           										</div>
-         										<div ng-message="unique">
+         										<div ng-message="dadoUnico">
           											email já existente.
           										</div>
 												<span class="text-success" ng-show="frmAdmin.email.$valid">
 													email disponível.
 												</span>
+												<span ng-if="frmAdmin.email.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
 											</div>
 									</md-input-container>
 								</div>
@@ -231,7 +240,7 @@
 										<label>Password</label>
 										<div class="col-sm-9">
 											<input required md-no-asterisk type="password" name="password" value="@{{ administrador.password }}" ng-model="administrador.password" minlength="8"/>
-											<div ng-messages="frmAdmin.$submitted && frmAdmin.password.$error">
+											<div ng-messages="frmAdmin.password.$error">
           										<div ng-message="required">
           											Campo password é obrigatório.
           										</div>
