@@ -31,6 +31,17 @@ class QuestaoController extends Controller
                     ->with('questoes', $questoes);
     }
 
+    public function indexAPI($id = null)
+    {
+        if($id == null)
+        {
+            return Questao::all();
+        }else
+        {
+            return $this->show($id);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -70,7 +81,7 @@ class QuestaoController extends Controller
 
         if(isset($request->admin_id))
         {
-            $questao->professor()->associate($request->professor_id);
+            $questao->professor()->associate($request->admin_id);
         }
 
 
@@ -91,7 +102,7 @@ class QuestaoController extends Controller
      */
     public function show($id)
     {
-        //
+        return Questao::find($id);
     }
 
     /**
@@ -186,12 +197,10 @@ class QuestaoController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function destroy($id)
+    {
+        Questao::find($id)->delete();
+    }
 
     public function deletar(Request $request)
     {

@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-      <link rel="stylesheet" href="css/style.css">
-      <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/global.css">
 
   
 </head>
@@ -59,6 +59,10 @@
 
                 <li>
                     <a href="/turmas"><i class="fa fa-fw fa-pencil"></i> Turmas</a>
+                </li>
+
+                <li>
+                    <a href="/admin/questoes"><i class="fa fa-fw fa-list-ol"></i> Questões</a>
                 </li>
 
                 <li>
@@ -147,10 +151,10 @@
 
       <!-- /#final footer -->
 
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 
-    <script src="js/index.js"></script>
+<script src="js/index.js"></script>
 
 </body>
 </html>

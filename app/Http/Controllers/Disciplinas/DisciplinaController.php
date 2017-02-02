@@ -25,12 +25,21 @@ class DisciplinaController extends Controller
         $turmas = Turma::all();
         return view('disciplinas.disciplinas_lista')->with('turmas', $turmas)->with('disciplinas', $disciplinas);
     }
-    /**
 
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function indexAPI($id = null)
+    {
+        if($id != null)
+        {
+            return Disciplina::all();
+        }
+        else
+        {
+            return $this->show($id);
+        }
+
+    }
+
+
     public function create()
     {
         $disciplinas = Disciplina::all();
@@ -53,67 +62,50 @@ class DisciplinaController extends Controller
             return redirect()->back();
 
         }
-
-
-        $disciplina = new Disciplina;
-       
-        //$subject = $request->subjects;
-        $disciplina->nome = $request->nome;
-    
-       // $teacher->subjects()->sync($request->subjects, false);
-
-        if($disciplina->save())
+        else
         {
-            $disciplina -> turmas()->sync($request->turmas, false);
-            $request->session()->flash('alert-success', 'Disciplina cadastrada com sucesso');
-            return redirect ('/disciplinas');
+            $disciplina = new Disciplina;
+            $disciplina->nome = $request->nome;
+            if($disciplina->save())
+            {
+                $disciplina->turmas()->sync($request->turmas, false);
+                $request->session()->flash('alert-success', 'Disciplina cadastrada com sucesso');
+                return redirect ('/disciplinas');
+            }
         }
-        //$teacher->subjects()->attach($request->subjects);
-
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return Disciplina::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $turmaDisponivel = Disciplina::checarTurmaDisponivel($request->nome, $request->turmas);
+        
+        if(count($turmaDisponivel) > 0)
+        {
+            $request->session()->flash('alert-danger', 'Disciplina já associada a esta turma');
+            return redirect()->back();
+
+        }
+        else
+        {
+            $disciplina = Disciplina::find($id);
+            $disciplina->nome = $request->nome;
+            if($disciplina->save())
+            {
+                $disciplina->turmas()->sync($request->turmas, false);
+                $request->session()->flash('alert-success', 'Disciplina cadastrada com sucesso');
+                return redirect ('/disciplinas');
+            }
+        }
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        Disciplina::find($id)->delete();
     }
 }

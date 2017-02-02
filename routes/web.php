@@ -131,7 +131,6 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
     Route::post('/api/turmas', 'Turmas\TurmaController@store');
     Route::post('/api/turmas/{id}', 'Turmas\TurmaController@update');
     Route::delete('/api/turmas/{id}', 'Turmas\TurmaController@destroy');
-    Route::post('/api/turmas/cpf/{dado?}', 'Turmas\TurmaController@validarDados');
 
 /*    API DISCIPLINAS
 */
@@ -140,6 +139,13 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
     Route::post('/api/disciplinas/{id}', 'Disciplinas\DisciplinaController@update');
     Route::delete('/api/disciplinas/{id}', 'Disciplinas\DisciplinaController@destroy');
     Route::post('/api/disciplinas/cpf/{dado?}', 'Disciplinas\DisciplinaController@validarDados');
+
+/*    API QUESTOES
+*/
+	Route::get('/api/questoes/{id?}', 'Questoes\QuestaoController@indexAPI');
+    Route::post('/api/questoes', 'Questoes\QuestaoController@store');
+    Route::post('/api/questoes/{id}', 'Questoes\QuestaoController@update');
+    Route::delete('/api/questoes/{id}', 'Questoes\QuestaoController@destroy');
 
 #####################################################################################
 

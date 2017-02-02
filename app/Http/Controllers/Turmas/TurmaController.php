@@ -59,8 +59,11 @@ class TurmaController extends Controller
 
         return 'turma alterada id = '.$id;
     }
+    
     public function destroy($id)
     {
-        return Turma::find($id)->delete();
+       Turma::find($id)->delete();
+
+       return 'Turma ' . $id .' deletada';
     }
 }

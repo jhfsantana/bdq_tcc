@@ -123,14 +123,13 @@
 								
 								<div layout="row">
 									<div class="form-group" ng-controller="TurmaController" flex="95" style="margin-left: auto; margin-right: auto;">
-										<!-- 										<div ng-controller="DisciplinaController" ng-model="aluno.disciplinas">
-										--><!-- 												<select multiple class="form-control" ng-model="aluno.disciplinas" ng-options="disciplina.id as disciplina.nome for disciplina in disciplinas">
+										<select multiple class="form-control" ng-model="disciplina.turmas" ng-options="turma.id as turma.nome for turma in turmas track by $index">
 										</select>
-										-->
-										<select multiple class="form-control" ng-model="disciplina.turmas">
+									
+										<!-- <select multiple class="form-control" ng-model="disciplina.turmas">
 											<option value="" disabled="true">Selecione uma turma</option>
 											<option ng-repeat="turma in turmas" value="@{{turma.id}}">@{{turma.nome}}</option>
-										</select>	
+										</select> -->	
 									</div>
 								</div>
 								</div>
