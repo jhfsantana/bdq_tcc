@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Questoes;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests\Questao\QuestaoRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests;
+use App\Models\Disciplina;
 use App\Models\Professor;
 use App\Models\Questao;
-use App\Models\Disciplina;
-use Validator;
+use App\Http\Requests\Questao\QuestaoRequest;
 use Auth;
-use Illuminate\Support\Facades\Input;
-use DB;
 
+    
 
 
 class QuestaoController extends Controller
@@ -23,10 +22,10 @@ class QuestaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
         $questoes = Professor::with('questoes')
-                    ->find($id)->questoes;
+                    ->find(Auth::user()->id)->questoes;
         return view('questoes.questao_lista')
                     ->with('questoes', $questoes);
     }
@@ -35,7 +34,7 @@ class QuestaoController extends Controller
     {
         if($id == null)
         {
-            return Questao::all();
+            return Questao::orderBy('id', 'desc')->get();
         }else
         {
             return $this->show($id);
@@ -47,9 +46,9 @@ class QuestaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $professor = Professor::find($id);
+        $professor = Professor::find(Auth::user()->id);
         return view('questoes.formulario_questao')->withProfessor($professor);
     }
 
@@ -62,139 +61,84 @@ class QuestaoController extends Controller
     public function store(Request $request)
     {
         
-        $questao = new Questao();
+        $this->validate($request, [
+            'disciplina_id' => 'required|max:255',
+        ]
+        ,$messages = [
+            'disciplina_id.required'    => 'Escolha uma disciplina',
 
+        ]);
+
+        $questao = new Questao();
         $questao->questao = $request->questao;
         $questao->disciplina_nome = $request->disciplina_nome;
-        $questao->alternativaA = $request->a;
-        $questao->alternativaB = $request->b;
-        $questao->alternativaC = $request->c;
-        $questao->alternativaD = $request->d;
-        $questao->alternativaE = $request->e;
+        $questao->alternativaA = $request->alternativaA;
+        $questao->alternativaB = $request->alternativaB;
+        $questao->alternativaC = $request->alternativaC;
+        $questao->alternativaD = $request->alternativaD;
+        $questao->alternativaE = $request->alternativaE;
         $questao->correta = $request->correta;
         $questao->nivel = $request->nivel;
         
-        if(isset($request->professor_id))
+        if(\Auth::guard('web_admins'))
         {
-            $questao->professor()->associate($request->professor_id);
+            $questao->admin()->associate(Auth::guard('web_admins')->user()->id);
         }
-
-        if(isset($request->admin_id))
+        elseif(\Auth::guard('web_teachers'))
         {
-            $questao->professor()->associate($request->admin_id);
+            $questao->professor()->associate(Auth::guard('web_teachers')->user()->id);
         }
-
 
         $questao->disciplina()->associate($request->disciplina);
 
         if($questao->save())
         {
-            $request->session()->flash('alert-success', 'Questão salva com sucesso!');
-            return redirect ('professor');
+            return json_encode([
+                'message' => 'Questão com ID '. $questao->id .' cadastrada com sucesso!',
+                'success' => 'success' 
+            ]);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return Questao::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
+
+    public function update(Request $request, $id)
     {
-        $questao = Questao::find($request->id);
-        $professor = Professor::find($request->professor_id);
-               
-       if(Auth::guard('web_admins')->check())
-        {
-            $disciplinas = Disciplina::all();
-            return view('questoes.questao_alterar')->withQuestao($questao)->with('professor', $professor)->with('disciplinas', $disciplinas);
-        }
-        elseif(Auth::guard('web_teachers')->check())
-        {
-            return view('questoes.professor.questao_alterar')->withQuestao($questao)->with('professor', $professor);
-        }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-
-        $alterado = Questao::find($request->questao_id);
-
-        $alterado->questao = $request->questao;
-
-        $alterado->alternativaA = $request->a;
-
-        $alterado->alternativaB = $request->b;
-
-        $alterado->alternativaC = $request->c;
-
-        $alterado->alternativaD = $request->d;
-
-        $alterado->alternativaE = $request->e;
-
-        $alterado->correta = $request->correta;
-        $alterado->nivel = $request->nivel;
-
-        $alterado->disciplina()->associate($request->disciplina);
-
-        if(Auth::guard('web_admins')->check())
-        {  
-            if($alterado->save())
-            {
-
-                $request->session()->flash('alert-success', 'Questão alterada com sucesso!');
-                return redirect ('/home');
-            }
-        }
-        elseif(Auth::guard('web_teachers')->check())
-        {
-            if($alterado->save())
-            {
-                $request->session()->flash('alert-success', 'Questão alterada com sucesso!');
-                return redirect ('/professor');
-            }
-        }
-        /*$usuario = Auth::guard();
-        dd($usuario);
-        switch($usuario)
-        {
-            case 'web_admins':
-                if($alterado->save())
-                {
-                    $request->session()->flash('alert-success', 'Questão alterada com sucesso!');
-                    return redirect ('/home');
-                }
-                break;
-
-            case 'web_teachers':
-                if($alterado->save())
-                {
-                    $request->session()->flash('alert-success', 'Questão alterada com sucesso!');
-                    return redirect ('/professor');
-                }
-                break;
-            default;
-            echo('a');*/
         
+        $questao = Questao::find($id);
+
+        $questao->questao = $request->questao;
+        $questao->disciplina_nome = $request->disciplina_nome;
+        $questao->alternativaA = $request->alternativaA;
+        $questao->alternativaB = $request->alternativaB;
+        $questao->alternativaC = $request->alternativaC;
+        $questao->alternativaD = $request->alternativaD;
+        $questao->alternativaE = $request->alternativaE;
+        $questao->correta = $request->correta;
+        $questao->nivel = $request->nivel;
+        
+        if(Auth::guard('web_admins'))
+        {
+            $questao->admin()->associate(Auth::guard('web_admins')->user()->id);
+        }
+        elseif(Auth::guard('web_teachers'))
+        {
+            $questao->professor()->associate(Auth::guard('web_teachers')->user()->id);
+        }
+
+        $questao->disciplina()->associate($request->disciplina);
+
+        if($questao->save())
+        {
+            return json_encode([
+                'message' => 'Questão com ID '. $questao->id .' alterada com sucesso!',
+                'success' => 'success' 
+            ]);
+        }
     }
 
     public function destroy($id)
@@ -266,5 +210,16 @@ class QuestaoController extends Controller
         $questoes = Questao::all();
 
         return view('questoes.questao_lista_admin')->with('questoes', $questoes);
+    }
+
+    public function messages()
+    {
+        return [
+        ];
+    }
+
+    public function getQuestaoByProfessor()
+    {
+        return DB::select('select * from questoes where professor_id = ?', array(Auth::user()->id));
     }
 }

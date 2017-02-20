@@ -35,6 +35,15 @@
 	<br>
 		<div class="container">
 			<h2 style="text-align: center;">Avaliações criadas</h2>
+		      <!-- MENSAGEM DE SUCESSO -->
+		      <div class="flash-message">
+		          @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+		            @if(Session::has('alert-' . $msg))
+		            <h3><p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p></h3>
+		            @endif
+		          @endforeach
+		      </div>  
+		      <!-- FIM DA MENSAGEM DE SUCESSO -->
 			<br>
 			<br>
 		<?php $count=0; ?>
@@ -61,7 +70,7 @@
 							{{$avaliacoes->turma->nome}}
 						</td>
 
-						<td style="text-align: center;"><a href="finalizada/{{$avaliacoes->id}}"><img style="display: block;margin-right: auto;margin-left: auto;" src="/images/search.png">	</a>
+						<td style="text-align: center;"><a href="/professor/avaliacao/finalizada/{{$avaliacoes->id}}"><img style="display: block;margin-right: auto;margin-left: auto;" src="/images/search.png">	</a>
 						</td>
 						
 						<td style="text-align: center;">

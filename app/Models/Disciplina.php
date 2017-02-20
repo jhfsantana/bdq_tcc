@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class Disciplina extends Model
 {
-    public $timestamps = false;
-    protected $fillable = array('classroom_id','name');
 
     public function professores()
     {

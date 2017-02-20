@@ -19,11 +19,11 @@ var app = angular.module('app', ['ui.bootstrap', 'ngMaterial', 'ngMessages'])
 					        require: 'ngModel',	
 					        link: function(scope, elem, attrs, ngModel) {
 								ngModel.$asyncValidators.dadoUnico = function(modelValue, viewValue) {
-									return $http.post(API_URL + 'administradores/cpf/' + elem.val()).then(function(response) {
+									return $http.get(API_URL + 'administradores/validar/' + elem.val() + '/' + $('#id').val()).then(function(response) {
 										return response.data == 'true' ? $q.reject(response.data.errorMessage) : true;
 								    });
 								};
-					        } 
+					        }
 					    };
 					});
 

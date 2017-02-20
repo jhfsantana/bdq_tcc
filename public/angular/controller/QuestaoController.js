@@ -1,12 +1,18 @@
 app.controller('QuestaoController', function($scope, $http, API_URL, questaoAPI)
 	{
-		$scope.pageSize = 5;
+		$scope.pageSize = 6;
 		$scope.currentPage = 1;
 
 		questaoAPI.getQuestoes()
 		.success(function(response)
 		{
 			$scope.questoes = response;
+		});
+
+		questaoAPI.getQuestoesByProfessor()
+		.success(function(response)
+		{
+			$scope.questoesProfessor = response;
 		});
 
 	$scope.toggle = function(modalstate, id) {
@@ -55,8 +61,18 @@ app.controller('QuestaoController', function($scope, $http, API_URL, questaoAPI)
 				  data: $.param($scope.questao),
 				  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 				}).success(function(response){
-				  console.log(response);
-				  location.reload();
+				  	//se o retorno for sucesso ele monta uma div com m alert success com a mensagem do response
+				  	if(response.success)
+					{
+						$('#main').html('<div class="alert alert-success col-ssm-12" >' + response.message + '</div>');
+					}
+		  			
+		  			$('#myModal').modal('hide');
+					questaoAPI.getQuestoes()
+					.success(function(response)
+					{
+						$scope.questoes = response;
+					});
 				}).error(function(response){
 				  console.log(response);
 				  alert('ocorreu um erro, verifique o log');
@@ -64,12 +80,27 @@ app.controller('QuestaoController', function($scope, $http, API_URL, questaoAPI)
 			}
 			else
 			{
-				questaoAPI.saveQuestao($scope.questao).success(function(response){
-				  console.log(response);
-				  location.reload();
+				questaoAPI.saveQuestao($scope.questao)
+				.success(function(response){
+				  	//se o retorno for sucesso ele monta uma div com m alert success com a mensagem do response
+				  	if(response.success)
+					{
+						$('#main').html('<div class="alert alert-success col-ssm-12" >' + response.message + '</div>');
+					}
+		  			
+		  			$('#myModal').modal('hide');
+					questaoAPI.getQuestoes()
+					.success(function(response)
+					{
+						$scope.questoes = response;
+					});
+
 				}).error(function(response){
-				  console.log(response);
-				  alert('ocorreu um erro, verifique o log');
+					if(response.disciplina_id)
+					{
+						$('#campo_vazio').html('<div class="alert alert-danger col-ssm-12" >' + response.disciplina_id[0] + '</div>');
+						window.location.hash = '#campo_vazio';
+					}
 				});
 			}
 		}

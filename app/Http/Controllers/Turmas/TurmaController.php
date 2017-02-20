@@ -22,7 +22,7 @@ class TurmaController extends Controller
     {
         if($id == null)
         {
-            return Turma::all();
+            return Turma::orderBy('id', 'desc')->get();
         }
         else
         {

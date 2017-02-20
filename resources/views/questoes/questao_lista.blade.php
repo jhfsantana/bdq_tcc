@@ -1,12 +1,9 @@
 @extends('templates.professor.template')
 	
 	@section('head')
-	<link rel="stylesheet" href="/css/formularios.css">
-	<link rel="stylesheet" href="/css/global.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<title>Lista de Questões</title>
-	<script type="text/javascript"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/global.css">
+
 	<script>
     // validation code here ...
 function confirmDelete(e) {
@@ -50,7 +47,7 @@ function confirmDelete(e) {
 	<br>
 	<br>
 	<br>
-	<h2 style="text-align: center;"> Lista de questões</h2>
+	<h3 style="text-align: center;"> Lista de questões</h3>
 	<div class="" id="questoes">
 	<br>
 	<br>

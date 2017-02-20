@@ -81,16 +81,40 @@ class AdminController extends Controller
         }
     }
 
-    public function validarDados($dado)
+    public function validarDados($dado, $id = null)
     {  
 
-        $sql = Admin::where('email', $dado)->orWhere('cpf', $dado)->orWhere('matricula', $dado)->get();
-
-        if(count($sql) > 0)
+        $emailValidado = Admin::where('email', $dado)->Where('id', '<>', $id)->get();
+        $matriculaValidado = Admin::where('matricula', $dado)->Where('id', '<>', $id)->get();
+        $cpfValidado = Admin::where('cpf', $dado)->Where('id', '<>', $id)->get();
+        
+        if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
         {
             return json_encode(true);
         }
+        elseif (!count($emailValidado) || !count($matriculaValidado) || !count($cpfValidado)) 
+        {
+            $emailValidado = Professor::where('email', $dado)->Where('id', '<>', $id)->get();
+            $matriculaValidado = Professor::where('matricula', $dado)->Where('id', '<>', $id)->get();
+            $cpfValidado = Professor::where('cpf', $dado)->Where('id', '<>', $id)->get();
 
+            if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
+            {
+                return json_encode(true);
+            }
+            elseif (!count($emailValidado) || !count($matriculaValidado) || !count($cpfValidado))
+            {
+                $emailValidado = Aluno::where('email', $dado)->Where('id', '<>', $id)->get();
+                $matriculaValidado = Aluno::where('matricula', $dado)->Where('id', '<>', $id)->get();
+                $cpfValidado = Aluno::where('cpf', $dado)->Where('id', '<>', $id)->get();
+
+                if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
+                {
+                    return json_encode(true);
+                }
+            }
+
+        }
     }
 
     public function show($id)
@@ -141,7 +165,7 @@ class AdminController extends Controller
         $admin->password = $cryptPassword;
         
        // $professor->subjects()->sync($request->subjects, false);
-        
+        $this->getToken();
         $admin->save();
         return 'salvou';
 
@@ -207,5 +231,9 @@ class AdminController extends Controller
     public function lista()
     {
         return view('admin.admin_lista');
+    }
+    public function getToken()
+    {
+        return Response::json(['token'=>csrf_token()]);
     }
 }

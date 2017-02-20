@@ -7,6 +7,7 @@ app.controller('AdminController', function($scope, $http, API_URL, adminAPI)
 		{
 			$scope.administradores = response;
 		});
+
 // show modal Form
 		$scope.toggle = function(modalstate, id) {
 		  $scope.modalstate = modalstate;

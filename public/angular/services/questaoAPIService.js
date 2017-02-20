@@ -1,6 +1,10 @@
-angular.module('app').factory('questaoAPI', function($http, API_URL){
+	angular.module('app').factory('questaoAPI', function($http, API_URL){
 	var _getQuestoes = function(){
 		return $http.get(API_URL + 'questoes');
+	};
+
+	var _getQuestoesByProfessor = function(){
+		return $http.get(API_URL + 'questoes/professor');
 	};
 	var _saveQuestao = function(questao){
 		return $http.post(API_URL + 'questoes', questao);
@@ -16,6 +20,7 @@ angular.module('app').factory('questaoAPI', function($http, API_URL){
 		getQuestoes : _getQuestoes,
 		saveQuestao : _saveQuestao,
 		deleteQuestao : _deleteQuestao,
-		updateQuestao : _updateQuestao
+		updateQuestao : _updateQuestao,
+		getQuestoesByProfessor : _getQuestoesByProfessor
 	}
 });

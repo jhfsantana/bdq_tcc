@@ -25,18 +25,7 @@
 		
 
 		@section('content')
-			<div class="container" style="margin-top: 80px;">
-			<h3 style="text-align: center;">Lista de Questões</h3>
-    
-		    @if(!empty($errors->all()))
-		    <div class="alert alert-danger" role="alert-danger">
-		        @foreach($errors->all() as $error)
-		            <ul>
-		                <li> {{$error}}</li>
-		            </ul>
-		        @endforeach
-		    </div>
-		    @endif
+				<div id="main"></div>
 				<div ng-controller="QuestaoController">
 					<div class="table-responsive">
 						<table class="table table-bordered table-striped" style="border: 2px;">
@@ -110,39 +99,123 @@
 					        <h4 class="modal-title" id="myModalLabel" style="text-align: center;">@{{form_title}}</h4>
 					      </div>
 					      <div class="modal-body">
-							<form name="frmAdmin" class="form-horizontal" novalidate=""> 
-								<div class="form-group">
+							<form name="frmAdmin" class="form-horizontal" novalidate="" onsubmit="parent.scrollTo(0, 0); return true"> 
+							<div id="campo_vazio"></div>
+							<div layout="row" flex="90" layout-align="center center" style="margin-left: auto; margin-right: auto;">
+								<div class="panel panel-default">
+									<div class="panel-heading">Escolha um nivel de dificuldade</div>
+									<div class="panel-body">
+										<div layout="row">
+											<md-radio-group required ng-model="questao.nivel" layout="row" >
+												<md-radio-button value="1" class="md-warn" checked="checked">Facil</md-radio-button>
+												<md-radio-button value="2" class="md-warn">Moderada</md-radio-button>
+												<md-radio-button value="3" class="md-warn">Dificil</md-radio-button>
+												<md-radio-button value="4" class="md-warn">Muito Dificil</md-radio-button>
+											</md-radio-group>									
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div layout="row" layout-align="center center">
+								<div class="form-group" ng-controller="DisciplinaController" flex="70">
+									<select class="form-control" name="disciplina_id" ng-model="questao.disciplina" ng-options="disciplina.id as disciplina.nome for disciplina in disciplinas">
+    									<option style="display:none" value="">Selecione uma disciplina</option>
+									</select>
+								</div>
+							</div>
+							<div layout="row" layout-align="center center">
+								<div class="form-group" flex="90">
+									<md-icon md-svg-src="/images/q.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
 									<md-input-container class="md-block">
 										<label>Enunciado</label>
-										<div class="col-sm-9">
-											<input required dado-unico md-no-asterisk type="number" name="matricula" value="@{{ questao.matricula }}" ng-model="questao.matricula" minlength="11"/>
-											<div ng-messages="frmAdmin.matricula.$error">
+											<textarea required md-no-asterisk md-maxlength="535" name="questao" rows="5" value="@{{ questao.questao }}" ng-model="questao.questao" minlength="8"  md-select-on-focus>
+											</textarea>
+											<div ng-messages="frmAdmin.questao.$error">
           										<div ng-message="required">
-          											Campo matricula é obrigatório.
+          											Campo enunciado é obrigatório.
           										</div>
          										<div ng-message="minlength">
-          											Tamanho da matricula deve ser no minimo 11 caracteres.
+          											Tamanho da enunciado deve ser no minimo 8 caracteres.
           										</div>
-         										<div ng-message="dadoUnico">
-          											Matricula já existente.
+         										<div ng-message="maxlength">
+          											Limite maximo de 200 caracteres
           										</div>
-												<span class="text-success" ng-show="frmAdmin.matricula.$valid">
-													Matricula disponível.
-												</span>
-												<span ng-if="frmAdmin.matricula.$pending" >
- 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
- 												</span>
 											</div>
-										</div>
 									</md-input-container>
 								</div>
-		
-		
-							
-								<div layout="row">
-									<md-input-container class="md-block" flex="50">
-										<label>Nome</label>
-											<input required md-no-asterisk type="text" name="name" value="@{{ questao.name }}" ng-model="questao.name" maxlength="30"/>
+							</div>
+
+								<div layout="row" layout-align="center center" style="margin-top: 10px;">
+									<md-input-container class="md-block" flex="90">
+										<label>Alternativa A</label>
+										<md-icon md-svg-src="/images/a.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
+											<input required md-no-asterisk type="text" name="a" ng-model="questao.alternativaA" maxlength="250" value="@{{ questao.alternativaA }}" />
+											<div ng-messages="frmAdmin.name.$error">
+          										<div ng-message="required">
+          											Campo nome é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do nome deve ser no minimo 11 caracteres.
+          										</div>
+											</div>
+									</md-input-container>
+								</div>
+
+								<div layout="row" layout-align="center center">
+									<md-input-container class="md-block" flex="90">
+										<label>Alternativa B</label>
+										<md-icon md-svg-src="/images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
+											<input required md-no-asterisk type="text" name="b" ng-model="questao.alternativaB" maxlength="250" value="@{{ questao.alternativaB }}" />
+											<div ng-messages="frmAdmin.name.$error">
+          										<div ng-message="required">
+          											Campo nome é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do nome deve ser no minimo 11 caracteres.
+          										</div>
+											</div>
+									</md-input-container>
+								</div>
+
+								<div layout="row" layout-align="center center">
+									<md-input-container class="md-block" flex="90">
+										<label>Alternativa C</label>
+										<md-icon md-svg-src="/images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
+											<input required md-no-asterisk type="text" name="c" ng-model="questao.alternativaC" maxlength="250" value="@{{ questao.alternativaC }}" />
+											<div ng-messages="frmAdmin.name.$error">
+          										<div ng-message="required">
+          											Campo nome é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do nome deve ser no minimo 11 caracteres.
+          										</div>
+											</div>
+									</md-input-container>
+								</div>
+
+								<div layout="row" layout-align="center center">
+									<md-input-container class="md-block" flex="90">
+										<label>Alternativa D</label>
+										<md-icon md-svg-src="/images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
+											<input required md-no-asterisk type="text" name="d" ng-model="questao.alternativaD" maxlength="250" value="@{{ questao.alternativaD }}" />
+											<div ng-messages="frmAdmin.name.$error">
+          										<div ng-message="required">
+          											Campo nome é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do nome deve ser no minimo 11 caracteres.
+          										</div>
+											</div>
+									</md-input-container>
+								</div>
+
+
+								<div layout="row" layout-align="center center">
+									<md-input-container class="md-block" flex="90">
+										<label>Alternativa E</label>
+										<md-icon md-svg-src="/images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
+											<input required md-no-asterisk type="text" name="e" ng-model="questao.alternativaE" maxlength="250" value="@{{ questao.alternativaE }}" />
 											<div ng-messages="frmAdmin.name.$error">
           										<div ng-message="required">
           											Campo nome é obrigatório.
@@ -153,81 +226,22 @@
 											</div>
 									</md-input-container>
 
-									<md-input-container class="md-block" flex="50">
-										<label>Sobrenome</label>
-											<input required md-no-asterisk type="text" name="sobrenome" value="@{{ questao.sobrenome }}" ng-model="questao.sobrenome" maxlength="30"/>
-											<div ng-messages="frmAdmin.sobrenome.$error">
-          										<div ng-message="required">
-          											Campo sobrename é obrigatório.
-          										</div>
-         										<div ng-message="maxlength">
-          											Tamanho do campo sobrenome deve ter no máximo 30 caracteres.
-          										</div>
-											</div>
-									</md-input-container>
 								</div>
-								<div layout="row">
-									<md-input-container class="md-block" flex="50">
-										<label>CPF</label>
-											<input dado-unico required md-no-asterisk type="text" name="cpf" value="@{{ questao.cpf }}" ng-model="questao.cpf" maxlength="11" minlength="11"/>
-											<div ng-messages="frmAdmin.cpf.$error">
-          										<div ng-message="required">
-          											Campo cpf é obrigatório.
-          										</div>
-         										<div ng-message="minlength">
-          											Tamanho da cpf deve ser no minimo 11 caracteres.
-          										</div>
-         										<div ng-message="dadoUnico">	
-          											cpf já existente.
-          										</div>
-												<span ng-if="frmAdmin.cpf.$pending" >
- 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
- 												</span>
-												<span class="text-success" ng-show="frmAdmin.cpf.$valid">
-													cpf disponível.
-												</span>
-											</div>
-									</md-input-container>
+							<div class="panel panel-info">
+								<div class="panel-heading">Alternativa correta</div>
+								<div class="panel-body">
+									<div layout="row" style="margin-left: 28px;" layout-align="center center">
+										<md-radio-group required ng-model="questao.correta" layout="row" >
+											<md-radio-button value="a" class="md-warn">A</md-radio-button>
+											<md-radio-button value="b" class="md-warn">B</md-radio-button>
+											<md-radio-button value="c" class="md-warn">C</md-radio-button>
+											<md-radio-button value="d" class="md-warn">D</md-radio-button>
+											<md-radio-button value="e" class="md-warn">E</md-radio-button>
+										</md-radio-group>									
+									</div>
+								</div>
+							</div>
 
-									<md-input-container class="md-block" flex="50">
-										<label>E-mail</label>
-											<input required dado-unico md-no-asterisk type="email" name="email" value="@{{ questao.email }}" ng-model="questao.email" maxlength="30"/>
-											<div ng-messages="frmAdmin.email.$error">
-          										<div ng-message="required">
-          											Campo email é obrigatório.
-          										</div>
-         										<div ng-message="minlength">
-          											Tamanho da email deve ser no minimo 11 caracteres.
-          										</div>
-         										<div ng-message="dadoUnico">
-          											email já existente.
-          										</div>
-												<span class="text-success" ng-show="frmAdmin.email.$valid">
-													email disponível.
-												</span>
-												<span ng-if="frmAdmin.email.$pending" >
- 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
- 												</span>
-											</div>
-									</md-input-container>
-								</div>
-
-								<div class="form-group">
-									<md-input-container class="md-block">
-										<label>Password</label>
-										<div class="col-sm-9">
-											<input required md-no-asterisk type="password" name="password" value="@{{ questao.password }}" ng-model="questao.password" minlength="8"/>
-											<div ng-messages="frmAdmin.password.$error">
-          										<div ng-message="required">
-          											Campo password é obrigatório.
-          										</div>
-         										<div ng-message="minlength">
-          											Tamanho do campo password deve ter no minimo 8 caracteres.
-          										</div>
-											</div>
-										</div>
-									</md-input-container>
-								</div>
 							</form>
 								<div class="modal-footer">
 					                <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, id)" ng-disabled="frmAdmin.$invalid">Salvar</button>
@@ -312,6 +326,7 @@
 		<!--Script para pagination-->
 		    <script src="/angular/libs/ui-bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
 		    <script src="/angular/services/questaoAPIService.js"></script>
+		    <script src="/angular/services/disciplinaAPIService.js"></script>
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 		@stop
 </html>

@@ -22,6 +22,8 @@ use DateTime;
 
 use App\Models\Util;
 
+use Auth;
+
 class ProfessorController extends Controller
 {
     /**
@@ -33,7 +35,10 @@ class ProfessorController extends Controller
     public function bemvindo()
     {
         $alunos = Professor::meusAlunos();
-        return view('professores.index')->with('alunos', $alunos);
+        $diames = Util::pegarDiaSemana();
+
+        return view('professores.index')->with('alunos', $alunos)
+            ->with('diames', $diames);
     }
 
 
@@ -42,7 +47,7 @@ class ProfessorController extends Controller
     {
         if($id == null)
         {
-            return $profesores = Professor::orderBy('id', 'desc')->get();
+            return Professor::orderBy('id', 'desc')->get();
         }
         else
         {
@@ -163,9 +168,9 @@ class ProfessorController extends Controller
         return view('professores.auth');
     }
 
-    public function alunos($professor_id)
+    public function alunos()
     {
-        $disciplina = Disciplina::with('professores')->find($professor_id);
+        $disciplina = Disciplina::with('professores')->find(Auth::user()->id);
         return view('professores.alunos')->with('disciplina', $disciplina);
     }
 

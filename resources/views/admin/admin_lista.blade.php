@@ -25,7 +25,7 @@
 		
 
 		@section('content')
-			<div class="container" style="margin-top: 80px;">
+			<div class="container" style="margin-top: 40px;">
 			<h3 style="text-align: center;">Lista de Administradores</h3>
     
 		    @if(!empty($errors->all()))
@@ -133,7 +133,7 @@
 					        <h4 class="modal-title" id="myModalLabel" style="text-align: center;">@{{form_title}}</h4>
 					      </div>
 					      <div class="modal-body">
-							<form name="frmAdmin" class="form-horizontal" novalidate=""> 
+							<form name="frmAdmin" class="form-horizontal" novalidate="">
 								<div class="form-group">
 									<md-input-container class="md-block">
 										<label>Matricula</label>
@@ -149,6 +149,9 @@
          										<div ng-message="dadoUnico">
           											Matricula já existente.
           										</div>
+         										<div ng-message="dadoUnicoNovo">
+          											Matricula já existente.
+          										</div>          										
 												<span class="text-success" ng-show="frmAdmin.matricula.$valid">
 													Matricula disponível.
 												</span>
@@ -188,7 +191,12 @@
           										</div>
 											</div>
 									</md-input-container>
+								<!-- ID DO ADMIN CAMPO HIDDEN -->
+								<input type="hidden" name="id" id="id" value="@{{ administrador.id }}" ng-model="administrador.id">
 								</div>
+
+
+
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
 										<label>CPF</label>

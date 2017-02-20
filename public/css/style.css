@@ -403,8 +403,21 @@ box-shadow: -4px 9px 24px -2px rgba(0,0,0,0.75);
 }
 
 .modal .modal-dialog{
-  width:650px;
+  width:40%;
+  max-height: 100%;
+  overflow: auto;
   position: absolute;
   top:0; bottom: 0; left: 0; right: 0;
   margin: auto
+}
+
+@media only screen and (max-width: 580px) {
+
+  .modal .modal-dialog{
+    width:80%;
+    position: absolute;
+    top:0; bottom: 0; left: 0; right: 0;
+    margin: auto
+  }
+
 }

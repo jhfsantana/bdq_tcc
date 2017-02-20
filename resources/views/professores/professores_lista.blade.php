@@ -25,7 +25,7 @@
 		
 
 		@section('content')
-			<div class="container" style="margin-top: 80px;">
+			<div class="container" style="margin-top: 40px;">
 			<h3 style="text-align: center;">Lista de Professores</h3>
 
 				<div ng-controller="ProfessorController">
@@ -129,7 +129,7 @@
 									<md-input-container class="md-block">
 										<label>Matricula</label>
 										<div class="col-sm-9">
-											<input required md-no-asterisk type="number" name="matricula" value="@{{ professor.matricula }}" ng-model="professor.matricula" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="number" name="matricula" value="@{{ professor.matricula }}" ng-model="professor.matricula" minlength="11"/>
 											<div ng-messages="frmProfessor.matricula.$error">
           										<div ng-message="required">
           											Campo matricula é obrigatório.
@@ -137,6 +137,15 @@
          										<div ng-message="minlength">
           											Tamanho da matricula deve ser no minimo 11 caracteres.
           										</div>
+         										<div ng-message="dadoUnico">
+          											Matricula já existente.
+          										</div>        										
+												<span class="text-success" ng-show="frmProfessor.matricula.$valid">
+													Matricula disponível.
+												</span>
+												<span ng-if="frmProfessor.matricula.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
 											</div>
 										</div>
 									</md-input-container>
@@ -174,7 +183,7 @@
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
 										<label>CPF</label>
-											<input required md-no-asterisk type="text" name="cpf" value="@{{ professor.cpf }}" ng-model="professor.cpf" maxlength="11" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="text" name="cpf" value="@{{ professor.cpf }}" ng-model="professor.cpf" maxlength="11" minlength="11"/>
 											<div ng-messages="frmProfessor.cpf.$error">
           										<div ng-message="required">
           											Campo cpf é obrigatório.
@@ -185,12 +194,21 @@
          										<div ng-message="maxlength">
           											Tamanho do campo cpf deve ter no máximo 11 caracteres.
           										</div>
+         										<div ng-message="dadoUnico">
+          											CPF já existente.
+          										</div>        										
+												<span class="text-success" ng-show="frmProfessor.CPF.$valid">
+													CPF disponível.
+												</span>
+												<span ng-if="frmProfessor.cpf.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
 											</div>
 									</md-input-container>
 
 									<md-input-container class="md-block" flex="50">
-										<label>E-mal</label>
-											<input required md-no-asterisk type="email" name="email" value="@{{ professor.email }}" ng-model="professor.email" maxlength="30"/>
+										<label>E-mail</label>
+											<input required dado-unico md-no-asterisk type="email" name="email" value="@{{ professor.email }}" ng-model="professor.email" maxlength="30"/>
 											<div ng-messages="frmProfessor.email.$error">
           										<div ng-message="required">
           											Campo email é obrigatório.
@@ -198,10 +216,20 @@
          										<div ng-message="maxlength">
           											Tamanho do campo email deve ter no máximo 30 caracteres.
           										</div>
+         										<div ng-message="dadoUnico">
+          											E-mail já existente.
+          										</div>        										
+												<span class="text-success" ng-show="frmProfessor.email.$valid">
+													E-mail disponível.
+												</span>
+												<span ng-if="frmProfessor.email.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
 											</div>
 									</md-input-container>
 								</div>
-							
+								<input type="hidden" name="id" id="id" value="@{{ professor.id }}" ng-model="professor.id">
+								</div>
 								<div layout="row">
 									<div class="form-group" ng-controller="DisciplinaController" flex="95" style="margin-left: auto; margin-right: auto;">
 										<!-- 										<div ng-controller="DisciplinaController" ng-model="professor.disciplinas">
@@ -325,7 +353,10 @@
 		
 		<!--Script para pagination-->
 		    <script src="angular/libs/ui-bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
+
+		 	<!-- importando os servicos  -->
 		    <script src="angular/services/professorAPIService.js"></script>
+		    <script src="angular/services/disciplinaAPIService.js"></script>
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 		@stop
 </html>

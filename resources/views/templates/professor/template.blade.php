@@ -1,94 +1,106 @@
-
-<html>
+<!DOCTYPE html>
+<html >
 <head>
-	@yield('head')
-	<link type="text/css" rel="stylesheet" href="/css/global.css" />
-	<meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
+  <title>BDQ - Avaliação Online / Página inicial Administrativa</title>
+  @yield('head')
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/global.css">
+
+  
 </head>
+
 <body>
-
-	<div id="header">
-		<div class="logo">
-			<a  href="#">BDQ - Avaliação<span>Online</span></a>
+		<div id="header" style="width: 100%; height: 135px;background-color: #95a5a6;">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-5" ">
+          <div class="logo" style="margin-left: 65px; margin-top: 0; margin-bottom: 155px;">
+            <img src="/images/header_logo_professor.svg/">
+          </div>
+        </div>
+      </div>
 		</div>
-		
-		@if(Auth::guard('web_teachers')->check())
-		<div class="headeruser">
-			<h3 style="float: right; color: #E7E7E7; margin: 0px; margin-top: 8px;">Você está logado como professor(a): {{Auth::guard('web_teachers')->user()->nome }}</h3>
-			<img src="/images/teacher-desk.png" style="float: right; margin-right: 10px;">
+
+      <div id="wrapper">
+        <div class="overlay"></div>
+    
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                       MENU
+                    </a>
+                </li>
+                <li>
+                    <a href="/professor"><i class="fa fa-fw fa-home"></i> Home</a>
+                </li>
+
+                <li>
+                  <a href="/professor/questoes"><i class="fa fa-fw fa-cog"></i> Questões</a>
+                </li>
+
+                <li>
+                  <a href="/professor/avaliacao"><i class="fa fa-fw fa-group"></i> Avaliações</a>
+                </li>
+
+                <li>
+                  <a href="/professor/avaliacao/gerar"><i class="fa fa-fw fa-graduation-cap"></i> Gerar Avaliação</a>
+                </li>
+
+                <li>
+                    <a href="/professor/questao/add"><i class="fa fa-fw fa-book"></i> Cadastrar Questão</a>
+                </li>
+
+                <li>
+                   <a href="/professor/alunos"><i class="fa fa-fw fa-pencil"></i> Alunos</a>
+                </li>
+
+                <li>
+                    <a href="/professor/logout"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+          </button>	
+
+		<div class="conteudo">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1" style="margin-top: 45px;">
+					@yield('content')
+				</div>
+			</div>
 		</div>
-		@endif
-	</div>
-	<a href="#" class="mobile">MENU</a>
-	<div id="container">
-		<div class="sidebar">
-			<ul id="nav"> 
-			    <li><a href="/professor">Inicio</a></li> 
-			    <li><input type="submit" form="formQuestoes" name="questoes" value="Questões" class="btn btn-link"></li> 
-			    <li><input type="submit" name="avaliacao" value="Avaliações" form="formAvaliacao" class="btn btn-link"></li>
-		        <li><input type="submit"  value="Gerar Avaliacao" form="formGerar" class="btn btn-link"></li> 
-		        <li><input type="submit" name="cadastrar-questao" value="Cadastrar Questão" form="formCadastrarQ" class="btn btn-link"></li>
-		        <li><input type="submit" name="alunos" value="Lista de Alunos" form="formAlunos" class="btn btn-link"></li> 
-			    <li><a href="/professor/logout">Logout</a></li> 
-			 </ul>
-		</div>
-		<div class="content" id="conteudo">
-			
-			<!-- MENSAGEM DE SUCESSO -->
-				<div class="flash-message">
-				    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-				      @if(Session::has('alert-' . $msg))
+    </div>
+    <!-- /#wrapper -->
+  
+    <!-- /#footer -->
 
-				      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
-				      @endif
-				    @endforeach
-				 </div>	
+<!--   <div class="navbar navbar-default navbar-fixed-bottom" style="text-align: center; background-color: #ccc; position: fixed;">
+    <div class="container">
+      <p>© 2016 Banco de Questões e Avaliação Online 
+           <p>BDQ - Avaliação Online</p>
+      </p>
+    </div>
+  </div> -->
 
-			<!-- FIM DA MENSAGEM DE SUCESSO -->
-		@yield('content')
-		</div>
-	</div>
+      <!-- /#final footer -->
 
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 
-	<script type="text/javascript">
+<script src="/js/index.js"></script>
 
-		$(document).ready(function(){
-	     $("a.mobile").click(function(){
-	      $(".sidebar").slideToggle('slow');
-	     });
-
-	    window.onresize = function(event) {
-	      if($(window).width() > 480){
-	      	$(".sidebar").show();
-	      }
-	    };
-
-
-		});
-
-	</script>
-
-		
-		<!-- FORMULARIO PARA CADASTRAR, GERAR VISUALIZAR AVALIACAO E LISTA DE QUESTOES -->
-		<form action="/professor/{{Auth::user()->id}}/questao" method="post" id="formCadastrarQ">
-			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-		</form>
-
-		<form action="/professor/avaliacao/{{Auth::user()->id}}/gerar" method="post" id="formGerar">
-			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-		</form>
-
-		<form action="/professor/avaliacao/{{Auth::user()->id}}" method="post" id="formAvaliacao">
-			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-		</form>
-
-		<form action="/professor/{{Auth::user()->id}}/questoes" method="post" id="formQuestoes">
-			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-		</form>
-
-		<form action="/professor/{{Auth::user()->id}}/alunos" method="post" id="formAlunos">
-			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-		</form>
 </body>
 </html>
-

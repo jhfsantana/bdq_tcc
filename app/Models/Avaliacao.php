@@ -66,8 +66,8 @@ class Avaliacao extends Model
 
     public static function checarStatusAvaliacao($professor_id, $avaliacao_id)
     {
-    /*        $sql = self::where('status', '=', 'disponivel')->where('professor_id', '=', $professor_id);
-*/      $sql = DB::select("select * from avaliacoes where professor_id = ? and status = 'disponivel' and id <> ?", array($professor_id, $avaliacao_id));
+        $sql = DB::select("select * from avaliacoes where professor_id = ? and status = 'disponivel' and id <> ?", 
+        array($professor_id, $avaliacao_id));
 
         if($sql)
         {

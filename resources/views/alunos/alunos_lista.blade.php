@@ -25,7 +25,7 @@
 		
 
 		@section('content')
-			<div class="container" style="margin-top: 80px;">
+			<div class="container" style="margin-top: 40px;">
 			<h3 style="text-align: center;">Lista de Alunos</h3>
 				<div ng-controller="AlunoController">
 					<div class="table-responsive">
@@ -127,7 +127,7 @@
 									<md-input-container class="md-block">
 										<label>Matricula</label>
 										<div class="col-sm-9">
-											<input required md-no-asterisk type="number" name="matricula" value="@{{ aluno.matricula }}" ng-model="aluno.matricula" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="number" name="matricula" value="@{{ aluno.matricula }}" ng-model="aluno.matricula" minlength="11"/>
 											<div ng-messages="frmaluno.matricula.$error">
           										<div ng-message="required">
           											Campo matricula é obrigatório.
@@ -135,11 +135,21 @@
          										<div ng-message="minlength">
           											Tamanho da matricula deve ser no minimo 11 caracteres.
           										</div>
+         										<div ng-message="dadoUnico">
+          											Matricula já existente.
+          										</div>        										
+												<span class="text-success" ng-show="frmaluno.matricula.$valid">
+													Matricula disponível.
+												</span>
+												<span ng-if="frmaluno.matricula.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
 											</div>
 										</div>
 									</md-input-container>
 								</div>
-		
+								<!-- PASSANDO ID DO ALUNO PARA VALIDAR NA HORA DE ALTERAR -->
+								<input type="hidden" name="id" id="id" value="@{{ aluno.id }}" ng-model="aluno.id">
 								
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
@@ -172,7 +182,7 @@
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
 										<label>CPF</label>
-											<input required md-no-asterisk type="text" name="cpf" value="@{{ aluno.cpf }}" ng-model="aluno.cpf" maxlength="11" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="text" name="cpf" value="@{{ aluno.cpf }}" ng-model="aluno.cpf" maxlength="11" minlength="11"/>
 											<div ng-messages="frmaluno.cpf.$error">
           										<div ng-message="required">
           											Campo cpf é obrigatório.
@@ -183,12 +193,21 @@
          										<div ng-message="maxlength">
           											Tamanho do campo cpf deve ter no máximo 11 caracteres.
           										</div>
+         										<div ng-message="dadoUnico">
+          											cpf já existente.
+          										</div>        										
+												<span class="text-success" ng-show="frmaluno.cpf.$valid">
+													cpf disponível.
+												</span>
+												<span ng-if="frmaluno.cpf.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
 											</div>
 									</md-input-container>
 
 									<md-input-container class="md-block" flex="50">
-										<label>E-mal</label>
-											<input required md-no-asterisk type="email" name="email" value="@{{ aluno.email }}" ng-model="aluno.email" maxlength="30"/>
+										<label>E-mail</label>
+											<input required  dado-unico md-no-asterisk type="email" name="email" value="@{{ aluno.email }}" ng-model="aluno.email" maxlength="30"/>
 											<div ng-messages="frmaluno.email.$error">
           										<div ng-message="required">
           											Campo email é obrigatório.
@@ -196,16 +215,24 @@
          										<div ng-message="maxlength">
           											Tamanho do campo email deve ter no máximo 30 caracteres.
           										</div>
+         										<div ng-message="dadoUnico">
+          											email já existente.
+          										</div>        										
+												<span class="text-success" ng-show="frmaluno.email.$valid">
+													email disponível.
+												</span>
+												<span ng-if="frmaluno.email.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
 											</div>
 									</md-input-container>
 								</div>
 							
 								<div layout="row">
 									<div class="form-group" ng-controller="DisciplinaController" flex="95" style="margin-left: auto; margin-right: auto;">
-										<!-- 										<div ng-controller="DisciplinaController" ng-model="aluno.disciplinas">
-										--><!-- 												<select multiple class="form-control" ng-model="aluno.disciplinas" ng-options="disciplina.id as disciplina.nome for disciplina in disciplinas">
-										</select>
-										-->
+										<!-- <select multiple class="form-control" ng-model="aluno.disciplinas" ng-options="disciplina.id as disciplina.nome for disciplina in disciplinas">
+										</select> -->
+										
 										<select multiple class="form-control" ng-model="aluno.disciplinas">
 											<option value="" disabled="true">Selecione uma turma</option>
 											<optgroup ng-repeat='disciplina in disciplinas track by $index' label="@{{disciplina.nome}}">
@@ -324,6 +351,7 @@
 		<!--Script para pagination-->
 		    <script src="angular/libs/ui-bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
 		    <script src="angular/services/alunoAPIService.js"></script>
+		    <script src="angular/services/disciplinaAPIService.js"></script>
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 
 		@stop

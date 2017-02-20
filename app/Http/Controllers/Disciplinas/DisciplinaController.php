@@ -28,17 +28,20 @@ class DisciplinaController extends Controller
 
     public function indexAPI($id = null)
     {
-        if($id != null)
+        if($id == null)
         {
-            return Disciplina::all();
+            return Disciplina::orderBy('id', 'desc')->get();
         }
         else
         {
             return $this->show($id);
         }
-
     }
-
+    
+    public function show($id)
+    {
+        return Disciplina::find($id);
+    }
 
     public function create()
     {
@@ -46,21 +49,17 @@ class DisciplinaController extends Controller
         return view('disciplinas.formulario_disciplina')->with('turmas', $turmas)->with('disciplinas', $disciplinas);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(DisciplinaRequest $request)
     {   
-        $turmaDisponivel = Disciplina::checarTurmaDisponivel($request->nome, $request->turmas);
-        
-        if(count($turmaDisponivel) > 0)
-        {
-            $request->session()->flash('alert-danger', 'Disciplina já associada a esta turma');
-            return redirect()->back();
+        $resultado = $this->validarDisciplinaNaTurma($request->nome, $request->turmas);
 
+        if($resultado)
+        {
+            return json_encode([
+                   'message' => 'Disciplina já cadastrada para esta turma',
+                   'error' => 'ME-30' 
+                   ]);
         }
         else
         {
@@ -75,12 +74,7 @@ class DisciplinaController extends Controller
         }
     }
 
-    public function show($id)
-    {
-        return Disciplina::find($id);
-    }
-
-    public function update(Request $request, $id)
+    public function update(DisciplinaRequest $request, $id)
     {
         $turmaDisponivel = Disciplina::checarTurmaDisponivel($request->nome, $request->turmas);
         
@@ -107,5 +101,21 @@ class DisciplinaController extends Controller
     public function destroy($id)
     {
         Disciplina::find($id)->delete();
+    }
+
+    public function validarDisciplinaNaTurma($nome, $turma)
+    {
+        $turmaDisponivel = Disciplina::checarTurmaDisponivel($nome, $turma);
+        
+        if(count($turmaDisponivel) > 0)
+        {
+            return true;
+        }
+    }
+
+    public function DisciplinaByProfessor()
+    {
+        return Professor::with('disciplinas')->find(\Auth::user()->id)->disciplinas;
+        // return DB::select('select * from disciplinas where professor_id = ?', array(Auth::user()->id));
     }
 }

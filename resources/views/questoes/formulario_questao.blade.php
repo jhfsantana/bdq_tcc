@@ -52,31 +52,31 @@
                                 
                             <div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i>										      	  
-                                        <input id="questao-alternativa-a" type="text" class="form-control" name="a" placeholder="Alternativa A">
+                                        <input id="questao-alternativa-a" type="text" class="form-control" name="alternativaA" placeholder="Alternativa A">
                                         <label><input type="checkbox"  value="a" name="correta"> Alternativa Correta</span></label>
                            	</div>
 
                            	<div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i>										      	  
-                                        <input id="questao-alternativa-b" type="text" class="form-control" name="b" placeholder="Alternativa B">
+                                        <input id="questao-alternativa-b" type="text" class="form-control" name="alternativaB" placeholder="Alternativa B">
                                         <label><input type="checkbox"  value="b" name="correta"> Alternativa Correta</span></label>
                            	</div>
 
                            	<div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i>										      	  
-                                        <input id="questao-alternativa-c" type="text" class="form-control" name="c" placeholder="Alternativa C">
+                                        <input id="questao-alternativa-c" type="text" class="form-control" name="alternativaC" placeholder="Alternativa C">
                                         <label><input type="checkbox" value="c" name="correta"> Alternativa Correta</span></label>
                            	</div>
 
                            	<div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i>										      	  
-                                        <input id="questao-alternativa-d" type="text" class="form-control" name="d" placeholder="Alternativa D">
+                                        <input id="questao-alternativa-d" type="text" class="form-control" name="alternativaD" placeholder="Alternativa D">
                                         <label><input type="checkbox" value="d" name="correta"> Alternativa Correta</span></label>
                            	</div>
 
                            	<div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i>										      	  
-                                        <input id="questao-alternativa-e" type="text" class="form-control" name="e" placeholder="Alternativa E">
+                                        <input id="questao-alternativa-e" type="text" class="form-control" name="questao-alternativa-e" placeholder="Alternativa E">
                                         <label><input type="checkbox" value="e" name="correta"> Alternativa Correta</span></label>
                            	</div>
                                 <div style="margin-top:10px" class="form-group">

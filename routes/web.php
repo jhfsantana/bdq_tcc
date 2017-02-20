@@ -58,25 +58,31 @@ Route::post('professor/login', 'Professores\AuthController@login');
 Route::group(['middleware'=> ['auth:web_teachers']], function ()
 {
 
+	Route::get('/api/turmas/{id?}', 'Turmas\TurmaController@indexAPI');
+
+    Route::get('/api/disciplinas/professor', 'Disciplinas\DisciplinaController@DisciplinaByProfessor');
+
+	Route::get('/api/questoes/professor', 'Questoes\QuestaoController@getQuestaoByProfessor');
+
 	Route::get('professor', 'Professores\ProfessorController@bemvindo');
 
-	Route::post('professor/avaliacao/{id}', 'Avaliacoes\AvaliacaoController@index');
+	Route::get('professor/avaliacao', 'Avaliacoes\AvaliacaoController@index');
 
-	Route::get('professor/avaliacao/finalizada/{id}', 'Avaliacoes\AvaliacaoController@mostrar');
+	Route::get('/professor/avaliacao/finalizada/{id}', 'Avaliacoes\AvaliacaoController@mostrar');
 
-	Route::post('professor/{id}/questao', 'Questoes\QuestaoController@create');
+	Route::get('professor/questao/add', 'Questoes\QuestaoController@create');
 
 	Route::post('professor/{id}/questao/adicionada', 'Questoes\QuestaoController@store');
 
-	Route::post('professor/avaliacao/{id}/gerar', 'Avaliacoes\AvaliacaoController@formulario');
+	Route::get('professor/avaliacao/gerar', 'Avaliacoes\AvaliacaoController@formulario');
 
 	Route::get('avaliacao/{id}/gerar/buscar/', 'Avaliacoes\AvaliacaoController@trazerQuestao');
 
-	Route::post('professor/avaliacao/{id}/gerar/salvar', 'Avaliacoes\AvaliacaoController@salvar');
+	Route::post('professor/avaliacao/gerar/salvar', 'Avaliacoes\AvaliacaoController@salvar');
 
 	Route::get('professor/avaliacao/{id}/gerar/adicionar', 'Avaliacoes\AvaliacaoController@receberQuestao');
 
-	Route::post('professor/{id}/questoes', 'Questoes\QuestaoController@index');
+	Route::get('professor/questoes', 'Questoes\QuestaoController@index');
 	
 	Route::post('professor/questao/deletar/{id}', 'Questoes\QuestaoController@deletar');
 
@@ -86,7 +92,7 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 	
 	Route::post('/avaliacao/status', 'Avaliacoes\AvaliacaoController@status');
 
-	Route::post('/professor/{professor_id}/alunos', 'Professores\ProfessorController@alunos');
+	Route::get('/professor/alunos', 'Professores\ProfessorController@alunos');
 
 	Route::get('professor/logout', 'Professores\AuthController@logout');
 
@@ -100,6 +106,14 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 
 Route::group(['middleware'=> ['auth:web_admins']], function ()
 {
+	
+	//API CURRENTUSER admin
+
+	Route::get('/api/admin/currentadminID', function()
+		{
+			return Auth::user()->id;
+		});
+
 	//API DOS PROFESSORES 
 	Route::get('/api/professores/{id?}', 'Professores\ProfessorController@indexAPI');
 	Route::post('/api/professores', 'Professores\ProfessorController@store');
@@ -123,7 +137,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
     Route::post('/api/administradores', 'Admins\AdminController@store');
     Route::put('/api/administradores/{id}', 'Admins\AdminController@update');
     Route::delete('/api/administradores/{id}', 'Admins\AdminController@destroy');
-    Route::post('/api/administradores/cpf/{dado?}', 'Admins\AdminController@validarDados');
+    Route::get('/api/administradores/validar/{dado?}/{id?}/{formulario?}', 'Admins\AdminController@validarDados');
 
 /*    API TURMAS
 */
@@ -134,11 +148,11 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 
 /*    API DISCIPLINAS
 */
-	Route::get('/api/disciplinas/{id?}', 'Disciplinas\DisciplinaController@indexAPI');
+    Route::get('/api/disciplinas/{id?}', 'Disciplinas\DisciplinaController@indexAPI');
     Route::post('/api/disciplinas', 'Disciplinas\DisciplinaController@store');
     Route::post('/api/disciplinas/{id}', 'Disciplinas\DisciplinaController@update');
     Route::delete('/api/disciplinas/{id}', 'Disciplinas\DisciplinaController@destroy');
-    Route::post('/api/disciplinas/cpf/{dado?}', 'Disciplinas\DisciplinaController@validarDados');
+    Route::get('/api/disciplinas/validar/{nome}/{turma}', 'Disciplinas\DisciplinaController@validarDisciplinaNaTurma');
 
 /*    API QUESTOES
 */

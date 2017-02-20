@@ -15,26 +15,27 @@ use Response;
 use DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\Avaliacao\AvaliacaoRequest;
+use Auth;
 class AvaliacaoController extends Controller
 {
     
 
 
-	public function index($id)
+	public function index()
 	{
 		/*$professor = Professor::find($id);
         
         $avaliacao = DB::table()*/
 
-        $avaliacoes = Professor::with('avaliacoes')->find($id)->avaliacoes;
+        $avaliacoes = Professor::with('avaliacoes')->find(\Auth::user()->id)->avaliacoes;
 
 		return view('avaliacao.index')->with('avaliacoes', $avaliacoes);
     }
 
 
-    public function formulario($id)
+    public function formulario()
     {
-    	$professor = Professor::find($id);
+    	$professor = Professor::find(Auth::user()->id);
     	
     	$questao = $this->buscarQuestao();
 
@@ -361,8 +362,6 @@ class AvaliacaoController extends Controller
     public function status(Request $request)
     {
         $avaliacao = Avaliacao::find($request->id);
-        $av = Avaliacao::all();
-
         $avaliacao->status = $request->status;
 
         if(!Avaliacao::checarStatusAvaliacao($avaliacao->professor_id, $avaliacao->id))
@@ -370,13 +369,13 @@ class AvaliacaoController extends Controller
             if($avaliacao->save())
             {
                 $request->session()->flash('alert-success', 'Status alterado com sucesso!');
-                return redirect('/professor');
+                return redirect()->back();
             }
         }
         else
         {
             $request->session()->flash('alert-warning', 'Status não pode ser alterado para disponível, já existe uma avaliação disponível!');
-            return redirect('/professor');        
+            return redirect()->back();        
         }
 
 

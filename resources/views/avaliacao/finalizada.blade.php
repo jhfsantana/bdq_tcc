@@ -27,7 +27,7 @@
 			@foreach($avaliacao->questoes as $questao)
 				<table>
 					<tr>
-						<td><h3>{{++$count}}) {{$questao->questao}}</h3></td>
+						<td><h5>{{++$count}}) {{$questao->questao}}</h5></td>
 					</tr>
 
 					<tr>

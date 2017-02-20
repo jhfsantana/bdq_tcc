@@ -16,6 +16,6 @@ angular.module('app').factory('adminAPI', function($http, API_URL){
 		getAdministradores : _getAdministradores,
 		saveAdministrador : _saveAdministrador,
 		deleteAdministrador : _deleteAdministrador,
-		updateAdministrador : _updateAdministrador
+		updateAdministrador : _updateAdministrador,
 	}
 });
