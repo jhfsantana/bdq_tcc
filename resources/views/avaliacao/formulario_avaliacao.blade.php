@@ -1395,9 +1395,9 @@ function showQ(select){
                     </div>
 
                     <div class="tab-pane" role="tabpanel" id="complete">
-                        <h3>Complete</h3>
+                        <h3>Completo</h3>
                         <p>Tem certeza que deseja gerar a Avaliação com as questões escolhidas?</p>
-        <input  style="margin-right: auto;margin-left: 540px;display: block;" type="submit"  value="Criar Avaliação" form="avaliacaoform" class="btn btn-success" onclick="return validar();">
+        <input  style="margin-right: auto;margin-left: auto;display: block; height: 100px;" type="image"  value="GERAR AVALIAÇÃO" form="avaliacaoform" class="btn btn-primary btn-lg btn-block" onclick="return validar();" src="/images/gerar.svg" title="GERAR AVALIAÇÃO">
 </form>
                     </div>
                     <div class="clearfix"></div>
