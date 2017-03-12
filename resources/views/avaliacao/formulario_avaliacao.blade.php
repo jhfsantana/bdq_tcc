@@ -3,7 +3,10 @@
 
 <!-- Bootstrap -->
     <link href="/css/formularios.css" rel="stylesheet">
+    <link href="/css/wizard.css" rel="stylesheet">
     <script src="/js/jquery-3.1.1.js"></script>
+
+    <script src="/js/wizard.js"></script>
   <script src="/js/pontos.js"></script>
   <script src="/js/qtd_questao.js"></script>
   <script src="/js/buscar_questoes.js"></script>
@@ -94,13 +97,109 @@ function showQ(select){
     </div>
     @endif
 
-<div class="container" style="margin-top: 50px;">
-<h2 style="text-align: center;">Formulario para gerar avaliação</h2> 
-<br>
-<br>
-<br>
-    <div id="avaliacaobox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-        <div class="panel panel-info" >
+<div style="width: 100%;" id="top">
+	<div class="row">
+		<section>
+        <div class="wizard">
+            <div class="wizard-inner">
+                <div id="line" class="connecting-line2"></div>
+                <div id="line" class="connecting-line3"></div>
+                <ul class="nav nav-tabs" role="tablist">
+
+                    <li role="presentation" class="active">
+                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Menu de opções">
+                            <span class="round-tab">
+                                <img src="/images/settings.svg">
+                            </span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" class="disabled">
+                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Questão 1">
+                            <span class="round-tab">
+                                <img src="/images/one.svg">
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled">
+                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Questão 2">
+                            <span class="round-tab">
+                                <img src="/images/two.svg">
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled">
+                        <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Questão 3">
+                            <span class="round-tab">
+                                <img src="/images/three.svg">
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled">
+                        <a href="#step5" data-toggle="tab" aria-controls="step5" role="tab" title="Questão 4">
+                            <span class="round-tab">
+                                <img src="/images/four.svg">
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled">
+                        <a href="#step6" data-toggle="tab" aria-controls="step6" role="tab" title="Questão 5">
+                            <span class="round-tab">
+                                <img src="/images/five.svg">
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled" id="step7">
+                        <a href="#step7" data-toggle="tab" aria-controls="step7" role="tab" title="Questão 6">
+                            <span class="round-tab">
+                                <img src="/images/six.svg">
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled" id="step8">
+                        <a href="#step8" data-toggle="tab" aria-controls="step8" role="tab" title="Questão 7">
+                            <span class="round-tab">
+                                <img src="/images/seven.svg">
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled" id="step9">
+                        <a href="#step9" data-toggle="tab" aria-controls="step9" role="tab" title="Questão 8">
+                            <span class="round-tab">
+                                <img src="/images/eight.svg">
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled" id="step10">
+                        <a href="#step10" data-toggle="tab" aria-controls="step10" role="tab" title="Questão 9">
+                            <span class="round-tab">
+                                <img src="/images/nine.svg">
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled" id="step11">
+                        <a href="#step11" data-toggle="tab" aria-controls="step11" role="tab" title="Questão 9">
+                            <span class="round-tab">
+                                <img src="/images/ten.svg">
+                            </span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" class="disabled" id="fim">
+                        <a href="#complete" data-toggle="tab" aria-controls="tab" role="tab" title="Finalizar">
+                            <span class="round-tab">
+                                <img src="/images/success.svg">
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <form  id="avaliacaoform" data-toggle="validator"  role="form" method="POST" action="gerar/salvar">                
+
+            <div class="tab-content">
+                    <div class="tab-pane active" role="tabpanel" id="step1">
+		<div class="panel panel-info" >
             <div class="panel-heading">
                 <div class="panel-title">Selecione a disciplina para buscar as questões</div>
             </div>     
@@ -150,10 +249,14 @@ function showQ(select){
                         </select>
                     </div>
             </div>
-        </div>
-    </div>
-</div>
-	<div class="container" id="questao1">    
+        </div>                        
+
+    				<ul class="list-inline pull-right">
+                        <li><button type="button" class="btn btn-primary next-step">Avançar</button></li>
+                    </ul>
+                    </div>
+<div class="tab-pane" role="tabpanel" id="step2">
+<div class="container">    
         <div id="questaobox"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
@@ -203,7 +306,7 @@ function showQ(select){
                                             <input type="radio" name="op" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input  class="form-control" type="text" name="q1_pontos" id="q1_pontos" style="text-align: right;" readonly="true" />
                                     </div>
                                 </div>
@@ -241,26 +344,32 @@ function showQ(select){
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "c" id="alternativaC" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                                <span class="input-group-addon"></i>                                               
+                                <textarea  name = "c" id="alternativaC" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "d" id="alternativaD" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                                <span class="input-group-addon"></i>                                               
+                                <textarea  name = "d" id="alternativaD" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "e" id="alternativaE" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+	                            <span class="input-group-addon"></i>                                               
+	                            <textarea  name = "e" id="alternativaE" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
                             </div>
                       </div>
                   </div>
              </div>
-         </div>
+         </div>             
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
+                            <li><button type="button" class="btn btn-primary next-step">Avançar</button></li>
+                        </ul>
+                    </div>
 
-    <div class="container">    
-        <div id="questaobox2" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+<div class="tab-pane" role="tabpanel" id="step3">
+   <div class="container">    
+        <div id="questaobox2"class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
                         <div class="panel-title">Questão 2</div>
@@ -308,7 +417,7 @@ function showQ(select){
                                             <input type="radio" name="opq2" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input  class="form-control" type="text" name="q2_pontos" id="q2_pontos" style="text-align: right;" readonly="true" />
                                     </div>
                                 </div>
@@ -362,10 +471,16 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>
-
-    <div class="container">    
-        <div id="questaobox3" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+    </div>                  <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Avançar</button></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-pane" role="tabpanel" id="step4">
+ <div class="container">    
+        <div id="questaobox3"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
                         <div class="panel-title">Questão 3</div>
@@ -414,7 +529,7 @@ function showQ(select){
                                             <input type="radio" name="opq3" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input  class="form-control" type="text" name="q3_pontos" id="q3_pontos" style="text-align: right;" readonly="true" />
                                     </div>
                                 </div>
@@ -469,10 +584,16 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>  
+    </div>                  <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
+                        </ul>
+                    </div>
 
-    <div class="container">    
-        <div id="questaobox4" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+                    <div class="tab-pane" role="tabpanel" id="step5">
+   <div class="container">    
+        <div id="questaobox4"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
                         <div class="panel-title">Questão 4</div>
@@ -521,7 +642,7 @@ function showQ(select){
                                             <input type="radio" name="opq4" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input  class="form-control" type="text" name="q4_pontos" id="q4_pontos" style="text-align: right;" readonly="true" />
                                     </div>
                                 </div>
@@ -578,9 +699,16 @@ function showQ(select){
                     </div>  
         </div>
     </div>
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
+                        </ul>
+                    </div>
 
+                    <div class="tab-pane" role="tabpanel" id="step6">
     <div class="container">    
-        <div id="questaobox5" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        <div id="questaobox5"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
                         <div class="panel-title">Questão 5</div>
@@ -628,7 +756,7 @@ function showQ(select){
                                             <input type="radio" name="opq5" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input  class="form-control" type="text" name="q5_pontos" id="q5_pontos" style="text-align: right;" readonly="true" />
                                     </div>
                                 </div>
@@ -684,10 +812,16 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>  
+    </div>                          <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
+                        </ul>
+                    </div>
 
+                    <div class="tab-pane" role="tabpanel" id="step7">
     <div class="container">    
-        <div id="questaobox6" style="margin-top:50px; display: block;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        <div id="questaobox6"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
                         <div class="panel-title">Questão 6</div>
@@ -704,7 +838,7 @@ function showQ(select){
                             </div>
                             
                             <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i></i>
+                                <span class="input-group-"><i></i>
 
                                 
                                 <label class="radio-inline">
@@ -736,7 +870,7 @@ function showQ(select){
                                             <input type="radio" name="opq6" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input  class="form-control" type="text" name="q6_pontos" id="q6_pontos" style="text-align: right;" readonly="true" />
                                     </div>
                                 </div>
@@ -793,11 +927,16 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>  
+    </div>                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
+                        </ul>
+                    </div>
 
-
+                    <div class="tab-pane" role="tabpanel" id="step8">
     <div class="container">    
-        <div id="questaobox7" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        <div id="questaobox7"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
                         <div class="panel-title">Questão 7</div>
@@ -846,7 +985,7 @@ function showQ(select){
                                             <input type="radio" name="opq7" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input  class="form-control" type="text" name="q7_pontos" id="q7_pontos" style="text-align: right;" readonly="true" />
                                     </div>
                                 </div>
@@ -903,11 +1042,16 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>  
+    </div>                          <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
+                        </ul>
+                    </div>
 
-
+                    <div class="tab-pane" role="tabpanel" id="step9">
     <div class="container">    
-        <div id="questaobox8" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        <div id="questaobox8"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
                         <div class="panel-title">Questão 8</div>
@@ -956,7 +1100,7 @@ function showQ(select){
                                             <input type="radio" name="opq8" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input  class="form-control" type="text" name="q8_pontos" id="q8_pontos" style="text-align: right;" readonly="true" />
                                     </div>
                                 </div>
@@ -1013,11 +1157,16 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>  
+    </div>                         <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
+                        </ul>
+                    </div>
 
-
-    <div class="container">    
-        <div id="questaobox9" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+                    <div class="tab-pane" role="tabpanel" id="step10">
+ <div class="container">    
+        <div id="questaobox9"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
                         <div class="panel-title">Questão 9</div>
@@ -1065,7 +1214,7 @@ function showQ(select){
                                             <input type="radio" name="opq9" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input  class="form-control" type="text" name="q9_pontos" id="q9_pontos" style="text-align: right;" readonly="true" />
                                     </div>
                                 </div>
@@ -1122,11 +1271,16 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>  
+    </div>                          <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
+                        </ul>
+                    </div>
 
-
-    <div class="container">    
-        <div id="questaobox10" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+                    <div class="tab-pane" role="tabpanel" id="step11">
+ <div class="container">    
+        <div id="questaobox10"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
                         <div class="panel-title">Questão 10</div>
@@ -1175,7 +1329,7 @@ function showQ(select){
                                             <input type="radio" name="opq10" value="2" checked="true"> Não
                                         </i>
                                     </span>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input  class="form-control" type="text" name="q10_pontos" id="q10_pontos" style="text-align: right;" readonly="true" />
                                     </div>
                                 </div>
@@ -1234,12 +1388,35 @@ function showQ(select){
     
         </div>
 
-    </div>
-    
-        <input  style="margin-right: auto;margin-left: 540px;display: block;" type="submit"  value="Criar Avaliação" form="avaliacaoform" class="btn btn-success" onclick="return validar();">
- 
+    </div>                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
+                        </ul>
+                    </div>
 
+                    <div class="tab-pane" role="tabpanel" id="complete">
+                        <h3>Complete</h3>
+                        <p>Tem certeza que deseja gerar a Avaliação com as questões escolhidas?</p>
+        <input  style="margin-right: auto;margin-left: 540px;display: block;" type="submit"  value="Criar Avaliação" form="avaliacaoform" class="btn btn-success" onclick="return validar();">
 </form>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+        </div>
+    </section>
+   </div>
+</div>
+
+
+
+
+
+
+    <div id="avaliacaobox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        
+    </div>
+</div>
+    
 
 
 @stop

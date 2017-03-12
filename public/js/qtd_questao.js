@@ -7,7 +7,19 @@ function showDiv(select){
     document.getElementById('q4_pontos').value=2.0;
     document.getElementById('q5_pontos').value=2.0;
 
+
     document.getElementById('questaobox6').style.display = "none";
+    document.getElementById('step7').style.display = "none";
+    document.getElementById('step8').style.display = "none";
+    document.getElementById('step9').style.display = "none";
+    document.getElementById('step10').style.display = "none";
+    document.getElementById('step11').style.display = "none";
+    $('li#step7').not();
+    $('li#step8').not();
+    $('li#step9').not();
+    $('li#step10').not();
+    $('li#step11').not();
+
     document.getElementById('questao-area6').setAttribute("disabled","disabled");
 
     document.getElementById('questaobox7').style.display = "none";
@@ -31,6 +43,11 @@ function showDiv(select){
     document.getElementById('q6_pontos').value=2.0;
 
     document.getElementById('questaobox6').style.display = "block";
+    document.getElementById('step7').style.display = "block";
+    document.getElementById('step8').style.display = "none";
+    document.getElementById('step9').style.display = "none";
+    document.getElementById('step10').style.display = "none";
+    document.getElementById('step11').style.display = "none";
     document.getElementById('questao-area6').removeAttribute("disabled");
     
     document.getElementById('questaobox7').style.display = "none";
@@ -55,6 +72,11 @@ function showDiv(select){
     document.getElementById('q7_pontos').value=2.5;
 
     document.getElementById('questaobox6').style.display = "block";
+    document.getElementById('step7').style.display = "block";
+    document.getElementById('step8').style.display = "block";
+    document.getElementById('step9').style.display = "none";
+    document.getElementById('step10').style.display = "none";
+    document.getElementById('step11').style.display = "none";
     document.getElementById('questao-area6').removeAttribute("disabled");
 
     document.getElementById('questaobox7').style.display = "block";
@@ -80,6 +102,11 @@ function showDiv(select){
     document.getElementById('q8_pontos').value=2.0;
 
     document.getElementById('questaobox6').style.display = "block";
+    document.getElementById('step7').style.display = "block";
+    document.getElementById('step8').style.display = "block";
+    document.getElementById('step9').style.display = "block";
+    document.getElementById('step10').style.display = "none";
+    document.getElementById('step11').style.display = "none";
     document.getElementById('questao-area6').removeAttribute("disabled");
 
     document.getElementById('questaobox7').style.display = "block";
@@ -106,6 +133,11 @@ function showDiv(select){
     document.getElementById('q9_pontos').value=2.0;
 
     document.getElementById('questaobox6').style.display = "block";
+    document.getElementById('step7').style.display = "block";
+    document.getElementById('step8').style.display = "block";
+    document.getElementById('step9').style.display = "block";
+    document.getElementById('step10').style.display = "block";
+    document.getElementById('step11').style.display = "none";
     document.getElementById('questao-area6').removeAttribute("disabled");
 
     document.getElementById('questaobox7').style.display = "block";
@@ -134,6 +166,11 @@ function showDiv(select){
     document.getElementById('q10_pontos').value=1.0;
 
     document.getElementById('questaobox6').style.display = "block";
+    document.getElementById('step7').style.display = "block";
+    document.getElementById('step8').style.display = "block";
+    document.getElementById('step9').style.display = "block";
+    document.getElementById('step10').style.display = "block";
+    document.getElementById('step11').style.display = "block";
     document.getElementById('questao-area6').removeAttribute("disabled");
 
     document.getElementById('questaobox7').style.display = "block";
