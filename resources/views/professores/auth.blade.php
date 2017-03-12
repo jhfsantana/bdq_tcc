@@ -22,7 +22,7 @@
             @endif                     
             <div class="panel panel-info">
                     <div class="panel-heading" style="background-color: #ecf0f1; border-color: #f39c12;">
-                       <img src="/images/teacher.png">
+                       <img src="/images/desk.png">
                        <div class="panel-title" style="text-align: center; font-family: lato; "><h2>Área do Professor</h2></div>
                     </div>     
 

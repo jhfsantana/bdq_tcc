@@ -18,7 +18,7 @@
 		<div id="header" style="width: 100%; height: 135px;background-color: #95a5a6;">
       <div class="row">
         <div class="col-md-8 col-md-offset-5" ">
-          <div class="logo" style="margin-left: 65px; margin-top: 0; margin-bottom: 155px;">
+          <div class="logo" style="margin-left: 65px; margin-top: 0; margin-bottom: 155px; position: fixed;">
             <img src="/images/header_logo_professor.svg/">
           </div>
         </div>

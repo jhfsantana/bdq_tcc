@@ -119,7 +119,7 @@
 							
 							<div layout="row" layout-align="center center">
 								<div class="form-group" ng-controller="DisciplinaController" flex="70">
-									<select class="form-control" name="disciplina_id" ng-model="questao.disciplina" ng-options="disciplina.id as disciplina.nome for disciplina in disciplinas">
+									<select class="form-control" name="disciplina_id" ng-model="questao.disciplina_id" ng-options="disciplina.id as disciplina.nome for disciplina in disciplinas">
     									<option style="display:none" value="">Selecione uma disciplina</option>
 									</select>
 								</div>
