@@ -72,7 +72,7 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 
 	Route::get('professor/questao/add', 'Questoes\QuestaoController@create');
 
-	Route::post('professor/{id}/questao/adicionada', 'Questoes\QuestaoController@store');
+	Route::post('professor/questao/adicionada', 'Questoes\QuestaoController@store');
 
 	Route::get('professor/avaliacao/gerar', 'Avaliacoes\AvaliacaoController@formulario');
 

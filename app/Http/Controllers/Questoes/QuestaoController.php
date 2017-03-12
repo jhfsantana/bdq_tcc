@@ -61,42 +61,52 @@ class QuestaoController extends Controller
     public function store(Request $request)
     {
         
-        $this->validate($request, [
-            'disciplina_id' => 'required|max:255',
-        ]
-        ,$messages = [
-            'disciplina_id.required'    => 'Escolha uma disciplina',
-
-        ]);
-
+        $this->validate($request, 
+            [
+                'disciplina_id' => 'required|max:255',
+                'nivel'         => 'required',
+            ],
+            $messages = 
+                [
+                    'disciplina_id.required' => 'Escolha uma disciplina',
+                    'nivel.required'         => 'Nivel de dificuldade é obrigatório',
+                ]);
         $questao = new Questao();
-        $questao->questao = $request->questao;
-        $questao->disciplina_nome = $request->disciplina_nome;
-        $questao->alternativaA = $request->alternativaA;
-        $questao->alternativaB = $request->alternativaB;
-        $questao->alternativaC = $request->alternativaC;
-        $questao->alternativaD = $request->alternativaD;
-        $questao->alternativaE = $request->alternativaE;
-        $questao->correta = $request->correta;
-        $questao->nivel = $request->nivel;
+        $questao->questao         = $request->questao;
+        $questao->alternativaA    = $request->alternativaA;
+        $questao->alternativaB    = $request->alternativaB;
+        $questao->alternativaC    = $request->alternativaC;
+        $questao->alternativaD    = $request->alternativaD;
+        $questao->alternativaE    = $request->alternativaE;
+        $questao->correta         = $request->correta;
+        $questao->nivel           = $request->nivel;
         
-        if(\Auth::guard('web_admins'))
+        if(\Auth::guard() == 'web_admins')
         {
             $questao->admin()->associate(Auth::guard('web_admins')->user()->id);
         }
-        elseif(\Auth::guard('web_teachers'))
+        
+        if(\Auth::guard() == 'web_teachers')
         {
             $questao->professor()->associate(Auth::guard('web_teachers')->user()->id);
         }
 
-        $questao->disciplina()->associate($request->disciplina);
+        $questao->disciplina()->associate($request->disciplina_id);
 
         if($questao->save())
         {
-            return json_encode([
-                'message' => 'Questão com ID '. $questao->id .' cadastrada com sucesso!',
-                'success' => 'success' 
-            ]);
+            if($request->trace == 'web')
+            {
+                $request->session()->flash('alert-success', 'questão adicionada com sucesso!');
+                return redirect('/professor');
+            }
+            else
+            {
+                return json_encode([
+                    'message' => 'Questão com ID '. $questao->id .' cadastrada com sucesso!',
+                    'success' => 'success' 
+                ]);
+            }
         }
     }
 
