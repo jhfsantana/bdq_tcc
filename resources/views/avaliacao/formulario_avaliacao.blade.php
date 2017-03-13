@@ -149,35 +149,35 @@ function showQ(select){
                             </span>
                         </a>
                     </li>
-                    <li role="presentation" class="disabled" id="step7">
+                    <li role="presentation" class="disabled" id="estep7">
                         <a href="#step7" data-toggle="tab" aria-controls="step7" role="tab" title="Questão 6">
                             <span class="round-tab">
                                 <img src="/images/six.svg">
                             </span>
                         </a>
                     </li>
-                    <li role="presentation" class="disabled" id="step8">
+                    <li role="presentation" class="disabled" id="estep8">
                         <a href="#step8" data-toggle="tab" aria-controls="step8" role="tab" title="Questão 7">
                             <span class="round-tab">
                                 <img src="/images/seven.svg">
                             </span>
                         </a>
                     </li>
-                    <li role="presentation" class="disabled" id="step9">
+                    <li role="presentation" class="disabled" id="estep9">
                         <a href="#step9" data-toggle="tab" aria-controls="step9" role="tab" title="Questão 8">
                             <span class="round-tab">
                                 <img src="/images/eight.svg">
                             </span>
                         </a>
                     </li>
-                    <li role="presentation" class="disabled" id="step10">
+                    <li role="presentation" class="disabled" id="estep10">
                         <a href="#step10" data-toggle="tab" aria-controls="step10" role="tab" title="Questão 9">
                             <span class="round-tab">
                                 <img src="/images/nine.svg">
                             </span>
                         </a>
                     </li>
-                    <li role="presentation" class="disabled" id="step11">
+                    <li role="presentation" class="disabled" id="estep11">
                         <a href="#step11" data-toggle="tab" aria-controls="step11" role="tab" title="Questão 9">
                             <span class="round-tab">
                                 <img src="/images/ten.svg">
@@ -361,10 +361,7 @@ function showQ(select){
                   </div>
              </div>
          </div>             
-                        <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Avançar</button></li>
-                        </ul>
+                    
                     </div>
 
 <div class="tab-pane" role="tabpanel" id="step3">
@@ -471,11 +468,7 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>                  <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Avançar</button></li>
-                        </ul>
+    </div>                 
                     </div>
                     
                     <div class="tab-pane" role="tabpanel" id="step4">
@@ -584,11 +577,7 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>                  <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
-                        </ul>
+    </div>              
                     </div>
 
                     <div class="tab-pane" role="tabpanel" id="step5">
@@ -699,11 +688,7 @@ function showQ(select){
                     </div>  
         </div>
     </div>
-                        <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
-                        </ul>
+                      
                     </div>
 
                     <div class="tab-pane" role="tabpanel" id="step6">
@@ -812,15 +797,11 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>                          <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
-                        </ul>
+    </div>               
                     </div>
 
                     <div class="tab-pane" role="tabpanel" id="step7">
-    <div class="container">    
+    <div class="container">   
         <div id="questaobox6"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-primary" >
                     <div class="panel-heading">
@@ -927,11 +908,7 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>                        <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
-                        </ul>
+    </div>                
                     </div>
 
                     <div class="tab-pane" role="tabpanel" id="step8">
@@ -1042,11 +1019,7 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>                          <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
-                        </ul>
+    </div>               
                     </div>
 
                     <div class="tab-pane" role="tabpanel" id="step9">
@@ -1157,11 +1130,7 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
-                        </ul>
+    </div>              
                     </div>
 
                     <div class="tab-pane" role="tabpanel" id="step10">
@@ -1271,11 +1240,7 @@ function showQ(select){
                         </div>                     
                     </div>  
         </div>
-    </div>                          <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Pular</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
-                        </ul>
+    </div>                
                     </div>
 
                     <div class="tab-pane" role="tabpanel" id="step11">
@@ -1388,16 +1353,13 @@ function showQ(select){
     
         </div>
 
-    </div>                        <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Salvar e continuar</button></li>
-                        </ul>
+    </div>                 
                     </div>
 
                     <div class="tab-pane" role="tabpanel" id="complete">
-                        <h3>Completo</h3>
-                        <p>Tem certeza que deseja gerar a Avaliação com as questões escolhidas?</p>
-        <input  style="margin-right: auto;margin-left: auto;display: block; height: 100px;" type="image"  value="GERAR AVALIAÇÃO" form="avaliacaoform" class="btn btn-primary btn-lg btn-block" onclick="return validar();" src="/images/gerar.svg" title="GERAR AVALIAÇÃO">
+                        <h3>Última etapa</h3>
+                        <p>Tem certeza que deseja gerar a Avaliação com as questões escolhidas?</p>>
+        <input  style="margin-right: auto;margin-left: auto;display: block; height: 100px;" type="submit"  value="GERAR AVALIAÇÃO" form="avaliacaoform" class="btn btn-primary btn-lg btn-block" onclick="return validar();" src="/images/gerar.svg" title="GERAR AVALIAÇÃO">
 </form>
                     </div>
                     <div class="clearfix"></div>

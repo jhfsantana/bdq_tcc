@@ -28,7 +28,7 @@ $(document).ready(function () {
 });
 
 function nextTab(elem) {
-    
+        console.log(elem);
         $(elem).next().find('a[data-toggle="tab"]').click();
 }
 function prevTab(elem) {
