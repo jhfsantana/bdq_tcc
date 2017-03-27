@@ -20,6 +20,7 @@ var app = angular.module('app', ['ui.bootstrap', 'ngMaterial', 'ngMessages'])
 					        link: function(scope, elem, attrs, ngModel) {
 								ngModel.$asyncValidators.dadoUnico = function(modelValue, viewValue) {
 									return $http.get(API_URL + 'administradores/validar/' + elem.val() + '/' + $('#id').val()).then(function(response) {
+										$scope.administrador = response.data;
 										return response.data == 'true' ? $q.reject(response.data.errorMessage) : true;
 								    });
 								};

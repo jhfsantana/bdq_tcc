@@ -52,7 +52,7 @@
 	            						<span ng-show="sortType == 'disciplina' && sortReverse" class="fa fa-caret-up"></span>
 									</th>
 
-									<th style="text-align: right;">
+									<th style="text-align: right; margin-bottom: 10px;">
 										<button id="btn-add" class="btn btn-success btn-md" ng-click="toggle('add', 0)">Nova Questão</button>
 									</th>
 								</tr>

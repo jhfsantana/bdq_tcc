@@ -61,6 +61,10 @@
                 </li>
 
                 <li>
+                    <a href="/admin/lote"><i class="fa fa-fw fa-archive"></i> Questões em lote</a>
+                </li>
+
+                <li>
                     <a href="/relatorio"><i class="fa fa-fw fa-pie-chart"></i> Relatórios</a>
                 </li>
 
@@ -78,20 +82,26 @@
             <span class="hamb-middle"></span>
             <span class="hamb-bottom"></span>
           </button>
-            	<div class="flash-message">
-				    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-				      @if(Session::has('alert-' . $msg))
-				      	<p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
-				      @endif
-				    @endforeach
-				</div>	
+            	
 
 	<!-- FIM DA MENSAGEM DE SUCESSO -->
         		{!! Charts::assets() !!}
-		<div class="conteudo">
+		<div class="conteudo"> 
 			<div class="row">
-				<div class="col-md-10 col-md-offset-1" style="margin-top: 29px;">
+				<div class="col-md-10 col-md-offset-1">
+      <div class="flash-message" style="width: 50%;">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+          @if(Session::has('alert-' . $msg))
+            @if($msg == 'danger')
+            <p class="alert alert-{{ $msg }}"><img src="/images/warning.svg" style="width: 30px; height: 30px;"> {{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+            @else
+            <p class="alert alert-{{ $msg }}"><img src="/images/success.svg" style="width: 30px; height: 30px;"> {{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+            @endif
+          @endif
+        @endforeach
+      </div> 
   			   @yield('content')
+
   			</div>
       </div>
     </div>

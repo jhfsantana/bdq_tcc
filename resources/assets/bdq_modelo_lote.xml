@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<data-set xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<registro>
+		<questao>Este enunciado esta em um xml - Quanto é um mais um?</questao>
+		<alternativaA>1</alternativaA>
+		<alternativaB>2</alternativaB>
+		<alternativaC>3</alternativaC>
+		<alternativaD>4</alternativaD>
+		<alternativaE>5</alternativaE>
+		<correta>b</correta>
+		<disciplina>Matematica</disciplina>
+		<nivel>facil</nivel>
+	</registro>
+	<registro>
+		<questao>Este enunciado esta em um xml - Quanto é um mais dois?</questao>
+		<alternativaA>2</alternativaA>
+		<alternativaB>1</alternativaB>
+		<alternativaC>4</alternativaC>
+		<alternativaD>3</alternativaD>
+		<alternativaE>5</alternativaE>
+		<correta>d</correta>
+		<disciplina>Matematica</disciplina>
+		<nivel>dificil</nivel>
+	</registro>
+	<registro>
+		<questao>Num mesmo dia, uma mercadoria foi comprada por R$ 70,00, vendida por R$ 80,00, recomprada por R$ 90,00 e, finalmente, vendida por R$ 100,00. No final dessa seqüência de compras e vendas, o dono dessa mercadoria:</questao>
+		<alternativaA>teve um lucro de R$ 10,00</alternativaA>
+		<alternativaB>teve um prejuízo de R$ 10,00</alternativaB>
+		<alternativaC>teve um prejuízo de R$ 20,00</alternativaC>
+		<alternativaD>teve um lucro de R$ 20,00</alternativaD>
+		<alternativaE>não teve lucro nem prejuízo</alternativaE>
+		<correta>a</correta>
+		<disciplina>matematica</disciplina>
+		<nivel>moderado</nivel>
+	</registro>
+	<registro>
+		<questao>Uma pousada que dispõe de 60 quartos, alguns duplos (para duas pessoas) e outros, triplos (para três pessoas), pode acomodar, no máximo, 162 hóspedes. Quantos quartos duplos há nessa pousada?</questao>
+		<alternativaA>18</alternativaA>
+		<alternativaB>22</alternativaB>
+		<alternativaC>28</alternativaC>
+		<alternativaD>36</alternativaD>
+		<alternativaE>42</alternativaE>
+		<correta>c</correta>
+		<disciplina>matematica</disciplina>
+		<nivel>facil</nivel>
+	</registro>
+</data-set>

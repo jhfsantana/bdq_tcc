@@ -1,4 +1,4 @@
-@extends('templates.aluno.template')
+	@extends('templates.aluno.template')
 	@section('head')
 	<link rel="stylesheet" href="/css/global.css">	
 	<link rel="stylesheet" href="/css/formularios.css">	
@@ -40,7 +40,7 @@
 				@foreach($aluno->disciplinas as $disciplinas)
 					<tr>
 					@foreach ($disciplinas->turmas as $turma)
-						@foreach($disciplinas->avaliacao as $avaliacao)
+						@foreach($turma->avaliacoes as $avaliacao)
 							<tr> 
 								<td>{{$disciplinas->nome}}</td>
 								<td>{{$turma->nome}}</td>

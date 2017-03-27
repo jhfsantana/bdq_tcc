@@ -27,14 +27,14 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-			@foreach($notas as $nota)
+			   @foreach($notas as $nota)
           		['{{$nota->aluno_nome}}', {{$nota->nota}}],
           @endforeach
         ]);
 
         // Set chart options
         var options = {'title':'Notas dos alunos',
-        			   'is3D':true,
+        			   'is3D':false,
                        'width':450,
                        'height':450,
                        'backgroundColor': 'transparent',

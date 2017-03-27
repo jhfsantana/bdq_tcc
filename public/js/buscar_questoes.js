@@ -46,8 +46,16 @@ $(document).ready(function(){
             var questao_id = "id"
             $("#questao_id").html(JSON.stringify(response[questao_id]));
 
-            console.log(disciplina_nome);
+            console.log(response);
 
+            if(response['correta'] === "a")
+            {
+                $('a10').addClass("alert-sucess");
+            }
+            else
+            {
+                $('a10').removeClass("alert alert-sucess");
+            }
             
         }
 
@@ -483,22 +491,70 @@ $(document).ready(function() {
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
-            var questao = "questao"
-            var alternativaA = "alternativaA"
-            var alternativaB = "alternativaB"
-            var alternativaC = "alternativaC"
-            var alternativaD = "alternativaD"
-            var alternativaE = "alternativaE"
-            var questao10_id = "id"
-            $("#questao-area10").html(JSON.stringify(response[questao]));
-            $("#questao10_id").html(JSON.stringify(response[questao10_id]));
-            $("#alternativaA10").html(JSON.stringify(response[alternativaA]));
-            $("#alternativaB10").html(JSON.stringify(response[alternativaB]));
-            $("#alternativaC10").html(JSON.stringify(response[alternativaC]));
-            $("#alternativaD10").html(JSON.stringify(response[alternativaD]));
-            $("#alternativaE10").html(JSON.stringify(response[alternativaE]));
+            $("#questao-area10").html(JSON.stringify(response['questao']));
+            $("#questao10_id").html(JSON.stringify(response['id']));
+            $("#alternativaA10").html(JSON.stringify(response['alternativaA']));
+            $("#alternativaB10").html(JSON.stringify(response['alternativaB']));
+            $("#alternativaC10").html(JSON.stringify(response['alternativaC']));
+            $("#alternativaD10").html(JSON.stringify(response['alternativaD']));
+            $("#alternativaE10").html(JSON.stringify(response['alternativaE']));
 
-            console.log(response);
+            if(response['correta'] === "a")
+            {
+/*                document.getElementById('a10').setAttribute("class", "alert alert-success");
+*/                
+                document.getElementById('alternativaA10').style.borderColor="#58BF67";
+                document.getElementById('alternativaA10').style.borderWidth="medium";
+
+            }
+            else
+            {
+                document.getElementById('alternativaA10').style.borderColor="red";
+                document.getElementById('alternativaA10').style.borderWidth="thin";
+            }
+            if(response['correta'] === "b")
+            {
+                document.getElementById('alternativaB10').style.borderColor="#58BF67";
+                document.getElementById('alternativaB10').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaB10').style.borderColor="red";
+                document.getElementById('alternativaB10').style.borderWidth="thin";
+            }
+            
+            if(response['correta'] === "c")
+            {
+                document.getElementById('alternativaC10').style.borderColor="#58BF67";
+                document.getElementById('alternativaC10').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaC10').style.borderColor="red";
+                document.getElementById('alternativaC10').style.borderWidth="thin";
+
+            }
+
+            if(response['correta'] === "d")
+            {
+                document.getElementById('alternativaD10').style.borderColor="#58BF67";
+                document.getElementById('alternativaD10').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaD10').style.borderColor="red";
+                document.getElementById('alternativaD10').style.borderWidth="thin";
+            }
+            if(response['correta'] === "e")
+            {
+                document.getElementById('alternativaE10').style.borderColor="#58BF67";
+                document.getElementById('alternativaE10').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaE10').style.borderColor="red";
+                document.getElementById('alternativaE10').style.borderWidth="thin";
+            }
 
             
         }

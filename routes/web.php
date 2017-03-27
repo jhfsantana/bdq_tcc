@@ -11,6 +11,11 @@
 |
 */
 
+Route::get('/teste', function()
+	{
+		return view('teste');
+	});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -164,6 +169,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 #####################################################################################
 
 	Route::get('home','Admins\AdminController@index');
+	Route::get('/download/arquivo/modelo','Questoes\QuestaoController@downloadArquivo');
 
 
 	Route::get('aluno/novo','Alunos\AlunoController@create');
@@ -226,15 +232,11 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 
 	Route::post('admin/questao/alterada', 'Questoes\QuestaoController@update');
 
-	Route::get('/verificar/turma/disponivel', function(){
+	Route::get('admin/lote', 'Questoes\QuestaoController@lote');
 
-		
-	});
-/*	Route::get('/turmas', function () {
-	    $turmas = Turma::all();
-	    return view('turmas.formulario_turmas')->with('turmas', $turmas);
-	});
-*/
+	Route::post('admin/carregar/lote', 'Questoes\QuestaoController@processarXML'); //carregarLote
+
+
 
 
 });

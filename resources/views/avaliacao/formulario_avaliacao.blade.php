@@ -1236,149 +1236,85 @@ function showQ(select){
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"></i>                                               
                                         <textarea  name = "e" id="alternativaE9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-                            </div>
-                        </div>                     
-                    </div>  
+                    </div>
+                </div>                     
+             </div>  
         </div>
     </div>                
-                    </div>
+ </div>
 
-                    <div class="tab-pane" role="tabpanel" id="step11">
- <div class="container">    
-        <div id="questaobox10"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-primary" >
+    <div class="tab-pane" role="tabpanel" id="step11">
+         <div layout="row" class="mainbox col-md-12 col-md-offset-1">
+         <div layout="column">
+             <div id="questaobox10">
+                <div class="panel panel-info">
                     <div class="panel-heading">
-                        <div class="panel-title">Questão 10</div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-                            
-                            <div class="panel panel-info " >
-                                <div class="panel-heading">
-                                    <div class="panel-title">Selecione a dificuldade da questão</div>
-                                </div> 
-                            </div>
-                            
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i></i>
-
-                                
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq10_id" value="1" id="nivelq10_id" checked="true"> Facil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq10_id" value="2" id="nivelq10_id"> Moderada<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq10_id" value="3" id="nivelq10_id"> Dificil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq10_id" value="4" id="nivelq10_id"> Muito dificil<br>
-                                </label>
-                                <!-- <select class="form-control" id="nivel">
-                                    <option value="1">Facil</option>
-                                    <option value="2">Moderada</option>
-                                    <option value="3">Dificil</option>
-                                    <option value="4">Muito dificil</option>
-                                </select> -->
-                                </span>
-                            </div>
-                           
-                            <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i>Deseja alterar a quantidade de pontos?
-                                            <input type="radio" name="opq10" value="1"> Sim
-                                            <input type="radio" name="opq10" value="2" checked="true"> Não
-                                        </i>
-                                    </span>
-                                    <div class="col-md-8">
-                                        <input  class="form-control" type="text" name="q10_pontos" id="q10_pontos" style="text-align: right;" readonly="true" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>
-                            <textarea  id="questao10_id" type="textarea" value="" rows="1" class="form-control" name="questao10_id[]"  style="display: none;"></textarea>
-                           <div style="margin-bottom: 25px" class="input-group">
-                                        <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area10" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required  ></textarea>
-
-                                        
-                                        
-                                            <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar10" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        
-                                         
-
-
-                            </div>
-                             
- 
-
-                                
-                            
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "a" id="alternativaA10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
-
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "b" id="alternativaB10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "c" id="alternativaC10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "d" id="alternativaD10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "e" id="alternativaE10" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-                            </div>
-                          
-                       </div>                     
-                    </div>  
-    
-        </div>
-
-    </div>                 
-                    </div>
-
-                    <div class="tab-pane" role="tabpanel" id="complete">
-                        <h3>Última etapa</h3>
-                        <p>Tem certeza que deseja gerar a Avaliação com as questões escolhidas?</p>>
-        <input  style="margin-right: auto;margin-left: auto;display: block; height: 100px;" type="submit"  value="GERAR AVALIAÇÃO" form="avaliacaoform" class="btn btn-primary btn-lg btn-block" onclick="return validar();" src="/images/gerar.svg" title="GERAR AVALIAÇÃO">
-</form>
-                    </div>
-                    <div class="clearfix"></div>
+                        <div class="panel-title">Selecione a dificuldade da questão</div>
+                    </div> 
                 </div>
+                <div style="padding-left: 16px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="nivelq10_id" value="1" id="nivelq10_id" checked="true"> Facil<br>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="nivelq10_id" value="2" id="nivelq10_id"> Moderada<br>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="nivelq10_id" value="3" id="nivelq10_id"> Dificil<br>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="nivelq10_id" value="4" id="nivelq10_id"> Muito dificil<br>
+                        </label>
+                    <input id = "disciplina_id" name="disciplina_id" type="hidden">
+                </div>
+                <input id="questao10_id" type="hidden" name="questao10_id[]">
+                <textarea id="questao-area10" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
+                <div class="input-group">
+                    <i>Deseja alterar a quantidade de pontos?
+                        <input type="radio" name="opq10" value="1"> Sim
+                        <input type="radio" name="opq10" value="2" checked="true"> Não
+                    </i>
+                    <div>
+                        <input  class="form-control" type="text" name="q10_pontos" id="q10_pontos" style="text-align: right;" readonly="true" />
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
-   </div>
-</div>
 
+        <div layout="column" layout-margin flex="50">
+            <div id="a10">
+                <textarea  name = "a" id="alternativaA10" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+            </div>
+            <div id="b10">
+                <textarea  name = "b" id="alternativaB10" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+            </div>
+            <div id="c10">
+                <textarea  name = "c" id="alternativaC10" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+            </div>
+            <div id="d10">
+                <textarea  name = "d" id="alternativaD10" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+            </div>
+            <div id="e10">
+                <textarea  name = "e" id="alternativaE10" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+            </div>
+            <input id = "buscar10" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
+        </div>
+    </div>
+</div>  
 
-
-
-
-
-    <div id="avaliacaobox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-        
+        <div class="tab-pane" role="tabpanel" id="complete">
+            <h3>Última etapa</h3>
+            <p>Tem certeza que deseja gerar a Avaliação com as questões escolhidas?</p>
+            <input  style="margin-right: auto;margin-left: auto;display: block; height: 100px;" type="submit"  value="GERAR AVALIAÇÃO" form="avaliacaoform" class="btn btn-primary btn-lg btn-block" onclick="return validar();" src="/images/gerar.svg" title="GERAR AVALIAÇÃO">
+        </div>
+        <div class="clearfix"></div>
+        </div>
+        </form>
+        </div>
+        </section>
+        </div>
     </div>
 </div>
-    
 
 
 @stop

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
@@ -8,22 +8,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/global.css">
 
   
 </head>
 
-<body>
-		<div id="header" style="width: 100%; height: 135px;background-color: #95a5a6;">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-5" ">
-          <div class="logo" style="margin-left: 65px; margin-top: 0; margin-bottom: 155px; position: fixed;">
-            <img src="/images/header_logo_professor.svg/">
-          </div>
-        </div>
+<body ng-app="BlankApp" ng-cloak>
+		<div id="header" style="width: 100%; height: 105px;background-color: #95a5a6; position: fixed;">
+      <div layout="row" layout-align="center center" style="margin: 0;">
+        <img src="/images/header_logo_professor.svg/">
       </div>
-		</div>
+    </div>
 
       <div id="wrapper">
         <div class="overlay"></div>
@@ -96,11 +94,23 @@
   </div> -->
 
       <!-- /#final footer -->
-
+      
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
-<script src="/js/index.js"></script>
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+  <!-- Your application bootstrap  -->
+  <script type="text/javascript">    
+
+    angular.module('BlankApp', ['ngMaterial']);
+  </script>
+  <script src="/js/index.js"></script>
 
 </body>
 </html>

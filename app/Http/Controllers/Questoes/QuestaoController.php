@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Models\Disciplina;
 use App\Models\Professor;
 use App\Models\Questao;
+use App\Models\Turma;
 use App\Http\Requests\Questao\QuestaoRequest;
 use Auth;
 
@@ -231,5 +232,227 @@ class QuestaoController extends Controller
     public function getQuestaoByProfessor()
     {
         return DB::select('select * from questoes where professor_id = ?', array(Auth::user()->id));
+    }
+
+    public function lote()
+    {
+        return view('admin.lote');
+    }
+
+    // public function carregarLote(Request $request)
+    // {
+    //     ini_set('auto_detect_line_endings', true);
+    //     if (isset($_FILES['file'])) {
+    //         $ok = true;
+    //         $file = $_FILES['file']['tmp_name'];
+    //         $handle = fopen($file, "r");
+    //         $ext = pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_EXTENSION);
+
+    //         if($ext != 'csv')
+    //         {
+    //             $request->session()->flash('alert-danger', 'Somente e permitido arquivos com extensão .CSV');
+    //             return redirect()->back();  
+    //         }
+    //         else
+    //         {
+    //             if ($file == NULL)
+    //             {
+    //                 error(_('Por favor selecione um arquivo para fazer o upload'));
+    //                 return redirect()->back();
+    //             }
+    //             else 
+    //             {
+
+    //                 fgetcsv($handle);      
+    //                 $data = array();
+    //                 $count = 1;
+    //                 $col = 0;
+    //                 $aux = 10;
+    //                 while(($rows = fgetcsv($handle, 1000, ";")) !== false)
+    //                 {
+    //                   $count++;
+    //                   $arr = array();
+    //                   foreach ($rows as $i => $col)
+    //                     $col++;
+    //                     $aux--;
+    //                     $coluna = ($col-$aux);
+    //                     $arr['questao'] = $this->tirarAcentos($rows[0]);
+    //                     $arr['alternativaA'] = $this->tirarAcentos($rows[1]);
+    //                     $arr['alternativaB'] = $this->tirarAcentos($rows[2]);
+    //                     $arr['alternativaC'] = $this->tirarAcentos($rows[3]);
+    //                     $arr['alternativaD'] = $this->tirarAcentos($rows[4]);
+    //                     $arr['alternativaE'] = $this->tirarAcentos($rows[5]);
+    //                     $arr['correta'] = $this->tirarAcentos($rows[6]);
+    //                     $disciplina = Disciplina::where('nome', $this->tirarAcentos($rows[7]))->first();
+
+    //                     if(!empty($disciplina))
+    //                     {
+    //                         $arr['disciplina_id'] = $disciplina->id; 
+    //                     }
+    //                     else
+    //                     {
+    //                         $request->session()->flash('alert-danger', 'Disciplina informada não encontrada, erro na linha: '. $count . ' coluna: '. $coluna);
+    //                         return redirect()->back();
+    //                     }
+
+    //                     switch ($this->tirarAcentos(strtolower($rows[8]))) 
+    //                     {
+    //                         case 'facil':
+    //                             $arr['nivel'] = 1;
+    //                             break;
+    //                         case 'moderado':
+    //                             $arr['nivel'] = 2;
+    //                             break;
+    //                         case 'dificil':
+    //                             $arr['nivel'] = 3;
+    //                             break;
+    //                         case 'muito dificil':
+    //                             $arr['nivel'] = 4;
+    //                             break;
+    //                         default:
+    //                             $request->session()->flash('alert-danger', 'Opção inválida para o nivel de dificuldade, erro na linha: ' . $count . ' coluna: ' . $coluna);
+    //                             return redirect()->back();
+    //                             break;
+    //                     }
+
+    //                     $arr['admin_id'] = Auth::user()->id;
+    //                     $data[] = $arr;
+
+    //                 }
+
+    //                     if ($ok) 
+    //                     {
+    //                         $result = Questao::insert($data);
+    //                     }
+                        
+    //                     if($result)
+    //                     {
+    //                         $request->session()->flash('alert-success', 'Arquivo processado com sucesso!');
+    //                         return redirect()->back(); 
+    //                     }
+    // /*              while(($filesop = fgetcsv($handle, 1000, ";")) !== false)
+    //                 {
+    //                     foreach ($filesop as $file) {
+    //                         $campos['questao'] = $file;
+    //                         $campos['alternativaA'] = $file;
+    //                         $campos['alternativaB'] = $file;
+    //                         $campos['alternativaC'] = $file;
+    //                         $campos['alternativaD'] = $file;
+    //                         $campos['alternativaE'] = $file;
+    //                         $campos['correta'] = $file;
+    //                         $campos['disciplina_id'] = $file;
+    //                         $campos['nivel'] = $file;
+    //                     }
+    //                     dd($campos);
+    //                     if ($ok) 
+    //                     {
+    //                         Questao::insert($campos);
+    //                     }
+    //                     exit;
+    //               }*/
+    //             }
+    //         }
+    //     }
+    // }
+
+    public function processarXML(Request $request)
+    {
+        ini_set('auto_detect_line_endings', true);
+        $ok = false;
+        $file = $request->file('file');
+
+        if(isset($file))
+        {
+            $ok = true;
+            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+
+            if($ext != 'xml')
+            {
+                $request->session()->flash('alert-danger', ' Extensão inválida, somente .XML');
+                return redirect()->back();
+            }
+            else
+            {
+
+                $xml = new \SimpleXMLElement($file, null, true);
+
+                $data = array();
+                
+                $count = 0;
+                foreach($xml->children() as $nodes)
+                {
+                    $count++;
+                    $data['questao']        = $nodes->questao;
+                    $data['alternativaA']   = $nodes->alternativaA;
+                    $data['alternativaB']   = $nodes->alternativaB;
+                    $data['alternativaC']   = $nodes->alternativaC;
+                    $data['alternativaD']   = $nodes->alternativaD;
+                    $data['alternativaE']   = $nodes->alternativaE;
+                    $data['correta']        = $nodes->correta;
+
+                    $disciplina = Disciplina::where('nome', $nodes->disciplina)->first();
+
+                    if(!empty($disciplina))
+                    {
+                        $data['disciplina_id']  = $disciplina->id;
+                    }
+                    else
+                    {
+                        $request->session()->flash('alert-danger', ' Disciplina informada não encontrada');
+                        return redirect()->back();
+                    }
+
+                    switch ($nodes->nivel) 
+                    {
+                        case 'facil':
+                            $data['nivel'] = 1;
+                            break;
+                        case 'moderado':
+                            $data['nivel'] = 2;
+                            break;
+                        case 'dificil':
+                            $data['nivel'] = 3;
+                            break;
+                        case 'muito dificil':
+                            $data['nivel'] = 4;
+                            break;
+                        default:
+                            $request->session()->flash('alert-danger', 'Opção inválida para o nivel de dificuldade');
+                            return redirect()->back();
+                            break;
+                    }
+                    
+                    $data['admin_id'] = Auth::user()->id;
+
+                    $data['created_at'] = new \DateTime();
+
+                    $data['updated_at'] = new \DateTime();
+
+                    $campos[] = $data;
+                }
+
+                if($ok)
+                {
+                    Questao::insert($campos);
+                    $request->session()->flash('alert-success', ' XML Processado com Sucesso / Total de ' . $count . ' questões adicionadas ao Banco de Dados');
+                    return redirect()->back();
+                }
+            }
+        }
+        else
+        {
+            $request->session()->flash('alert-danger', ' Nenhum arquivo encontrado');
+            return redirect()->back(); 
+        }
+    }
+
+    public function downloadArquivo()
+    {
+        $caminho = 'C:\wamp\www\bq_tcc\resources\assets\bdq_modelo_lote.xlsx';
+        set_time_limit(0);
+        header('Content-Type: application/octet-stream');
+        header("Content-Transfer-Encoding: Binary"); 
+        header("Content-disposition: attachment; filename=\"" . basename($caminho) . "\""); 
+        readfile($caminho); // do the double-download-dance (dirty but worky)
     }
 }

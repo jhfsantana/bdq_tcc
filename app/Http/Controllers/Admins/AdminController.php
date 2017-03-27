@@ -90,7 +90,7 @@ class AdminController extends Controller
         
         if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
         {
-            return json_encode(true);
+            return $matriculaValidado;
         }
         elseif (!count($emailValidado) || !count($matriculaValidado) || !count($cpfValidado)) 
         {
