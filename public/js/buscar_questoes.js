@@ -46,15 +46,60 @@ $(document).ready(function(){
             var questao_id = "id"
             $("#questao_id").html(JSON.stringify(response[questao_id]));
 
-            console.log(response);
-
-            if(response['correta'] === "a")
+             if(response['correta'] === "a")
             {
-                $('a10').addClass("alert-sucess");
+                
+                document.getElementById('alternativaA').style.borderColor="#58BF67";
+                document.getElementById('alternativaA').style.borderWidth="medium";
+
             }
             else
             {
-                $('a10').removeClass("alert alert-sucess");
+                document.getElementById('alternativaA').style.borderColor="red";
+                document.getElementById('alternativaA').style.borderWidth="thin";
+            }
+            if(response['correta'] === "b")
+            {
+                document.getElementById('alternativaB').style.borderColor="#58BF67";
+                document.getElementById('alternativaB').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaB').style.borderColor="red";
+                document.getElementById('alternativaB').style.borderWidth="thin";
+            }
+            
+            if(response['correta'] === "c")
+            {
+                document.getElementById('alternativaC').style.borderColor="#58BF67";
+                document.getElementById('alternativaC').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaC').style.borderColor="red";
+                document.getElementById('alternativaC').style.borderWidth="thin";
+
+            }
+
+            if(response['correta'] === "d")
+            {
+                document.getElementById('alternativaD').style.borderColor="#58BF67";
+                document.getElementById('alternativaD').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaD').style.borderColor="red";
+                document.getElementById('alternativaD').style.borderWidth="thin";
+            }
+            if(response['correta'] === "e")
+            {
+                document.getElementById('alternativaE').style.borderColor="#58BF67";
+                document.getElementById('alternativaE').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaE').style.borderColor="red";
+                document.getElementById('alternativaE').style.borderWidth="thin";
             }
             
         }
@@ -141,8 +186,61 @@ $(document).ready(function() {
             $("#alternativaD2").html(JSON.stringify(response[alternativaD]));
             $("#alternativaE2").html(JSON.stringify(response[alternativaE]));
 
-            console.log(response);
+            if(response['correta'] === "a")
+            {
+                
+                document.getElementById('alternativaA2').style.borderColor="#58BF67";
+                document.getElementById('alternativaA2').style.borderWidth="medium";
 
+            }
+            else
+            {
+                document.getElementById('alternativaA2').style.borderColor="red";
+                document.getElementById('alternativaA2').style.borderWidth="thin";
+            }
+            if(response['correta'] === "b")
+            {
+                document.getElementById('alternativaB2').style.borderColor="#58BF67";
+                document.getElementById('alternativaB2').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaB2').style.borderColor="red";
+                document.getElementById('alternativaB2').style.borderWidth="thin";
+            }
+            
+            if(response['correta'] === "c")
+            {
+                document.getElementById('alternativaC2').style.borderColor="#58BF67";
+                document.getElementById('alternativaC2').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaC102').style.borderColor="red";
+                document.getElementById('alternativaC2').style.borderWidth="thin";
+
+            }
+
+            if(response['correta'] === "d")
+            {
+                document.getElementById('alternativaD2').style.borderColor="#58BF67";
+                document.getElementById('alternativaD2').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaD2').style.borderColor="red";
+                document.getElementById('alternativaD2').style.borderWidth="thin";
+            }
+            if(response['correta'] === "e")
+            {
+                document.getElementById('alternativaE2').style.borderColor="#58BF67";
+                document.getElementById('alternativaE2').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaE2').style.borderColor="red";
+                document.getElementById('alternativaE2').style.borderWidth="thin";
+            }
             
         }
 
@@ -187,8 +285,61 @@ $(document).ready(function() {
             $("#alternativaD3").html(JSON.stringify(response[alternativaD]));
             $("#alternativaE3").html(JSON.stringify(response[alternativaE]));
 
-            console.log(response);
+            if(response['correta'] === "a")
+            {
+                
+                document.getElementById('alternativaA3').style.borderColor="#58BF67";
+                document.getElementById('alternativaA3').style.borderWidth="medium";
 
+            }
+            else
+            {
+                document.getElementById('alternativaA3').style.borderColor="red";
+                document.getElementById('alternativaA3').style.borderWidth="thin";
+            }
+            if(response['correta'] === "b")
+            {
+                document.getElementById('alternativaB3').style.borderColor="#58BF67";
+                document.getElementById('alternativaB3').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaB3').style.borderColor="red";
+                document.getElementById('alternativaB3').style.borderWidth="thin";
+            }
+            
+            if(response['correta'] === "c")
+            {
+                document.getElementById('alternativaC3').style.borderColor="#58BF67";
+                document.getElementById('alternativaC3').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaC3').style.borderColor="red";
+                document.getElementById('alternativaC3').style.borderWidth="thin";
+
+            }
+
+            if(response['correta'] === "d")
+            {
+                document.getElementById('alternativaD3').style.borderColor="#58BF67";
+                document.getElementById('alternativaD3').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaD3').style.borderColor="red";
+                document.getElementById('alternativaD3').style.borderWidth="thin";
+            }
+            if(response['correta'] === "e")
+            {
+                document.getElementById('alternativaE3').style.borderColor="#58BF67";
+                document.getElementById('alternativaE3').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaE3').style.borderColor="red";
+                document.getElementById('alternativaE3').style.borderWidth="thin";
+            }
             
         }
 
@@ -232,7 +383,61 @@ $(document).ready(function() {
             $("#alternativaD4").html(JSON.stringify(response[alternativaD]));
             $("#alternativaE4").html(JSON.stringify(response[alternativaE]));
 
-            console.log(response);
+            if(response['correta'] === "a")
+            {
+                
+                document.getElementById('alternativaA4').style.borderColor="#58BF67";
+                document.getElementById('alternativaA4').style.borderWidth="medium";
+
+            }
+            else
+            {
+                document.getElementById('alternativaA4').style.borderColor="red";
+                document.getElementById('alternativaA4').style.borderWidth="thin";
+            }
+            if(response['correta'] === "b")
+            {
+                document.getElementById('alternativaB4').style.borderColor="#58BF67";
+                document.getElementById('alternativaB4').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaB4').style.borderColor="red";
+                document.getElementById('alternativaB4').style.borderWidth="thin";
+            }
+            
+            if(response['correta'] === "c")
+            {
+                document.getElementById('alternativaC4').style.borderColor="#58BF67";
+                document.getElementById('alternativaC4').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaC4').style.borderColor="red";
+                document.getElementById('alternativaC4').style.borderWidth="thin";
+
+            }
+
+            if(response['correta'] === "d")
+            {
+                document.getElementById('alternativaD4').style.borderColor="#58BF67";
+                document.getElementById('alternativaD4').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaD4').style.borderColor="red";
+                document.getElementById('alternativaD4').style.borderWidth="thin";
+            }
+            if(response['correta'] === "e")
+            {
+                document.getElementById('alternativaE4').style.borderColor="#58BF67";
+                document.getElementById('alternativaE4').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaE4').style.borderColor="red";
+                document.getElementById('alternativaE4').style.borderWidth="thin";
+            }
 
             
         }
@@ -277,8 +482,61 @@ $(document).ready(function() {
             $("#alternativaD5").html(JSON.stringify(response[alternativaD]));
             $("#alternativaE5").html(JSON.stringify(response[alternativaE]));
 
-            console.log(response);
+            if(response['correta'] === "a")
+            {
+                
+                document.getElementById('alternativaA5').style.borderColor="#58BF67";
+                document.getElementById('alternativaA5').style.borderWidth="medium";
 
+            }
+            else
+            {
+                document.getElementById('alternativaA5').style.borderColor="red";
+                document.getElementById('alternativaA5').style.borderWidth="thin";
+            }
+            if(response['correta'] === "b")
+            {
+                document.getElementById('alternativaB5').style.borderColor="#58BF67";
+                document.getElementById('alternativaB5').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaB5').style.borderColor="red";
+                document.getElementById('alternativaB5').style.borderWidth="thin";
+            }
+            
+            if(response['correta'] === "c")
+            {
+                document.getElementById('alternativaC5').style.borderColor="#58BF67";
+                document.getElementById('alternativaC5').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaC5').style.borderColor="red";
+                document.getElementById('alternativaC5').style.borderWidth="thin";
+
+            }
+
+            if(response['correta'] === "d")
+            {
+                document.getElementById('alternativaD5').style.borderColor="#58BF67";
+                document.getElementById('alternativaD5').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaD5').style.borderColor="red";
+                document.getElementById('alternativaD5').style.borderWidth="thin";
+            }
+            if(response['correta'] === "e")
+            {
+                document.getElementById('alternativaE5').style.borderColor="#58BF67";
+                document.getElementById('alternativaE5').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaE5').style.borderColor="red";
+                document.getElementById('alternativaE5').style.borderWidth="thin";
+            }
             
         }
 
@@ -323,8 +581,61 @@ $(document).ready(function() {
             $("#alternativaD6").html(JSON.stringify(response[alternativaD]));
             $("#alternativaE6").html(JSON.stringify(response[alternativaE]));
 
-            console.log(response);
+            if(response['correta'] === "a")
+            {
+                
+                document.getElementById('alternativaA6').style.borderColor="#58BF67";
+                document.getElementById('alternativaA6').style.borderWidth="medium";
 
+            }
+            else
+            {
+                document.getElementById('alternativaA6').style.borderColor="red";
+                document.getElementById('alternativaA6').style.borderWidth="thin";
+            }
+            if(response['correta'] === "b")
+            {
+                document.getElementById('alternativaB6').style.borderColor="#58BF67";
+                document.getElementById('alternativaB6').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaB6').style.borderColor="red";
+                document.getElementById('alternativaB6').style.borderWidth="thin";
+            }
+            
+            if(response['correta'] === "c")
+            {
+                document.getElementById('alternativaC6').style.borderColor="#58BF67";
+                document.getElementById('alternativaC6').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaC6').style.borderColor="red";
+                document.getElementById('alternativaC6').style.borderWidth="thin";
+
+            }
+
+            if(response['correta'] === "d")
+            {
+                document.getElementById('alternativaD6').style.borderColor="#58BF67";
+                document.getElementById('alternativaD6').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaD6').style.borderColor="red";
+                document.getElementById('alternativaD6').style.borderWidth="thin";
+            }
+            if(response['correta'] === "e")
+            {
+                document.getElementById('alternativaE6').style.borderColor="#58BF67";
+                document.getElementById('alternativaE6').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaE6').style.borderColor="red";
+                document.getElementById('alternativaE6').style.borderWidth="thin";
+            }
             
         }
 
@@ -368,8 +679,61 @@ $(document).ready(function() {
             $("#alternativaD7").html(JSON.stringify(response[alternativaD]));
             $("#alternativaE7").html(JSON.stringify(response[alternativaE]));
 
-            console.log(response);
+            if(response['correta'] === "a")
+            {
+                
+                document.getElementById('alternativaA7').style.borderColor="#58BF67";
+                document.getElementById('alternativaA7').style.borderWidth="medium";
 
+            }
+            else
+            {
+                document.getElementById('alternativaA7').style.borderColor="red";
+                document.getElementById('alternativaA7').style.borderWidth="thin";
+            }
+            if(response['correta'] === "b")
+            {
+                document.getElementById('alternativaB7').style.borderColor="#58BF67";
+                document.getElementById('alternativaB7').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaB7').style.borderColor="red";
+                document.getElementById('alternativaB7').style.borderWidth="thin";
+            }
+            
+            if(response['correta'] === "c")
+            {
+                document.getElementById('alternativaC7').style.borderColor="#58BF67";
+                document.getElementById('alternativaC7').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaC7').style.borderColor="red";
+                document.getElementById('alternativaC7').style.borderWidth="thin";
+
+            }
+
+            if(response['correta'] === "d")
+            {
+                document.getElementById('alternativaD7').style.borderColor="#58BF67";
+                document.getElementById('alternativaD7').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaD7').style.borderColor="red";
+                document.getElementById('alternativaD7').style.borderWidth="thin";
+            }
+            if(response['correta'] === "e")
+            {
+                document.getElementById('alternativaE7').style.borderColor="#58BF67";
+                document.getElementById('alternativaE7').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaE7').style.borderColor="red";
+                document.getElementById('alternativaE7').style.borderWidth="thin";
+            }
             
         }
 
@@ -414,8 +778,61 @@ $(document).ready(function() {
             $("#alternativaD8").html(JSON.stringify(response[alternativaD]));
             $("#alternativaE8").html(JSON.stringify(response[alternativaE]));
 
-            console.log(response);
+            if(response['correta'] === "a")
+            {
+                
+                document.getElementById('alternativaA8').style.borderColor="#58BF67";
+                document.getElementById('alternativaA8').style.borderWidth="medium";
 
+            }
+            else
+            {
+                document.getElementById('alternativaA8').style.borderColor="red";
+                document.getElementById('alternativaA8').style.borderWidth="thin";
+            }
+            if(response['correta'] === "b")
+            {
+                document.getElementById('alternativaB8').style.borderColor="#58BF67";
+                document.getElementById('alternativaB8').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaB8').style.borderColor="red";
+                document.getElementById('alternativaB8').style.borderWidth="thin";
+            }
+            
+            if(response['correta'] === "c")
+            {
+                document.getElementById('alternativaC8').style.borderColor="#58BF67";
+                document.getElementById('alternativaC8').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaC8').style.borderColor="red";
+                document.getElementById('alternativaC8').style.borderWidth="thin";
+
+            }
+
+            if(response['correta'] === "d")
+            {
+                document.getElementById('alternativaD8').style.borderColor="#58BF67";
+                document.getElementById('alternativaD8').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaD8').style.borderColor="red";
+                document.getElementById('alternativaD8').style.borderWidth="thin";
+            }
+            if(response['correta'] === "e")
+            {
+                document.getElementById('alternativaE8').style.borderColor="#58BF67";
+                document.getElementById('alternativaE8').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaE8').style.borderColor="red";
+                document.getElementById('alternativaE8').style.borderWidth="thin";
+            }
             
         }
 
@@ -460,8 +877,61 @@ $(document).ready(function() {
             $("#alternativaD9").html(JSON.stringify(response[alternativaD]));
             $("#alternativaE9").html(JSON.stringify(response[alternativaE]));
 
-            console.log(response);
+            if(response['correta'] === "a")
+            {
+                
+                document.getElementById('alternativaA9').style.borderColor="#58BF67";
+                document.getElementById('alternativaA9').style.borderWidth="medium";
 
+            }
+            else
+            {
+                document.getElementById('alternativaA9').style.borderColor="red";
+                document.getElementById('alternativaA9').style.borderWidth="thin";
+            }
+            if(response['correta'] === "b")
+            {
+                document.getElementById('alternativaB9').style.borderColor="#58BF67";
+                document.getElementById('alternativaB9').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaB9').style.borderColor="red";
+                document.getElementById('alternativaB9').style.borderWidth="thin";
+            }
+            
+            if(response['correta'] === "c")
+            {
+                document.getElementById('alternativaC9').style.borderColor="#58BF67";
+                document.getElementById('alternativaC9').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaC9').style.borderColor="red";
+                document.getElementById('alternativaC9').style.borderWidth="thin";
+
+            }
+
+            if(response['correta'] === "d")
+            {
+                document.getElementById('alternativaD9').style.borderColor="#58BF67";
+                document.getElementById('alternativaD9').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaD9').style.borderColor="red";
+                document.getElementById('alternativaD9').style.borderWidth="thin";
+            }
+            if(response['correta'] === "e")
+            {
+                document.getElementById('alternativaE9').style.borderColor="#58BF67";
+                document.getElementById('alternativaE9').style.borderWidth="medium";
+            }
+            else
+            {
+                document.getElementById('alternativaE9').style.borderColor="red";
+                document.getElementById('alternativaE9').style.borderWidth="thin";
+            }
             
         }
 
@@ -501,8 +971,7 @@ $(document).ready(function() {
 
             if(response['correta'] === "a")
             {
-/*                document.getElementById('a10').setAttribute("class", "alert alert-success");
-*/                
+                
                 document.getElementById('alternativaA10').style.borderColor="#58BF67";
                 document.getElementById('alternativaA10').style.borderWidth="medium";
 

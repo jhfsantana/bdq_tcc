@@ -255,1003 +255,565 @@ function showQ(select){
                         <li><button type="button" class="btn btn-primary next-step">Avançar</button></li>
                     </ul>
                     </div>
+
 <div class="tab-pane" role="tabpanel" id="step2">
-<div class="container">    
-        <div id="questaobox"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-primary" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Questão 1</div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-							
-                            <div class="panel panel-info " >
-                                <div class="panel-heading">
-                                    <div class="panel-title">Selecione a dificuldade da questão</div>
-                                </div> 
-                            </div>
-							
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i></i>
-
-                                
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivel" value="1" id="nivel_id" checked="true"> Facil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivel" value="2" id="nivel2_id"> Moderada<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivel" value="3" id="nivel3_id"> Dificil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivel" value="4" id="nivel4_id"> Muito dificil<br>
-                                </label>
-                                <!-- <select class="form-control" id="nivel">
-                                    <option value="1">Facil</option>
-                                    <option value="2">Moderada</option>
-                                    <option value="3">Dificil</option>
-                                    <option value="4">Muito dificil</option>
-                                </select> -->
-                                </span>
-                            </div>
-
-                            <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i>Deseja alterar a quantidade de pontos?
-                                            <input type="radio" name="op" value="1"> Sim
-                                            <input type="radio" name="op" value="2" checked="true"> Não
-                                        </i>
-                                    </span>
-                                    <div class="col-md-8">
-                                        <input  class="form-control" type="text" name="q1_pontos" id="q1_pontos" style="text-align: right;" readonly="true" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>
-                        <textarea id="questao_id" type="textarea" value="{{old('questao_id[]')}}" rows="1" class="form-control" name="questao_id[]" id="questao_id" " style="display: none;"></textarea>
-
-                           <div style="margin-bottom: 25px" class="input-group">
-                                        <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required 
-                                        ></textarea>
-                                        <div class="help-block with-errors"></div>
-
-                                        
-                                            <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                         
-
-											<input name="_token" type="hidden" value="{{ csrf_token() }}">
-
-
-
-							</div>
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "a" id="alternativaA" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
-
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "b" id="alternativaB" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"></i>                                               
-                                <textarea  name = "c" id="alternativaC" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"></i>                                               
-                                <textarea  name = "d" id="alternativaD" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-	                            <span class="input-group-addon"></i>                                               
-	                            <textarea  name = "e" id="alternativaE" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-                            </div>
-                      </div>
-                  </div>
-             </div>
-         </div>             
-                    
+    <div class="tab-pane" role="tabpanel" id="step2">
+         <div layout="row" class="mainbox col-md-12 col-md-offset-1">
+             <div layout="column">
+                 <div id="questaobox">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Selecione a dificuldade da questão</div>
+                        </div> 
                     </div>
+                    <div style="padding-left: 16px;">
+                            <label class="radio-inline">
+                                <input type="radio" name="nivel" value="1" id="nivel_id" checked="true"> Facil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivel" value="2" id="nivel_id"> Moderada<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivel" value="3" id="nivel_id"> Dificil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivel" value="4" id="nivel_id"> Muito dificil<br>
+                            </label>
+                        <input id = "disciplina_id" name="disciplina_id" type="hidden">
+                    </div>
+                    <textarea id="questao_id" type="text" name="questao_id[]" style="display: none;"></textarea>
+                    <textarea id="questao-area" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
+                    <div class="input-group">
+                        <i>Deseja alterar a quantidade de pontos?
+                            <input type="radio" name="op" value="1"> Sim
+                            <input type="radio" name="op" value="2" checked="true"> Não
+                        </i>
+                        <div>
+                            <input  class="form-control" type="text" name="q1_pontos" id="q1_pontos" style="text-align: right;" readonly="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="column" layout-margin flex="50">
+                <div id="a1">
+                    <textarea  name = "a" id="alternativaA" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                </div>
+                <div id="b1">
+                    <textarea  name = "b" id="alternativaB" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                </div>
+                <div id="c1">
+                    <textarea  name = "c" id="alternativaC" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                </div>
+                <div id="d1">
+                    <textarea  name = "d" id="alternativaD" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                </div>
+                <div id="e1">
+                    <textarea  name = "e" id="alternativaE" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                </div>
+                <input id = "buscar" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
+            </div>
+        </div>
+    </div> 
+</div>
 
 <div class="tab-pane" role="tabpanel" id="step3">
-   <div class="container">    
-        <div id="questaobox2"class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-primary" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Questão 2</div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-                            
-                            <div class="panel panel-info " >
-                                <div class="panel-heading">
-                                    <div class="panel-title">Selecione a dificuldade da questão</div>
-                                </div> 
-                            </div>
-                            
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i></i>
-
-                                
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq2_id" value="1" id="nivelq2_id" checked="true"> Facil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq2_id" value="2" id="nivelq2_id"> Moderada<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq2_id" value="3" id="nivelq2_id"> Dificil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq2_id" value="4" id="nivelq2_id"> Muito dificil<br>
-                                </label>
-                                <!-- <select class="form-control" id="nivel">
-                                    <option value="1">Facil</option>
-                                    <option value="2">Moderada</option>
-                                    <option value="3">Dificil</option>
-                                    <option value="4">Muito dificil</option>
-                                </select> -->
-                                </span>
-                                </div>
-                            <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i>Deseja alterar a quantidade de pontos?
-                                            <input type="radio" name="opq2" value="1"> Sim
-                                            <input type="radio" name="opq2" value="2" checked="true"> Não
-                                        </i>
-                                    </span>
-                                    <div class="col-md-8">
-                                        <input  class="form-control" type="text" name="q2_pontos" id="q2_pontos" style="text-align: right;" readonly="true" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>
-                        <textarea  id="questao2_id" type="textarea" value="" rows="1" class="form-control" name="questao2_id[]"  style="display: none;" ></textarea>
-                        
-
-                             <div style="margin-bottom: 25px" class="input-group">
-                                        <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area2" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required  ></textarea>
-
-                                        
-                                        
-                                            <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar2" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        
-                                         
-
-
-                            </div>                             
-                            
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "a" id="alternativaA2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
-
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "b" id="alternativaB2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "c" id="alternativaC2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "d" id="alternativaD2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "e" id="alternativaE2" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-                            </div>
-                        </div>                     
-                    </div>  
-        </div>
-    </div>                 
-                    </div>
-                    
-                    <div class="tab-pane" role="tabpanel" id="step4">
- <div class="container">    
-        <div id="questaobox3"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-primary" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Questão 3</div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-                            
-                            <div class="panel panel-info " >
-                                <div class="panel-heading">
-                                    <div class="panel-title">Selecione a dificuldade da questão</div>
-                                </div> 
-                            </div>
-                            
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i></i>
-
-                                
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq3_id" value="1" id="nivelq3_id" checked="true"> Facil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq3_id" value="2" id="nivelq3_id"> Moderada<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq3_id" value="3" id="nivelq3_id"> Dificil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq3_id" value="4" id="nivelq3_id"> Muito dificil<br>
-                                </label>
-                                <!-- <select class="form-control" id="nivel">
-                                    <option value="1">Facil</option>
-                                    <option value="2">Moderada</option>
-                                    <option value="3">Dificil</option>
-                                    <option value="4">Muito dificil</option>
-                                </select> -->
-                                </span>
-                            </div>
-                           
-                            <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i>Deseja alterar a quantidade de pontos?
-                                            <input type="radio" name="opq3" value="1"> Sim
-                                            <input type="radio" name="opq3" value="2" checked="true"> Não
-                                        </i>
-                                    </span>
-                                    <div class="col-md-8">
-                                        <input  class="form-control" type="text" name="q3_pontos" id="q3_pontos" style="text-align: right;" readonly="true" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>
-                            <textarea  id="questao3_id" type="textarea" value="" rows="1" class="form-control" name="questao3_id[]" style="display: none;"></textarea>
-                           <div style="margin-bottom: 25px" class="input-group">
-                                        <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area3" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
-
-                                        
-                                        
-                                            <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar3" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        
-                                         
-
-                            </div>
-                             
- 
-
-                                
-                            
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "a" id="alternativaA3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
-
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "b" id="alternativaB3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "c" id="alternativaC3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "d" id="alternativaD3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "e" id="alternativaE3" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-                            </div>
-                        </div>                     
-                    </div>  
-        </div>
-    </div>              
-                    </div>
-
-                    <div class="tab-pane" role="tabpanel" id="step5">
-   <div class="container">    
-        <div id="questaobox4"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-primary" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Questão 4</div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-                            
-                            <div class="panel panel-info " >
-                                <div class="panel-heading">
-                                    <div class="panel-title">Selecione a dificuldade da questão</div>
-                                </div> 
-                            </div>
-                            
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i></i>
-
-                                
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq4_id" value="1" id="nivelq4_id" checked="true"> Facil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq4_id" value="2" id="nivelq4_id"> Moderada<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq4_id" value="3" id="nivelq4_id"> Dificil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq4_id" value="4" id="nivelq4_id"> Muito dificil<br>
-                                </label>
-                                <!-- <select class="form-control" id="nivel">
-                                    <option value="1">Facil</option>
-                                    <option value="2">Moderada</option>
-                                    <option value="3">Dificil</option>
-                                    <option value="4">Muito dificil</option>
-                                </select> -->
-                                </span>
-                            </div>
-
-                            <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i>Deseja alterar a quantidade de pontos?
-                                            <input type="radio" name="opq4" value="1"> Sim
-                                            <input type="radio" name="opq4" value="2" checked="true"> Não
-                                        </i>
-                                    </span>
-                                    <div class="col-md-8">
-                                        <input  class="form-control" type="text" name="q4_pontos" id="q4_pontos" style="text-align: right;" readonly="true" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>
-                            <textarea  id="questao4_id" type="textarea" value="" rows="1" class="form-control" name="questao4_id[]"  style="display: none;" ></textarea>
-                           <div style="margin-bottom: 25px" class="input-group">
-                                        <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area4" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
-
-                                        
-                                        
-                                            <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar4" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        
-                                         
-
-
-                            </div>
-                             
- 
-
-                                
-                            
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "a" id="alternativaA4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
-
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "b" id="alternativaB4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "c" id="alternativaC4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "d" id="alternativaD4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "e" id="alternativaE4" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-                            </div>
-                        </div>                     
-                    </div>  
-        </div>
-    </div>
-                      
-                    </div>
-
-                    <div class="tab-pane" role="tabpanel" id="step6">
-    <div class="container">    
-        <div id="questaobox5"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-primary" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Questão 5</div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-                           
-                            <div class="panel panel-info " >
-                                <div class="panel-heading">
-                                    <div class="panel-title">Selecione a dificuldade da questão</div>
-                                </div> 
-                            </div>
-                            
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i></i>
-
-                                
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq5_id" value="1" id="nivelq5_id" checked="true"> Facil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq5_id" value="2" id="nivelq5_id"> Moderada<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq5_id" value="3" id="nivelq5_id"> Dificil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq5_id" value="4" id="nivelq5_id"> Muito dificil<br>
-                                </label>
-                                <!-- <select class="form-control" id="nivel">
-                                    <option value="1">Facil</option>
-                                    <option value="2">Moderada</option>
-                                    <option value="3">Dificil</option>
-                                    <option value="4">Muito dificil</option>
-                                </select> -->
-                                </span>
-                            </div>
-                            <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i>Deseja alterar a quantidade de pontos?
-                                            <input type="radio" name="opq5" value="1"> Sim
-                                            <input type="radio" name="opq5" value="2" checked="true"> Não
-                                        </i>
-                                    </span>
-                                    <div class="col-md-8">
-                                        <input  class="form-control" type="text" name="q5_pontos" id="q5_pontos" style="text-align: right;" readonly="true" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>
-                            <textarea  id="questao5_id" type="textarea" value="" rows="1" class="form-control" name="questao5_id[]"  style="display: none;"></textarea>
-                           <div style="margin-bottom: 25px" class="input-group">
-                                        <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area5" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
-
-                                        
-                                        
-                                            <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar5" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        
-  
-
-
-                            </div>
-                             
- 
-
-                                
-                            
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "a" id="alternativaA5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
-
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "b" id="alternativaB5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "c" id="alternativaC5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "d" id="alternativaD5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "e" id="alternativaE5" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-                            </div>
-                        </div>                     
-                    </div>  
-        </div>
-    </div>               
-                    </div>
-
-                    <div class="tab-pane" role="tabpanel" id="step7">
-    <div class="container">   
-        <div id="questaobox6"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-primary" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Questão 6</div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-                            
-                            <div class="panel panel-info " >
-                                <div class="panel-heading">
-                                    <div class="panel-title">Selecione a dificuldade da questão</div>
-                                </div> 
-                            </div>
-                            
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-"><i></i>
-
-                                
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq6_id" value="1" id="nivelq6_id" checked="true"> Facil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq6_id" value="2" id="nivelq6_id"> Moderada<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq6_id" value="3" id="nivelq6_id"> Dificil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq6_id" value="4" id="nivelq6_id"> Muito dificil<br>
-                                </label>
-                                <!-- <select class="form-control" id="nivel">
-                                    <option value="1">Facil</option>
-                                    <option value="2">Moderada</option>
-                                    <option value="3">Dificil</option>
-                                    <option value="4">Muito dificil</option>
-                                </select> -->
-                                </span>
-                            </div>
-
-                             <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i>Deseja alterar a quantidade de pontos?
-                                            <input type="radio" name="opq6" value="1"> Sim
-                                            <input type="radio" name="opq6" value="2" checked="true"> Não
-                                        </i>
-                                    </span>
-                                    <div class="col-md-8">
-                                        <input  class="form-control" type="text" name="q6_pontos" id="q6_pontos" style="text-align: right;" readonly="true" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>                           
-
-                            <textarea  id="questao6_id" type="textarea" value="" rows="1" class="form-control" name="questao6_id[]"  style="display: none;"></textarea>
-                           <div style="margin-bottom: 25px" class="input-group">
-                                        <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area6" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
-
-                                        
-                                        
-                                            <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar6" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        
-                                         
-
-
-                            </div>
-                             
- 
-
-                                
-                            
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "a" id="alternativaA6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
-
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "b" id="alternativaB6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "c" id="alternativaC6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "d" id="alternativaD6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "e" id="alternativaE6" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-                            </div>
-                        </div>                     
-                    </div>  
-        </div>
-    </div>                
-                    </div>
-
-                    <div class="tab-pane" role="tabpanel" id="step8">
-    <div class="container">    
-        <div id="questaobox7"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-primary" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Questão 7</div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-                           
-                            <div class="panel panel-info " >
-                                <div class="panel-heading">
-                                    <div class="panel-title">Selecione a dificuldade da questão</div>
-                                </div> 
-                            </div>
-                            
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i></i>
-
-                                
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq7_id" value="1" id="nivelq7_id" checked="true"> Facil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq7_id" value="2" id="nivelq7_id"> Moderada<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq7_id" value="3" id="nivelq7_id"> Dificil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq7_id" value="4" id="nivelq7_id"> Muito dificil<br>
-                                </label>
-                                <!-- <select class="form-control" id="nivel">
-                                    <option value="1">Facil</option>
-                                    <option value="2">Moderada</option>
-                                    <option value="3">Dificil</option>
-                                    <option value="4">Muito dificil</option>
-                                </select> -->
-                                </span>
-                            </div>
-
-                               <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i>Deseja alterar a quantidade de pontos?
-                                            <input type="radio" name="opq7" value="1"> Sim
-                                            <input type="radio" name="opq7" value="2" checked="true"> Não
-                                        </i>
-                                    </span>
-                                    <div class="col-md-8">
-                                        <input  class="form-control" type="text" name="q7_pontos" id="q7_pontos" style="text-align: right;" readonly="true" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>                        
-
-                            <textarea id="questao7_id" type="textarea" value="" rows="1" class="form-control" name="questao7_id[]"  style="display: none;"></textarea>
-                           <div style="margin-bottom: 25px" class="input-group">
-                                        <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area7" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
-
-                                        
-                                        
-                                            <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar7" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        
-                                         
-
-
-                            </div>
-                             
- 
-
-                                
-                            
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "a" id="alternativaA7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
-
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "b" id="alternativaB7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "c" id="alternativaC7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "d" id="alternativaD7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "e" id="alternativa7" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-                            </div>
-                        </div>                     
-                    </div>  
-        </div>
-    </div>               
-                    </div>
-
-                    <div class="tab-pane" role="tabpanel" id="step9">
-    <div class="container">    
-        <div id="questaobox8"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-primary" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Questão 8</div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-                            
-                            <div class="panel panel-info " >
-                                <div class="panel-heading">
-                                    <div class="panel-title">Selecione a dificuldade da questão</div>
-                                </div> 
-                            </div>
-                            
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i></i>
-
-                                
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq8_id" value="1" id="nivelq8_id" checked="true"> Facil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq8_id" value="2" id="nivelq8_id"> Moderada<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq8_id" value="3" id="nivelq8_id"> Dificil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq8_id" value="4" id="nivelq8_id"> Muito dificil<br>
-                                </label>
-                                <!-- <select class="form-control" id="nivel">
-                                    <option value="1">Facil</option>
-                                    <option value="2">Moderada</option>
-                                    <option value="3">Dificil</option>
-                                    <option value="4">Muito dificil</option>
-                                </select> -->
-                                </span>
-                            </div>
-
-                                <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i>Deseja alterar a quantidade de pontos?
-                                            <input type="radio" name="opq8" value="1"> Sim
-                                            <input type="radio" name="opq8" value="2" checked="true"> Não
-                                        </i>
-                                    </span>
-                                    <div class="col-md-8">
-                                        <input  class="form-control" type="text" name="q8_pontos" id="q8_pontos" style="text-align: right;" readonly="true" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>                        
-
-                            <textarea  id="questao8_id" type="textarea" value="" rows="1" class="form-control" name="questao8_id[]"  style="display: none;"></textarea>
-                           <div style="margin-bottom: 25px" class="input-group">
-                                        <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area8" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
-
-                                        
-                                        
-                                            <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar8" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        
-                                         
-
-
-                            </div>
-                             
- 
-
-                                
-                            
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "a" id="alternativaA8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
-
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "b" id="alternativaB8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "c" id="alternativaC8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "d" id="alternativaD8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "e" id="alternativaE8" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-                            </div>
-                        </div>                     
-                    </div>  
-        </div>
-    </div>              
-                    </div>
-
-                    <div class="tab-pane" role="tabpanel" id="step10">
- <div class="container">    
-        <div id="questaobox9"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-primary" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Questão 9</div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
-                        
-                            <div class="panel panel-info " >
-                                <div class="panel-heading">
-                                    <div class="panel-title">Selecione a dificuldade da questão</div>
-                                </div> 
-                            </div>
-                            
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i></i>
-
-                                
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq9_id" value="1" id="nivelq9_id" checked="true"> Facil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq9_id" value="2" id="nivelq9_id"> Moderada<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq9_id" value="3" id="nivelq9_id"> Dificil<br>
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="nivelq9_id" value="4" id="nivelq9_id"> Muito dificil<br>
-                                </label>
-                                <!-- <select class="form-control" id="nivel">
-                                    <option value="1">Facil</option>
-                                    <option value="2">Moderada</option>
-                                    <option value="3">Dificil</option>
-                                    <option value="4">Muito dificil</option>
-                                </select> -->
-                                </span>
-                            </div>
-                                    <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i>Deseja alterar a quantidade de pontos?
-                                            <input type="radio" name="opq9" value="1"> Sim
-                                            <input type="radio" name="opq9" value="2" checked="true"> Não
-                                        </i>
-                                    </span>
-                                    <div class="col-md-8">
-                                        <input  class="form-control" type="text" name="q9_pontos" id="q9_pontos" style="text-align: right;" readonly="true" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>                    
-
-                            <textarea  id="questao9_id" type="textarea" value="" rows="1" class="form-control" name="questao9_id[]"  style="display: none;"></textarea>
-                           <div style="margin-bottom: 25px" class="input-group">
-                                        <span  data-toggle="tooltip" title="Questão da avaliação" class="input-group-addon"><i class="glyphicon glyphicon-book" ></i></span>
-                                        <textarea id="questao-area9" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required ></textarea>
-
-                                        
-                                        
-                                            <input id = "disciplina_id" name="disciplina_id" type="hidden" value="{{$disciplinas->id}}"> 
-                                            <input id = "buscar9" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block">
-                                        
-                                         
-
-
-                            </div>
-                             
- 
-
-                                
-                            
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "a" id="alternativaA9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
-
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "b" id="alternativaB9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "c" id="alternativaC9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "d" id="alternativaD9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"></i>                                               
-                                        <textarea  name = "e" id="alternativaE9" type="textarea" value="" rows="2" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-                    </div>
-                </div>                     
-             </div>  
-        </div>
-    </div>                
- </div>
-
-    <div class="tab-pane" role="tabpanel" id="step11">
+    <div class="tab-pane" role="tabpanel" id="step3">
          <div layout="row" class="mainbox col-md-12 col-md-offset-1">
-         <div layout="column">
-             <div id="questaobox10">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <div class="panel-title">Selecione a dificuldade da questão</div>
-                    </div> 
+             <div layout="column">
+                 <div id="questaobox2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Selecione a dificuldade da questão</div>
+                        </div> 
+                    </div>
+                    <div style="padding-left: 16px;">
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq2_id" value="1" id="nivelq2_id" checked="true"> Facil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq2_id" value="2" id="nivelq2_id"> Moderada<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq2_id" value="3" id="nivelq2_id"> Dificil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq2_id" value="4" id="nivelq2_id"> Muito dificil<br>
+                            </label>
+                        <input id = "disciplina_id" name="disciplina_id" type="hidden">
+                    </div>
+                    <textarea id="questao2_id" type="text" name="questao2_id[]" style="display: none;"></textarea>
+                    <textarea id="questao-area2" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
+                    <div class="input-group">
+                        <i>Deseja alterar a quantidade de pontos?
+                            <input type="radio" name="opq2" value="1"> Sim
+                            <input type="radio" name="opq2" value="2" checked="true"> Não
+                        </i>
+                        <div>
+                            <input  class="form-control" type="text" name="q2_pontos" id="q2_pontos" style="text-align: right;" readonly="true" />
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <div layout="column" layout-margin flex="50">
+                <div id="a2">
+                    <textarea  name = "a" id="alternativaA2" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                </div>
+                <div id="b2">
+                    <textarea  name = "b" id="alternativaB2" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                </div>
+                <div id="c2">
+                    <textarea  name = "c" id="alternativaC2" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                </div>
+                <div id="d2">
+                    <textarea  name = "d" id="alternativaD2" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                </div>
+                <div id="e2">
+                    <textarea  name = "e" id="alternativaE2" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                </div>
+                <input id = "buscar2" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
+            </div>
+        </div>
+    </div> 
+</div>
+                    
+<div class="tab-pane" role="tabpanel" id="step4">
+    <div class="tab-pane" role="tabpanel" id="step4">
+         <div layout="row" class="mainbox col-md-12 col-md-offset-1">
+             <div layout="column">
+                 <div id="questaobox3">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Selecione a dificuldade da questão</div>
+                        </div> 
+                    </div>
+                    <div style="padding-left: 16px;">
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq3_id" value="1" id="nivelq3_id" checked="true"> Facil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq3_id" value="2" id="nivelq3_id"> Moderada<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq3_id" value="3" id="nivelq3_id"> Dificil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq3_id" value="4" id="nivelq3_id"> Muito dificil<br>
+                            </label>
+                        <input id = "disciplina_id" name="disciplina_id" type="hidden">
+                    </div>
+                    <textarea id="questao3_id" type="text" name="questao3_id[]" style="display: none;"></textarea>
+                    <textarea id="questao-area3" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
+                    <div class="input-group">
+                        <i>Deseja alterar a quantidade de pontos?
+                            <input type="radio" name="opq3" value="1"> Sim
+                            <input type="radio" name="opq3" value="2" checked="true"> Não
+                        </i>
+                        <div>
+                            <input  class="form-control" type="text" name="q3_pontos" id="q3_pontos" style="text-align: right;" readonly="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="column" layout-margin flex="50">
+                <div id="a3">
+                    <textarea  name = "a" id="alternativaA3" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                </div>
+                <div id="b3">
+                    <textarea  name = "b" id="alternativaB3" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                </div>
+                <div id="c3">
+                    <textarea  name = "c" id="alternativaC3" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                </div>
+                <div id="d3">
+                    <textarea  name = "d" id="alternativaD3" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                </div>
+                <div id="e3">
+                    <textarea  name = "e" id="alternativaE3" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                </div>
+                <input id = "buscar3" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
+            </div>
+        </div>
+    </div> 
+</div>
+<div class="tab-pane" role="tabpanel" id="step5">
+    <div class="tab-pane" role="tabpanel" id="step5">
+         <div layout="row" class="mainbox col-md-12 col-md-offset-1">
+             <div layout="column">
+                 <div id="questaobox4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Selecione a dificuldade da questão</div>
+                        </div> 
+                    </div>
+                    <div style="padding-left: 16px;">
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq4_id" value="1" id="nivelq4_id" checked="true"> Facil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq4_id" value="2" id="nivelq4_id"> Moderada<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq4_id" value="3" id="nivelq4_id"> Dificil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq4_id" value="4" id="nivelq4_id"> Muito dificil<br>
+                            </label>
+                        <input id = "disciplina_id" name="disciplina_id" type="hidden">
+                    </div>
+                    <textarea id="questao4_id" type="text" name="questao4_id[]" style="display: none;"></textarea>
+                    <textarea id="questao-area4" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
+                    <div class="input-group">
+                        <i>Deseja alterar a quantidade de pontos?
+                            <input type="radio" name="opq4" value="1"> Sim
+                            <input type="radio" name="opq4" value="2" checked="true"> Não
+                        </i>
+                        <div>
+                            <input  class="form-control" type="text" name="q4_pontos" id="q4_pontos" style="text-align: right;" readonly="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="column" layout-margin flex="50">
+                <div id="a4">
+                    <textarea  name = "a" id="alternativaA4" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                </div>
+                <div id="b4">
+                    <textarea  name = "b" id="alternativaB4" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                </div>
+                <div id="c4">
+                    <textarea  name = "c" id="alternativaC4" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                </div>
+                <div id="d4">
+                    <textarea  name = "d" id="alternativaD4" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                </div>
+                <div id="e4">
+                    <textarea  name = "e" id="alternativaE4" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                </div>
+                <input id = "buscar4" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
+            </div>
+        </div>
+    </div> 
+</div>
+
+<div class="tab-pane" role="tabpanel" id="step6">
+    <div class="tab-pane" role="tabpanel" id="step6">
+         <div layout="row" class="mainbox col-md-12 col-md-offset-1">
+             <div layout="column">
+                 <div id="questaobox5">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Selecione a dificuldade da questão</div>
+                        </div> 
+                    </div>
+                    <div style="padding-left: 16px;">
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq5_id" value="1" id="nivelq5_id" checked="true"> Facil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq5_id" value="2" id="nivelq5_id"> Moderada<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq5_id" value="3" id="nivelq5_id"> Dificil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq5_id" value="4" id="nivelq5_id"> Muito dificil<br>
+                            </label>
+                        <input id = "disciplina_id" name="disciplina_id" type="hidden">
+                    </div>
+                    <textarea id="questao5_id" type="text" name="questao5_id[]" style="display: none;"></textarea>
+                    <textarea id="questao-area5" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
+                    <div class="input-group">
+                        <i>Deseja alterar a quantidade de pontos?
+                            <input type="radio" name="opq5" value="1"> Sim
+                            <input type="radio" name="opq5" value="2" checked="true"> Não
+                        </i>
+                        <div>
+                            <input  class="form-control" type="text" name="q5_pontos" id="q5_pontos" style="text-align: right;" readonly="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="column" layout-margin flex="50">
+                <div id="a5">
+                    <textarea  name = "a" id="alternativaA5" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                </div>
+                <div id="b5">
+                    <textarea  name = "b" id="alternativaB5" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                </div>
+                <div id="c5">
+                    <textarea  name = "c" id="alternativaC5" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                </div>
+                <div id="d5">
+                    <textarea  name = "d" id="alternativaD5" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                </div>
+                <div id="e5">
+                    <textarea  name = "e" id="alternativaE5" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                </div>
+                <input id = "buscar5" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
+            </div>
+        </div>
+    </div> 
+</div>
+
+<div class="tab-pane" role="tabpanel" id="step7">
+    <div class="tab-pane" role="tabpanel" id="step7">
+         <div layout="row" class="mainbox col-md-12 col-md-offset-1">
+             <div layout="column">
+                 <div id="questaobox6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Selecione a dificuldade da questão</div>
+                        </div> 
+                    </div>
+                    <div style="padding-left: 16px;">
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq6_id" value="1" id="nivelq6_id" checked="true"> Facil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq6_id" value="2" id="nivelq6_id"> Moderada<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq6_id" value="3" id="nivelq6_id"> Dificil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq6_id" value="4" id="nivelq6_id"> Muito dificil<br>
+                            </label>
+                        <input id = "disciplina_id" name="disciplina_id" type="hidden">
+                    </div>
+                    <textarea id="questao6_id" type="text" name="questao6_id[]" style="display: none;"></textarea>
+                    <textarea id="questao-area6" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
+                    <div class="input-group">
+                        <i>Deseja alterar a quantidade de pontos?
+                            <input type="radio" name="opq6" value="1"> Sim
+                            <input type="radio" name="opq6" value="2" checked="true"> Não
+                        </i>
+                        <div>
+                            <input  class="form-control" type="text" name="q6_pontos" id="q6_pontos" style="text-align: right;" readonly="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="column" layout-margin flex="50">
+                <div id="a6">
+                    <textarea  name = "a" id="alternativaA6" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                </div>
+                <div id="b6">
+                    <textarea  name = "b" id="alternativaB6" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                </div>
+                <div id="c6">
+                    <textarea  name = "c" id="alternativaC6" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                </div>
+                <div id="d6">
+                    <textarea  name = "d" id="alternativaD6" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                </div>
+                <div id="e6">
+                    <textarea  name = "e" id="alternativaE6" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                </div>
+                <input id = "buscar6" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
+            </div>
+        </div>
+    </div> 
+</div>
+
+<div class="tab-pane" role="tabpanel" id="step8">
+    <div class="tab-pane" role="tabpanel" id="step8">
+         <div layout="row" class="mainbox col-md-12 col-md-offset-1">
+             <div layout="column">
+                 <div id="questaobox7">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Selecione a dificuldade da questão</div>
+                        </div> 
+                    </div>
+                    <div style="padding-left: 16px;">
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq7_id" value="1" id="nivelq7_id" checked="true"> Facil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq7_id" value="2" id="nivelq7_id"> Moderada<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq7_id" value="3" id="nivelq7_id"> Dificil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq7_id" value="4" id="nivelq7_id"> Muito dificil<br>
+                            </label>
+                        <input id = "disciplina_id" name="disciplina_id" type="hidden">
+                    </div>
+                    <textarea id="questao7_id" type="text" name="questao7_id[]" style="display: none;"></textarea>
+                    <textarea id="questao-area7" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
+                    <div class="input-group">
+                        <i>Deseja alterar a quantidade de pontos?
+                            <input type="radio" name="opq7" value="1"> Sim
+                            <input type="radio" name="opq7" value="2" checked="true"> Não
+                        </i>
+                        <div>
+                            <input  class="form-control" type="text" name="q7_pontos" id="q7_pontos" style="text-align: right;" readonly="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="column" layout-margin flex="50">
+                <div id="a7">
+                    <textarea  name = "a" id="alternativaA7" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                </div>
+                <div id="b7">
+                    <textarea  name = "b" id="alternativaB7" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                </div>
+                <div id="c7">
+                    <textarea  name = "c" id="alternativaC7" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                </div>
+                <div id="d7">
+                    <textarea  name = "d" id="alternativaD7" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                </div>
+                <div id="e7">
+                    <textarea  name = "e" id="alternativaE7" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                </div>
+                <input id = "buscar7" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
+            </div>
+        </div>
+    </div> 
+</div>
+
+<div class="tab-pane" role="tabpanel" id="step9">
+    <div class="tab-pane" role="tabpanel" id="step9">
+         <div layout="row" class="mainbox col-md-12 col-md-offset-1">
+             <div layout="column">
+                 <div id="questaobox8">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Selecione a dificuldade da questão</div>
+                        </div> 
+                    </div>
+                    <div style="padding-left: 16px;">
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq8_id" value="1" id="nivelq8_id" checked="true"> Facil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq8_id" value="2" id="nivelq8_id"> Moderada<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq8_id" value="3" id="nivelq8_id"> Dificil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq8_id" value="4" id="nivelq8_id"> Muito dificil<br>
+                            </label>
+                        <input id = "disciplina_id" name="disciplina_id" type="hidden">
+                    </div>
+                    <textarea id="questao8_id" type="text" name="questao8_id[]" style="display: none;"></textarea>
+                    <textarea id="questao-area8" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
+                    <div class="input-group">
+                        <i>Deseja alterar a quantidade de pontos?
+                            <input type="radio" name="opq8" value="1"> Sim
+                            <input type="radio" name="opq8" value="2" checked="true"> Não
+                        </i>
+                        <div>
+                            <input  class="form-control" type="text" name="q8_pontos" id="q8_pontos" style="text-align: right;" readonly="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="column" layout-margin flex="50">
+                <div id="a8">
+                    <textarea  name = "a" id="alternativaA8" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                </div>
+                <div id="b8">
+                    <textarea  name = "b" id="alternativaB8" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                </div>
+                <div id="c8">
+                    <textarea  name = "c" id="alternativaC8" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                </div>
+                <div id="d8">
+                    <textarea  name = "d" id="alternativaD8" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                </div>
+                <div id="e8">
+                    <textarea  name = "e" id="alternativaE8" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                </div>
+                <input id = "buscar8" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
+            </div>
+        </div>
+    </div> 
+</div>
+
+<div class="tab-pane" role="tabpanel" id="step10">
+    <div class="tab-pane" role="tabpanel" id="step10">
+         <div layout="row" class="mainbox col-md-12 col-md-offset-1">
+             <div layout="column">
+                 <div id="questaobox9">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Selecione a dificuldade da questão</div>
+                        </div> 
+                    </div>
+                    <div style="padding-left: 16px;">
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq9_id" value="1" id="nivelq9_id" checked="true"> Facil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq9_id" value="2" id="nivelq9_id"> Moderada<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq9_id" value="3" id="nivelq9_id"> Dificil<br>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="nivelq9_id" value="4" id="nivelq9_id"> Muito dificil<br>
+                            </label>
+                        <input id = "disciplina_id" name="disciplina_id" type="hidden">
+                    </div>
+                    <textarea id="questao9_id" type="text" name="questao9_id[]" style="display: none;"></textarea>
+                    <textarea id="questao-area9" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
+                    <div class="input-group">
+                        <i>Deseja alterar a quantidade de pontos?
+                            <input type="radio" name="opq9" value="1"> Sim
+                            <input type="radio" name="opq9" value="2" checked="true"> Não
+                        </i>
+                        <div>
+                            <input  class="form-control" type="text" name="q9_pontos" id="q9_pontos" style="text-align: right;" readonly="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="column" layout-margin flex="50">
+                <div id="a9">
+                    <textarea  name = "a" id="alternativaA9" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                </div>
+                <div id="b9">
+                    <textarea  name = "b" id="alternativaB9" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                </div>
+                <div id="c9">
+                    <textarea  name = "c" id="alternativaC9" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                </div>
+                <div id="d9">
+                    <textarea  name = "d" id="alternativaD9" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                </div>
+                <div id="e9">
+                    <textarea  name = "e" id="alternativaE9" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                </div>
+                <input id = "buscar9" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
+            </div>
+        </div>
+    </div> 
+</div>
+
+<div class="tab-pane" role="tabpanel" id="step11">
+    <div class="tab-pane" role="tabpanel" id="step11">
+        <div layout="row" class="mainbox col-md-12 col-md-offset-1">
+            <div layout="column">
+                 <div id="questaobox10">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Selecione a dificuldade da questão</div>
+                        </div> 
+                    </div>
                 <div style="padding-left: 16px;">
                         <label class="radio-inline">
                             <input type="radio" name="nivelq10_id" value="1" id="nivelq10_id" checked="true"> Facil<br>
@@ -1267,7 +829,7 @@ function showQ(select){
                         </label>
                     <input id = "disciplina_id" name="disciplina_id" type="hidden">
                 </div>
-                <input id="questao10_id" type="hidden" name="questao10_id[]">
+                <textarea id="questao10_id" type="text" name="questao10_id[]" style="display: none;"></textarea>
                 <textarea id="questao-area10" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
                 <div class="input-group">
                     <i>Deseja alterar a quantidade de pontos?
@@ -1281,27 +843,27 @@ function showQ(select){
             </div>
         </div>
 
-        <div layout="column" layout-margin flex="50">
-            <div id="a10">
-                <textarea  name = "a" id="alternativaA10" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+            <div layout="column" layout-margin flex="50">
+                <div id="a10">
+                    <textarea  name = "a" id="alternativaA10" type="textarea" class="form-control" name="questao" placeholder="Alternativa A"></textarea>
+                </div>
+                <div id="b10">
+                    <textarea  name = "b" id="alternativaB10" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
+                </div>
+                <div id="c10">
+                    <textarea  name = "c" id="alternativaC10" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
+                </div>
+                <div id="d10">
+                    <textarea  name = "d" id="alternativaD10" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
+                </div>
+                <div id="e10">
+                    <textarea  name = "e" id="alternativaE10" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
+                </div>
+                <input id = "buscar10" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
             </div>
-            <div id="b10">
-                <textarea  name = "b" id="alternativaB10" type="textarea" class="form-control" name="questao" placeholder="Alternativa B"></textarea>
-            </div>
-            <div id="c10">
-                <textarea  name = "c" id="alternativaC10" type="textarea" class="form-control" name="questao" placeholder="Alternativa C"></textarea>
-            </div>
-            <div id="d10">
-                <textarea  name = "d" id="alternativaD10" type="textarea" class="form-control" name="questao" placeholder="Alternativa D"></textarea>
-            </div>
-            <div id="e10">
-                <textarea  name = "e" id="alternativaE10" type="textarea" class="form-control" name="questao" placeholder="Alternativa E"></textarea>
-            </div>
-            <input id = "buscar10" type="submit" name="buscar-questao" value="Buscar Questao" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
         </div>
-    </div>
-</div>  
-
+    </div>  
+</div>
         <div class="tab-pane" role="tabpanel" id="complete">
             <h3>Última etapa</h3>
             <p>Tem certeza que deseja gerar a Avaliação com as questões escolhidas?</p>
