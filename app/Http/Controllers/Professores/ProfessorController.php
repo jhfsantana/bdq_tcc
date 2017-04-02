@@ -22,6 +22,8 @@ use DateTime;
 
 use App\Models\Util;
 
+use App\Models\Notificacao;
+
 use Auth;
 
 class ProfessorController extends Controller
@@ -36,9 +38,12 @@ class ProfessorController extends Controller
     {
         $alunos = Professor::meusAlunos();
         $diames = Util::pegarDiaSemana();
-
+        $notificacoes = Notificacao::all();
+        $contador_notificacoes = Notificacao::all()->where('visualizado', '<>', 'yes');
         return view('professores.index')->with('alunos', $alunos)
-            ->with('diames', $diames);
+            ->with('diames', $diames)
+            ->with('notificacoes', $notificacoes)
+            ->with('contador_notificacoes', count($contador_notificacoes));
     }
 
 

@@ -49,6 +49,7 @@ Route::get('/', function () {
 
 */
 use App\Models\Professor;
+use App\Models\Notificacao;
 use App\Models\Aluno;
 use App\Models\Turma;
 use Illuminate\Support\Facades\DB;
@@ -62,6 +63,11 @@ Route::post('professor/login', 'Professores\AuthController@login');
 
 Route::group(['middleware'=> ['auth:web_teachers']], function ()
 {
+	Route::get('/notificacao/visualizada', function()
+	{
+		$visualizada = Input::get('visualizada');
+		Notificacao::where('visualizado', '=', 'no')->update(['visualizado' => 'yes']);
+	});
 
 	Route::get('/api/turmas/{id?}', 'Turmas\TurmaController@indexAPI');
 

@@ -144,7 +144,13 @@
                       <!--THE NOTIFICAIONS DROPDOWN BOX.-->
                       <div id="notifications">
                           <h3>Notificações</h3>
-                          <div style="height:300px;"></div>
+                          <div style="height:300px;">
+                            @foreach($notificacoes as $notificacao)
+                              <div class="list-group">
+                                <a href="#" class="list-group-item">{{$notificacao->mensagem}}</a>
+                              </div>
+                            @endforeach
+                          </div>
                           <div class="seeAll"><a href="#">Ver todas</a></div>
                       </div>
                   </li>
@@ -263,11 +269,15 @@
     $(document).ready(function () {
 
         // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER.
+        var count = ({{ $contador_notificacoes }});
+ 
         $('#noti_Counter')
-            .css({ opacity: 0 })
-            .text('7')              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
-            .css({ top: '-10px' })
-            .animate({ top: '-2px', opacity: 1 }, 500);
+          .css({ opacity: 0 })
+          .text(count)              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+          .css({ top: '-10px' })
+          .animate({ top: '-2px', opacity: 1 }, 500);
+
+        
 
         $('#noti_Button').click(function () {
 
@@ -287,10 +297,21 @@
         // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
         $(document).click(function () {
             $('#notifications').hide();
+                
+                $.ajax({    //create an ajax request to load_page.php
+                type: "get",
+                url: "/notificacao/visualizada",
+                data:  {'visualizada' : 'yes'},
+                dataType: "JSON",   //expect html to be returned                
+                success: function(response){
+                    console.log(response);
+                }
+
+                });
 
             // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
             if ($('#noti_Counter').is(':hidden')) {
-                // CHANGE BACKGROUND COLOR OF THE BUTTON.
+
                 $('#noti_Button').css('background-color', 'transparent');
             }
         });

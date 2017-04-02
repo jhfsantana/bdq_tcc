@@ -20,6 +20,7 @@ use App\Models\Questao;
 use App\Models\Avaliacao;
 use App\Models\Resultado;
 use App\Models\Alternativa;
+use App\Models\Notificacao;
 
 use Illuminate\Support\Facades\Input;
 
@@ -1125,7 +1126,8 @@ class AlunoController extends Controller
         $resultado->aluno()->associate($request->aluno_id);
         $resultado->nota = $nota;
         if($resultado->save())
-        {            
+        {   
+            Notificacao::dispararNotificacao($request->avaliacao_id, 'O aluno '. $aluno->nome .' realizou a avaliação da disciplina ' . $avaliacao->disciplina->nome);            
             $request->session()->flash('alert-success', 'Avaliação realizada com sucesso!!');
             return redirect('aluno');
         }

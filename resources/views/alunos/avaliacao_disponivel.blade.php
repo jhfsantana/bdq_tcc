@@ -39,17 +39,16 @@
 			<table class="table table-striped">
 				@foreach($aluno->disciplinas as $disciplinas)
 					<tr>
-					@foreach ($disciplinas->turmas as $turma)
-						@foreach($turma->avaliacoes as $avaliacao)
+					@foreach($disciplinas->avaliacao as $avaliacao)
 							<tr> 
 								<td>{{$disciplinas->nome}}</td>
-								<td>{{$turma->nome}}</td>
+								<td>{{$avaliacao->turma->nome}}</td>
 								@if($avaliacao->resultado || $avaliacao->status == 'finalizada')
 									<td style="text-align: center;">
 									<form id="formAvaliacaoDisponivel" method="post" action="/aluno/avaliacao/online">
 				                		<input name="_token" type="hidden" value="{{ csrf_token() }}">
 										<input type="hidden"  name="disciplina_id" value="{{$disciplinas->id}}"/>
-										<input type="hidden"  name="turma_id" value="{{$turma->id}}">
+										<input type="hidden"  name="turma_id" value="{{$avaliacao->turma->id}}">
 										<input type="hidden"  name="avaliacao_id" value="{{$avaliacao->id}}">
 										<button type="submit" name="avaliacoes" id="avaliacoes" class="btn btn-danger">
 											<i class="glyphicon glyphicon-education"></i>{{$avaliacao->id}} - Avaliação - {{$avaliacao->created_at->format('d/m/Y')}}
@@ -73,7 +72,7 @@
 									<form id="formAvaliacaoDisponivel" method="post" action="/aluno/avaliacao/online">
 				                		<input name="_token" type="hidden" value="{{ csrf_token() }}">
 										<input type="hidden"  name="disciplina_id" value="{{$disciplinas->id}}"/>
-										<input type="hidden"  name="turma_id" value="{{$turma->id}}">
+										<input type="hidden"  name="turma_id" value="{{$avaliacao->turma->id}}">
 										<input type="hidden"  name="avaliacao_id" value="{{$avaliacao->id}}">
 										<button type="submit" name="avaliacoes" id="avaliacoes" class="btn btn-success">
 											<i class="glyphicon glyphicon-education"></i>{{$avaliacao->id}} - Avaliação - {{$avaliacao->created_at->format('d/m/Y')}}
@@ -83,7 +82,6 @@
 
 								@endif
 							</tr>		
-						@endforeach
 					@endforeach
 				@endforeach
 				</td>
