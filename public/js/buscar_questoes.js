@@ -23,13 +23,14 @@ $(document).ready(function(){
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivel_id" : nivel_selecionado, "professor_id" : $('#prof').val(), "disciplina_nome" : disciplina_nome},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivel_id" : nivel_selecionado, "professor_id" : $('#prof').val(), "disciplina_nome" : disciplina_nome, "questao_numero" : 1},
         dataType: "JSON",   //expect html to be returned                
         
         beforesend: function(){
             res.container.append(res.loader);
         },
         success: function(response){
+            console.log(response);
             res.container.find(res.loader).remove() ;
             var questao = "questao"
             var alternativaA = "alternativaA"
@@ -167,7 +168,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq2_id" : nivel_selecionado, "professor_id" : $('#prof').val(),  "disciplina_nome" : disciplina_nome},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq2_id" : nivel_selecionado, "professor_id" : $('#prof').val(),  "disciplina_nome" : disciplina_nome, "questao_numero" : 2},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -216,7 +217,7 @@ $(document).ready(function() {
             }
             else
             {
-                document.getElementById('alternativaC102').style.borderColor="red";
+                document.getElementById('alternativaC2').style.borderColor="red";
                 document.getElementById('alternativaC2').style.borderWidth="thin";
 
             }
@@ -266,7 +267,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq3_id" :nivel_selecionado, "disciplina_nome" : disciplina_nome},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq3_id" :nivel_selecionado, "disciplina_nome" : disciplina_nome, "questao_numero" : 3},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -364,7 +365,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq4_id" :nivel_selecionado, "disciplina_nome" : disciplina_nome},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq4_id" :nivel_selecionado, "disciplina_nome" : disciplina_nome, "questao_numero" : 4},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -463,7 +464,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq5_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq5_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome, "questao_numero" : 5},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -562,7 +563,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq6_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq6_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome, "questao_numero" : 6},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -660,7 +661,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq7_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq7_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome, "questao_numero" : 7},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -759,7 +760,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq8_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq8_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome, "questao_numero" : 8},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -858,7 +859,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq9_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq9_id" : nivel_selecionado, "disciplina_nome" : disciplina_nome, "questao_numero" : 9},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 
@@ -957,7 +958,7 @@ $(document).ready(function() {
       $.ajax({    //create an ajax request to load_page.php
         type: "get",
         url: "/avaliacao/{id}/gerar/buscar/",
-        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq10_id" :nivel_selecionado, "disciplina_nome" : disciplina_nome},
+        data:  { "disciplina_id" : $('#disciplina_id').val(), "nivelq10_id" :nivel_selecionado, "disciplina_nome" : disciplina_nome, "questao_numero" : 10},
         dataType: "JSON",   //expect html to be returned                
         success: function(response){
 

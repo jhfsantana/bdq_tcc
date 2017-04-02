@@ -123,7 +123,6 @@ class QuestaoController extends Controller
         $questao = Questao::find($id);
 
         $questao->questao = $request->questao;
-        $questao->disciplina_nome = $request->disciplina_nome;
         $questao->alternativaA = $request->alternativaA;
         $questao->alternativaB = $request->alternativaB;
         $questao->alternativaC = $request->alternativaC;
@@ -191,7 +190,6 @@ class QuestaoController extends Controller
         $questao = new Questao();
 
         $questao->questao = $request->questao;
-        $questao->disciplina_nome = $request->disciplina_nome;
         $questao->alternativaA = $request->a;
         $questao->alternativaB = $request->b;
         $questao->alternativaC = $request->c;

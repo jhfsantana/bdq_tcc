@@ -74,4 +74,16 @@ class Questao extends Model
 
         return $resultado;
     }
+
+    public static function buscarQuestao($disciplina_id, $nivel_id)
+    {
+        $disciplina = self::join('disciplinas', 'disciplinas.id', '=','questoes.disciplina_id')
+                                ->where('disciplinas.id', '=', $disciplina_id)
+                                ->get(['disciplinas.nome']);
+
+        return self::where('disciplina_id', '=', $disciplina_id)
+                    ->where('nivel', '=', $nivel_id)
+                    ->InRandomOrder()
+                    ->first();
+    }
 }

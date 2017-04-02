@@ -11,15 +11,15 @@
 
 <body>
 
-		<div id="header" style="width: 100%; height: 135px;background-color: #34495e;">
+    <div id="header" style="width: 100%; height: 135px;background-color: #34495e;">
       <div class="row">
         <div class="col-md-8 col-md-offset-5" ">
-          <div class="logo" style="margin-left: 65px; margin-top: 0; position: fixed;">
+          <div class="logo" style="margin-left: 65px; margin-top: 0; margin-bottom: 155px;position: fixed;">
             <img src="/images/Untitled-4.svg/">
           </div>
         </div>
       </div>
-		</div>
+    </div>
 
       <div id="wrapper">
         <div class="overlay"></div>

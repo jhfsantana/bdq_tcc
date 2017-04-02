@@ -281,6 +281,11 @@ function showQ(select){
                             </label>
                         <input id = "disciplina_id" name="disciplina_id" type="hidden">
                     </div>
+
+                    <md-switch ng-model="isActive" aria-label="Finished?">
+                      Discursiva?
+                    </md-switch>
+
                     <textarea id="questao_id" type="text" name="questao_id[]" style="display: none;"></textarea>
                     <textarea id="questao-area" type="textarea" value="" rows="10" class="form-control" name="questao" placeholder="Questão" required></textarea>
                     <div class="input-group">

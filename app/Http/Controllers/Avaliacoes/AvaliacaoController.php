@@ -68,36 +68,47 @@ class AvaliacaoController extends Controller
         $nivelq8_id = Input::get('nivelq8_id');
         $nivelq9_id = Input::get('nivelq9_id');
         $nivelq10_id = Input::get('nivelq10_id');
-
-
-
-
-    	$questao = DB::table('questoes')
-                                        ->where('disciplina_id', '=', $disciplina_id)
-                                        ->where('nivel', '=', $nivel_id)
-                                        ->orwhere('disciplina_id', '=', $disciplina_id)
-                                        ->Where('nivel', '=', $nivelq2_id)
-                                        ->orwhere('disciplina_id', '=', $disciplina_id)
-                                        ->Where('nivel', '=', $nivelq3_id)
-                                        ->orwhere('disciplina_id', '=', $disciplina_id)
-                                        ->Where('nivel', '=', $nivelq4_id)
-                                        ->orwhere('disciplina_id', '=', $disciplina_id)
-                                        ->Where('nivel', '=', $nivelq5_id)
-                                        ->orwhere('disciplina_id', '=', $disciplina_id)
-                                        ->Where('nivel', '=', $nivelq6_id)
-                                        ->orwhere('disciplina_id', '=', $disciplina_id)
-                                        ->Where('nivel', '=', $nivelq7_id)
-                                        ->orwhere('disciplina_id', '=', $disciplina_id)
-                                        ->Where('nivel', '=', $nivelq8_id)
-                                        ->orwhere('disciplina_id', '=', $disciplina_id)
-                                        ->Where('nivel', '=', $nivelq9_id)
-                                        ->orwhere('disciplina_id', '=', $disciplina_id)
-                                        ->Where('nivel', '=', $nivelq10_id)
-								    	->InRandomOrder()
-								    	->first();
-      
-
-            return Response::json($questao);    
+        $questao_numero = Input::get('questao_numero');
+        $questao = "";
+        
+        switch ($questao_numero) 
+        {
+            case 1:
+                $questao = Questao::buscarQuestao($disciplina_id, $nivel_id);
+                break;
+            case 2:
+                $questao = Questao::buscarQuestao($disciplina_id, $nivelq2_id);
+                break;
+            case 3:
+                $questao = Questao::buscarQuestao($disciplina_id, $nivelq3_id);
+                break;
+            case 4:
+                $questao = Questao::buscarQuestao($disciplina_id, $nivelq4_id);
+                break;
+            case 5:
+                $questao = Questao::buscarQuestao($disciplina_id, $nivelq5_id);
+                break;
+            case 6:
+                $questao = Questao::buscarQuestao($disciplina_id, $nivelq6_id);
+                break;
+            case 7:
+                $questao = Questao::buscarQuestao($disciplina_id, $nivelq7_id);
+                break;
+            case 8:
+                $questao = Questao::buscarQuestao($disciplina_id, $nivelq8_id);
+                break;
+            case 9:
+                $questao = Questao::buscarQuestao($disciplina_id, $nivelq9_id);
+                break;
+            case 10:
+                $questao = Questao::buscarQuestao($disciplina_id, $nivelq10_id);
+                break;
+            
+            default:
+                break;
+        }
+    
+        return Response::json($questao);    
     }
 
 

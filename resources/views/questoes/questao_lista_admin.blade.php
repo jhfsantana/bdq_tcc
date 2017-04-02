@@ -52,14 +52,16 @@
 	            						<span ng-show="sortType == 'disciplina' && sortReverse" class="fa fa-caret-up"></span>
 									</th>
 
-									<th style="text-align: right; margin-bottom: 10px;">
-										<button id="btn-add" class="btn btn-success btn-md" ng-click="toggle('add', 0)">Nova Questão</button>
+									<th style="text-align: right; margin-bottom: 10px; padding: 5px;">
+										<md-button id="btn-add"  class="md-raised md-primary" ng-click="toggle('add', 0)">Nova Questão</md-button>
+										
+										<a href="/admin/lote"><md-button id="btn-add"  class="md-raised md-warn">CADASTRAR EM LOTE</md-button></a>
 									</th>
 								</tr>
 							</thead>
 							<tbody>
 							<div class="input-group col-xs-4" style="margin-bottom: 8px;">
-								<span class="input-group-addon" id="sizing-addon2" style="background-color: #ccc;"><i class="glyphicon glyphicon-search"></i></span>
+							<span class="input-group-addon" id="sizing-addon2" style="background-color: #ccc;"><i class="glyphicon glyphicon-search"></i></span>
 								<input type="text" class="form-control" placeholder="Buscar" aria-describedby="sizing-addon2" ng-model="buscar">
 							</div>
 								<tr ng-repeat="questao in questoes | filter:buscar | comecarEm:(currentPage - 1) * pageSize | limitTo:pageSize | orderBy:sortType:sortReverse">
