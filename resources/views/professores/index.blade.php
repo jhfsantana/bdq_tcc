@@ -52,7 +52,7 @@
         -webkit-border-radius:50%;*/
         margin:-3px 10px 0 10px;
         cursor:pointer;
-        background-image: url("/images/mail.svg");
+        background-image: url("/images/bell.svg");
     }
         
     /* THE POPULAR RED NOTIFICATIONS COUNTER. */
@@ -77,7 +77,7 @@
         width:330px;
         position:absolute;
         top:30px;
-        left:0;
+        right:0;
         background:#FFF;
         border:solid 1px rgba(100, 100, 100, .20);
         -webkit-box-shadow:0 3px 8px rgba(0, 0, 0, .20);
@@ -89,11 +89,13 @@
         display:block;
         width:0;
         height:0;
+        float: right;
         color:transparent;
         border:10px solid #CCC;
         border-color:transparent transparent #FFF;
         margin-top:-20px;
         margin-left:10px;
+        margin-right: 20px;
     }
         
    div#notify h3 {
@@ -133,7 +135,7 @@
           </div>
         </div>
       </div>
-          <div id="notify" style="float: right; margin-right: 15%;">
+          <div id="notify" style="float: right;">
               <ul>
                   <li id="noti_Container">
                       <div id="noti_Counter"></div>   <!--SHOW NOTIFICATIONS COUNT.-->
