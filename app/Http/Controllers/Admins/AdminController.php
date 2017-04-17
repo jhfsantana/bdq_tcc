@@ -29,7 +29,8 @@ class AdminController extends Controller
         $professore2s = Professor::professorTopQuestoes();
         $questoes = Questao::topQuestoes();
         $media = Avaliacao::mediaAvaliacao();
-           
+        
+        $todos = Professor::all();
       
         $total = Professor::totalProfessores();
         $alunos = ALuno::totalAlunos();
@@ -66,7 +67,8 @@ class AdminController extends Controller
                                    ->with('top', $professores)
                                    ->with('realtime', $realtime)
                                    ->with('chartPizza', $chartPizza)
-                                   ->with('diames', $diames);
+                                   ->with('diames', $diames)
+                                   ->with('todos',  $todos);
     }
 
     public function indexAPI($id = null)
@@ -84,26 +86,37 @@ class AdminController extends Controller
     public function validarDados($dado, $id = null)
     {  
 
-        $emailValidado = Admin::where('email', $dado)->Where('id', '<>', $id)->get();
-        $matriculaValidado = Admin::where('matricula', $dado)->Where('id', '<>', $id)->get();
-        $cpfValidado = Admin::where('cpf', $dado)->Where('id', '<>', $id)->get();
+        // $emailValidado = Admin::where('email', $dado)->Where('id', '<>', $id)->get();
+        // $matriculaValidado = Admin::where('matricula', $dado)->Where('id', '<>', $id)->get();
+        // $cpfValidado = Admin::where('cpf', $dado)->Where('id', '<>', $id)->get();
         
-        if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
-        {
-            return $matriculaValidado;
-        }
-        elseif (!count($emailValidado) || !count($matriculaValidado) || !count($cpfValidado)) 
-        {
-            $emailValidado = Professor::where('email', $dado)->Where('id', '<>', $id)->get();
-            $matriculaValidado = Professor::where('matricula', $dado)->Where('id', '<>', $id)->get();
-            $cpfValidado = Professor::where('cpf', $dado)->Where('id', '<>', $id)->get();
+        // if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
+        // {
+        //     return $matriculaValidado;
+        // }
+        // elseif (!count($emailValidado) || !count($matriculaValidado) || !count($cpfValidado)) 
+        // {
+        //     $emailValidado = Professor::where('email', $dado)->Where('id', '<>', $id)->get();
+        //     $matriculaValidado = Professor::where('matricula', $dado)->Where('id', '<>', $id)->get();
+        //     $cpfValidado = Professor::where('cpf', $dado)->Where('id', '<>', $id)->get();
 
-            if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
-            {
-                return json_encode(true);
-            }
-            elseif (!count($emailValidado) || !count($matriculaValidado) || !count($cpfValidado))
-            {
+        //     if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
+        //     {
+        //         return json_encode(true);
+        //     }
+        //     elseif (!count($emailValidado) || !count($matriculaValidado) || !count($cpfValidado))
+        //     {
+        //         $emailValidado = Aluno::where('email', $dado)->Where('id', '<>', $id)->get();
+        //         $matriculaValidado = Aluno::where('matricula', $dado)->Where('id', '<>', $id)->get();
+        //         $cpfValidado = Aluno::where('cpf', $dado)->Where('id', '<>', $id)->get();
+
+        //         if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
+        //         {
+        //             return json_encode(true);
+        //         }
+        //     }
+
+        // }
                 $emailValidado = Aluno::where('email', $dado)->Where('id', '<>', $id)->get();
                 $matriculaValidado = Aluno::where('matricula', $dado)->Where('id', '<>', $id)->get();
                 $cpfValidado = Aluno::where('cpf', $dado)->Where('id', '<>', $id)->get();
@@ -112,9 +125,6 @@ class AdminController extends Controller
                 {
                     return json_encode(true);
                 }
-            }
-
-        }
     }
 
     public function show($id)

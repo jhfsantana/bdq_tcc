@@ -346,6 +346,7 @@ class ComposerStaticInit401c39904328666e339d313dfea4cb02
     public static $classMap = array (
         'AdicionandoTimesstamp' => __DIR__ . '/../..' . '/database/migrations/2017_04_02_180034_adicionando_timesstamp.php',
         'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
+        'CreateTableMensagens' => __DIR__ . '/../..' . '/database/migrations/2017_04_17_003925_create_table_mensagens.php',
         'CriarTableNotificacao' => __DIR__ . '/../..' . '/database/migrations/2017_04_02_175831_criar_table_notificacao.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',

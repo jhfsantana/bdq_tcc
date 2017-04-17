@@ -105,6 +105,8 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 
 	Route::get('/professor/alunos', 'Professores\ProfessorController@alunos');
 
+	Route::post('/enviar/mensagem', 'Professores\ProfessorController@enviarMensagem');
+	
 	Route::get('professor/logout', 'Professores\AuthController@logout');
 
 });

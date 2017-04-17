@@ -10,6 +10,8 @@ use App\Http\Requests;
 
 use App\Models\Professor;
 
+use App\Models\Mensagem;
+
 use App\Models\Turma;
 
 use App\Models\Disciplina;
@@ -36,14 +38,17 @@ class ProfessorController extends Controller
     
     public function bemvindo()
     {
-        $alunos = Professor::meusAlunos();
+        $alunos = Professor::listarAlunos(Auth::user()->id);
         $diames = Util::pegarDiaSemana();
         $notificacoes = Notificacao::all();
         $contador_notificacoes = Notificacao::all()->where('visualizado', '<>', 'yes');
-        return view('professores.index')->with('alunos', $alunos)
+        $lista_alunos = Professor::listarAlunos(Auth::user()->id);
+
+        return view('professores.index')->with('alunos', count($alunos))
             ->with('diames', $diames)
             ->with('notificacoes', $notificacoes)
-            ->with('contador_notificacoes', count($contador_notificacoes));
+            ->with('contador_notificacoes', count($contador_notificacoes))
+            ->with('lista_alunos', $lista_alunos);
     }
 
 
@@ -179,4 +184,16 @@ class ProfessorController extends Controller
         return view('professores.alunos')->with('disciplina', $disciplina);
     }
 
+    public function enviarMensagem(Request $request)
+    {
+        $mensagem = new Mensagem;
+        $mensagem->enviado_por = Auth::user()->id;
+        $mensagem->enviado_para = $request->aluno_id;
+        $mensagem->mensagem = $request->mensagem;
+        if($mensagem->save())
+        {
+            $request->session()->flash('alert-success', 'Mensagem enviada para o aluno '. $request->nome . ' com sucesso!');
+            return redirect('/professor');
+        }
+    }
 }
