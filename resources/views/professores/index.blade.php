@@ -6,8 +6,9 @@
   <title>BDQ - Avaliação Online / Página inicial Administrativa</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel='stylesheet prefetch' href='https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css'>
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/global.css">
 
@@ -212,9 +213,9 @@
 
 		<div class="conteudo">
 			<div class="row">
-				<div class="col-md-10 col-md-offset-1" style="margin-top: 45px;">
+				<div class="col-md-10 col-md-offset-1" style="margin-top: 60px;">
 
-				<h3>Olá, {{Auth::guard('web_teachers')->user()->nome }} </h3>
+				<h4>Professor(a): {{Auth::guard('web_teachers')->user()->nome }} </h4>
 				<i class="fa fa-fw fa-calendar"></i><em>{{$diames}}</em>
       
       <!-- MENSAGEM DE SUCESSO -->
@@ -228,46 +229,120 @@
       <!-- FIM DA MENSAGEM DE SUCESSO -->
 				<h4>Resumo das informações</h4>
 
-				<div class="box-top">
+				<div class="box-top" style="border-color: #2980b9; background-color: #ecf0f1;">
 					<img src="images/professor_64px.png">
 					<h3 class="professores"></h3>
-					<a href="#">Nº Minhas turmas</a>
+					<a href="#" style="color: #2980b9;"><u>Nº Minhas turmas</u></a>
 				</div>
 
-				<div class="box2-top">
+				<div class="box2-top" style="border-color: #e67e22;background-color: #ecf0f1; ">
 					<img src="images/estudantes_64.png">
-					<h3 class="estudantes"> {{$alunos->qtd_alunos}} </h3>
-					<a href="#">Nº Estudantes</a>
+					<h3 class="estudantes" style="color: #e67e22;"> {{$alunos}} </h3>
+					<a href="#"style="color: #e67e22;"><u>Nº Estudantes</u></a>
 				</div>
 
-				<div class="box3-top">
+				<div class="box3-top" style="border-color: #27ae60; background-color:#ecf0f1 ">
 					<img src="images/estatistica_64.png">
-					<a href="/relatorio/"><u>Relatórios <i class="fa fa-fw fa-arrow-right"></i></u></a>
+					<a href="/relatorio/" style="color: #27ae60;"><u>Relatórios <i class="fa fa-fw fa-arrow-right"></i></u></a>
 				</div>
 			</div>
 		</div>
+    
+    <div class="col-md-10 col-md-offset-1" style="margin-top: 45px;">
+      <table id="tab" class="table table-striped" style="border-style: inset; border-width:1px;">
+       <thead>
+        <tr>
+           <td> <strong>Matricula</strong></td>
+           <td> <strong>Nome do aluno</strong></td>
+           <td><strong>Disciplina</strong></td>
+           <td><strong>Turma</strong></td>
+           <td><strong>Professor</strong></td>
+           <td><strong>Contato</strong></td>
+        </tr>
+       </thead>
+       <tbody>
+          @foreach($lista_alunos as $lista)
+            <tr>
+                <td>{{ $lista->matricula }}</td>
+                <td>{{ $lista->aluno_nome }}</td>
+                <td>{{ $lista->disciplina_nome }}</td>
+                <td>{{ $lista->turma_nome }}</td>
+                <td>{{ $lista->professor_nome }}</td>
+                <td><a data-toggle="modal" data-id="{{ $lista->aluno_id }}"  data-nome="{{ $lista->aluno_nome }}" data-target="#enviarMensagem" title="Enviar mensagem" class="open-enviarMensagem" href="#"><img src="/images/mail2.svg"  style="width: 35px; height: 35px;"></a></td>
+            </tr>
+          @endforeach
+       </tbody>
+      </table>
+    </div>
 	</div>
-        <!-- /#page-content-wrapper -->
-    </div>
-    <!-- /#wrapper -->
-  
-    <!-- /#footer -->
+</div>
 
-<!--   <div class="navbar navbar-default navbar-fixed-bottom" style="text-align: center; background-color: #ccc; position: fixed;">
-    <div class="container">
-      <p>© 2016 Banco de Questões e Avaliação Online 
-           <p>BDQ - Avaliação Online</p>
-      </p>
+<div class="modal fade" id="enviarMensagem" tabindex="-1" role="dialog" aria-labelledby="enviarMensagemLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="enviarMensagemLabel">Enviar Mensagem</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="POST" action="/enviar/mensagem">
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              Para:<input type="text" class="form-control" id="nome" name="nome" readonly="true" style=" background:rgba(0,0,0,0);border:none;color: black;">
+              <input type="hidden" class="form-control" id="aluno_id" name="aluno_id">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="form-control-label">Mensagem:</label>
+              <textarea class="form-control" id="mensagem" name="mensagem"></textarea>
+              <input name="_token" type="hidden" value="{{ csrf_token() }}">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <input type="submit" class="btn btn-primary" name="Enviar" "></button>
+        </div>
+      </form>
     </div>
-  </div> -->
-
-      <!-- /#final footer -->
+  </div>
+</div>
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-
+<script src='https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js'></script>
+<script src='https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js'></script>
+  
 <script src="js/index.js"></script>
 <script>
+
+$(document).on("click", ".open-enviarMensagem", function () {
+     var aluno_id = $(this).data('id');
+     var aluno_nome = $(this).data('nome');
+     $(".modal-body #nome").val( aluno_nome );
+     $(".modal-body #aluno_id").val( aluno_id );
+
+     console.log(aluno_id);
+     console.log(aluno_nome);
+});
+
+$(document).ready(function() {
+    $('#tab').DataTable(
+       {
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página ",
+            "zeroRecords": "Nada encontrado - desculpe",
+            "info": "Mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "Nenhum registro disponivel",
+            "infoFiltered": "(Filtrado em um total de _MAX_ )",
+            "paginate": {
+            "previous": "Anterior",
+            "next": "Proxima"
+            },
+            "search" : "Buscar"
+        }
+      });
+} );
     $(document).ready(function () {
 
         // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER.

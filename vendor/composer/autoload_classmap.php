@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'AdicionandoTimesstamp' => $baseDir . '/database/migrations/2017_04_02_180034_adicionando_timesstamp.php',
     'Cpdf' => $vendorDir . '/dompdf/dompdf/lib/Cpdf.php',
+    'CreateTableMensagens' => $baseDir . '/database/migrations/2017_04_17_003925_create_table_mensagens.php',
     'CriarTableNotificacao' => $baseDir . '/database/migrations/2017_04_02_175831_criar_table_notificacao.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
