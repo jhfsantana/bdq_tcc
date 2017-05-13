@@ -86,37 +86,26 @@ class AdminController extends Controller
     public function validarDados($dado, $id = null)
     {  
 
-        // $emailValidado = Admin::where('email', $dado)->Where('id', '<>', $id)->get();
-        // $matriculaValidado = Admin::where('matricula', $dado)->Where('id', '<>', $id)->get();
-        // $cpfValidado = Admin::where('cpf', $dado)->Where('id', '<>', $id)->get();
+        $emailValidado = Admin::where('email', $dado)->Where('id', '<>', $id)->get();
+        $matriculaValidado = Admin::where('matricula', $dado)->Where('id', '<>', $id)->get();
+        $cpfValidado = Admin::where('cpf', $dado)->Where('id', '<>', $id)->get();
         
-        // if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
-        // {
-        //     return $matriculaValidado;
-        // }
-        // elseif (!count($emailValidado) || !count($matriculaValidado) || !count($cpfValidado)) 
-        // {
-        //     $emailValidado = Professor::where('email', $dado)->Where('id', '<>', $id)->get();
-        //     $matriculaValidado = Professor::where('matricula', $dado)->Where('id', '<>', $id)->get();
-        //     $cpfValidado = Professor::where('cpf', $dado)->Where('id', '<>', $id)->get();
+        if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
+        {
+            return json_encode(true);
+        }
+        else if (!count($emailValidado) || !count($matriculaValidado) || !count($cpfValidado)) 
+        {
+            $emailValidado = Professor::where('email', $dado)->Where('id', '<>', $id)->get();
+            $matriculaValidado = Professor::where('matricula', $dado)->Where('id', '<>', $id)->get();
+            $cpfValidado = Professor::where('cpf', $dado)->Where('id', '<>', $id)->get();
 
-        //     if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
-        //     {
-        //         return json_encode(true);
-        //     }
-        //     elseif (!count($emailValidado) || !count($matriculaValidado) || !count($cpfValidado))
-        //     {
-        //         $emailValidado = Aluno::where('email', $dado)->Where('id', '<>', $id)->get();
-        //         $matriculaValidado = Aluno::where('matricula', $dado)->Where('id', '<>', $id)->get();
-        //         $cpfValidado = Aluno::where('cpf', $dado)->Where('id', '<>', $id)->get();
-
-        //         if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
-        //         {
-        //             return json_encode(true);
-        //         }
-        //     }
-
-        // }
+            if(count($emailValidado) || count($matriculaValidado) || count($cpfValidado))
+            {
+                return json_encode(true);
+            }
+            else if (!count($emailValidado) || !count($matriculaValidado) || !count($cpfValidado))
+            {
                 $emailValidado = Aluno::where('email', $dado)->Where('id', '<>', $id)->get();
                 $matriculaValidado = Aluno::where('matricula', $dado)->Where('id', '<>', $id)->get();
                 $cpfValidado = Aluno::where('cpf', $dado)->Where('id', '<>', $id)->get();
@@ -125,6 +114,10 @@ class AdminController extends Controller
                 {
                     return json_encode(true);
                 }
+            }
+
+        }
+
     }
 
     public function show($id)
@@ -204,7 +197,10 @@ class AdminController extends Controller
 
     public function destroy($id)
     {
-        return Admin::find($id)->delete();
+        $admin =  Admin::find($id);
+        $admin->delete();
+
+        return json_encode(['message' => 'Admin '. $admin->nome .' deletado com sucesso!']);
     }
 
     public function relatorio()  

@@ -38,10 +38,15 @@ class ProfessorController extends Controller
     
     public function bemvindo()
     {
+                /*$avaliacao = Turma::with('avaliacoes')->find($request->turma_id)->avaliacoes->where('disciplina_id', '=', $request->disciplina_id)->where('id', '=', $request->avaliacao_id);*/
+
         $alunos = Professor::listarAlunos(Auth::user()->id);
         $diames = Util::pegarDiaSemana();
-        $notificacoes = Notificacao::all();
-        $contador_notificacoes = Notificacao::all()->where('visualizado', '<>', 'yes');
+        $notificacoes = Notificacao::all()->where('professor_id', Auth::user()->id)->where('avaliacao_id', '<>', 0);
+        $contador_notificacoes = Notificacao::all()->where('visualizado', '<>', 1)
+                                                   ->where('professor_id', Auth::user()->id)
+                                                   ->where('avaliacao_id', '<>', 0);
+
         $lista_alunos = Professor::listarAlunos(Auth::user()->id);
 
         return view('professores.index')->with('alunos', count($alunos))
@@ -166,10 +171,10 @@ class ProfessorController extends Controller
      */
     public function destroy($id)
     {
-        $professor = Professor::find($id)->delete();
+        $professor_nome = Professor::find($id);
+        $professor_nome->delete();
 
-        return 'Professor deletado com sucesso!';
-
+        return json_encode(['message' => 'Professor ' . $professor_nome->nome. ' deletado com sucesso!']);
 /*        return redirect('professores');
 */
     }
@@ -186,11 +191,10 @@ class ProfessorController extends Controller
 
     public function enviarMensagem(Request $request)
     {
-        $mensagem = new Mensagem;
-        $mensagem->enviado_por = Auth::user()->id;
-        $mensagem->enviado_para = $request->aluno_id;
-        $mensagem->mensagem = $request->mensagem;
-        if($mensagem->save())
+
+        $mensagem = Notificacao::dispararNotificacao(null, Auth::user()->id, $request->aluno_id, $request->mensagem);
+        
+        if($mensagem)
         {
             $request->session()->flash('alert-success', 'Mensagem enviada para o aluno '. $request->nome . ' com sucesso!');
             return redirect('/professor');

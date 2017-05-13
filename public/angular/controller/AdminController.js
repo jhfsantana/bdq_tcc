@@ -19,8 +19,7 @@ app.controller('AdminController', function($scope, $http, API_URL, adminAPI)
 		      $scope.form_title = "Alterar Administrador";
 		      $scope.id = id;
 		      $http.get(API_URL + 'administradores/' + id).success(function(response){
-		      $scope.administrador = angular.copy(response);
-		      $scope.delete;
+		      $scope.administradores = response;
 		      console.log(response);
 		      });
 		      break;
@@ -78,18 +77,44 @@ app.controller('AdminController', function($scope, $http, API_URL, adminAPI)
 
 	 // delete supplier record
 		$scope.confirmDelete = function(id) {
-			var isConfirmDelete = confirm('Tem certeza que deseja excluir esse Administrador?');
-			if (isConfirmDelete) {
-			 adminAPI.deleteAdministrador(id).success(function(data){
-			   console.log(data);
-			   location.reload();
+			swal({
+			  title: "Você tem certeza que deseja remover este admin?",
+			  text: "Não será possivel recuperar esse registro, caso seja deletado, cuidado!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#DD6B55",
+			  confirmButtonText: "Sim, quero deletar!",
+			  cancelButtonText: "Não, quero cancelar solicitação!",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+			},
+			function(isConfirm){
+			  if (isConfirm) {
+			    swal("Deletado!", "Registro foi deletado com sucesso.", "success");
+			    adminAPI.deleteAdministrador(id).success(function(data){
+
+			   	if (data.message)
+			   	{
+			   		$('#main').html('<div class="alert alert-danger col-ssm-12" >' + data.message + '</div>');
+			   	}
+
+			   	$('#myModal').modal('hide');
+
+				adminAPI.getAdministradores()
+				.success(function(response)
+				{
+					$scope.administradores = response;
+				});
+
 			 }).error(function(data){
-			   console.log(data);
-			   alert('ocorreu um erro');
+			   	console.log(data);
+			    swal("Cancelado", "Ocorreu um erro!	", "error");
 			 });
-			} else {
-			 return false;
-			}
+
+			  } else {
+			    swal("Cancelado", "Solicitação cancelada!", "error");
+			  }
+			});
 		}
 
 		$scope.$on('modal.hidden', function() {

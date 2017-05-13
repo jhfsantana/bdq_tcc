@@ -204,12 +204,12 @@
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
-        <div id="page-content-wrapper">
-          <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
-            <span class="hamb-top"></span>
-            <span class="hamb-middle"></span>
-            <span class="hamb-bottom"></span>
-          </button>	
+  <div id="page-content-wrapper">
+    <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+      <span class="hamb-top"></span>
+      <span class="hamb-middle"></span>
+      <span class="hamb-bottom"></span>
+    </button>	
 
 		<div class="conteudo">
 			<div class="row">
@@ -231,7 +231,7 @@
 
 				<div class="box-top" style="border-color: #2980b9; background-color: #ecf0f1;">
 					<img src="images/professor_64px.png">
-					<h3 class="professores"></h3>
+					<h3 class="professores"  style="color: #2980b9;">20</h3>
 					<a href="#" style="color: #2980b9;"><u>Nº Minhas turmas</u></a>
 				</div>
 
@@ -249,7 +249,7 @@
 		</div>
     
     <div class="col-md-10 col-md-offset-1" style="margin-top: 45px;">
-      <table id="tab" class="table table-striped" style="border-style: inset; border-width:1px;">
+      <table id="tab" class="table table-striped" style="border-style: inset; border-width:1px; ">
        <thead>
         <tr>
            <td> <strong>Matricula</strong></td>
@@ -322,8 +322,6 @@ $(document).on("click", ".open-enviarMensagem", function () {
      $(".modal-body #nome").val( aluno_nome );
      $(".modal-body #aluno_id").val( aluno_id );
 
-     console.log(aluno_id);
-     console.log(aluno_nome);
 });
 
 $(document).ready(function() {
@@ -340,7 +338,8 @@ $(document).ready(function() {
             "next": "Proxima"
             },
             "search" : "Buscar"
-        }
+        },
+        "responsive" : true
       });
 } );
     $(document).ready(function () {
@@ -373,19 +372,20 @@ $(document).ready(function() {
 
         // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
         $(document).click(function () {
-            $('#notifications').hide();
-                
-                $.ajax({    //create an ajax request to load_page.php
-                type: "get",
-                url: "/notificacao/visualizada",
-                data:  {'visualizada' : 'yes'},
-                dataType: "JSON",   //expect html to be returned                
-                success: function(response){
-                    console.log(response);
-                }
+          $('#notifications').hide();
+          
+          @if(count(App\Models\Notificacao::all()->where('professor_id', Auth::user()->id)->where('visualizado', 0)->where('avaliacao_id', '<>', 0)) > 0)
+              $.ajax({   
+              type: "get",
+              url: "/notificacao/visualizada",
+              data:  {'visualizada' : 1},
+              dataType: "JSON",   //enviando json para request                
+              success: function(response){
+                  console.log(response);
+              }
 
-                });
-
+              });
+            @endif
             // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
             if ($('#noti_Counter').is(':hidden')) {
 

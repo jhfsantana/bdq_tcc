@@ -38,9 +38,9 @@ class AlunoController extends Controller
      */
     public function index()
     {
-       $alunos = Aluno::all();
+        $alunos = Aluno::all();
 
-       return view('alunos.alunos_lista')->with('alunos', $alunos);
+        return view('alunos.alunos_lista')->with('alunos', $alunos);
     }
 
     public function indexAPI($id = null)
@@ -87,7 +87,7 @@ class AlunoController extends Controller
 
         $aluno->disciplinas()->sync($request->disciplinas, false);
 
-        return redirect('alunos');
+        return 'salvou';
     }
 
     /**
@@ -174,7 +174,18 @@ class AlunoController extends Controller
     {
         $usuario = Aluno::find(Auth::user()->id);
         $aluno = Aluno::ultimaNota();
-        return view('alunos.index')->with('aluno', $aluno)->withAluno($usuario);
+
+        $alunos = Aluno::all();
+        $notificacoes = Notificacao::all()->where('aluno_id', Auth::user()->id)->where('avaliacao_id', '=', 0);
+        
+        $contador_notificacoes = Notificacao::all()
+                                                ->where('visualizado', '<>', 1)
+                                                ->where('aluno_id', Auth::user()->id)
+                                                ->where('avaliacao_id', '=', 0);
+
+        return view('alunos.index')->with('aluno', $aluno)->withAluno($usuario)
+                                    ->with('notificacoes', $notificacoes)
+                                    ->with('contador_notificacoes', count($contador_notificacoes));;
     }
 
     public function avaliacao(Request $request)
@@ -189,9 +200,9 @@ class AlunoController extends Controller
     }
     
     
-    public function avaliacoesDisponiveis($id)
+    public function avaliacoesDisponiveis()
     {
-        $aluno = Aluno::find($id);
+        $aluno = Aluno::find(Auth::user()->id);
         return view('alunos.avaliacao_disponivel')->withAluno($aluno);
     }
 
@@ -1127,7 +1138,7 @@ class AlunoController extends Controller
         $resultado->nota = $nota;
         if($resultado->save())
         {   
-            Notificacao::dispararNotificacao($request->avaliacao_id, 'O aluno '. $aluno->nome .' realizou a avaliação da disciplina ' . $avaliacao->disciplina->nome);            
+            Notificacao::dispararNotificacao($request->avaliacao_id, $avaliacao->professor_id, $request->aluno_id, 'O aluno '. $aluno->nome .' realizou a avaliação da disciplina ' . $avaliacao->disciplina->nome);            
             $request->session()->flash('alert-success', 'Avaliação realizada com sucesso!!');
             return redirect('aluno');
         }
@@ -1135,4 +1146,21 @@ class AlunoController extends Controller
 
        
     }
+
+
+    public function mensagens()
+    {
+        $usuario = Aluno::find(Auth::user()->id);
+
+        $notificacoes = Notificacao::all()->where('aluno_id', Auth::user()->id)->where('avaliacao_id', '=', 0);
+        return view('alunos.mensagens')->with('notificacoes', $notificacoes);
+    }
+
+
+
+
+
+
+
+
 }

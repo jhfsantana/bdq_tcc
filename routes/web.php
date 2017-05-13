@@ -60,18 +60,29 @@ Route::get('professor/login','Professores\ProfessorController@logintela');
 
 Route::post('professor/login', 'Professores\AuthController@login');
 
+Route::get('/api/administradores/validar/{dado?}/{id?}/{formulario?}', 'Admins\AdminController@validarDados');
+
+///Route::get('/api/disciplinas/professor', 'Disciplinas\DisciplinaController@DisciplinaByProfessor');
 
 Route::group(['middleware'=> ['auth:web_teachers']], function ()
 {
 	Route::get('/notificacao/visualizada', function()
 	{
 		$visualizada = Input::get('visualizada');
-		Notificacao::where('visualizado', '=', 'no')->update(['visualizado' => 'yes']);
+
+		if(count(Notificacao::all()->where('professor_id', Auth::user()->id)->where('visualizado', 0)) > 0)
+		{
+			Notificacao::where('visualizado', '=', false)->where('professor_id', Auth::user()->id)
+													 ->update(['visualizado' => $visualizada]);
+		}
+		else
+		{
+			return json_encode(false);
+		}
 	});
 
 	Route::get('/api/turmas/{id?}', 'Turmas\TurmaController@indexAPI');
 
-    Route::get('/api/disciplinas/professor', 'Disciplinas\DisciplinaController@DisciplinaByProfessor');
 
 	Route::get('/api/questoes/professor', 'Questoes\QuestaoController@getQuestaoByProfessor');
 
@@ -150,7 +161,6 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
     Route::post('/api/administradores', 'Admins\AdminController@store');
     Route::put('/api/administradores/{id}', 'Admins\AdminController@update');
     Route::delete('/api/administradores/{id}', 'Admins\AdminController@destroy');
-    Route::get('/api/administradores/validar/{dado?}/{id?}/{formulario?}', 'Admins\AdminController@validarDados');
 
 /*    API TURMAS
 */
@@ -255,7 +265,7 @@ Route::group(['middleware'=> ['auth:web_students']], function ()
 	
 	Route::get('aluno/logout', 'Alunos\AuthController@logout');
 
-	Route::post('aluno/avaliacoes/{id}', 'Alunos\AlunoController@avaliacoesDisponiveis');
+	Route::get('aluno/avaliacoes', 'Alunos\AlunoController@avaliacoesDisponiveis');
 
 	Route::post('aluno/avaliacao/online', 'Alunos\AlunoController@avaliacao');
 
@@ -263,7 +273,9 @@ Route::group(['middleware'=> ['auth:web_students']], function ()
 	
 	Route::get('aluno/avaliacao/resultado/{id}', 'Avaliacoes\AvaliacaoController@paginaResultado');
 	
-	Route::post('aluno/avaliacoes/realizadas/{id}', 'Avaliacoes\AvaliacaoController@realizadas');
+	Route::get('aluno/avaliacoes/realizadas', 'Avaliacoes\AvaliacaoController@realizadas');
+
+	Route::get('aluno/mensagens', 'Alunos\AlunoController@mensagens');
 	
 });
 

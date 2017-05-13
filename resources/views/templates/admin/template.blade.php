@@ -86,8 +86,13 @@
 
 	<!-- FIM DA MENSAGEM DE SUCESSO -->
         		{!! Charts::assets() !!}
-		<div class="conteudo"> 
-			<div class="row">
+		<div class="conteudo">
+        <div style="width: 100%; height: 85px; background-color: #bdc3c7;">
+          <div class="row">
+            <h3 style="margin-left: 25px; color: white; "><span class="glyphicon glyphicon-cog"></span>Administradores</h3>
+          </div>
+        </div> 
+			<div class="row" style="margin-top: 30px;">
 				<div class="col-md-10 col-md-offset-1">
       <div class="flash-message" style="width: 50%;">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -99,8 +104,9 @@
             @endif
           @endif
         @endforeach
-      </div> 
-  			   @yield('content')
+      </div>
+
+  			@yield('content')
 
   			</div>
       </div>

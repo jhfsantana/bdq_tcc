@@ -13,6 +13,7 @@
 		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		    <link rel="stylesheet" type="text/css" href="/css/style.css">
  			<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+			<link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
 
 		    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,9 +26,9 @@
 		
 
 		@section('content')
-			<div class="container" style="margin-top: 40px;">
-			<h3 style="text-align: center;">Lista de Administradores</h3>
-    
+			<div class="container" style="margin-top: 5px;">
+    		<div id="main
+    		"></div>
 		    @if(!empty($errors->all()))
 		    <div class="alert alert-danger" role="alert-danger">
 		        @foreach($errors->all() as $error)
@@ -148,10 +149,7 @@
           										</div>
          										<div ng-message="dadoUnico">
           											Matricula já existente.
-          										</div>
-         										<div ng-message="dadoUnicoNovo">
-          											Matricula já existente.
-          										</div>          										
+          										</div>        										
 												<span class="text-success" ng-show="frmAdmin.matricula.$valid">
 													Matricula disponível.
 												</span>
@@ -199,8 +197,9 @@
 
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
-										<label>CPF</label>
-											<input dado-unico required md-no-asterisk type="text" name="cpf" value="@{{ administrador.cpf }}" ng-model="administrador.cpf" maxlength="11" minlength="11"/>
+										<label>cpf</label>
+										<div class="col-sm-9">
+											<input required dado-unico md-no-asterisk type="number" name="cpf" value="@{{ administrador.cpf }}" ng-model="administrador.cpf" minlength="11"/>
 											<div ng-messages="frmAdmin.cpf.$error">
           										<div ng-message="required">
           											Campo cpf é obrigatório.
@@ -208,37 +207,38 @@
          										<div ng-message="minlength">
           											Tamanho da cpf deve ser no minimo 11 caracteres.
           										</div>
-         										<div ng-message="dadoUnico">	
+         										<div ng-message="dadoUnico">
           											cpf já existente.
           										</div>
-												<span ng-if="frmAdmin.cpf.$pending" >
- 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
- 												</span>
+         										<div ng-message="dadoUnicoNovo">
+          											cpf já existente.
+          										</div>          										
 												<span class="text-success" ng-show="frmAdmin.cpf.$valid">
 													cpf disponível.
 												</span>
+												<span ng-if="frmAdmin.cpf.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
 											</div>
+										</div>
 									</md-input-container>
 
 									<md-input-container class="md-block" flex="50">
-										<label>E-mail</label>
-											<input required dado-unico md-no-asterisk type="email" name="email" value="@{{ administrador.email }}" ng-model="administrador.email" maxlength="30"/>
+										<label>E-MAIL</label>
+											<input dado-unico required md-no-asterisk type="text" name="cpf" value="@{{ administrador.email }}" ng-model="administrador.email"  minlength="11"/>
 											<div ng-messages="frmAdmin.email.$error">
           										<div ng-message="required">
           											Campo email é obrigatório.
           										</div>
-         										<div ng-message="minlength">
-          											Tamanho da email deve ser no minimo 11 caracteres.
-          										</div>
-         										<div ng-message="dadoUnico">
+         										<div ng-message="dadoUnico">	
           											email já existente.
           										</div>
-												<span class="text-success" ng-show="frmAdmin.email.$valid">
-													email disponível.
-												</span>
 												<span ng-if="frmAdmin.email.$pending" >
  													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
  												</span>
+												<span class="text-success" ng-show="frmAdmin.email.$valid">
+													email disponível.
+												</span>
 											</div>
 									</md-input-container>
 								</div>
@@ -353,5 +353,6 @@
 		    <script src="angular/libs/ui-bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
 		    <script src="angular/services/adminAPIService.js"></script>
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+			<script src="/js/sweetalert.min.js"></script>
 		@stop
 </html>

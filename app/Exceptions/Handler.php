@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Auth;
 
 class Handler extends ExceptionHandler
 {
@@ -59,7 +60,19 @@ class Handler extends ExceptionHandler
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
-
-        return redirect()->guest('login');
+        ///Verifico qual se o usuario tem permissao para pagina, se não redireciono para página de login
+        
+        if(!Auth::guard('web_admins')->check())
+        {
+            return redirect()->guest('/admin');
+        }
+        else if(!Auth::guard('web_teachers')->check())
+        {
+            return redirect()->guest('/professor/login');   
+        }
+        else
+        {
+            return redirect()->guest('/aluno/login');   
+        }
     }
 }

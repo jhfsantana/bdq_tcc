@@ -7,7 +7,7 @@
 
 
 
-	<div id="header">
+	<div id="header" style="height: 80px;">
 		<div class="logo">
 			<a href="#">BDQ - Avaliação<span>Online</span></a>
 		</div>
@@ -16,12 +16,11 @@
 	<div id="container">
 		<div class="sidebar">
 			<ul id="nav"> 
-			    <li><a href="/aluno">Inicio</a></li> 
-			    <li><input type="submit" name="avaliacao" value="Avaliações" form="formAvaliacao" class="btn btn-link"></li>
-			      <ul> 
-			        <li><input type="submit" name="resultado" value="Provas realizadas" form="formRealizadas" class="btn btn-link"></li> 
-			      </ul> 
-			    <li><a href="/aluno/logout">Logout</a></li> 
+			    <li><a href="/aluno" ><img src="/images/home.svg" style="width: 32px;width: 32px;" data-toggle="tooltip" title="Home"></a></li> 
+			    <li><a href="/aluno/avaliacoes"><img src="/images/exam.svg" style="width: 32px;width: 32px;" data-toggle="tooltip" title="Avaliações"></a></li>
+				<li><a href="/aluno/avaliacoes/realizadas"><img src="/images/notas.png" style="width: 32px;width: 32px;" data-toggle="tooltip" title="Avaliações Realizadas"></a></li>
+          		<li><a href="/aluno/mensagens"><img src="/images/messagewhite.svg" style="width: 32px;width: 32px;" data-toggle="tooltip" title="Mensagens"></a></li>
+			    <li><a href="/aluno/logout"><img src="/images/logout.svg" style="width: 32px;width: 32px;" data-toggle="tooltip" title="Sair"></a></li> 
 
 			 </ul>
 		</div>

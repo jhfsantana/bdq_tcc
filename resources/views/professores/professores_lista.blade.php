@@ -13,7 +13,7 @@
 		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		    <link rel="stylesheet" type="text/css" href="/css/style.css">
  			<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-
+			<link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
 		    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		    <!--[if lt IE 9]>
@@ -26,6 +26,7 @@
 
 		@section('content')
 			<div class="container" style="margin-top: 40px;">
+			<div id="main"></div>
 			<h3 style="text-align: center;">Lista de Professores</h3>
 
 				<div ng-controller="ProfessorController">
@@ -358,5 +359,6 @@
 		    <script src="angular/services/professorAPIService.js"></script>
 		    <script src="angular/services/disciplinaAPIService.js"></script>
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+		    <script src="/js/sweetalert.min.js"></script>
 		@stop
 </html>

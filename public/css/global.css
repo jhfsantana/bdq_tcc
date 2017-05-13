@@ -136,10 +136,10 @@ div#container {
 .sidebar {
 	padding: 0px;
 	margin: 0px;
-	width: 250px;
+	width: 100px;
 	height: 100%;
 	background: #171717;
-    margin-top:70px;
+    margin-top:80px;
     position:fixed;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
@@ -189,7 +189,7 @@ ul#nav li input{
 	color: #ccc;
 	margin-top: 15px;
 	display: block;
-	padding: 15px;
+	padding: 25px;
 	font-size: 0.9em;
 	border-bottom: 1px solid #444;
 	-webkit-transition: all 0.2s ease;
@@ -210,9 +210,8 @@ ul#nav li {
 }
 ul#nav li a {
   color: #ccc;
-  margin-top: 15px;
   display: block;
-  padding: 15px;
+  padding: 30px;
   font-size: 0.9em;
   border-bottom: 1px solid #444;
 -webkit-transition: all 0.2s ease;
@@ -234,7 +233,7 @@ ul#nav li a:hover {
 	width: auto;
 	height: 100%;
 	background: #EDEDED;
-	margin-left: 250px;
+	margin-left: 100px;
 	padding: 25px;
 	overflow: auto;
 

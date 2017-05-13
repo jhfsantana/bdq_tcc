@@ -364,9 +364,9 @@ class AvaliacaoController extends Controller
     }
 
 
-    public function realizadas($id)
+    public function realizadas()
     {
-        $aluno = Aluno::find($id);
+        $aluno = Aluno::find(Auth::user()->id);
         return view('alunos.realizadas')->withAluno($aluno);
     }
 

@@ -76,7 +76,48 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
 
 	 // delete supplier record
 		$scope.confirmDelete = function(id) {
-			var isConfirmDelete = confirm('Tem certeza que deseja excluir esse professor?');
+			swal({
+			  title: "Você tem certeza que deseja remover este professor?",
+			  text: "Não será possivel recuperar esse registro, caso seja deletado, cuidado!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#DD6B55",
+			  confirmButtonText: "Sim, quero deletar!",
+			  cancelButtonText: "Não, quero cancelar solicitação!",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+			},
+			function(isConfirm){
+			  if (isConfirm) {
+			    swal("Deletado!", "Registro foi deletado com sucesso.", "success");
+			    professorAPI.deleteProfessor(id).success(function(data){
+
+			   	if (data.message)
+			   	{
+			   		$('#main').html('<div class="alert alert-danger col-ssm-12" >' + data.message + '</div>');
+			   	}
+
+			   	$('#myModal').modal('hide');
+
+				professorAPI.getProfessores()
+				.success(function(response)
+				{
+					$scope.professores = response;
+				});
+
+			 }).error(function(data){
+			   	console.log(data);
+			    swal("Cancelado", "Ocorreu um erro!	", "error");
+			 });
+
+			  } else {
+			    swal("Cancelado", "Solicitação cancelada!", "error");
+			  }
+			});
+
+
+
+			/*var isConfirmDelete = confirm('Tem certeza que deseja excluir esse professor?');
 			if (isConfirmDelete) {
 			 professorAPI.deleteProfessor(id).success(function(data){
 			   console.log(data);
@@ -87,7 +128,7 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
 			 });
 			} else {
 			 return false;
-			}
+			}*/
 		}
 
 		$scope.$on('modal.hidden', function() {
