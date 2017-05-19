@@ -27,7 +27,6 @@
 		@section('content')
 			<div class="container" style="margin-top: 40px;">
 			<div id="main"></div>
-			<h3 style="text-align: center;">Lista de Professores</h3>
 
 				<div ng-controller="ProfessorController">
 					<div class="table-responsive">

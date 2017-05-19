@@ -61,7 +61,6 @@ class QuestaoController extends Controller
      */
     public function store(Request $request)
     {
-        
         $this->validate($request, 
             [
                 'disciplina_id' => 'required|max:255',
@@ -82,12 +81,12 @@ class QuestaoController extends Controller
         $questao->correta         = $request->correta;
         $questao->nivel           = $request->nivel;
         
-        if(\Auth::guard() == 'web_admins')
+        if(\Auth::guard('web_admins')->check())
         {
             $questao->admin()->associate(Auth::guard('web_admins')->user()->id);
         }
         
-        if(\Auth::guard() == 'web_teachers')
+        if(\Auth::guard('web_teachers')->check())
         {
             $questao->professor()->associate(Auth::guard('web_teachers')->user()->id);
         }

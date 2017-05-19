@@ -89,7 +89,7 @@
 		<div class="conteudo">
         <div style="width: 100%; height: 85px; background-color: #bdc3c7;">
           <div class="row">
-            <h3 style="margin-left: 25px; color: white; "><span class="glyphicon glyphicon-cog"></span>Administradores</h3>
+            <h3 style="margin-left: 25px; color: white; "><span class="glyphicon glyphicon-cog"></span>Professores</h3>
           </div>
         </div> 
 			<div class="row" style="margin-top: 30px;">

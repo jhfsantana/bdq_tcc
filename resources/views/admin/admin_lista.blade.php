@@ -135,10 +135,10 @@
 					      </div>
 					      <div class="modal-body">
 							<form name="frmAdmin" class="form-horizontal" novalidate="">
-								<div class="form-group">
-									<md-input-container class="md-block">
+								<div layout="row">
+									<md-input-container class="md-block"  flex="50">
 										<label>Matricula</label>
-										<div class="col-sm-9">
+										<md-icon md-svg-src="/images/admin/matricula.svg" class="name"></md-icon>
 											<input required dado-unico md-no-asterisk type="number" name="matricula" value="@{{ administrador.matricula }}" ng-model="administrador.matricula" minlength="11"/>
 											<div ng-messages="frmAdmin.matricula.$error">
           										<div ng-message="required">
@@ -157,7 +157,6 @@
  													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
  												</span>
 											</div>
-										</div>
 									</md-input-container>
 								</div>
 		
@@ -166,6 +165,7 @@
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
 										<label>Nome</label>
+											<md-icon md-svg-src="/images/admin/name.svg" class="name"></md-icon>
 											<input required md-no-asterisk type="text" name="name" value="@{{ administrador.name }}" ng-model="administrador.name" maxlength="30"/>
 											<div ng-messages="frmAdmin.name.$error">
           										<div ng-message="required">
@@ -179,6 +179,7 @@
 
 									<md-input-container class="md-block" flex="50">
 										<label>Sobrenome</label>
+											<md-icon md-svg-src="/images/admin/sobrenome.svg" class="name"></md-icon>										
 											<input required md-no-asterisk type="text" name="sobrenome" value="@{{ administrador.sobrenome }}" ng-model="administrador.sobrenome" maxlength="30"/>
 											<div ng-messages="frmAdmin.sobrenome.$error">
           										<div ng-message="required">
@@ -197,8 +198,8 @@
 
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
-										<label>cpf</label>
-										<div class="col-sm-9">
+										<label>CPF</label>
+											<md-icon md-svg-src="/images/admin/cpf.svg" class="name"></md-icon>
 											<input required dado-unico md-no-asterisk type="number" name="cpf" value="@{{ administrador.cpf }}" ng-model="administrador.cpf" minlength="11"/>
 											<div ng-messages="frmAdmin.cpf.$error">
           										<div ng-message="required">
@@ -220,12 +221,12 @@
  													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
  												</span>
 											</div>
-										</div>
 									</md-input-container>
 
 									<md-input-container class="md-block" flex="50">
 										<label>E-MAIL</label>
-											<input dado-unico required md-no-asterisk type="text" name="cpf" value="@{{ administrador.email }}" ng-model="administrador.email"  minlength="11"/>
+											<md-icon md-svg-src="/images/admin/email.svg" class="name"></md-icon>
+											<input dado-unico required md-no-asterisk type="text" name="email" value="@{{ administrador.email }}" ng-model="administrador.email"  minlength="11"/>
 											<div ng-messages="frmAdmin.email.$error">
           										<div ng-message="required">
           											Campo email é obrigatório.
@@ -243,10 +244,10 @@
 									</md-input-container>
 								</div>
 
-								<div class="form-group">
+								<div layout="row">
 									<md-input-container class="md-block">
 										<label>Password</label>
-										<div class="col-sm-9">
+											<md-icon md-svg-src="/images/admin/email.svg" class="name"></md-icon>
 											<input required md-no-asterisk type="password" name="password" value="@{{ administrador.password }}" ng-model="administrador.password" minlength="8"/>
 											<div ng-messages="frmAdmin.password.$error">
           										<div ng-message="required">
@@ -256,12 +257,16 @@
           											Tamanho do campo password deve ter no minimo 8 caracteres.
           										</div>
 											</div>
-										</div>
 									</md-input-container>
 								</div>
 							</form>
 								<div class="modal-footer">
-					                <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, id)" ng-disabled="frmAdmin.$invalid">Salvar</button>
+									<div ng-if="modalstate == 'add'" >
+					                	<button type="button"  class="btn btn-primary" id="btn-save" ng-click="save(modalstate, id)" ng-disabled="frmAdmin.$invalid">Salvar</button>
+					                </div>
+					                <div ng-if="modalstate == 'edit'" >
+					                	<button type="button"  class="btn btn-primary" id="btn-save" ng-click="save(modalstate, id)">Salvar</button>
+					                </div>
 					            </div>
 							</div>
 						</div>
@@ -284,7 +289,9 @@
 								    <div class="details-photo">
 								      <div class="details-pic">
 								        <a href="#">
-								          <div class="button-position"></div>
+								          <label class="button-position">
+								            <input id="file" name="file" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
+								          </label>
 								        </a>
 								      </div>
 								      </div>

@@ -83,7 +83,7 @@ class AdminController extends Controller
         }
     }
 
-    public function validarDados($dado, $id = null)
+    public function validarDados($dado, $id = 0)
     {  
 
         $emailValidado = Admin::where('email', $dado)->Where('id', '<>', $id)->get();

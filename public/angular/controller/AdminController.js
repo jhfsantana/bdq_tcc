@@ -7,7 +7,6 @@ app.controller('AdminController', function($scope, $http, API_URL, adminAPI)
 		{
 			$scope.administradores = response;
 		});
-
 // show modal Form
 		$scope.toggle = function(modalstate, id) {
 		  $scope.modalstate = modalstate;
@@ -19,8 +18,8 @@ app.controller('AdminController', function($scope, $http, API_URL, adminAPI)
 		      $scope.form_title = "Alterar Administrador";
 		      $scope.id = id;
 		      $http.get(API_URL + 'administradores/' + id).success(function(response){
-		      $scope.administradores = response;
-		      console.log(response);
+		      $scope.administrador ='';
+		      $scope.administrador = response;
 		      });
 		      break;
  			case 'details':

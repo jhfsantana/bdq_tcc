@@ -61,16 +61,17 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
         ///Verifico qual se o usuario tem permissao para pagina, se não redireciono para página de login
-        
         if(!Auth::guard('web_admins')->check())
         {
             return redirect()->guest('/admin');
         }
-        else if(!Auth::guard('web_teachers')->check())
+        
+        if(!Auth::guard('web_teachers')->check())
         {
             return redirect()->guest('/professor/login');   
         }
-        else
+        
+        if(!Auth::guard('web_students')->check())
         {
             return redirect()->guest('/aluno/login');   
         }

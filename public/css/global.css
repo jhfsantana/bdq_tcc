@@ -136,7 +136,7 @@ div#container {
 .sidebar {
 	padding: 0px;
 	margin: 0px;
-	width: 100px;
+	width: 80px;
 	height: 100%;
 	background: #171717;
     margin-top:80px;
@@ -233,7 +233,7 @@ ul#nav li a:hover {
 	width: auto;
 	height: 100%;
 	background: #EDEDED;
-	margin-left: 100px;
+	margin-left: 79px;
 	padding: 25px;
 	overflow: auto;
 

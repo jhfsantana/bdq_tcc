@@ -84,10 +84,11 @@
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
     	@foreach($disciplinas as $disciplina)
-			@foreach($disciplina->turmas as $turma)
-    			<li><a href="/relatorio/notas/{{$disciplina->id}}">{{$disciplina->nome}} da turma {{$turma->nome}}</a></li>
+			 @foreach($disciplina->turmas as $turma)
+          <li><a href="/relatorio/notas/{{$disciplina->id}}">{{$disciplina->nome}} da turma {{$turma->nome}}</a></li>
     		@endforeach
     	@endforeach
+        <li><a href="/relatorio/notas/todos">todos</a></li>
     </ul>
   </div>
 	<table id="notas" class="table table-striped" cellspacing="0" width="100%">
