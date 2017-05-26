@@ -23,7 +23,6 @@ class DisciplinaRequest extends FormRequest
         $disciplina = Input::get('nome');
         return [
                 'nome' => 'required',
-                'turmas' => 'required',
                 ];
     }
 
@@ -31,7 +30,6 @@ class DisciplinaRequest extends FormRequest
     {
         return [
             'nome.required' => 'Nome da disciplina é obrigatório',
-            'turmas.required' => 'Campo turmas é obrigatório',
 
         ];
     }

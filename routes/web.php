@@ -185,7 +185,8 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
     Route::delete('/api/questoes/{id}', 'Questoes\QuestaoController@destroy');
 
 #####################################################################################
-
+	
+	Route::get('/disciplina/config/{id}','Disciplinas\DisciplinaController@config');
 	Route::get('home','Admins\AdminController@index');
 	Route::get('/download/arquivo/modelo','Questoes\QuestaoController@downloadArquivo');
 
@@ -221,6 +222,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	Route::get('disciplina/novo','Disciplinas\DisciplinaController@create');
 	Route::get('disciplinas','Disciplinas\DisciplinaController@index');
 	Route::post('subjects','Disciplinas\DisciplinaController@store');
+	Route::post('disciplina/config/remover', 'Disciplinas\DisciplinaController@removerProfessor');
 
 	Route::get('/relatorio', 'Admins\AdminController@relatorio');
 

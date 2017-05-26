@@ -28,7 +28,6 @@ class ProfessorRequest extends FormRequest
             'nome' => 'required',
             'sobrenome' => 'required',
             'cpf' => 'required|unique:professores',
-            'disciplinas' => 'required',
             'email' => 'required|unique:professores|email',
             'password' => 'required',
         ];
@@ -41,7 +40,6 @@ class ProfessorRequest extends FormRequest
             'nome.required' => 'Campo nome é obrigatório',
             'sobrenome.required' => 'Campo sobrenome é obrigatório',
             'cpf.required' => 'Campo cpf é obrigatório',
-            'disciplinas.required' => 'Campo disciplina é obrigatório',
             'email.required' => 'Campo email é obrigatório',
             'email.unique' => 'Email já cadastrado',
             'email.email' => 'Digite o e-mail em um formato válido',

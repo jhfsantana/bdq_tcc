@@ -11,7 +11,6 @@ use App\Models\Professor;
 use App\Models\Turma;
 use App\Http\Requests\Disciplina\DisciplinaRequest;
 
-
 class DisciplinaController extends Controller
 {
     /**
@@ -67,9 +66,15 @@ class DisciplinaController extends Controller
             $disciplina->nome = $request->nome;
             if($disciplina->save())
             {
-                $disciplina->turmas()->sync($request->turmas, false);
-                $request->session()->flash('alert-success', 'Disciplina cadastrada com sucesso');
-                return redirect ('/disciplinas');
+                if(isset($request->professores))
+                {
+                    $disciplina->professores()->sync($request->professores, false);                
+                }
+
+                return json_encode([
+                   'message' => 'Disciplina cadastrada com sucesso!',
+                   'success' => 'MS-30' 
+                   ]);
             }
         }
     }
@@ -90,8 +95,11 @@ class DisciplinaController extends Controller
             $disciplina->nome = $request->nome;
             if($disciplina->save())
             {
-                $disciplina->turmas()->sync($request->turmas, false);
-                $request->session()->flash('alert-success', 'Disciplina cadastrada com sucesso');
+                if(isset($request->professores))
+                {
+                    $disciplina->professores()->sync($request->professores, false);                
+                }                
+                $request->session()->flash('alert-success', 'Disciplina alterada com sucesso');
                 return redirect ('/disciplinas');
             }
         }
@@ -117,5 +125,21 @@ class DisciplinaController extends Controller
     {
         return Professor::with('disciplinas')->find(\Auth::user()->id)->disciplinas;
         // return DB::select('select * from disciplinas where professor_id = ?', array(Auth::user()->id));
+    }
+
+    public function config($id)
+    {   
+        /*
+        $avaliacao = Turma::with('avaliacoes')->find($request->turma_id)->avaliacoes->where('disciplina_id', '=', $request->disciplina_id)->where('id', '=', $request->avaliacao_id);*/
+
+        $d_id = Disciplina::find($id);
+        return vieW('disciplinas.config')->with('disciplina', $d_id);
+    }
+
+    public function removerProfessor(Request $request)
+    {
+        $result = DB::delete('DELETE FROM disciplina_professor WHERE professor_id = ? AND disciplina_id = ? LIMIT 1',[$request->professor_id, $request->disciplina_id]);
+
+        return redirect()->back();
     }
 }

@@ -41,7 +41,7 @@ class TurmaController extends Controller
         $turma = new Turma();
         $turma->nome = $request->nome;
         $turma->save();
-
+        $turma->disciplinas()->sync($request->disciplinas, false);
         return 'turma criada';
         
     }
@@ -56,6 +56,7 @@ class TurmaController extends Controller
         $turma = Turma::find($id);
         $turma->nome = $request->nome;
         $turma->save();
+        $turma->disciplinas()->sync($request->disciplinas, false);
 
         return 'turma alterada id = '.$id;
     }

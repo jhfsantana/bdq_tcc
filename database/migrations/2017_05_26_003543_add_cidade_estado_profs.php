@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableMensagens extends Migration
+class AddCidadeEstadoProfs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateTableMensagens extends Migration
      */
     public function up()
     {
-        Schema::create('mensagens', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('enviado_por');
-            $table->integer('enviado_para');
-            $table->string('mensagem');
-            $table->timestamps();
+        Schema::table('professores', function (Blueprint $table) {
+           $table->string('uf');
+            $table->string('cidade');
+            $table->string('bairro');
+            $table->string('logradouro');
         });
     }
 
@@ -29,6 +28,8 @@ class CreateTableMensagens extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mensagens');
+        Schema::table('professores', function (Blueprint $table) {
+            //
+        });
     }
 }

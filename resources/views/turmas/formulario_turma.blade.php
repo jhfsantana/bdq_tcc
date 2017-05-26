@@ -134,6 +134,16 @@
           										</div>
 											</div>
 									</md-input-container>
+									</div>
+									<div layout="row">
+									<div class="form-group" ng-controller="DisciplinaController" flex="95" style="margin-left: auto; margin-right: auto;">
+										<select multiple  class="form-control" ng-model="turma.disciplinas" >
+											<option ng-repeat='disciplina in disciplinas' value="@{{disciplina.id}}">@{{disciplina.nome}}</option>
+											@{{ disciplina.id }}
+										</select>
+
+									</div>
+								</div>
 
 							</form>
 								<div class="modal-footer">
@@ -228,6 +238,7 @@
 		<!--Script para pagination-->
 		    <script src="angular/libs/ui-bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
 		    <script src="angular/services/TurmaAPIService.js"></script>
+		    <script src="angular/services/disciplinaAPIService.js"></script>
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 		@stop
 </html>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AdicionandoTimesstamp extends Migration
+class AddCidadeEstadoAlunos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AdicionandoTimesstamp extends Migration
      */
     public function up()
     {
-        Schema::table('notificacoes', function (Blueprint $table) {
-            $table->timestamps();
+        Schema::table('alunos', function (Blueprint $table) {
+            $table->string('uf');
+            $table->string('cidade');
+            $table->string('bairro');
+            $table->string('logradouro'); 
         });
     }
 
@@ -25,7 +28,7 @@ class AdicionandoTimesstamp extends Migration
      */
     public function down()
     {
-        Schema::table('notificacoes', function (Blueprint $table) {
+        Schema::table('alunos', function (Blueprint $table) {
             //
         });
     }

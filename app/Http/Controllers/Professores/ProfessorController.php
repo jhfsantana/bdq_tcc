@@ -116,7 +116,7 @@ class ProfessorController extends Controller
        // $professor->subjects()->sync($request->subjects, false);
         
         $professor->save();
-        $professor->disciplinas()->sync($request->input('disciplinas'), false);
+        ///$professor->disciplinas()->sync($request->input('disciplinas'), false);
         return 'salvou'.$professor->id;
 
         

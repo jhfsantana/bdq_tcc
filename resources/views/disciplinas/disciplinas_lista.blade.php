@@ -27,6 +27,7 @@
 		@section('content')
 			<div class="container" style="margin-top: 80px;">
 			<h3 style="text-align: center;">Lista de Disciplinas</h3>
+			    <div id="main"></div>
 				<div ng-controller="DisciplinaController">
 					<div class="table-responsive">
 						<table class="table table-bordered table-striped" style="border: 2px;">
@@ -81,6 +82,9 @@
 										<button class="btn btn-info btn-sm btn-details" ng-click="toggle('details', disciplina.id)" style="margin-left: 10px;">
 											<span class="glyphicon glyphicon-search"></span>
 										</button>
+										<button class="btn btn-primary btn-sm btn-config"  style="margin-left: 10px;">
+											<a href="/disciplina/config/@{{disciplina.id}}"><span class="glyphicon glyphicon-wrench"></span></a>
+										</button>
 									</td>
 								</tr>
 							</tbody>
@@ -99,7 +103,6 @@
 					          <span aria-hidden="true">×</span>
 					        </button>
 					        <h4 class="modal-title" id="myModalLabel" style="text-align: center;">@{{form_title}}</h4>
-    						<div id="main"></div>
 					      </div>
 					      <div class="modal-body">
 							<form name="frmDisciplina" class="form-horizontal" novalidate=""> 
@@ -121,13 +124,13 @@
 
 								@{{turma.nome}}
 								<div layout="row">
-									<div class="form-group" ng-controller="TurmaController" flex="95" style="margin-left: auto; margin-right: auto;">
+									<div class="form-group" ng-controller="ProfessorController" flex="95" style="margin-left: auto; margin-right: auto;">
 										<!-- 										<div ng-controller="DisciplinaController" ng-model="professor.disciplinas">
 										--><!-- 												<select multiple class="form-control" ng-model="professor.disciplinas" ng-options="disciplina.id as disciplina.nome for disciplina in disciplinas">
 										</select>
 										-->
-										<select multiple  class="form-control" ng-model="disciplina.turmas" >
-											<option ng-repeat='turma in turmas' value="@{{turma.id}}">@{{turma.nome}}</option>
+										<select multiple  class="form-control" ng-model="disciplina.professores" >
+											<option ng-repeat='professor in professores' value="@{{professor.id}}">@{{professor.nome}}</option>
 										</select>	
 									</div>
 								</div>
@@ -207,11 +210,13 @@
 		    <script src="{{ asset('angular/app.js') }}"></script>
 		    <script src="{{ asset('angular/controller/DisciplinaController.js') }}"></script>
 		    <script src="{{ asset('angular/controller/TurmaController.js') }}"></script>
+		    <script src="{{ asset('angular/controller/ProfessorController.js') }}"></script>
 		
 		<!--Script para pagination-->
 		    <script src="angular/libs/ui-bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
 		    <script src="angular/services/disciplinaAPIService.js"></script>
 		    <script src="angular/services/turmaAPIService.js"></script>
+		    <script src="angular/services/professorAPIService.js"></script>
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 		@stop
 </html>

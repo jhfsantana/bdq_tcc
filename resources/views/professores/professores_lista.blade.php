@@ -230,12 +230,8 @@
 								</div>
 								<input type="hidden" name="id" id="id" value="@{{ professor.id }}" ng-model="professor.id">
 								</div>
-								<div layout="row">
-									<div class="form-group" ng-controller="DisciplinaController" flex="95" style="margin-left: auto; margin-right: auto;">
-										<!-- 										<div ng-controller="DisciplinaController" ng-model="professor.disciplinas">
-										--><!-- 												<select multiple class="form-control" ng-model="professor.disciplinas" ng-options="disciplina.id as disciplina.nome for disciplina in disciplinas">
-										</select>
-										-->
+								<!-- <div layout="row">
+									<div class="form-group" ng-controller="DisciplinaController" flex="95" style="margin-left: auto; margin-right: auto;">										
 										<select multiple class="form-control" ng-model="professor.disciplinas">
 											<option value="" disabled="true">Selecione uma turma</option>
 											<optgroup ng-repeat='disciplina in disciplinas track by $index' label="@{{disciplina.nome}}">
@@ -243,8 +239,87 @@
 											</optgroup>
 										</select>	
 									</div>
+								</div> -->
+								<div class="form-group">
+									<md-input-container class="md-block">
+										<label>CEP</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="cep" name="cep" value="@{{ professor.cep }}" ng-model="professor.cep" minlength="8"/>
+											<div ng-messages="frmProfessor.cep.$error">
+          										<div ng-message="required">
+          											Campo cep é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do campo cep deve ter no minimo 8 caracteres.
+          										</div>
+											</div>
+										</div>
+									</md-input-container>
 								</div>
-
+								<div class="form-group">
+									<md-input-container class="md-block">
+										<label>logradouro</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="logradouro" name="logradouro" value="@{{ professor.logradouro }}" ng-model="professor.logradouro" minlength="8"/>
+											<div ng-messages="frmProfessor.logradouro.$error">
+          										<div ng-message="required">
+          											Campo logradouro é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do campo logradouro deve ter no minimo 8 caracteres.
+          										</div>
+											</div>
+										</div>
+									</md-input-container>
+								</div>
+								<div class="form-group">
+									<md-input-container class="md-block">
+										<label>Bairro</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="bairro" name="bairro" value="@{{ professor.bairro }}" ng-model="professor.bairro" minlength="8"/>
+											<div ng-messages="frmProfessor.bairro.$error">
+          										<div ng-message="required">
+          											Campo bairro é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do campo bairro deve ter no minimo 8 caracteres.
+          										</div>
+											</div>
+										</div>
+									</md-input-container>
+								</div>
+								<div class="form-group">
+									<md-input-container class="md-block">
+										<label>UF</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="uf" name="uf" value="@{{ professor.uf }}" ng-model="professor.uf" minlength="8"/>
+											<div ng-messages="frmProfessor.uf.$error">
+          										<div ng-message="required">
+          											Campo uf é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do campo uf deve ter no minimo 8 caracteres.
+          										</div>
+											</div>
+										</div>
+									</md-input-container>
+								</div>
+								<div class="form-group">
+									<md-input-container class="md-block">
+										<label>Cidade</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="cidade" name="cidade" value="@{{ professor.cidade }}" ng-model="professor.cidade" minlength="8"/>
+											<div ng-messages="frmProfessor.cidade.$error">
+          										<div ng-message="required">
+          											Campo cidade é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do campo cidade deve ter no minimo 8 caracteres.
+          										</div>
+											</div>
+										</div>
+									</md-input-container>
+								</div>
 								<div class="form-group">
 									<md-input-container class="md-block">
 										<label>Password</label>
@@ -325,17 +400,40 @@
 		</div>
 
 			<!-- Script para limpar o modal -->
-			<script>
+			<script type="text/javascript">
 				$(document).ready(function() {
 					$('#myModal').on('hidden.bs.modal', function () {
 				    	$(this).find("input,textarea").val('').end();
 
 					});
 				});
+
+				function correioApi()
+				{
+			      if ( $( this ).val() != '' )
+			      {
+			          $.getJSON("https://viacep.com.br/ws/"+$( this ).val()+"/json/", function(result){
+			          	console.log(result);
+			              $.each(result, function(i, field){
+			                  if ( i == 'logradouro' )
+			                     $('#logradouro').val(field);    
+			                  else if ( i == 'bairro' )
+			                     $('#bairro').val(field);   
+			                  else if ( i == 'complemento' )
+			                     $('#additional').val(field); 
+			                  else if ( i == 'uf' )
+			                     $('#uf').val(field);  
+			                  else if ( i == 'cidade' )
+			                     $('#cidade').val(field);   
+			              });
+			          });
+			      }
+				}
+
 			</script>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 		    <!-- Include all compiled plugins (below), or include individual files as needed -->
 		    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -359,5 +457,6 @@
 		    <script src="angular/services/disciplinaAPIService.js"></script>
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 		    <script src="/js/sweetalert.min.js"></script>
+		    <script type="/js/indexGlobal.js"></script>
 		@stop
 </html>

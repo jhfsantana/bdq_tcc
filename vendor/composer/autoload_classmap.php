@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddCidadeEstadoAdmins' => $baseDir . '/database/migrations/2017_05_26_003518_add_cidade_estado_admins.php',
+    'AddCidadeEstadoAlunos' => $baseDir . '/database/migrations/2017_05_26_003559_add_cidade_estado_alunos.php',
+    'AddCidadeEstadoProfs' => $baseDir . '/database/migrations/2017_05_26_003543_add_cidade_estado_profs.php',
     'AdicionandoTimesstamp' => $baseDir . '/database/migrations/2017_04_02_180034_adicionando_timesstamp.php',
     'Cpdf' => $vendorDir . '/dompdf/dompdf/lib/Cpdf.php',
     'CreateTableMensagens' => $baseDir . '/database/migrations/2017_04_17_003925_create_table_mensagens.php',

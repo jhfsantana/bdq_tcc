@@ -82,13 +82,20 @@ app.controller('DisciplinaController', function($scope, $http, API_URL, discipli
 					{
 						$('#main').html('<div class="alert alert-danger col-ssm-12" >' + response.message + '</div>');
 					}
-					else
+					else if(response.success)
 					{
-						location.reload();
+						$('#main').html('<div class="alert alert-success col-ssm-12" >' + response.message + '</div>');
 					}
-					console.log(response);
+				disciplinaAPI.getDisciplinas()
+				.success(function(response)
+				{
+					$scope.disciplinas = response;
+					
+					$(function () {
+					   $('#myModal').modal('toggle');
+					});
+				});
 				}).error(function(response){
-					console.log(response);
 					alert('ocorreu um erro, verifique o log');
 				});
 			}

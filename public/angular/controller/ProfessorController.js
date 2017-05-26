@@ -1,5 +1,6 @@
 app.controller('ProfessorController', function($scope, $http, API_URL, professorAPI)
 	{
+		
 		$scope.pageSize = 5;
 		$scope.currentPage = 1;
 		professorAPI.getProfessores()
@@ -135,4 +136,6 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
   		// Execute action
   		$scope.professor = {};
 		});
-	});
+
+
+});

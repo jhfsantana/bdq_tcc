@@ -344,6 +344,9 @@ class ComposerStaticInit401c39904328666e339d313dfea4cb02
     );
 
     public static $classMap = array (
+        'AddCidadeEstadoAdmins' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_003518_add_cidade_estado_admins.php',
+        'AddCidadeEstadoAlunos' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_003559_add_cidade_estado_alunos.php',
+        'AddCidadeEstadoProfs' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_003543_add_cidade_estado_profs.php',
         'AdicionandoTimesstamp' => __DIR__ . '/../..' . '/database/migrations/2017_04_02_180034_adicionando_timesstamp.php',
         'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
         'CreateTableMensagens' => __DIR__ . '/../..' . '/database/migrations/2017_04_17_003925_create_table_mensagens.php',
