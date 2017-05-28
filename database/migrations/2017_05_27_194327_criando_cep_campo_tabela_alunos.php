@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCidadeEstadoAdmins extends Migration
+class CriandoCepCampoTabelaAlunos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class AddCidadeEstadoAdmins extends Migration
      */
     public function up()
     {
-        Schema::table('admins', function (Blueprint $table) {
-            $table->string('uf');
-            $table->string('cidade');
-            $table->string('bairro');
-            $table->string('logradouro');
+        Schema::table('alunos', function (Blueprint $table) {
+            $table->string('cep')->after('cpf');
         });
     }
 
@@ -28,7 +25,7 @@ class AddCidadeEstadoAdmins extends Migration
      */
     public function down()
     {
-        Schema::table('admins', function (Blueprint $table) {
+        Schema::table('alunos', function (Blueprint $table) {
             //
         });
     }

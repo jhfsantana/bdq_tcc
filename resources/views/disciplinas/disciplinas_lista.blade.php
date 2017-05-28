@@ -25,6 +25,10 @@
 		
 
 		@section('content')
+		@section('titulo')
+			<i class="fa fa-book" aria-hidden="true"></i>
+			Disciplinas
+		@stop
 			<div class="container" style="margin-top: 80px;">
 			<h3 style="text-align: center;">Lista de Disciplinas</h3>
 			    <div id="main"></div>
@@ -82,9 +86,11 @@
 										<button class="btn btn-info btn-sm btn-details" ng-click="toggle('details', disciplina.id)" style="margin-left: 10px;">
 											<span class="glyphicon glyphicon-search"></span>
 										</button>
-										<button class="btn btn-primary btn-sm btn-config"  style="margin-left: 10px;">
-											<a href="/disciplina/config/@{{disciplina.id}}"><span class="glyphicon glyphicon-wrench"></span></a>
-										</button>
+										<a href="/disciplina/config/@{{disciplina.id}}">
+										<span class="btn btn-primary btn-sm btn-config"  style="margin-left: 10px;">
+										<span class="glyphicon glyphicon-wrench">
+										</span>
+										</span></a>
 									</td>
 								</tr>
 							</tbody>

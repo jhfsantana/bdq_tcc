@@ -6,13 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AddCidadeEstadoAdmins' => $baseDir . '/database/migrations/2017_05_26_003518_add_cidade_estado_admins.php',
-    'AddCidadeEstadoAlunos' => $baseDir . '/database/migrations/2017_05_26_003559_add_cidade_estado_alunos.php',
-    'AddCidadeEstadoProfs' => $baseDir . '/database/migrations/2017_05_26_003543_add_cidade_estado_profs.php',
-    'AdicionandoTimesstamp' => $baseDir . '/database/migrations/2017_04_02_180034_adicionando_timesstamp.php',
     'Cpdf' => $vendorDir . '/dompdf/dompdf/lib/Cpdf.php',
-    'CreateTableMensagens' => $baseDir . '/database/migrations/2017_04_17_003925_create_table_mensagens.php',
-    'CriarTableNotificacao' => $baseDir . '/database/migrations/2017_04_02_175831_criar_table_notificacao.php',
+    'CriandoCepCampoTabelaAdmins' => $baseDir . '/database/migrations/2017_05_27_194249_criando_cep_campo_tabela_admins.php',
+    'CriandoCepCampoTabelaAlunos' => $baseDir . '/database/migrations/2017_05_27_194327_criando_cep_campo_tabela_alunos.php',
+    'CriandoCepCampoTabelaProfessores' => $baseDir . '/database/migrations/2017_05_27_194313_criando_cep_campo_tabela_professores.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',

@@ -5,21 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
   <title>BDQ - Avaliação Online / Página inicial Administrativa</title>
   
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
 
-	@yield('scripts') 
+	@yield('scripts')
+  <style type="text/css">
+    header {
+      position: relative;
+      width: 100%;
+      height: 60px;
+      }
+
+    header.clone {
+      position: fixed;
+      top: -65px;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      transition: 0.2s top cubic-bezier(.3,.73,.3,.74);
+      }
+
+    body.down header.clone {
+      top: 0;
+      }
+  </style>
 </head>
 
 <body>
 
-    <div id="header" style="width: 100%; height: 135px;background-color: #34495e;">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-5" ">
-          <div class="logo" style="margin-left: 65px; margin-top: 0; margin-bottom: 155px;position: fixed;">
-            <img src="/images/Untitled-4.svg/">
-          </div>
-        </div>
-      </div>
+  <header style="width: 100%; height: 135px;background-color: #34495e;">
+    <div class="row">
+      
     </div>
+  </header>
 
       <div id="wrapper">
         <div class="overlay"></div>
@@ -128,6 +145,16 @@
       <!-- /#final footer -->
 
 <script src="/js/index.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var $header = $("header"),
+      $clone = $header.before($header.clone().addClass("clone"));
 
+    $(window).on("scroll", function() {
+      var fromTop = $("body").scrollTop();
+      $('body').toggleClass("down", (fromTop > 200));
+    });
+});
+</script>
 </body>
 </html>

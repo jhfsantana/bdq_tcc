@@ -28,6 +28,9 @@ use App\Models\Notificacao;
 
 use Auth;
 
+use File;
+use Illuminate\Support\Facades\Input;
+
 class ProfessorController extends Controller
 {
     /**
@@ -98,8 +101,7 @@ class ProfessorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ProfessorRequest $request)
-    {
-      
+    {      
        // $subjects = Subject::find($request->id);
        //dd($request);
         $professor = new Professor;
@@ -109,7 +111,13 @@ class ProfessorController extends Controller
         $professor->sobrenome = $request->input('sobrenome');
         $professor->cpf = Util::somenteNumeros($request->input('cpf'));
         $professor->email = $request->input('email');
+        $professor->uf = $request->input('uf');
+        $professor->bairro = $request->input('bairro');
+        $professor->cidade = $request->input('cidade');
+        $professor->logradouro = $request->input('logradouro');
+        $professor->cep = $request->input('cep');
         
+
         $cryptPassword = bcrypt($request->input('password'));
         $professor->password = $cryptPassword;
         
@@ -172,6 +180,12 @@ class ProfessorController extends Controller
     public function destroy($id)
     {
         $professor_nome = Professor::find($id);
+        $checkDisciplina = Disciplina::with('professores')->find($professor_nome->id);
+        if(!empty($checkDisciplina))
+        {
+            return json_encode(['error' => 'Professor ' . $professor_nome->nome. ' possui disciplina(s) associada(s), não foi possivel concluir a operação!']);
+        }
+        
         $professor_nome->delete();
 
         return json_encode(['message' => 'Professor ' . $professor_nome->nome. ' deletado com sucesso!']);
@@ -199,5 +213,16 @@ class ProfessorController extends Controller
             $request->session()->flash('alert-success', 'Mensagem enviada para o aluno '. $request->nome . ' com sucesso!');
             return redirect('/professor');
         }
+    }
+
+    public function uploadPerfil()
+    {   
+        $file = Input::file("file");
+        $professor_id = Professor::find(Input::get("professor_id"));
+        
+        $result = File::makeDirectory('/public/images/'.$professor_id->matricula, 0775, true);
+        print_r($result);
+        $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+        return json_encode('Funcionou ');
     }
 }

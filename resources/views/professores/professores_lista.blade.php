@@ -6,6 +6,8 @@
 			<meta charset="utf-8">
 		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		    <meta name="viewport" content="width=device-width, initial-scale=1">
+		    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 		    <title>BDQ - Lista de Professores</title>
 
 		    <!-- Bootstrap -->
@@ -25,6 +27,10 @@
 		
 
 		@section('content')
+		@section('titulo')
+			<i class="fa fa-pencil" title="Edit"></i>
+			Professores
+		@stop
 			<div class="container" style="margin-top: 40px;">
 			<div id="main"></div>
 
@@ -36,41 +42,42 @@
 									<th>
 										<a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
 										ID
+										</a>
 										<span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
 										<span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
 									</th>
 
 									<th>
 										<a href="#" ng-click="sortType = 'matricula'; sortReverse = !sortReverse">
-										Matricula
+										Matricula</a>
 	       								 <span ng-show="sortType == 'matricula' && !sortReverse" class="fa fa-caret-down"></span>
 	      								 <span ng-show="sortType == 'matricula' && sortReverse" class="fa fa-caret-up"></span>
 									</th>
 
 									<th>
 										<a href="#" ng-click="sortType = 'nome'; sortReverse = !sortReverse">
-										Nome
+										Nome</a>
 	            						<span ng-show="sortType == 'nome' && !sortReverse" class="fa fa-caret-down"></span>
 	            						<span ng-show="sortType == 'nome' && sortReverse" class="fa fa-caret-up"></span>
 									</th>
 
 									<th>
 										<a href="#" ng-click="sortType = 'sobrenome'; sortReverse = !sortReverse">
-										Sobrenome
+										Sobrenome</a>
 	            						<span ng-show="sortType == 'sobrenome'  && !sortReverse" class="fa fa-caret-down"></span>
 	            						<span ng-show="sortType == 'sobrenome'  && sortReverse" class="fa fa-caret-up"></span>
 									</th>
 
 									<th>
 										<a href="#" ng-click="sortType = 'cpf'; sortReverse = !sortReverse">
-										CPF
+										CPF</a>
 	            						<span ng-show="sortType == 'cpf' && !sortReverse" class="fa fa-caret-down"></span>
 	            						<span ng-show="sortType == 'cpf' && sortReverse" class="fa fa-caret-up"></span>
 									</th>
 
 									<th>
 										<a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">
-										E-MAIL
+										E-MAIL</a>
 	            						<span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
 	            						<span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
 									</th>
@@ -113,6 +120,71 @@
 						<ul uib-pagination total-items="professores.length" ng-model="currentPage" items-per-page="pageSize" class="pagination-sm" boundary-links="true""></ul>
     				</div>
 					
+
+
+					<div class="modal  fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true"	>
+					  <div class="modal-dialog">
+
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">×</span>
+					        </button>
+					        <h4 class="modal-title" id="detailsModalLabel">@{{form_title}}</h4>
+					      </div>
+					    	<div class="modal-body">
+								<div class="details">
+								  <div class="details-header">
+								    <div class="details-photo">
+								      <div class="details-pic">
+								      <span ng-if="professor.img_perfil !== null">
+										<img class="perfil" src="@{{ professor.img_perfil }}">
+								      </span>
+								      <span ng-if="professor.img_perfil === null">
+										<img class="perfil" style="width: 100%; height: 100%;" src="/images/semfoto.svg">
+								      </span>
+								        <a href="#">
+								          <label class="button-position">
+								          <form method="POST" action="/professor/upload" id="formPerfil" enctype="multipart/form-data">
+								            <input id="file" name="file" type="file" style="display:none;" onchange="uploadPerfil(this);">
+								            <input type="hidden" name="professor_id" value="@{{ professor.id }}">
+								            <input name="_token" id="token" type="hidden" value="{{ csrf_token() }}">
+								            <input type="submit" name="go" value="go">
+								          </form>
+								          </label>
+								        </a>
+								      </div>
+								      </div>
+								    </div>
+								      	<table class="table" style="position: relative; margin-top: 60px;">
+								      		<thead>
+									      		<tr>
+									      			<th> ID : @{{ professor.id }}</th>
+									      		</tr>
+									      		<tr>
+									      			<th> Matricula : @{{ professor.matricula }}</th>
+									      		</tr>
+									      		<tr>
+									      			<th> name : @{{ professor.name }}</th>
+									      		</tr>
+									      		<tr>
+									      			<th> Sobrenome : @{{ professor.sobrenome }}</th>
+												</tr>
+									      		<tr>
+									      			<th> CPF : @{{ professor.cpf }}</th>
+									      		</tr>
+									      		<tr>
+									      			<th> E-MAIL : @{{ professor.email }}</th>
+									      		</tr>
+								      		</thead>
+								      	</table>
+								  </div>
+								</div>
+								<div class="info">
+								</div>
+							</div>
+						</div>
+					</div>
 				
 					<div class="modal  fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					  <div class="modal-dialog">
@@ -125,11 +197,11 @@
 					      </div>
 					      <div class="modal-body">
 							<form name="frmProfessor" class="form-horizontal" novalidate=""> 
-								<div class="form-group">
+								<fieldset style="width: 93%;">
+									<legend>Dados Pessoais</legend>
 									<md-input-container class="md-block">
 										<label>Matricula</label>
-										<div class="col-sm-9">
-											<input required dado-unico md-no-asterisk type="number" name="matricula" value="@{{ professor.matricula }}" ng-model="professor.matricula" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="text" name="matricula" value="@{{ professor.matricula }}" ng-model="professor.matricula" minlength="11" ng-model-options="{updateOn: 'blur'}" />
 											<div ng-messages="frmProfessor.matricula.$error">
           										<div ng-message="required">
           											Campo matricula é obrigatório.
@@ -146,10 +218,8 @@
 												<span ng-if="frmProfessor.matricula.$pending" >
  													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
  												</span>
-											</div>
 										</div>
 									</md-input-container>
-								</div>
 		
 								
 								<div layout="row">
@@ -183,7 +253,7 @@
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
 										<label>CPF</label>
-											<input required dado-unico md-no-asterisk type="text" name="cpf" value="@{{ professor.cpf }}" ng-model="professor.cpf" maxlength="11" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="text" name="cpf" value="@{{ professor.cpf }}" ng-model="professor.cpf" maxlength="11" minlength="11" ng-model-options="{updateOn: 'blur'}"/>
 											<div ng-messages="frmProfessor.cpf.$error">
           										<div ng-message="required">
           											Campo cpf é obrigatório.
@@ -208,7 +278,7 @@
 
 									<md-input-container class="md-block" flex="50">
 										<label>E-mail</label>
-											<input required dado-unico md-no-asterisk type="email" name="email" value="@{{ professor.email }}" ng-model="professor.email" maxlength="30"/>
+											<input required dado-unico md-no-asterisk type="email" name="email" value="@{{ professor.email }}" ng-model="professor.email" maxlength="30"  ng-model-options="{updateOn: 'blur'}"/>
 											<div ng-messages="frmProfessor.email.$error">
           										<div ng-message="required">
           											Campo email é obrigatório.
@@ -240,11 +310,14 @@
 										</select>	
 									</div>
 								</div> -->
+								</fieldset>
+								<fieldset>
+									<legend>Endereço</legend>
+								
 								<div class="form-group">
-									<md-input-container class="md-block">
 										<label>CEP</label>
 										<div class="col-sm-9">
-											<input required md-no-asterisk type="cep" name="cep" value="@{{ professor.cep }}" ng-model="professor.cep" minlength="8"/>
+											<input required md-no-asterisk type="cep" name="cep" class="zipcode" value="@{{ professor.cep }}" ng-model="professor.cep" minlength="8"/>
 											<div ng-messages="frmProfessor.cep.$error">
           										<div ng-message="required">
           											Campo cep é obrigatório.
@@ -254,13 +327,11 @@
           										</div>
 											</div>
 										</div>
-									</md-input-container>
 								</div>
 								<div class="form-group">
-									<md-input-container class="md-block">
 										<label>logradouro</label>
 										<div class="col-sm-9">
-											<input required md-no-asterisk type="logradouro" name="logradouro" value="@{{ professor.logradouro }}" ng-model="professor.logradouro" minlength="8"/>
+											<input required md-no-asterisk type="logradouro" readonly="true" name="logradouro" value="@{{ professor.logradouro }}" class="logradouro" ng-model="professor.logradouro" minlength="8"/>
 											<div ng-messages="frmProfessor.logradouro.$error">
           										<div ng-message="required">
           											Campo logradouro é obrigatório.
@@ -270,29 +341,47 @@
           										</div>
 											</div>
 										</div>
-									</md-input-container>
 								</div>
 								<div class="form-group">
-									<md-input-container class="md-block">
+									<label>Bairro</label>
+									<div class="col-sm-9">
+										<input required md-no-asterisk type="bairro" name="bairro" readonly="true" value="@{{ professor.bairro }}" ng-model="professor.bairro" class="bairro" minlength="8"/>
+
+										<div ng-messages="frmProfessor.bairro.$error">
+      										<div ng-message="required">
+      											Campo bairro é obrigatório.
+      										</div>
+     										<div ng-message="minlength">
+      											Tamanho do campo bairro deve ter no minimo 8 caracteres.
+      										</div>
+										</div>
+									</div>
+								</div>
+								<!-- <md-input-container class="md-block" flex="50">
 										<label>Bairro</label>
-										<div class="col-sm-9">
-											<input required md-no-asterisk type="bairro" name="bairro" value="@{{ professor.bairro }}" ng-model="professor.bairro" minlength="8"/>
+											<input required md-no-asterisk type="bairro" name="bairro" value="@{{ professor.bairro }}" ng-model="professor.bairro" maxlength="30"  ng-model-options="{updateOn: 'blur'}"/>
 											<div ng-messages="frmProfessor.bairro.$error">
           										<div ng-message="required">
           											Campo bairro é obrigatório.
           										</div>
-         										<div ng-message="minlength">
-          											Tamanho do campo bairro deve ter no minimo 8 caracteres.
+         										<div ng-message="maxlength">
+          											Tamanho do campo bairro deve ter no máximo 30 caracteres.
           										</div>
+         										<div ng-message="dadoUnico">
+          											E-mail já existente.
+          										</div>        										
+												<span class="text-success" ng-show="frmProfessor.bairro.$valid">
+													E-mail disponível.
+												</span>
+												<span ng-if="frmProfessor.bairro.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
 											</div>
-										</div>
-									</md-input-container>
-								</div>
+									</md-input-container> -->
 								<div class="form-group">
-									<md-input-container class="md-block">
 										<label>UF</label>
 										<div class="col-sm-9">
-											<input required md-no-asterisk type="uf" name="uf" value="@{{ professor.uf }}" ng-model="professor.uf" minlength="8"/>
+											<input required md-no-asterisk type="uf" class="uf" name="uf" readonly="true" value="@{{ professor.uf }}" ng-model="professor.uf" minlength="8"/>
 											<div ng-messages="frmProfessor.uf.$error">
           										<div ng-message="required">
           											Campo uf é obrigatório.
@@ -302,24 +391,22 @@
           										</div>
 											</div>
 										</div>
-									</md-input-container>
 								</div>
 								<div class="form-group">
-									<md-input-container class="md-block">
-										<label>Cidade</label>
-										<div class="col-sm-9">
-											<input required md-no-asterisk type="cidade" name="cidade" value="@{{ professor.cidade }}" ng-model="professor.cidade" minlength="8"/>
-											<div ng-messages="frmProfessor.cidade.$error">
-          										<div ng-message="required">
-          											Campo cidade é obrigatório.
-          										</div>
-         										<div ng-message="minlength">
-          											Tamanho do campo cidade deve ter no minimo 8 caracteres.
-          										</div>
-											</div>
+									<label>Cidade</label>
+									<div class="col-sm-9">
+										<input required md-no-asterisk type="cidade" readonly="true" class="cidade" name="cidade" value="@{{ professor.cidade }}" ng-model="professor.cidade" minlength="8"/>
+										<div ng-messages="frmProfessor.cidade.$error">
+	  										<div ng-message="required">
+	  											Campo cidade é obrigatório.
+	  										</div>
+	 										<div ng-message="minlength">
+	  											Tamanho do campo cidade deve ter no minimo 8 caracteres.
+	  										</div>
 										</div>
-									</md-input-container>
+									</div>
 								</div>
+								</fieldset>
 								<div class="form-group">
 									<md-input-container class="md-block">
 										<label>Password</label>
@@ -345,60 +432,9 @@
 					</div>
 				</div>
 
-
-					<div class="modal  fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true"	>
-					  <div class="modal-dialog">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">×</span>
-					        </button>
-					        <h4 class="modal-title" id="detailsModalLabel">@{{form_title}}</h4>
-					      </div>
-					    	<div class="modal-body">
-								<div class="details">
-								  <div class="details-header">
-								    <div class="details-photo">
-								      <div class="details-pic">
-								        <a href="#">
-								          <div class="button-position"></div>
-								        </a>
-								      </div>
-								      </div>
-								    </div>
-								      	<table class="table" style="position: relative; margin-top: 60px;">
-								      		<thead>
-									      		<tr>
-									      			<th> ID : @{{ professor.id }}</th>
-									      		</tr>
-									      		<tr>
-									      			<th> Matricula : @{{ professor.matricula }}</th>
-									      		</tr>
-									      		<tr>
-									      			<th> Nome : @{{ professor.nome }}</th>
-									      		</tr>
-									      		<tr>
-									      			<th> Sobrenome : @{{ professor.sobrenome }}</th>
-												</tr>
-									      		<tr>
-									      			<th> CPF : @{{ professor.cpf }}</th>
-									      		</tr>
-									      		<tr>
-									      			<th> E-MAIL : @{{ professor.email }}</th>
-									      		</tr>
-								      		</thead>
-								      	</table>
-								  </div>
-								</div>
-								<div class="info">
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>	
 			</div>
 		</div>
-
 			<!-- Script para limpar o modal -->
 			<script type="text/javascript">
 				$(document).ready(function() {
@@ -408,27 +444,35 @@
 					});
 				});
 
-				function correioApi()
+
+				function uploadPerfil(input)
 				{
-			      if ( $( this ).val() != '' )
-			      {
-			          $.getJSON("https://viacep.com.br/ws/"+$( this ).val()+"/json/", function(result){
-			          	console.log(result);
-			              $.each(result, function(i, field){
-			                  if ( i == 'logradouro' )
-			                     $('#logradouro').val(field);    
-			                  else if ( i == 'bairro' )
-			                     $('#bairro').val(field);   
-			                  else if ( i == 'complemento' )
-			                     $('#additional').val(field); 
-			                  else if ( i == 'uf' )
-			                     $('#uf').val(field);  
-			                  else if ( i == 'cidade' )
-			                     $('#cidade').val(field);   
-			              });
-			          });
-			      }
+					 if (input.files && input.files[0]) {
+				        var reader = new FileReader();
+
+				        reader.onload = function (e) {
+				            $('.perfil').attr('src', e.target.result);
+				        }
+
+				        reader.readAsDataURL(input.files[0]);
+				    }
+
 				}
+				
+				$("#uploadForm").on('submit',(function(e) {
+				    e.preventDefault();
+				    $.ajax({
+				        url: $('#uploadForm').attr('action'),
+				        type: "POST",
+				        data:  new FormData(this),
+				        contentType: false,
+				        cache: false,
+				        processData: false,
+				        success: function(data){
+				            console.log(data);
+				        }           
+				    });
+				}));
 
 			</script>
 

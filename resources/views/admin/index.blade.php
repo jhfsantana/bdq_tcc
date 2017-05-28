@@ -99,30 +99,33 @@
 	<!-- FIM DA MENSAGEM DE SUCESSO -->
         		{!! Charts::assets() !!}
 				<div class="conteudo">
-          <div class="row">
+          <div class="row" style="margin-top: 75px;">
   					<div class="col-md-10 col-md-offset-1" style="margin-top: 45px;">
   						
               <h3>Olá, {{Auth::guard('web_admins')->user()->name }} </h3>
                 <i class="fa fa-fw fa-calendar"></i><em>{{$diames}}</em>
+              <fieldset style="width: 100%;">
+  						<legend><h4>Resumo das informações</h4></legend>
 
-  						<h4>Resumo das informações</h4>
+      						<div class="box-top">
+      							<img src="images/professor_64px.png">
+      							<h3 class="professores"> {{$professores}}</h3>
+      							<a href="#">Nº Professores</a>
+      						</div>
 
-  						<div class="box-top">
-  							<img src="images/professor_64px.png">
-  							<h3 class="professores"> {{$professores}}</h3>
-  							<a href="#">Nº Professores</a>
-  						</div>
+      						<div class="box2-top">
+      							<img src="images/estudantes_64.png">
+      							<h3 class="estudantes"> {{$alunos}} </h3>
+      							<a href="#">Nº Estudantes</a>
+      						</div>
 
-  						<div class="box2-top">
-  							<img src="images/estudantes_64.png">
-  							<h3 class="estudantes"> {{$alunos}} </h3>
-  							<a href="#">Nº Estudantes</a>
-  						</div>
-
-  						<div class="box3-top">
-  							<img src="images/estatistica_64.png">
-  							<a href="/relatorio/"><u>Relatórios <i class="fa fa-fw fa-arrow-right"></i></u></a>
-  						</div>
+      						<div class="box3-top">
+      							<img src="images/estatistica_64.png">
+      							<a href="/relatorio/"><u>Relatórios <i class="fa fa-fw fa-arrow-right"></i></u></a>
+      						</div>
+              </fieldset>
+              <fieldset style="width: 100%; padding: 50px;">
+              <legend>Gráficos</legend>
   						@foreach($chart as $c)
                   <div class="chart_div" id="chart_div" style="width: 100%; margin-top:25px; ">
                     {!! $c->render() !!}
@@ -134,6 +137,7 @@
                     </div>
                   </div>
               @endforeach
+              </fieldset>
   				  </div>
           </div>
         </div>

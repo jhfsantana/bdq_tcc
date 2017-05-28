@@ -344,13 +344,10 @@ class ComposerStaticInit401c39904328666e339d313dfea4cb02
     );
 
     public static $classMap = array (
-        'AddCidadeEstadoAdmins' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_003518_add_cidade_estado_admins.php',
-        'AddCidadeEstadoAlunos' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_003559_add_cidade_estado_alunos.php',
-        'AddCidadeEstadoProfs' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_003543_add_cidade_estado_profs.php',
-        'AdicionandoTimesstamp' => __DIR__ . '/../..' . '/database/migrations/2017_04_02_180034_adicionando_timesstamp.php',
         'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
-        'CreateTableMensagens' => __DIR__ . '/../..' . '/database/migrations/2017_04_17_003925_create_table_mensagens.php',
-        'CriarTableNotificacao' => __DIR__ . '/../..' . '/database/migrations/2017_04_02_175831_criar_table_notificacao.php',
+        'CriandoCepCampoTabelaAdmins' => __DIR__ . '/../..' . '/database/migrations/2017_05_27_194249_criando_cep_campo_tabela_admins.php',
+        'CriandoCepCampoTabelaAlunos' => __DIR__ . '/../..' . '/database/migrations/2017_05_27_194327_criando_cep_campo_tabela_alunos.php',
+        'CriandoCepCampoTabelaProfessores' => __DIR__ . '/../..' . '/database/migrations/2017_05_27_194313_criando_cep_campo_tabela_professores.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',

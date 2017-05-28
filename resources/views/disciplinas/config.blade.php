@@ -20,33 +20,8 @@
 <i class="fa fa-book" aria-hidden="true"></i>
 Disciplinas
 @stop
-  <style type="text/css">
-  	fieldset 
-	{
-		border: 1px solid #ddd !important;
-		margin: 0;
-		xmin-width: 0;
-		padding: 10px;       
-		position: relative;
-		border-radius:4px;
-		background-color:#f5f5f5;
-		padding-left:10px!important;
-	}	
 	
-	legend
-	{
-		font-size:14px;
-		font-weight:bold;
-		margin-bottom: 0px; 
-		width: 35%; 
-		border: 1px solid #ddd;
-		border-radius: 4px; 
-		padding: 5px 5px 5px 10px; 
-		background-color: #ffffff;
-	}
-  </style>
-	
-	<input type="text" name="disciplina_id" id="disciplina_id" data-disciplina="{{ $disciplina->id}}">
+	<input type="hidden" name="disciplina_id" id="disciplina_id" data-disciplina="{{ $disciplina->id}}">
 	<input name="_token" type="hidden" id="csrf_token" value="{{ csrf_token() }}">
 
 
@@ -56,24 +31,49 @@ Disciplinas
 		</legend>
 		<ul>
 			<li>
-				{{ $disciplina->nome }}
-				<ul>
-					<li>
-						Professores	
-					</li>
-					@foreach($disciplina->professores as $professor)
-						{{ $professor->nome }}
-						<input type="button" data-id="{{ $professor->id }}" id="remover_prof" name="__SUBMIT__" value="x" onclick="confimar();">
-					@endforeach
-				</ul>
+				Disciplina
+				<table class="tg">
+				  <tr>
+				    <th class="tg-yw4l">{{ $disciplina->nome }}</th>
+				  </tr>
+				</table>
 			</li>
 		</ul>
+		<table class="table table-stripped">
+			<thead style="background-color: #ccc; text-align: center;">
+				<tr>
+					<th>Matricula</th>
+					<th>Nome</th>
+					<th>Ação</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					@foreach($disciplina->professores as $professor)
+					    <tr>
+					    	<td class="tg-yw4l">{{ $professor->matricula }} </td>
+					    	<td class="tg-yw4l">{{ $professor->nome }} </td>
+
+					    <td class="tg-yw41" style="padding: 20px;"> 
+					    	<a href="#" id="prof_id"  onclick="confimar({{ $professor->id }});">
+					    		<span class="btn btn-danger btn-sm btn-config">
+									<span class="glyphicon glyphicon-trash">
+									</span>
+								</span>
+					    	</a>
+					    </td>
+					    </tr>
+					@endforeach
+				</tr>
+			</tbody>
+		</table>
 	</fieldset>
 </form>
+
+
 <script type="text/javascript">
-	function remover()
+	function remover(professor_id)
     {
-    	var professor_id = $("#remover_prof").data('id');
     	var disciplina_id = $("#disciplina_id").data('disciplina');
 	 	var csrf_token = document.getElementById('csrf_token');
 
@@ -107,7 +107,7 @@ Disciplinas
         form.submit();
     }
 
-    function confimar()
+    function confimar(professor_id)
     {
     	swal({
 			  title: "Você tem certeza que deseja remover este professor?",
@@ -122,7 +122,7 @@ Disciplinas
 			},
 			function(isConfirm){
 			  if (isConfirm) {
-			    remover();
+			    remover(professor_id);
 			  } else {
 			    swal("Cancelado", "Solicitação cancelada!", "error");
 			  }

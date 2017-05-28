@@ -4,6 +4,7 @@ angular.module('app').factory('professorAPI', function($http, API_URL){
 				return $http.get(API_URL + 'professores');
 			};
 			var _saveProfessor = function(professor){
+				console.log(professor);
 				return $http.post(API_URL + 'professores', professor);
 			};
 			var _deleteProfessor = function(id){

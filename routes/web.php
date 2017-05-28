@@ -215,6 +215,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	Route::post('teachers/', ['uses'=>'Professores\ProfessorController@store', 'as' => 'professor.store']);
     Route::post('professor/detalhes/{id}','Professores\ProfessorController@show');
     Route::post('professores/{id}','Professores\ProfessorController@destroy');
+    Route::post('/professor/upload','Professores\ProfessorController@uploadPerfil');
 
 	Route::get('/turmas','Turmas\TurmaController@index');
 	Route::post('classrooms','Turmas\TurmaController@store');

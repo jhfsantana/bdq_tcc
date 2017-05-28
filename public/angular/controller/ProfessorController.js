@@ -3,6 +3,7 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
 		
 		$scope.pageSize = 5;
 		$scope.currentPage = 1;
+		
 		professorAPI.getProfessores()
 		.success(function(response)
 		{
@@ -11,6 +12,8 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
 // show modal Form
 		$scope.toggle = function(modalstate, id) {
 		  $scope.modalstate = modalstate;
+		  console.log(modalstate);
+		  console.log(id);
 		  switch(modalstate) {
 		    case 'add':
 		      $scope.form_title = "Cadastrar novo Professor";
@@ -26,6 +29,9 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
  			case 'details':
 		      $scope.form_title = "Detalhes";
 		      $scope.id = id;
+		      console.log( $scope.form_title);
+			  console.log($scope.id);
+
 		      $http.get(API_URL + 'professores/' + id).success(function(response){
 		      $scope.professor = response;
 		      console.log(response);
@@ -36,10 +42,12 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
 		    default:
 		      break;
 		  }
+
 		  if(modalstate === 'add' || modalstate === 'edit')
 		  {
 		  	$('#myModal').modal('show');
-		  }else
+		  }
+		  else
 		  {
 		  	$('#detailsModal').modal('show');
 		  }
@@ -66,10 +74,8 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
 			else
 			{
 				professorAPI.saveProfessor($scope.professor).success(function(response){
-				  console.log(response);
 				  location.reload();
 				}).error(function(response){
-				  console.log(response);
 				  alert('ocorreu um erro, verifique o log');
 				});
 			}
@@ -96,6 +102,11 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
 			   	if (data.message)
 			   	{
 			   		$('#main').html('<div class="alert alert-danger col-ssm-12" >' + data.message + '</div>');
+			   	}
+			   	else
+			   	{
+					swal("Cancelado", "Ocorreu um erro!	", "error");
+					$('#main').html('<div class="alert alert-danger col-ssm-12" >' + data.error + '</div>');
 			   	}
 
 			   	$('#myModal').modal('hide');
@@ -137,5 +148,31 @@ app.controller('ProfessorController', function($scope, $http, API_URL, professor
   		$scope.professor = {};
 		});
 
+		$(document).on("focusout", ".zipcode", function() {
+			  if ( $( this ).val() != '' )
+		      {
+		          $.getJSON("https://viacep.com.br/ws/"+$( this ).val()+"/json/", function(result){
+		          	console.log(result);
+		              $.each(result, function(i, field){
+		                  if ( i == 'logradouro' )
+		                  {
+							$scope.professor.logradouro = field;   
+		                  }else if ( i == 'bairro' ){
+		                    $scope.professor.bairro = field;   
+		                  }else if ( i == 'complemento' ){
+		                     $('.additional').val(field); 
+		                  }
+		                  else if ( i == 'uf' )
+		                  {
+							 $scope.professor.uf = field;   
+		                  }
+		                  else if ( i == 'localidade' )
+		                  {
+							 $scope.professor.cidade = field;     
+						  }
+		              });
+		          });
+		      }
+			});
 
 });
