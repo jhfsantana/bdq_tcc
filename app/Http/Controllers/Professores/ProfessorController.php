@@ -29,7 +29,10 @@ use App\Models\Notificacao;
 use Auth;
 
 use File;
+
 use Illuminate\Support\Facades\Input;
+
+use Illuminate\Support\Facades\DB;
 
 class ProfessorController extends Controller
 {
@@ -224,5 +227,51 @@ class ProfessorController extends Controller
         print_r($result);
         $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
         return json_encode('Funcionou ');
+    }
+
+    public function config($id)
+    {
+        $p_id = Professor::find($id);
+        $disciplinas = Disciplina::pegarDisciplinasDisponiveis($id);
+        $turmas = Turma::all();
+
+        return vieW('professores.config')->with('professor', $p_id)
+                                         ->with('disciplinas', $disciplinas)
+                                         ->with('turmas', $turmas);
+    }
+
+    public function configSave(Request $request)
+    {
+        $professor = Professor::find($request->professor_id);
+        
+        $disciplina = Disciplina::find($request->disciplina);
+        $turma = Turma::find($request->turma);
+        $disciplinaArray[] = $request->disciplina;
+        $turmaArray[] = $request->turma;
+        $profArray[] = $request->professor_id;
+
+        $nome = $professor->nome;
+
+        if($professor->save())
+        {
+            if($disciplina->save())
+            {
+                $professor->disciplinas()->sync($disciplinaArray, false);
+                $professor->turmas()->sync($turmaArray, false);
+                $disciplina->turmas()->sync($turmaArray, false);
+                $turma->professores()->sync($profArray, false);
+                $request->session()->flash('alert-success', 'Configuração para o professor '. $nome.' realizada com sucesso!');
+
+                return redirect()->back();
+            }
+        }
+    }
+
+    public function limparConfig(Request $request)
+    {
+        $result2 = DB::delete('DELETE FROM professor_turma WHERE professor_id = ? AND turma_id = ? LIMIT 1',[$request->professor_id, $request->turma_id]);
+        $result3 = DB::delete('DELETE FROM disciplina_turma WHERE disciplina_id = ? AND turma_id = ? LIMIT 1',[$request->disciplina_id, $request->turma_id]);
+
+        return redirect()->back();
     }
 }

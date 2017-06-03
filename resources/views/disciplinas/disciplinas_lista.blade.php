@@ -13,6 +13,9 @@
 		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		    <link rel="stylesheet" type="text/css" href="css/style.css">
  			<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+ 			<link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
+
+		    
 
 		    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,13 +56,6 @@
 	            						<span ng-show="sortType == 'nome' && sortReverse" class="fa fa-caret-up"></span>
 									</th>
 
-									<th>
-										<a href="#" ng-click="sortType = 'turma(s)'; sortReverse = !sortReverse">
-										Turma(s)
-	            						<span ng-show="sortType == 'turma(s)' && !sortReverse" class="fa fa-caret-down"></span>
-	            						<span ng-show="sortType == 'turma(s)' && sortReverse" class="fa fa-caret-up"></span>
-									</th>
-
 									<th style="text-align: right;">
 										<button id="btn-add" class="btn btn-success btn-md" ng-click="toggle('add', 0)">Nova disciplina</button>
 									</th>
@@ -73,7 +69,6 @@
 								<tr ng-repeat="disciplina in disciplinas | filter:buscar | comecarEm:(currentPage - 1) * pageSize | limitTo:pageSize | orderBy:sortType:sortReverse">
 									<td>@{{ disciplina.id }}</td>
 									<td>@{{ disciplina.nome }}</td>
-									<td><span ng-repeat="turma in disciplina.turmas">@{{ turma.nome }}, </span></td>
 									<td style="text-align: right;">
 										<button class="btn btn-warning btn-sm btn-detail" ng-click="toggle('edit', disciplina.id)">
 											<span class="glyphicon glyphicon-edit"></span>
@@ -83,14 +78,12 @@
 											<span class="glyphicon glyphicon-trash"></span>
 										</button>
 
-										<button class="btn btn-info btn-sm btn-details" ng-click="toggle('details', disciplina.id)" style="margin-left: 10px;">
-											<span class="glyphicon glyphicon-search"></span>
-										</button>
 										<a href="/disciplina/config/@{{disciplina.id}}">
-										<span class="btn btn-primary btn-sm btn-config"  style="margin-left: 10px;">
-										<span class="glyphicon glyphicon-wrench">
-										</span>
-										</span></a>
+											<span class="btn btn-primary btn-sm btn-config"  style="margin-left: 10px;">
+												<span class="glyphicon glyphicon-wrench">
+												</span>
+											</span>
+										</a>
 									</td>
 								</tr>
 							</tbody>
@@ -127,19 +120,6 @@
 											</div>
 									</md-input-container>
 								</div>
-
-								@{{turma.nome}}
-								<div layout="row">
-									<div class="form-group" ng-controller="ProfessorController" flex="95" style="margin-left: auto; margin-right: auto;">
-										<!-- 										<div ng-controller="DisciplinaController" ng-model="professor.disciplinas">
-										--><!-- 												<select multiple class="form-control" ng-model="professor.disciplinas" ng-options="disciplina.id as disciplina.nome for disciplina in disciplinas">
-										</select>
-										-->
-										<select multiple  class="form-control" ng-model="disciplina.professores" >
-											<option ng-repeat='professor in professores' value="@{{professor.id}}">@{{professor.nome}}</option>
-										</select>	
-									</div>
-								</div>
 							</form>
 								<div class="modal-footer">
 					                <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, id)" ng-disabled="frmDisciplina.$invalid">Salvar</button>
@@ -149,7 +129,7 @@
 					</div>
 				</div>
 
-					<div class="modal  fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true"	>
+<!-- 					<div class="modal  fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true"	>
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 					      <div class="modal-header">
@@ -188,7 +168,7 @@
 					</div>
 				</div>	
 			</div>
-		</div>
+		</div> -->
 
 			<!-- Script para limpar o modal -->
 			<script>
@@ -224,5 +204,6 @@
 		    <script src="angular/services/turmaAPIService.js"></script>
 		    <script src="angular/services/professorAPIService.js"></script>
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+		    <script src="/js/sweetalert.min.js"></script>
 		@stop
 </html>

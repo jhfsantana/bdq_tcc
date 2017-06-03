@@ -48,4 +48,31 @@ class Disciplina extends Model
             ->get();
         return $resultado;
     }
+
+    public static function pegarDisciplinasDisponiveis($professor_id)
+    {
+        $resultado = DB::table('professores')
+            ->join('disciplina_professor', 'professores.id', '!=', 'disciplina_professor.professor_id')
+            ->join('disciplinas', 'disciplina_professor.disciplina_id', '!=', 'disciplinas.id')
+            ->where('disciplina_professor.professor_id', '!=', $professor_id)
+            ///->select('professores.nome as turma_nome','disciplinas.nome as disciplina_nome')
+            ->get();
+
+        return $resultado;
+    }
+
+    public static function validarRemocao($professor_id, $disciplina_id)
+    {
+        $resultado = DB::table('professores')
+            ->join('disciplina_professor', 'professores.id', '=', 'disciplina_professor.professor_id')
+            ->join('disciplinas', 'disciplina_professor.disciplina_id', '=', 'disciplinas.id')
+            ->join('disciplina_turma', 'disciplinas.id', '=', 'disciplina_turma.disciplina_id')
+            ->join('turmas', 'disciplina_turma.turma_id', '=', 'turmas.id')
+            ->where('professores.id', '=', $professor_id)
+            ->where('disciplinas.id', '=', $disciplina_id)
+            ///->select('professores.nome as turma_nome','disciplinas.nome as disciplina_nome')
+            ->get();
+
+        return $resultado;
+    }
 }

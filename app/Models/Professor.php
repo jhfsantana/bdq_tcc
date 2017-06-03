@@ -18,7 +18,7 @@ class Professor extends User
 
     public function disciplinas()
     {
-		return $this->belongsToMany('App\Models\Disciplina');
+        return $this->belongsToMany('App\Models\Disciplina');
     }
 
     public function turmas()

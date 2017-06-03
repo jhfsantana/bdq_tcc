@@ -74,18 +74,48 @@ app.controller('AlunoController', function($scope, $http, API_URL, alunoAPI)
 		}
 		
 		$scope.confirmDelete = function(id) {
-			var isConfirmDelete = confirm('Tem certeza que deseja excluir esse aluno?');
-			if (isConfirmDelete) {
-			 alunoAPI.deleteAluno(id).success(function(data){
-			   console.log(data);
-			   location.reload();
+			swal({
+			  title: "Você tem certeza que deseja remover este aluno?",
+			  text: "Não será possivel recuperar esse registro, caso seja deletado, cuidado!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#DD6B55",
+			  confirmButtonText: "Sim, quero deletar!",
+			  cancelButtonText: "Não, quero cancelar solicitação!",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+			},
+			function(isConfirm){
+			  if (isConfirm) {
+			    swal("Deletado!", "Registro foi deletado com sucesso.", "success");
+			    alunoAPI.deleteAluno(id).success(function(data){
+
+			   	if (data.message)
+			   	{
+			   		$('#main').html('<div class="alert alert-danger col-ssm-12" >' + data.message + '</div>');
+			   	}
+			   	else
+			   	{
+					swal("Cancelado", "Ocorreu um erro!	", "error");
+					$('#main').html('<div class="alert alert-danger col-ssm-12" >' + data.error + '</div>');
+			   	}
+
+			   	$('#myModal').modal('hide');
+
+				alunoAPI.getAlunos()
+				.success(function(response)
+				{
+					$scope.alunos = response;
+				});
+
 			 }).error(function(data){
-			   console.log(data);
-			   alert('ocorreu um erro');
+			    swal("Cancelado", "Ocorreu um erro!	", "error");
 			 });
-			} else {
-			 return false;
-			}
+
+			  } else {
+			    swal("Cancelado", "Solicitação cancelada!", "error");
+			  }
+			});
 		}
 
 		$scope.$on('modal.hidden', function() {

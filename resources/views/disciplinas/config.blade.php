@@ -18,7 +18,7 @@
 @section('content')
 @section('titulo')
 <i class="fa fa-book" aria-hidden="true"></i>
-Disciplinas
+Disciplinas e Professores
 @stop
 	
 	<input type="hidden" name="disciplina_id" id="disciplina_id" data-disciplina="{{ $disciplina->id}}">
@@ -39,34 +39,72 @@ Disciplinas
 				</table>
 			</li>
 		</ul>
-		<table class="table table-stripped">
-			<thead style="background-color: #ccc; text-align: center;">
-				<tr>
-					<th>Matricula</th>
-					<th>Nome</th>
-					<th>Ação</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					@foreach($disciplina->professores as $professor)
-					    <tr>
-					    	<td class="tg-yw4l">{{ $professor->matricula }} </td>
-					    	<td class="tg-yw4l">{{ $professor->nome }} </td>
+		<fieldset>
+		<legend>
+			Professores
+		</legend>
+			<table class="table table-stripped">
+				<thead style="background-color: #ccc; text-align: center;">
+					<tr>
+						<th>Matricula</th>
+						<th>Nome</th>
+						<th>Ação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						@foreach($disciplina->professores as $professor)
+						    <tr>
+						    	<td class="tg-yw4l"><a href="/professor/config/{{$professor->id}}"> {{ $professor->matricula }} </a> </td>
+						    	<td class="tg-yw4l"><a href="/professor/config/{{$professor->id}}"> {{ $professor->nome }}      </a> </td>
 
-					    <td class="tg-yw41" style="padding: 20px;"> 
-					    	<a href="#" id="prof_id"  onclick="confimar({{ $professor->id }});">
-					    		<span class="btn btn-danger btn-sm btn-config">
-									<span class="glyphicon glyphicon-trash">
+						    <td class="tg-yw41" style="padding: 20px;"> 
+						    	<a href="#" id="prof_id"  onclick="confimar({{ $professor->id }});">
+						    		<span class="btn btn-danger btn-sm btn-config">
+										<span class="glyphicon glyphicon-trash">
+										</span>
 									</span>
-								</span>
-					    	</a>
-					    </td>
-					    </tr>
-					@endforeach
-				</tr>
-			</tbody>
-		</table>
+						    	</a>
+						    </td>
+						    </tr>
+						@endforeach
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+		<fieldset>
+		<legend>
+			Alunos
+		</legend>
+			<table class="table table-stripped">
+				<thead style="background-color: #ccc; text-align: center;">
+					<tr>
+						<th>Matricula</th>
+						<th>Nome</th>
+						<th>Ação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						@foreach($disciplina->alunos as $aluno)
+						    <tr>
+						    	<td class="tg-yw4l"><a href="/aluno/config/{{$aluno->id}}"> {{ $aluno->matricula }} </a> </td>
+						    	<td class="tg-yw4l"><a href="/aluno/config/{{$aluno->id}}"> {{ $aluno->nome }}      </a> </td>
+
+						    <td class="tg-yw41" style="padding: 20px;"> 
+						    	<a href="#" id="prof_id"  onclick="confimar({{ $aluno->id }});">
+						    		<span class="btn btn-danger btn-sm btn-config">
+										<span class="glyphicon glyphicon-trash">
+										</span>
+									</span>
+						    	</a>
+						    </td>
+						    </tr>
+						@endforeach
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
 	</fieldset>
 </form>
 

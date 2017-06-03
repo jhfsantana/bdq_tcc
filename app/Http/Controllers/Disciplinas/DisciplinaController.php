@@ -108,7 +108,50 @@ class DisciplinaController extends Controller
 
     public function destroy($id)
     {
-        Disciplina::find($id)->delete();
+        $disciplina = Disciplina::find($id);
+        $check = DB::table('disciplinas')->join('disciplina_professor', 'disciplinas.id', '=', 'disciplina_professor.disciplina_id')
+                                    ->join('professores', 'disciplina_professor.professor_id', '=', 'professores.id')
+                                    ->where('disciplinas.id', '=', $id)
+                                    ->get();
+        $check2 = DB::table('disciplinas')->join('aluno_disciplina', 'disciplinas.id', '=', 'aluno_disciplina.disciplina_id')
+                                    ->join('alunos', 'aluno_disciplina.aluno_id', '=', 'alunos.id')
+                                    ->where('disciplinas.id', '=', $id)
+                                    ->get();
+        $html = '<ul>';
+
+        if (count($check) > 0)
+        {
+            foreach ($check as $professor) {
+                $html .= '<li> Professor:'.$professor->nome.'</li>';
+            }
+
+            $html .= '</ul>';            
+
+            return json_encode(['error' => 'Error! Esta disciplina possui turmas/professores associadas, não é possivel continuar com a operação! '. $html]);  
+
+        }
+        else if(count($check2) > 0)
+        {
+
+            foreach ($check2 as $aluno) {
+                $html .= '<li> Aluno:'.$aluno->nome.'</li>';
+            }
+
+            $html .= '</ul>';
+            return json_encode(['error' => 'Error! Esta disciplina possui alunos associados, não é possivel continuar com a operação! '. $html]);        
+        }
+        else
+        {
+            return json_encode(['message' => 'Disciplina '. $disciplina->nome .' removida com sucesso!']);
+        }
+        // if($disciplina->delete())
+        // {
+        //     return json_encode(['message' => 'Disciplina '. $disciplina->nome .' removida com sucesso!']);
+        // }
+        // else
+        // {
+        //     return json_encode(['error' => 'Error! Algo inesperado occorreu!']);   
+        // }
     }
 
     public function validarDisciplinaNaTurma($nome, $turma)
@@ -137,7 +180,27 @@ class DisciplinaController extends Controller
     }
 
     public function removerProfessor(Request $request)
-    {
+    {        
+        $validar = Disciplina::validarRemocao($request->professor_id, $request->disciplina_id);
+        $foundTurma = array(); 
+        $count = 0;
+        
+        foreach ($validar as $turma) 
+        {
+           if($turma->nome)
+           {
+                $count++;
+                $foundTurma[] = $turma->nome; 
+           }
+        }
+        
+        if(!empty($foundTurma))
+        {
+            $request->session()->flash('alert-danger', 'ERROR! Esta disciplina, possui '.$count. ' turma(s) associada(s) a este professor.');
+            return redirect()->back();
+        }
+        
+
         $result = DB::delete('DELETE FROM disciplina_professor WHERE professor_id = ? AND disciplina_id = ? LIMIT 1',[$request->professor_id, $request->disciplina_id]);
 
         return redirect()->back();

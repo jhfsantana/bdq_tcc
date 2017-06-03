@@ -13,6 +13,7 @@
 		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		    <link rel="stylesheet" type="text/css" href="css/style.css">
  			<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+			<link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
 
 		    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,9 +26,13 @@
 		
 
 		@section('content')
+		@section('titulo')
+			<i class="fa fa-users" aria-hidden="true"></i>
+			Turmas
+		@stop
 			<div class="container" style="margin-top: 80px;">
 			<h3 style="text-align: center;">Lista de Turmas</h3>
-    
+    		<div id="main"></div>
 		    @if(!empty($errors->all()))
 		    <div class="alert alert-danger" role="alert-danger">
 		        @foreach($errors->all() as $error)
@@ -51,25 +56,11 @@
 
 									<th>
 										<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-										Nome
+										Nome / Númeração
 
 										
 	            						<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
 	            						<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
-									</th>
-
-									<th>
-										<a href="#" ng-click="sortType = 'created_at'; sortReverse = !sortReverse">
-										Data de criação
-	            						<span ng-show="sortType == 'created_at' && !sortReverse" class="fa fa-caret-down"></span>
-	            						<span ng-show="sortType == 'created_at' && sortReverse" class="fa fa-caret-up"></span>
-									</th>
-
-									<th>
-										<a href="#" ng-click="sortType = 'updated_at'; sortReverse = !sortReverse">
-										Data de modificação
-	            						<span ng-show="sortType == 'updated_at' && !sortReverse" class="fa fa-caret-down"></span>
-	            						<span ng-show="sortType == 'updated_at' && sortReverse" class="fa fa-caret-up"></span>
 									</th>
 
 									<th style="text-align: right;">
@@ -85,8 +76,6 @@
 								<tr ng-repeat="turma in turmas | filter:buscar | comecarEm:(currentPage - 1) * pageSize | limitTo:pageSize | orderBy:sortType:sortReverse">
 									<td>@{{ turma.id }}</td>
 									<td>@{{ turma.nome }}</td>
-									<td>@{{ turma.created_at }}</td>
-									<td>@{{ turma.updated_at }}</td>
 									<td style="text-align: right;">
 										<button class="btn btn-warning btn-sm btn-detail" ng-click="toggle('edit', turma.id)">
 											<span class="glyphicon glyphicon-edit"></span>
@@ -94,10 +83,6 @@
 
 										<button class="btn btn-danger btn-sm btn-delete" ng-click="confirmDelete(turma.id)" style="margin-left: 10px;">
 											<span class="glyphicon glyphicon-trash"></span>
-										</button>
-
-										<button class="btn btn-info btn-sm btn-details" ng-click="toggle('details', turma.id)" style="margin-left: 10px;">
-											<span class="glyphicon glyphicon-search"></span>
 										</button>
 									</td>
 								</tr>
@@ -136,13 +121,13 @@
 									</md-input-container>
 									</div>
 									<div layout="row">
-									<div class="form-group" ng-controller="DisciplinaController" flex="95" style="margin-left: auto; margin-right: auto;">
+									<!-- <div class="form-group" ng-controller="DisciplinaController" flex="95" style="margin-left: auto; margin-right: auto;">
 										<select multiple  class="form-control" ng-model="turma.disciplinas" >
 											<option ng-repeat='disciplina in disciplinas' value="@{{disciplina.id}}">@{{disciplina.nome}}</option>
 											@{{ disciplina.id }}
 										</select>
 
-									</div>
+									</div> -->
 								</div>
 
 							</form>
@@ -240,5 +225,7 @@
 		    <script src="angular/services/TurmaAPIService.js"></script>
 		    <script src="angular/services/disciplinaAPIService.js"></script>
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+		    <script src="/js/sweetalert.min.js"></script>
+
 		@stop
 </html>

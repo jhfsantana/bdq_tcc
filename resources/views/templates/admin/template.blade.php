@@ -111,17 +111,17 @@
         </div> 
 			<div class="row" style="margin-top: 30px;">
 				<div class="col-md-10 col-md-offset-1">
-      <div class="flash-message" style="width: 50%;">
-        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-          @if(Session::has('alert-' . $msg))
-            @if($msg == 'danger')
-            <p class="alert alert-{{ $msg }}"><img src="/images/warning.svg" style="width: 30px; height: 30px;"> {{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
-            @else
-            <p class="alert alert-{{ $msg }}"><img src="/images/success.svg" style="width: 30px; height: 30px;"> {{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
-            @endif
-          @endif
-        @endforeach
-      </div>
+		      <div class="flash-message" style="width: 50%; margin-right: auto;margin-left: auto;">
+		        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+		          @if(Session::has('alert-' . $msg))
+		            @if($msg == 'danger')
+		            <p class="alert alert-{{ $msg }}"><img src="/images/warning.svg" style="width: 30px; height: 30px;"> {{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+		            @else
+		            <p class="alert alert-{{ $msg }}"><img src="/images/success.svg" style="width: 30px; height: 30px;"> {{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+		            @endif
+		          @endif
+		        @endforeach
+		      </div>
 
   			@yield('content')
 

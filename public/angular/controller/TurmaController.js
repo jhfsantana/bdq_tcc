@@ -55,38 +55,81 @@ app.controller('TurmaController', function($scope, $http, API_URL, turmaAPI)
 				  data: $.param($scope.turma),
 				  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 				}).success(function(response){
-				  console.log(response);
 				  location.reload();
 				}).error(function(response){
-				  console.log(response);
 				  alert('ocorreu um erro, verifique o log');
 				});
 			}
 			else
 			{
 				turmaAPI.saveTurma($scope.turma).success(function(response){
-				  console.log(response);
-				  location.reload();
-				}).error(function(response){
-				  console.log(response);
-				  alert('ocorreu um erro, verifique o log');
+				if(response.success)
+				{
+					$('#main').html('<div class="alert alert-success col-ssm-12" >' + response.success + '</div>');
+					$(function () {
+					   $('#myModal').modal('toggle');
+					});
+				}
+				turmaAPI.getTurmas()
+					.success(function(response)
+						{
+							$scope.turmas = response;
+						});				
+			  	}).error(function(response){
+					if(response.error)
+					{
+						$('#main').html('<div class="alert alert-danger col-ssm-12" >' + response.error + '</div>');
+						$(function () {
+					   $('#myModal').modal('toggle');
+					});
+					}				
 				});
 			}
 		}
 		
 		$scope.confirmDelete = function(id) {
-			var isConfirmDelete = confirm('Tem certeza que deseja excluir esse turma?');
-			if (isConfirmDelete) {
-			 turmaAPI.deleteTurma(id).success(function(data){
-			   console.log(data);
-			   location.reload();
+			swal({
+			  title: "Você tem certeza que deseja remover esta turma?",
+			  text: "Não será possivel recuperar esse registro, caso seja deletado, cuidado!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#DD6B55",
+			  confirmButtonText: "Sim, quero deletar!",
+			  cancelButtonText: "Não, quero cancelar solicitação!",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+			},
+			function(isConfirm){
+			  if (isConfirm) {
+			    swal("Deletado!", "Registro foi deletado com sucesso.", "success");
+			    turmaAPI.deleteTurma(id).success(function(data){
+
+			   	if (data.message)
+			   	{
+			   		$('#main').html('<div class="alert alert-danger col-ssm-12" >' + data.message + '</div>');
+			   	}
+			   	else
+			   	{
+					swal("Cancelado", "Ocorreu um erro!	", "error");
+					$('#main').html('<div class="alert alert-danger col-ssm-12" >' + data.error + '</div>');
+			   	}
+
+			   	$('#myModal').modal('hide');
+
+				turmaAPI.getTurmas()
+				.success(function(response)
+				{
+					$scope.turmas = response;
+				});
+
 			 }).error(function(data){
-			   console.log(data);
-			   alert('ocorreu um erro');
+			    swal("Cancelado", "Ocorreu um erro!	", "error");
 			 });
-			} else {
-			 return false;
-			}
+
+			  } else {
+			    swal("Cancelado", "Solicitação cancelada!", "error");
+			  }
+			});
 		}
 
 		$scope.$on('modal.hidden', function() {

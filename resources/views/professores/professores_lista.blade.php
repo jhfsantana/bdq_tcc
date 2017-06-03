@@ -111,6 +111,13 @@
 										<button class="btn btn-info btn-sm btn-details" ng-click="toggle('details', professor.id)" style="margin-left: 10px;">
 											<span class="glyphicon glyphicon-search"></span>
 										</button>
+
+										<a href="/professor/config/@{{professor.id}}">
+											<span class="btn btn-primary btn-sm btn-config"  style="margin-left: 10px;">
+												<span class="glyphicon glyphicon-wrench">
+												</span>
+											</span>
+										</a>
 									</td>
 								</tr>
 							</tbody>

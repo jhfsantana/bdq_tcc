@@ -202,6 +202,12 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	Route::post('/aluno/dados/alterados','Alunos\AlunoController@update');
 
 	Route::post('/aluno/disciplina/desassociar', 'Alunos\AlunoController@desassociarDisciplina');
+	Route::get('/aluno/config/{id}','Alunos\AlunoController@config');
+	Route::post('/aluno/config/save','Alunos\AlunoController@configSave');
+	Route::post('/aluno/config/remover','Alunos\AlunoController@limparConfig');
+
+
+
 	Route::get('administrador/logout', 'Admins\AuthController@logout');
 
 
@@ -216,6 +222,10 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
     Route::post('professor/detalhes/{id}','Professores\ProfessorController@show');
     Route::post('professores/{id}','Professores\ProfessorController@destroy');
     Route::post('/professor/upload','Professores\ProfessorController@uploadPerfil');
+	Route::get('/professor/config/{id}','Professores\ProfessorController@config');
+	Route::post('/professor/config/save','Professores\ProfessorController@configSave');
+	Route::post('/professor/config/remover','Professores\ProfessorController@limparConfig');
+	
 
 	Route::get('/turmas','Turmas\TurmaController@index');
 	Route::post('classrooms','Turmas\TurmaController@store');

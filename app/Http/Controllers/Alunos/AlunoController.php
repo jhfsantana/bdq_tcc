@@ -161,8 +161,16 @@ class AlunoController extends Controller
      */
     public function destroy($id)
     {
-        $aluno = Aluno::find($id)->delete();
-        return 'aluno deletado';
+        $aluno = Aluno::find($id);
+
+        if($aluno->delete())
+        {
+            return json_encode(['message' => 'Aluno '. $aluno->nome .' deletado com sucesso!']);
+        }
+        else
+        {
+            return json_encode(['message' => 'Error! Algo inesperado ocorreu!']);
+        }
     }
 
     public function loginTela()
@@ -1147,20 +1155,49 @@ class AlunoController extends Controller
        
     }
 
-
-    public function mensagens()
+    public function config($id)
     {
-        $usuario = Aluno::find(Auth::user()->id);
+        $a_id = Aluno::find($id);
+        $disciplinas = Disciplina::all();
+        $turmas = Turma::all();
 
-        $notificacoes = Notificacao::all()->where('aluno_id', Auth::user()->id)->where('avaliacao_id', '=', 0);
-        return view('alunos.mensagens')->with('notificacoes', $notificacoes);
+        return vieW('alunos.config')->with('aluno', $a_id)
+                                         ->with('disciplinas', $disciplinas)
+                                         ->with('turmas', $turmas);
     }
 
+    public function configSave(Request $request)
+    {
+        $aluno = Aluno::find($request->aluno_id);
+        
+        $disciplina = Disciplina::find($request->disciplina);
+        $turma = Turma::find($request->turma);
+        $disciplinaArray[] = $request->disciplina;
+        $turmaArray[] = $request->turma;
+        $profArray[] = $request->aluno_id;
 
+        $nome = $aluno->nome;
 
+        if($aluno->save())
+        {
+            if($disciplina->save())
+            {   
+                $aluno->disciplinas()->sync($disciplinaArray, false);
+                $aluno->turmas()->sync($turmaArray, false);
+                $disciplina->turmas()->sync($turmaArray, false);
+                $turma->professores()->sync($profArray, false);
+                $request->session()->flash('alert-success', 'Configuração para o aluno '. $nome.' realizada com sucesso!');
 
+                return redirect()->back();
+            }
+        }
+    }
 
+    public function limparConfig(Request $request)
+    {
+        $result2 = DB::delete('DELETE FROM aluno_turma WHERE aluno_id = ? AND turma_id = ? LIMIT 1',[$request->aluno_id, $request->turma_id]);
+        $result3 = DB::delete('DELETE FROM disciplina_turma WHERE disciplina_id = ? AND turma_id = ? LIMIT 1',[$request->disciplina_id, $request->turma_id]);
 
-
-
+        return redirect()->back();
+    }
 }

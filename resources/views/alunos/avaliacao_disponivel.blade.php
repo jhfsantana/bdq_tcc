@@ -60,7 +60,7 @@
 									<form id="formAvaliacaoDisponivel" method="post" action="/aluno/avaliacao/online">
 				                		<input name="_token" type="hidden" value="{{ csrf_token() }}">
 										<input type="hidden"  name="disciplina_id" value="{{$disciplinas->id}}"/>
-										<input type="hidden"  name="turma_id" value="{{$turma->id}}">
+										<input type="hidden"  name="turma_id" value="{$avaliacao->turma->id}}">
 										<input type="hidden"  name="avaliacao_id" value="{{$avaliacao->id}}">
 										<button type="submit" name="avaliacoes" id="avaliacoes" class="btn btn-warning">
 											<i class="glyphicon glyphicon-education"></i>{{$avaliacao->id}} - Avaliação - {{$avaliacao->created_at->format('d/m/Y')}}

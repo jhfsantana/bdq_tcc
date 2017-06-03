@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Models\Turma;
 use App\Models\Disciplina;
 use App\Http\Requests\Turma\TurmaRequest;
+use Illuminate\Support\Facades\DB;
 
 
 class TurmaController extends Controller
@@ -40,9 +41,17 @@ class TurmaController extends Controller
     {
         $turma = new Turma();
         $turma->nome = $request->nome;
-        $turma->save();
-        $turma->disciplinas()->sync($request->disciplinas, false);
-        return 'turma criada';
+
+        if($turma->save())
+        {
+            return json_encode(['success' => 'Cadastrada com sucesso!']);
+        }
+        else
+        {
+            return json_encode(['error' => 'Algo inesperado aconeceu!']);
+        }
+        ///$turma->disciplinas()->sync($request->disciplinas, false);
+        
         
     }
 
@@ -63,8 +72,29 @@ class TurmaController extends Controller
     
     public function destroy($id)
     {
-       Turma::find($id)->delete();
+        $html = '<ul>';
+        $turma = Turma::find($id);
+        $check = DB::table('turmas')->join('disciplina_turma', 'turmas.id', '=', 'disciplina_turma.turma_id')
+                                    ->join('disciplinas', 'disciplina_turma.disciplina_id', '=', 'disciplinas.id')
+                                    ->where('turmas.id', '=', $id)
+                                    ->get();
 
-       return 'Turma ' . $id .' deletada';
+        if (count($check) > 0)
+        {
+            foreach ($check as $turma) {
+                $html .= '<li>'.$turma->nome.'</li>';
+            }
+
+            $html .= '</ul>';
+            return json_encode(['error' => 'Error! Esta turma possui disciplinas associadas, não é possivel continuar com a operação! '. $html]);
+        }
+        else 
+        {
+            if($turma->delete())
+            {
+                return json_encode(['message' => 'Turma removida com sucesso!']);
+            }
+        }
+       
     }
 }

@@ -13,6 +13,8 @@
 		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
  			<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 		    <link rel="stylesheet" type="text/css" href="/css/style.css">
+			<link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
+
 
 		    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,8 +27,13 @@
 		
 
 		@section('content')
+		@section('titulo')
+			<i class="fa fa-graduation-cap" aria-hidden="true"></i>
+			Alunos
+		@stop
 			<div class="container" style="margin-top: 40px;">
 			<h3 style="text-align: center;">Lista de Alunos</h3>
+			<div id="main"></div>
 				<div ng-controller="AlunoController">
 					<div class="table-responsive">
 						<table class="table table-bordered table-striped" style="border: 2px;">
@@ -103,6 +110,13 @@
 										<button class="btn btn-info btn-sm btn-details" ng-click="toggle('details', aluno.id)" style="margin-left: 10px;">
 											<span class="glyphicon glyphicon-search"></span>
 										</button>
+
+										<a href="/aluno/config/@{{aluno.id}}">
+											<span class="btn btn-primary btn-sm btn-config"  style="margin-left: 10px;">
+												<span class="glyphicon glyphicon-wrench">
+												</span>
+											</span>
+										</a>
 									</td>
 								</tr>
 							</tbody>
@@ -353,6 +367,8 @@
 		    <script src="angular/services/alunoAPIService.js"></script>
 		    <script src="angular/services/disciplinaAPIService.js"></script>
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+			<script src="/js/sweetalert.min.js"></script>
+
 
 		@stop
 </html>
