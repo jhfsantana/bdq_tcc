@@ -228,6 +228,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	
 
 	Route::get('/turmas','Turmas\TurmaController@index');
+	Route::get('/turma/config/{id}','Turmas\TurmaController@config');
 	Route::post('classrooms','Turmas\TurmaController@store');
 
 	Route::get('disciplina/novo','Disciplinas\DisciplinaController@create');

@@ -84,6 +84,13 @@
 										<button class="btn btn-danger btn-sm btn-delete" ng-click="confirmDelete(turma.id)" style="margin-left: 10px;">
 											<span class="glyphicon glyphicon-trash"></span>
 										</button>
+										
+										<a href="/turma/config/@{{turma.id}}">
+											<span class="btn btn-primary btn-sm btn-config"  style="margin-left: 10px;">
+												<span class="glyphicon glyphicon-search">
+												</span>
+											</span>
+										</a>
 									</td>
 								</tr>
 							</tbody>
@@ -201,8 +208,8 @@
 
 					});
 				});
-			</script>
 
+			</script>
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		    <!-- Include all compiled plugins (below), or include individual files as needed -->
