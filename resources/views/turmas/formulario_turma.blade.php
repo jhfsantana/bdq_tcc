@@ -77,6 +77,13 @@
 										<button class="btn btn-danger btn-sm btn-delete" ng-click="confirmDelete(turma.id)" style="margin-left: 10px;">
 											<span class="glyphicon glyphicon-trash"></span>
 										</button>
+										
+										<a href="/turma/config/@{{turma.id}}">
+											<span class="btn btn-primary btn-sm btn-config"  style="margin-left: 10px;">
+												<span class="glyphicon glyphicon-search">
+												</span>
+											</span>
+										</a>
 									</td>
 								</tr>
 							</tbody>
@@ -194,6 +201,35 @@
 
 					});
 				});
+<<<<<<< HEAD
 			</script>
+=======
+
+			</script>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		    <!-- Include all compiled plugins (below), or include individual files as needed -->
+		    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+		    <!-- Aangular Material load from CDN -->
+			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
+			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
+			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-touch.min.js"></script>
+		    <!-- Angular Application Scripts Load  -->
+		    <script src="{{ asset('angular/app.js') }}"></script>
+		    <script src="{{ asset('angular/controller/TurmaController.js') }}"></script>
+		    <script src="{{ asset('angular/controller/DisciplinaController.js') }}"></script>
+		
+		<!--Script para pagination-->
+		    <script src="angular/libs/ui-bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
+		    <script src="angular/services/TurmaAPIService.js"></script>
+		    <script src="angular/services/disciplinaAPIService.js"></script>
+		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+		    <script src="/js/sweetalert.min.js"></script>
+
+>>>>>>> 9f41b1cee2d726564aeb23d1335af614eff1d469
 		@stop
 </html>

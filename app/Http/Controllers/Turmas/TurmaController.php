@@ -97,4 +97,11 @@ class TurmaController extends Controller
         }
        
     }
+
+    public function config($id)
+    {
+        $turma = Turma::find($id);
+
+        return view('turmas.config')->with('turma', $turma);
+    }
 }
