@@ -139,6 +139,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 		});
 
 	//API DOS PROFESSORES 
+	Route::get('/api/questoes/professor', 'Questoes\QuestaoController@getQuestaoByProfessor');
 	Route::get('/api/professores/{id?}', 'Professores\ProfessorController@indexAPI');
 	Route::post('/api/professores', 'Professores\ProfessorController@store');
     Route::post('/api/professores/{id}', 'Professores\ProfessorController@update');
@@ -252,7 +253,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 
 	Route::post('/admin/questao/adicionada', 'Questoes\QuestaoController@adminQuestaoSalvar');
 
-	Route::get('/admin/questoes', 'Questoes\QuestaoController@listaTotalQuestoes');
+	Route::get('questoes', 'Questoes\QuestaoController@listaTotalQuestoes');
 	
 	Route::get('/administradores', 'Admins\AdminController@lista');
 

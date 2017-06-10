@@ -10,19 +10,6 @@
 
 		    <title>BDQ - Lista de Professores</title>
 
-		    <!-- Bootstrap -->
-		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-		    <link rel="stylesheet" type="text/css" href="/css/style.css">
- 			<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-			<link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
-		    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		    <!--[if lt IE 9]>
-		      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
-		      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		    <![endif]-->
-
 		@stop
 		
 
@@ -33,7 +20,7 @@
 		@stop
 			<div class="container" style="margin-top: 40px;">
 			<div id="main"></div>
-
+			<i id="hasAngular"></i>
 				<div ng-controller="ProfessorController">
 					<div class="table-responsive">
 						<table class="table table-bordered table-striped" style="border: 2px;">
@@ -482,32 +469,5 @@
 				}));
 
 			</script>
-
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-			<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-		    <!-- Include all compiled plugins (below), or include individual files as needed -->
-		    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-
-		    <!-- Aangular Material load from CDN -->
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
-		    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-touch.min.js"></script>
-		    <!-- Angular Application Scripts Load  -->
-		    <script src="{{ asset('angular/app.js') }}"></script>
-		    <script src="{{ asset('angular/controller/ProfessorController.js') }}"></script>
-		    <script src="{{ asset('angular/controller/DisciplinaController.js') }}"></script>
-		
-		<!--Script para pagination-->
-		    <script src="angular/libs/ui-bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
-
-		 	<!-- importando os servicos  -->
-		    <script src="angular/services/professorAPIService.js"></script>
-		    <script src="angular/services/disciplinaAPIService.js"></script>
-		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
-		    <script src="/js/sweetalert.min.js"></script>
-		    <script type="/js/indexGlobal.js"></script>
 		@stop
 </html>

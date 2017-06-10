@@ -36,8 +36,8 @@ fieldset
 }
 legend
 {
-  padding: 20px;
-  width: auto;
+  padding: 20px !important;
+  width: auto !important;
 }
 /*-------------------------------*/
 /*           Wrappers            */

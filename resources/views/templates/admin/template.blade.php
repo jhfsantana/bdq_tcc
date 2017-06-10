@@ -1,12 +1,10 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html >
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
   <title>BDQ - Avaliação Online / Página inicial Administrativa</title>
-  
-  <link rel="stylesheet" href="/css/font-awesome.min.css">
-
+  @include('shared.styles')
 	@yield('scripts')
   <style type="text/css">
     header {
@@ -115,9 +113,11 @@
 		        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
 		          @if(Session::has('alert-' . $msg))
 		            @if($msg == 'danger')
-		            <p class="alert alert-{{ $msg }}"><img src="/images/warning.svg" style="width: 30px; height: 30px;"> {{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
-		            @else
-		            <p class="alert alert-{{ $msg }}"><img src="/images/success.svg" style="width: 30px; height: 30px;"> {{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+		              <p class="alert alert-{{ $msg }}"><img src="/images/warning.svg" style="width: 30px; height: 30px;"> {{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+		            @elseif($msg == 'warning')
+                  <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
+                @else
+                  <p class="alert alert-{{ $msg }}"><img src="/images/success.svg" style="width: 30px; height: 30px;"> {{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p>
 		            @endif
 		          @endif
 		        @endforeach
@@ -143,7 +143,7 @@
   </div> -->
 
       <!-- /#final footer -->
-
+    @include('shared.scripts')
 <script src="/js/index.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {

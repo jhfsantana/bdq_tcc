@@ -51,6 +51,7 @@
     <div style="text-align: center;">
         <form method="POST" action="/admin/carregar/lote" enctype="multipart/form-data">
             <input name="_token" type="hidden" value="{{ csrf_token() }}">
+            <input name="admin_id" type="hidden" value="{{ Auth::user()->id}}">
             <label class="btn btn-danger" for="file" style="width: 20%;padding: 13px;" title="Selecione um arquivo xml para ser processado">
                 <input id="file" name="file" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
                 <img src="/images/upload-folder.svg" style="width: 70px; height: 70px;">

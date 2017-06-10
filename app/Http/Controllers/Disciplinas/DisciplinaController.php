@@ -182,21 +182,22 @@ class DisciplinaController extends Controller
     public function removerProfessor(Request $request)
     {        
         $validar = Disciplina::validarRemocao($request->professor_id, $request->disciplina_id);
-        $foundTurma = array(); 
+        $foundTurma = false;
         $count = 0;
-        
+        $html = '<ul>';
         foreach ($validar as $turma) 
         {
            if($turma->nome)
            {
+                $foundTurma = true;
                 $count++;
-                $foundTurma[] = $turma->nome; 
+                $html .= '<li>'.$turma->nome.'</li>'; 
            }
         }
-        
-        if(!empty($foundTurma))
+        $html .= '</ul>';
+        if($foundTurma)
         {
-            $request->session()->flash('alert-danger', 'ERROR! Esta disciplina, possui '.$count. ' turma(s) associada(s) a este professor.');
+            $request->session()->flash('alert-danger', 'ERROR! Existe '.$count. ' vinculo(s) Turma/Disciplina/Professor, por favor, vá até menu de configuração de Professores e remova esta relação.');
             return redirect()->back();
         }
         

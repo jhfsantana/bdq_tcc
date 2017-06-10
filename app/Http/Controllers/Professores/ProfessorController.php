@@ -232,7 +232,7 @@ class ProfessorController extends Controller
     public function config($id)
     {
         $p_id = Professor::find($id);
-        $disciplinas = Disciplina::pegarDisciplinasDisponiveis($id);
+        $disciplinas = Disciplina::all();
         $turmas = Turma::all();
 
         return vieW('professores.config')->with('professor', $p_id)
@@ -245,6 +245,16 @@ class ProfessorController extends Controller
         $professor = Professor::find($request->professor_id);
         
         $disciplina = Disciplina::find($request->disciplina);
+
+        
+        foreach ($disciplina->turmas as $turma) {
+            if($turma->id == $request->turma)
+            {
+            
+                $request->session()->flash('alert-warning', 'Já existe uma relação entre a disciplina '.$disciplina->nome.' e a turma '.$turma->nome);
+                return redirect()->back();
+            }
+        }
         $turma = Turma::find($request->turma);
         $disciplinaArray[] = $request->disciplina;
         $turmaArray[] = $request->turma;

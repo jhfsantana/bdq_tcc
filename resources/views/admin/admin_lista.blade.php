@@ -8,13 +8,6 @@
 		    <meta name="viewport" content="width=device-width, initial-scale=1">
 		    <title>BDQ - Lista de Administradores</title>
 
-		    <!-- Bootstrap -->
-		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-		    <link rel="stylesheet" type="text/css" href="/css/style.css">
- 			<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-			<link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
-
 		    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		    <!--[if lt IE 9]>
@@ -139,7 +132,7 @@
 									<md-input-container class="md-block"  flex="50">
 										<label>Matricula</label>
 										<md-icon md-svg-src="/images/admin/matricula.svg" class="name"></md-icon>
-											<input required dado-unico md-no-asterisk type="number" name="matricula" value="@{{ administrador.matricula }}" ng-model="administrador.matricula" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="text" name="matricula" value="@{{ administrador.matricula }}" ng-model="administrador.matricula" minlength="11"/>
 											<div ng-messages="frmAdmin.matricula.$error">
           										<div ng-message="required">
           											Campo matricula é obrigatório.
@@ -200,7 +193,7 @@
 									<md-input-container class="md-block" flex="50">
 										<label>CPF</label>
 											<md-icon md-svg-src="/images/admin/cpf.svg" class="name"></md-icon>
-											<input required dado-unico md-no-asterisk type="number" name="cpf" value="@{{ administrador.cpf }}" ng-model="administrador.cpf" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="text" name="cpf" value="@{{ administrador.cpf }}" ng-model="administrador.cpf" minlength="11"/>
 											<div ng-messages="frmAdmin.cpf.$error">
           										<div ng-message="required">
           											Campo cpf é obrigatório.
@@ -338,28 +331,5 @@
 					});
 				});
 			</script>
-
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		    <!-- Include all compiled plugins (below), or include individual files as needed -->
-		    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-
-		    <!-- Aangular Material load from CDN -->
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
-		    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-touch.min.js"></script>
-		    <!-- Angular Application Scripts Load  -->
-		    <script src="{{ asset('angular/app.js') }}"></script>
-		    <script src="{{ asset('angular/controller/AdminController.js') }}"></script>
-		    <script src="{{ asset('angular/controller/DisciplinaController.js') }}"></script>
-		
-		<!--Script para pagination-->
-		    <script src="angular/libs/ui-bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
-		    <script src="angular/services/adminAPIService.js"></script>
-		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
-			<script src="/js/sweetalert.min.js"></script>
 		@stop
 </html>

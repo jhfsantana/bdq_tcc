@@ -35,7 +35,8 @@ class QuestaoController extends Controller
     {
         if($id == null)
         {
-            return Questao::orderBy('id', 'desc')->get();
+            $q = DB::table('questoes')->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')->get(['disciplinas.nome as disciplina_nome', 'questoes.*']);
+            return $q;
         }else
         {
             return $this->show($id);

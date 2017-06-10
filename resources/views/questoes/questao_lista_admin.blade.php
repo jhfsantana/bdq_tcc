@@ -8,12 +8,6 @@
 		    <meta name="viewport" content="width=device-width, initial-scale=1">
 		    <title>BDQ - Lista de Questões</title>
 
-		    <!-- Bootstrap -->
-		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-		    <link rel="stylesheet" type="text/css" href="/css/style.css">
- 			<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-
 		    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		    <!--[if lt IE 9]>
@@ -67,7 +61,7 @@
 								<tr ng-repeat="questao in questoes | filter:buscar | comecarEm:(currentPage - 1) * pageSize | limitTo:pageSize | orderBy:sortType:sortReverse">
 									<td>@{{ questao.id }}</td>
 									<td>@{{ questao.questao }}</td>
-									<td>@{{ questao.disciplina_nome }}</td>
+									<td>@{{ questao.disciplina_nome}}</td>
 
 									<td style="text-align: right;">
 										<button class="btn btn-warning btn-sm btn-detail" ng-click="toggle('edit', questao.id)">
@@ -128,7 +122,7 @@
 							</div>
 							<div layout="row" layout-align="center center">
 								<div class="form-group" flex="90">
-									<md-icon md-svg-src="/images/q.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
+									<md-icon md-svg-src="images/q.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
 									<md-input-container class="md-block">
 										<label>Enunciado</label>
 											<textarea required md-no-asterisk md-maxlength="535" name="questao" rows="5" value="@{{ questao.questao }}" ng-model="questao.questao" minlength="8"  md-select-on-focus>
@@ -151,7 +145,7 @@
 								<div layout="row" layout-align="center center" style="margin-top: 10px;">
 									<md-input-container class="md-block" flex="90">
 										<label>Alternativa A</label>
-										<md-icon md-svg-src="/images/a.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
+										<md-icon md-svg-src="images/a.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
 											<input required md-no-asterisk type="text" name="a" ng-model="questao.alternativaA" maxlength="250" value="@{{ questao.alternativaA }}" />
 											<div ng-messages="frmAdmin.name.$error">
           										<div ng-message="required">
@@ -167,7 +161,7 @@
 								<div layout="row" layout-align="center center">
 									<md-input-container class="md-block" flex="90">
 										<label>Alternativa B</label>
-										<md-icon md-svg-src="/images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
+										<md-icon md-svg-src="images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
 											<input required md-no-asterisk type="text" name="b" ng-model="questao.alternativaB" maxlength="250" value="@{{ questao.alternativaB }}" />
 											<div ng-messages="frmAdmin.name.$error">
           										<div ng-message="required">
@@ -183,7 +177,7 @@
 								<div layout="row" layout-align="center center">
 									<md-input-container class="md-block" flex="90">
 										<label>Alternativa C</label>
-										<md-icon md-svg-src="/images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
+										<md-icon md-svg-src="images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
 											<input required md-no-asterisk type="text" name="c" ng-model="questao.alternativaC" maxlength="250" value="@{{ questao.alternativaC }}" />
 											<div ng-messages="frmAdmin.name.$error">
           										<div ng-message="required">
@@ -199,7 +193,7 @@
 								<div layout="row" layout-align="center center">
 									<md-input-container class="md-block" flex="90">
 										<label>Alternativa D</label>
-										<md-icon md-svg-src="/images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
+										<md-icon md-svg-src="images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
 											<input required md-no-asterisk type="text" name="d" ng-model="questao.alternativaD" maxlength="250" value="@{{ questao.alternativaD }}" />
 											<div ng-messages="frmAdmin.name.$error">
           										<div ng-message="required">
@@ -216,7 +210,7 @@
 								<div layout="row" layout-align="center center">
 									<md-input-container class="md-block" flex="90">
 										<label>Alternativa E</label>
-										<md-icon md-svg-src="/images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
+										<md-icon md-svg-src="images/.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
 											<input required md-no-asterisk type="text" name="e" ng-model="questao.alternativaE" maxlength="250" value="@{{ questao.alternativaE }}" />
 											<div ng-messages="frmAdmin.name.$error">
           										<div ng-message="required">
@@ -307,28 +301,5 @@
 					});
 				});
 			</script>
-
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		    <!-- Include all compiled plugins (below), or include individual files as needed -->
-		    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-
-		    <!-- Aangular Material load from CDN -->
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
-			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
-		    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-touch.min.js"></script>
-		    <!-- Angular Application Scripts Load  -->
-		    <script src="{{ asset('/angular/app.js') }}"></script>
-		    <script src="{{ asset('/angular/controller/QuestaoController.js') }}"></script>
-		    <script src="{{ asset('/angular/controller/DisciplinaController.js') }}"></script>
-		
-		<!--Script para pagination-->
-		    <script src="/angular/libs/ui-bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
-		    <script src="/angular/services/questaoAPIService.js"></script>
-		    <script src="/angular/services/disciplinaAPIService.js"></script>
-		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 		@stop
 </html>
