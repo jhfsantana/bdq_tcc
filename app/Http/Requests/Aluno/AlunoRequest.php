@@ -40,7 +40,6 @@ class AlunoRequest extends FormRequest
                         'nome' => 'required',
                         'sobrenome' => 'required',
                         'cpf' => 'required|unique:alunos',
-                        'disciplinas' => 'required',
                         'email' => 'required|unique:alunos|email',
                         'password' => 'required',
                     ];
@@ -54,7 +53,6 @@ class AlunoRequest extends FormRequest
                     'nome' => 'required',
                     'sobrenome' => 'required',
                     'cpf' => 'required|unique:alunos',
-                    'disciplinas' => 'required',
                     'email' => 'required|unique:alunos|email,'.$aluno->id,
                     'password' => 'required',
             ];

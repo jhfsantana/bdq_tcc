@@ -18,7 +18,11 @@
 
 		@stop
 		
-
+		<style type="text/css">
+			input[type="text"][readonly] {
+				   color: #2c3e50;
+				}
+		</style>
 		@section('content')
 		@section('titulo')
 			<i class="fa fa-graduation-cap" aria-hidden="true"></i>
@@ -129,12 +133,16 @@
 					        <h4 class="modal-title" id="myModalLabel">@{{form_title}}</h4>
 					      </div>
 					      <div class="modal-body">
-							<form name="frmaluno" class="form-horizontal" novalidate=""> 
+							<form name="frmaluno" class="form-horizontal" novalidate="">
+							<fieldset>
+								<legend>
+									Dados pessoais
+								</legend>
 								<div class="form-group">
 									<md-input-container class="md-block">
 										<label>Matricula</label>
 										<div class="col-sm-9">
-											<input required dado-unico md-no-asterisk type="number" name="matricula" value="@{{ aluno.matricula }}" ng-model="aluno.matricula" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="number" name="matricula" value="@{{ aluno.matricula }}" ng-model="aluno.matricula" minlength="11" ng-model-options="{updateOn: 'blur'}" />
 											<div ng-messages="frmaluno.matricula.$error">
           										<div ng-message="required">
           											Campo matricula é obrigatório.
@@ -189,7 +197,7 @@
 								<div layout="row">
 									<md-input-container class="md-block" flex="50">
 										<label>CPF</label>
-											<input required dado-unico md-no-asterisk type="text" name="cpf" value="@{{ aluno.cpf }}" ng-model="aluno.cpf" maxlength="11" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="text" name="cpf" value="@{{ aluno.cpf }}" ng-model="aluno.cpf" maxlength="11" minlength="11" ng-model-options="{updateOn: 'blur'}" />
 											<div ng-messages="frmaluno.cpf.$error">
           										<div ng-message="required">
           											Campo cpf é obrigatório.
@@ -214,7 +222,7 @@
 
 									<md-input-container class="md-block" flex="50">
 										<label>E-mail</label>
-											<input required  dado-unico md-no-asterisk type="email" name="email" value="@{{ aluno.email }}" ng-model="aluno.email" maxlength="30"/>
+											<input required  dado-unico md-no-asterisk type="email" name="email" value="@{{ aluno.email }}" ng-model="aluno.email" maxlength="30" ng-model-options="{updateOn: 'blur'}" />
 											<div ng-messages="frmaluno.email.$error">
           										<div ng-message="required">
           											Campo email é obrigatório.
@@ -234,21 +242,107 @@
 											</div>
 									</md-input-container>
 								</div>
-							
-								<div layout="row">
-									<div class="form-group" ng-controller="DisciplinaController" flex="95" style="margin-left: auto; margin-right: auto;">
-										<!-- <select multiple class="form-control" ng-model="aluno.disciplinas" ng-options="disciplina.id as disciplina.nome for disciplina in disciplinas">
-										</select> -->
-										
-										<select multiple class="form-control" ng-model="aluno.disciplinas">
-											<option value="" disabled="true">Selecione uma turma</option>
-											<optgroup ng-repeat='disciplina in disciplinas track by $index' label="@{{disciplina.nome}}">
-												<option ng-repeat="turma in disciplina.turmas" value="@{{disciplina.id}}">@{{turma.nome}}</option>
-											</optgroup>
-										</select>	
+							</fieldset>
+							<fieldset>
+									<legend>Endereço</legend>
+								
+								<div class="form-group">
+										<label>CEP</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="text" name="cep" class="zipcode form-control" value="@{{ aluno.cep }}" ng-model="aluno.cep" minlength="8" ng-model-options="{updateOn: 'blur'}" />
+											<div ng-messages="frmaluno.cep.$error">
+          										<div ng-message="required">
+          											Campo cep é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do campo cep deve ter no minimo 8 caracteres.
+          										</div>
+											</div>
+										</div>
+								</div>
+								<div class="form-group">
+										<label>logradouro</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="text" readonly="true" name="logradouro" value="@{{ aluno.logradouro }}" class="logradouro form-control" ng-model="aluno.logradouro" minlength="8"/>
+											<div ng-messages="frmaluno.logradouro.$error">
+          										<div ng-message="required">
+          											Campo logradouro é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do campo logradouro deve ter no minimo 8 caracteres.
+          										</div>
+											</div>
+										</div>
+								</div>
+								<div class="form-group">
+									<label>Bairro</label>
+									<div class="col-sm-9">
+										<input required md-no-asterisk type="text" class="form-control" name="bairro" readonly="true" value="@{{ aluno.bairro }}" ng-model="aluno.bairro" class="bairro" minlength="8"/>
+
+										<div ng-messages="frmaluno.bairro.$error">
+      										<div ng-message="required">
+      											Campo bairro é obrigatório.
+      										</div>
+     										<div ng-message="minlength">
+      											Tamanho do campo bairro deve ter no minimo 8 caracteres.
+      										</div>
+										</div>
 									</div>
 								</div>
-
+								<!-- <md-input-container class="md-block" flex="50">
+										<label>Bairro</label>
+											<input required md-no-asterisk type="bairro" name="bairro" value="@{{ aluno.bairro }}" ng-model="aluno.bairro" maxlength="30"  ng-model-options="{updateOn: 'blur'}"/>
+											<div ng-messages="frmaluno.bairro.$error">
+          										<div ng-message="required">
+          											Campo bairro é obrigatório.
+          										</div>
+         										<div ng-message="maxlength">
+          											Tamanho do campo bairro deve ter no máximo 30 caracteres.
+          										</div>
+         										<div ng-message="dadoUnico">
+          											E-mail já existente.
+          										</div>        										
+												<span class="text-success" ng-show="frmaluno.bairro.$valid">
+													E-mail disponível.
+												</span>
+												<span ng-if="frmaluno.bairro.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
+											</div>
+									</md-input-container> -->
+								<div class="form-group">
+										<label>UF</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="text" class="uf form-control" name="uf" readonly="true" value="@{{ aluno.uf }}" ng-model="aluno.uf" minlength="2"/>
+											<div ng-messages="frmaluno.uf.$error">
+          										<div ng-message="required">
+          											Campo uf é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do campo uf deve ter no minimo 8 caracteres.
+          										</div>
+											</div>
+										</div>
+								</div>
+								<div class="form-group">
+									<label>Cidade</label>
+									<div class="col-sm-9">
+										<input required md-no-asterisk type="text" readonly="true" class="cidade form-control" name="cidade" value="@{{ aluno.cidade }}" ng-model="aluno.cidade" minlength="8"/>
+										<div ng-messages="frmaluno.cidade.$error">
+	  										<div ng-message="required">
+	  											Campo cidade é obrigatório.
+	  										</div>
+	 										<div ng-message="minlength">
+	  											Tamanho do campo cidade deve ter no minimo 8 caracteres.
+	  										</div>
+										</div>
+									</div>
+								</div>
+								</fieldset>
+							<fieldset>
+								<legend>
+									Segurança
+								</legend>
 								<div class="form-group">
 									<md-input-container class="md-block">
 										<label>Password</label>
@@ -264,7 +358,25 @@
 											</div>
 										</div>
 									</md-input-container>
+									<md-input-container class="md-block">
+										<label>Confirmar Password</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="password" name="confirmarPassword" value="@{{ aluno.password }}" ng-model="aluno.confirmarPassword" minlength="8" confirmar-password="aluno.password"/>
+											<div ng-messages="frmaluno.confirmarPassword.$error">
+          										<div ng-message="required">
+          											Campo password é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do campo password deve ter no minimo 8 caracteres.
+          										</div>
+          										<div ng-message="confirmarPassword">
+	          										Confirmação inválida, digite o mesmo password do campo acima.
+          										</div>
+											</div>
+										</div>
+									</md-input-container>
 								</div>
+							</fieldset>
 							</form>
 								<div class="modal-footer">
 					                <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, id)" ng-disabled="frmaluno.$invalid">Salvar</button>

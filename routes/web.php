@@ -81,6 +81,11 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 		}
 	});
 
+
+	Route::get('/api/meusalunos', function()
+	{
+		return Professor::mediaMeusAluno(Auth::user()->id);
+	});
 	Route::get('/api/turmas/{id?}', 'Turmas\TurmaController@indexAPI');
 
 
@@ -276,6 +281,10 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 
 Route::group(['middleware'=> ['auth:web_students']], function ()
 {
+	Route::get('api/mediaAluno', function()
+	{
+		return  json_encode(Aluno::mediaAluno());
+	});
 	Route::get('aluno', 'Alunos\AlunoController@bemvindo');
 	
 	Route::get('aluno/logout', 'Alunos\AuthController@logout');

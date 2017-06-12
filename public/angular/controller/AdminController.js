@@ -120,4 +120,30 @@ app.controller('AdminController', function($scope, $http, API_URL, adminAPI)
   		// Execute action
 		      $scope.delete;
 		});
+		$(document).on("focusout", ".zipcode", function() {
+			  if ( $( this ).val() != '' )
+		      {
+		          $.getJSON("https://viacep.com.br/ws/"+$( this ).val()+"/json/", function(result){
+		          	console.log(result);
+		              $.each(result, function(i, field){
+		                  if ( i == 'logradouro' )
+		                  {
+							$scope.administrador.logradouro = field;   
+		                  }else if ( i == 'bairro' ){
+		                    $scope.administrador.bairro = field;   
+		                  }else if ( i == 'complemento' ){
+		                     $('.additional').val(field); 
+		                  }
+		                  else if ( i == 'uf' )
+		                  {
+							 $scope.administrador.uf = field;   
+		                  }
+		                  else if ( i == 'localidade' )
+		                  {
+							 $scope.administrador.cidade = field;     
+						  }
+		              });
+		          });
+		      }
+			});
 	});

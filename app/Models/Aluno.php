@@ -68,8 +68,38 @@ class Aluno extends User
         ->join('avaliacoes', 'aluno_resultado.avaliacao_id', '=', 'avaliacoes.id')
         ->join('disciplinas', 'avaliacoes.disciplina_id', '=', 'disciplinas.id')
         ->orderBy('aluno_resultado.created_at', 'desc')
+        ->select(DB::raw('avaliacoes.id, aluno_resultado.nota, disciplinas.nome as disciplina'))
         ->first();
-        return $nota;
+
+        if(empty($nota))
+        {
+            return 0;    
+        }
+        else
+        {
+            return $nota;
+        }
+
+    }
+
+    public static function  mediaAluno($aluno_id)
+    {
+
+        $media = DB::table('aluno_resultado')
+                     ->select(DB::raw('year(created_at) as ano, month(created_at) as mes, avg(nota) as y'))
+                     ->where('aluno_id', '=', $aluno_id)
+                     ->groupBy(DB::raw('year(created_at), month(created_at)'))
+                     ->get();       
+
+        if(empty($media))
+        {
+            return 0;    
+        }
+        else
+        {
+            return $media;
+        }
+        
     }
 }
 

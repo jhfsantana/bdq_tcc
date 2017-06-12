@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Play');
+@import url('"https://fonts.googleapis.com/css?family=Open+Sans');
 
 a {
     color: inherit;
@@ -9,9 +9,13 @@ a {
 	padding: 0;
 	box-sizing: border-box;
 }
-
+p {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #34495e;
+}
 body {
-	font-family: 'Play';
+	font-family:  'Open Sans';
 	overflow: auto;
 }
 
@@ -19,7 +23,6 @@ a {
 	color:inherit;
 	text-decoration: none;
 }
-
 .alert {
   padding: 15px;
   margin-bottom: 20px;
@@ -240,10 +243,7 @@ ul#nav li a:hover {
 
 }
 
-.content p {
-	color: #424242;
-	font-size: 0.8em;
-}
+
 
 div#box {
 	margin-top: 15px;

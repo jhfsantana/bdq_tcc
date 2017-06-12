@@ -58,4 +58,23 @@ class Admin extends User
             return false;
         }
     }
+
+    public static function  mediaAluno()
+    {
+
+        $media = DB::table('aluno_resultado')
+                     ->select(DB::raw('year(created_at) as ano, month(created_at) as mes, avg(nota) as y'))
+                     ->groupBy(DB::raw('year(created_at), month(created_at)'))
+                     ->get();       
+
+        if(empty($media))
+        {
+            return 0;    
+        }
+        else
+        {
+            return $media;
+        }
+        
+    }
 }

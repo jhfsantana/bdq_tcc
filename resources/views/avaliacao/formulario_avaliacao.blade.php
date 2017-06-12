@@ -97,7 +97,7 @@ function showQ(select){
     </div>
     @endif
 
-<div style="width: 100%;" id="top">
+<div style="width: 100%; margin-top: 105px;" id="top">
 	<div class="row">
 		<section>
         <div class="wizard">

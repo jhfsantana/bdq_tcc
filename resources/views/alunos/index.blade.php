@@ -8,8 +8,89 @@
 	<meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalabe=0"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="/css/formularios.css">
+
+  <script type="text/javascript">
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer",
+    {
+
+      title:{
+        text: "MINHA PERFOMANCE EM AVALIAÇÕES",
+        fontSize: 30
+      },
+        animationEnabled: true,
+      axisX:{
+
+        gridColor: "Silver",
+        tickColor: "silver",
+        valueFormatString: "DD/MMM"
+
+      },                        
+                        toolTip:{
+                          shared:true
+                        },
+      theme: "theme2",
+      axisY: {
+        gridColor: "Silver",
+        tickColor: "silver"
+      },
+      legend:{
+        verticalAlign: "center",
+        horizontalAlign: "right"
+      },
+      data: [
+      {        
+        type: "line",
+        showInLegend: true,
+        lineThickness: 2,
+        name: "Media/Nota",
+        markerType: "square",
+        color: "#F08080",
+        dataPoints: [
+        @foreach($media as $m)
+          { x: new Date({{$m->ano}}+'-'+{{$m->mes}}), y: {{ $m->y }} },
+        @endforeach
+        ]
+      },
+      
+      ],
+          legend:{
+            cursor:"pointer",
+            itemclick:function(e){
+              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+              }
+              else{
+                e.dataSeries.visible = true;
+              }
+              chart.render();
+            }
+          }
+    });
+
+chart.render();
+}
+</script>
 <style>
-	<style>
+p.uppercase {
+    text-transform: uppercase !important;
+}
+    fieldset
+    {
+      padding: 15px;
+      width: 90%;
+        border:1px solid #34495e;
+        -moz-border-radius:8px;
+        -webkit-border-radius:8px;  
+        border-radius:8px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    legend
+    {
+      padding: 20px !important;
+      width: auto !important;
+    }
     div#notify ul {
         display:block;
         background: transparent;
@@ -160,11 +241,11 @@
 	<div id="container">
 		<div class="sidebar">
 			<ul id="nav"> 
-			    <li data-toggle="tooltip" data-placement="right" title="Home"><a href="aluno" ><img src="images/home.svg" style="width: 32px;width: 32px;"></a></li> 
-			    <li data-toggle="tooltip" data-placement="right" title="Avaliações"><a href="aluno/avaliacoes"><img src="images/exam.svg" style="width: 32px;width: 32px;"></a></li>
-				  <li data-toggle="tooltip" data-placement="right" title="Avaliações Realizadas"><a href="aluno/avaliacoes/realizadas"><img src="images/notas.png" style="width: 32px;width: 32px;"></a></li>
-          <li data-toggle="tooltip" data-placement="right" title="Mensagens"><a href="aluno/mensagens"><img src="images/messagewhite.svg" style="width: 32px;width: 32px;" ></a></li> 
-			    <li data-toggle="tooltip" data-placement="right" title="Sair"><a href="aluno/logout"><img src="images/logout.svg" style="width: 32px;width: 32px;" ></a></li> 
+			    <li data-toggle="tooltip" data-placement="right" title="Home"><a href="aluno" ><img src="images/home.svg" style="width: 22px;width: 22px;"></a></li> 
+			    <li data-toggle="tooltip" data-placement="right" title="Avaliações"><a href="aluno/avaliacoes"><img src="images/exam.svg" style="width: 22px;width: 22px;"></a></li>
+				  <li data-toggle="tooltip" data-placement="right" title="Avaliações Realizadas"><a href="aluno/avaliacoes/realizadas"><img src="images/notas.png" style="width: 22px;width: 22px;"></a></li>
+          <li data-toggle="tooltip" data-placement="right" title="Mensagens"><a href="aluno/mensagens"><img src="images/messagewhite.svg" style="width: 22px;width: 22px;" ></a></li> 
+			    <li data-toggle="tooltip" data-placement="right" title="Sair"><a href="aluno/logout"><img src="images/logout.svg" style="width: 22px;width: 22px;" ></a></li> 
 
 			 </ul>
 		</div>
@@ -172,7 +253,6 @@
 		<br>
 		<br>
 		<div class="content">
-		<h1>Olá, {{Auth::guard('web_students')->user()->nome }}</h1> <p>
 <p>
 		<br>
 			
@@ -187,34 +267,66 @@
 				 </div>	
 
 			<!-- FIM DA MENSAGEM DE SUCESSO -->
-		<h2>Painel de Informações</h2>
-			<p>resumo das informações</p>
-			<div id="box">
-				<div class="box-top">
-					<img src="images/notas.png">
-					<a href="#" style="float: left;">Ultimo resultado</a>
-					<h3 class="alunos" style="float: right; margin-top: 13px;">
-						@if(count($aluno)>0)
-							{{$aluno->nota}} - {{$aluno->nome}}</h3>
-						@else
-							S/N
-						@endif
-				</div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3 col-md-offset-1">
+            <h3>Olá, {{Auth::guard('web_students')->user()->nome }} </h3>
+            <i class="fa fa-fw fa-calendar"></i><em>{{$diames}}</em>
+          </div>
+        </div>
+      </div>
+      
+  
+      <fieldset>
+        <legend>
+          Resumo de informações
+        </legend>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4" style="text-align: center;">
+                <div class="nota">
+                  <p>Última nota <i class="glyphicon glyphicon-circle-arrow-right"></i></p>
 
-				<div class="box2-top">
-					<img src="images/estudantes_64.png">
-					<h3 class="estudantes">4</h3>
-					<a href="#">Turmas matriculadas</a>
-				</div>
+                    @if($aluno->nota)
+                      <h2>{{$aluno->nota}}</h2>
+                      <h3>{{$aluno->disciplina}}</h3>
+                    @else
+                      <h2>Não realizada</h2>
+                    @endif
 
-				<div class="box3-top">
-					<img src="images/estatistica_64.png">
-					<a href="#">Estatisticas</a>
-				</div>
-				
-			</div>
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align: center;">
+                 <div class="turma">
+                  <p>Turmas <i class="glyphicon glyphicon-circle-arrow-right"></i></p>
+                  @if($turmas)
+                  <h2> {{ $turmas }}</h2>
+                  @else
+                  <h2> 0 </h2>
+                  @endif
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align: center;">
+                 <div class="disciplina">
+                  <p>Disciplinas <i class="glyphicon glyphicon-circle-arrow-right"></i></p>
+                  @if($disciplinas)
+                  <h2>{{ $disciplinas }}</h2>
+                  @else
+                  <h2> 0 </h2>
+                  @endif
+                </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
 
-
+      <fieldset>
+        <legend>
+          Performace
+        </legend>
+        <p>O gráfico abaixo mostra seu desempenho em Avaliações por mês</p>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+      </fieldset>
 		</div>
 	</div>
 
@@ -293,7 +405,10 @@
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
 });
+
+
 </script>
+
 
 		<form action="aluno/avaliacoes/realizadas/{{Auth::user()->id}}" method="post" id="formRealizadas">
 			<input name="_token" type="hidden" value="{{ csrf_token() }}"> 
@@ -303,7 +418,8 @@ $(document).ready(function(){
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 <script src='https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js'></script>
 <script src='https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js'></script>
-
+<script type="text/javascript" src="/js/jquery.canvasjs.min.js"></script>
+<script type="text/javascript" src="/js/canvasjs.min.js"></script>
 </body>
 </html>
 

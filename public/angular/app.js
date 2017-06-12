@@ -25,6 +25,24 @@ var app = angular.module('app', ['ui.bootstrap', 'ngMaterial', 'ngMessages'])
 								};
 					        }
 					    };
+					}).directive('confirmarPassword', function()
+					{
+						return {
+						        require: "ngModel",
+						        scope: {
+						            otherModelValue: "=confirmarPassword"
+						        },
+						        link: function(scope, element, attributes, ngModel) {
+						             
+						            ngModel.$validators.confirmarPassword = function(modelValue) {
+						                return modelValue == scope.otherModelValue;
+						            };
+						 
+						            scope.$watch("otherModelValue", function() {
+						                ngModel.$validate();
+						            });
+						        }
+						    };
 					});
 
 

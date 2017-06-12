@@ -54,12 +54,13 @@ class ProfessorController extends Controller
                                                    ->where('avaliacao_id', '<>', 0);
 
         $lista_alunos = Professor::listarAlunos(Auth::user()->id);
-
+        $media = Professor::mediaMeusAluno(Auth::user()->id);
         return view('professores.index')->with('alunos', count($alunos))
             ->with('diames', $diames)
             ->with('notificacoes', $notificacoes)
             ->with('contador_notificacoes', count($contador_notificacoes))
-            ->with('lista_alunos', $lista_alunos);
+            ->with('lista_alunos', $lista_alunos)
+            ->with('medias', $media);
     }
 
 

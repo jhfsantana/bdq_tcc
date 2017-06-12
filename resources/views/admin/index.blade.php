@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html >
 <head>
   <meta charset="UTF-8">
@@ -14,6 +14,68 @@
   
 </head>
 
+<script type="text/javascript">
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer",
+    {
+
+      title:{
+        text: "MÉDIA GERAL DOS ALUNOS POR MÊS",
+        fontSize: 30
+      },
+        animationEnabled: true,
+      axisX:{
+
+        gridColor: "Silver",
+        tickColor: "silver",
+        valueFormatString: "DD/MMM"
+
+      },                        
+                        toolTip:{
+                          shared:true
+                        },
+      theme: "theme2",
+      axisY: {
+        gridColor: "Silver",
+        tickColor: "silver"
+      },
+      legend:{
+        verticalAlign: "center",
+        horizontalAlign: "right"
+      },
+      data: [
+      {        
+        type: "line",
+        showInLegend: true,
+        lineThickness: 2,
+        name: "Media/Nota",
+        markerType: "square",
+        color: "#F08080",
+        dataPoints: [
+        @foreach($media as $m)
+          { x: new Date({{$m->ano}}+'-'+{{$m->mes}}), y: {{ $m->y }} },
+        @endforeach
+        ]
+      },
+      
+      ],
+          legend:{
+            cursor:"pointer",
+            itemclick:function(e){
+              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+              }
+              else{
+                e.dataSeries.visible = true;
+              }
+              chart.render();
+            }
+          }
+    });
+
+chart.render();
+}
+</script>
 <body>
 		<div id="header" style="width: 100%; height: 135px;background-color: #34495e;">
       <div class="row">
@@ -124,19 +186,25 @@
       							<a href="/relatorio/"><u>Relatórios <i class="fa fa-fw fa-arrow-right"></i></u></a>
       						</div>
               </fieldset>
-              <fieldset style="width: 100%; padding: 50px;">
+              <fieldset style="width: 100%; padding: 20px;">
               <legend>Gráficos</legend>
-  						@foreach($chart as $c)
-                  <div class="chart_div" id="chart_div" style="width: 100%; margin-top:25px; ">
-                    {!! $c->render() !!}
-                    <div style="float: left;">
-                      {!! $realtime->render() !!}
+                  <div class="col-md-12">
+                    <div class="col-md-12" style="margin-top: 10px;">
+                      {!! $chart->render() !!}
                     </div>
-                    <div style="float: right; margin-top: 15px; margin-left: 15px;">
+                    <div class="col-md-12" style="margin-top: 10px;">
                       {!! $chartPizza->render() !!}
                     </div>
+                    <div class="col-md-12" style="margin-top: 10px;">
+                      <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    </div>
                   </div>
-              @endforeach
+                
+
+                  <div class="chart_div" id="chart_div" style="width: 100%; margin-top:25px; ">
+                  
+                  </div>
+
               </fieldset>
   				  </div>
           </div>
@@ -160,6 +228,7 @@
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 
 <script src="js/index.js"></script>
-
+<script type="text/javascript" src="/js/jquery.canvasjs.min.js"></script>
+<script type="text/javascript" src="/js/canvasjs.min.js"></script>
 </body>
 </html>

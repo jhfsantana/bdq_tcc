@@ -18,7 +18,7 @@
 @section('content')
 @section('titulo')
 <i class="fa fa-book" aria-hidden="true"></i>
-Disciplinas e Professores
+Disciplinas, Professores e Alunos
 @stop
 	
 	<input type="hidden" name="disciplina_id" id="disciplina_id" data-disciplina="{{ $disciplina->id}}">

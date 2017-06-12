@@ -201,9 +201,9 @@
 
 					});
 				});
-<<<<<<< HEAD
+
 			</script>
-=======
+
 
 			</script>
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -230,6 +230,5 @@
 		    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 		    <script src="/js/sweetalert.min.js"></script>
 
->>>>>>> 9f41b1cee2d726564aeb23d1335af614eff1d469
 		@stop
 </html>

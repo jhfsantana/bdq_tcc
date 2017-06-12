@@ -14,6 +14,7 @@
 
   
 </head>
+
 <style>
     div#notify ul {
         display:block;
@@ -213,7 +214,7 @@
 
 		<div class="conteudo">
 			<div class="row">
-				<div class="col-md-10 col-md-offset-1" style="margin-top: 60px;">
+				<div class="col-md-10 col-md-offset-1" style="margin-top: 175px;">
 
 				<h4>Professor(a): {{Auth::guard('web_teachers')->user()->nome }} </h4>
 				<i class="fa fa-fw fa-calendar"></i><em>{{$diames}}</em>
@@ -249,30 +250,9 @@
 		</div>
     
     <div class="col-md-10 col-md-offset-1" style="margin-top: 45px;">
-      <table id="tab" class="table table-striped" style="border-style: inset; border-width:1px; ">
-       <thead>
-        <tr>
-           <td> <strong>Matricula</strong></td>
-           <td> <strong>Nome do aluno</strong></td>
-           <td><strong>Disciplina</strong></td>
-           <td><strong>Turma</strong></td>
-           <td><strong>Professor</strong></td>
-           <td><strong>Contato</strong></td>
-        </tr>
-       </thead>
-       <tbody>
-          @foreach($lista_alunos as $lista)
-            <tr>
-                <td>{{ $lista->matricula }}</td>
-                <td>{{ $lista->aluno_nome }}</td>
-                <td>{{ $lista->disciplina_nome }}</td>
-                <td>{{ $lista->turma_nome }}</td>
-                <td>{{ $lista->professor_nome }}</td>
-                <td><a data-toggle="modal" data-id="{{ $lista->aluno_id }}"  data-nome="{{ $lista->aluno_nome }}" data-target="#enviarMensagem" title="Enviar mensagem" class="open-enviarMensagem" href="#"><img src="/images/mail2.svg"  style="width: 35px; height: 35px;"></a></td>
-            </tr>
-          @endforeach
-       </tbody>
-      </table>
+      <div class="col-md-12">
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+      </div>
     </div>
 	</div>
 </div>
@@ -314,6 +294,8 @@
 <script src='https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js'></script>
   
 <script src="js/index.js"></script>
+<script type="text/javascript" src="/js/jquery.canvasjs.min.js"></script>
+<script type="text/javascript" src="/js/canvasjs.min.js"></script>
 <script>
 
 $(document).on("click", ".open-enviarMensagem", function () {
@@ -397,6 +379,68 @@ $(document).ready(function() {
             return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
         });
     });
+
+
+
+ window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer",
+    {
+
+      title:{
+        text: "MÉDIA MEUS ALUNOS",
+        fontSize: 30
+      },
+                        animationEnabled: true,
+      axisX:{
+
+        gridColor: "Silver",
+        tickColor: "silver",
+        valueFormatString: "DD/MMM"
+
+      },                        
+                        toolTip:{
+                          shared:true
+                        },
+      theme: "theme2",
+      axisY: {
+        gridColor: "Silver",
+        tickColor: "silver"
+      },
+      legend:{
+        verticalAlign: "center",
+        horizontalAlign: "right"
+      },
+      data: [
+      @foreach($medias as $media)       
+      { 
+        type: "column",
+        showInLegend: true,
+        lineThickness: 5,
+        name: '{{$media->aluno_nome}}',
+        markerType: "square",
+        dataPoints: [
+        { x: new Date({{$media->ano}}+'-'+{{$media->mes}}), y: {{$media->y}} },
+        ],
+      },
+      @endforeach
+      ],
+          legend:{
+            cursor:"pointer",
+            itemclick:function(e){
+              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+              }
+              else{
+                e.dataSeries.visible = true;
+              }
+              chart.render();
+            }
+          }
+    });
+
+chart.render();
+}
 </script>
+
 </body>
 </html>

@@ -13,7 +13,10 @@
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 
 @stop
-
+@section('titulo')
+    <i class="fa fa-book" title="Edit"></i>
+    Cadastrar em lote
+@stop
 @section('content')
     <div class="modal fade" id="pleaseWaitDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">

@@ -122,5 +122,30 @@ app.controller('AlunoController', function($scope, $http, API_URL, alunoAPI)
   		// Execute action
   		$scope.aluno = {};
 		});
-
+		$(document).on("focusout", ".zipcode", function() {
+			  if ( $( this ).val() != '' )
+		      {
+		          $.getJSON("https://viacep.com.br/ws/"+$( this ).val()+"/json/", function(result){
+		          	console.log(result);
+		              $.each(result, function(i, field){
+		                  if ( i == 'logradouro' )
+		                  {
+							$scope.aluno.logradouro = field;   
+		                  }else if ( i == 'bairro' ){
+		                    $scope.aluno.bairro = field;   
+		                  }else if ( i == 'complemento' ){
+		                     $('.additional').val(field); 
+		                  }
+		                  else if ( i == 'uf' )
+		                  {
+							 $scope.aluno.uf = field;   
+		                  }
+		                  else if ( i == 'localidade' )
+		                  {
+							 $scope.aluno.cidade = field;     
+						  }
+		              });
+		          });
+		      }
+			});
 });

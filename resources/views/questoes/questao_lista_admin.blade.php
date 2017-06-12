@@ -16,7 +16,10 @@
 		    <![endif]-->
 
 		@stop
-		
+		@section('titulo')
+			<i class="fa fa-book" title="Edit"></i>
+			Questões
+		@stop
 
 		@section('content')
 				<div id="main"></div>
@@ -61,7 +64,7 @@
 								<tr ng-repeat="questao in questoes | filter:buscar | comecarEm:(currentPage - 1) * pageSize | limitTo:pageSize | orderBy:sortType:sortReverse">
 									<td>@{{ questao.id }}</td>
 									<td>@{{ questao.questao }}</td>
-									<td>@{{ questao.disciplina_nome}}</td>
+									<td>@{{ questao.nome}}</td>
 
 									<td style="text-align: right;">
 										<button class="btn btn-warning btn-sm btn-detail" ng-click="toggle('edit', questao.id)">
@@ -72,9 +75,6 @@
 											<span class="glyphicon glyphicon-trash"></span>
 										</button>
 
-										<button class="btn btn-info btn-sm btn-details" ng-click="toggle('details', questao.id)" style="margin-left: 10px;">
-											<span class="glyphicon glyphicon-search"></span>
-										</button>
 									</td>
 								</tr>
 							</tbody>
@@ -145,7 +145,6 @@
 								<div layout="row" layout-align="center center" style="margin-top: 10px;">
 									<md-input-container class="md-block" flex="90">
 										<label>Alternativa A</label>
-										<md-icon md-svg-src="images/a.svg/" style="margin-bottom: 8px; margin-left: 5px;	"></md-icon>
 											<input required md-no-asterisk type="text" name="a" ng-model="questao.alternativaA" maxlength="250" value="@{{ questao.alternativaA }}" />
 											<div ng-messages="frmAdmin.name.$error">
           										<div ng-message="required">

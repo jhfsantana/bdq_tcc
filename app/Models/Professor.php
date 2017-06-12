@@ -153,4 +153,53 @@ class Professor extends User
                 ->select('alunos.id as qtd_alunos', 'alunos.id as aluno_id', 'alunos.matricula as matricula', 'turmas.nome as turma_nome as turma_nome', 'disciplinas.nome as disciplina_nome', 'professores.nome as professor_nome', 'alunos.nome as aluno_nome', 'alunos.id as qtd_alunos')->get();
         return $sql;
     }
+
+
+    public static function  mediaMeusAluno($professor_id)
+    {
+
+        $media = DB::table('aluno_resultado')
+                     ->join('avaliacoes', 'aluno_resultado.avaliacao_id', '=', 'avaliacoes.id')
+                     ->join('alunos', 'aluno_resultado.aluno_id', '=', 'alunos.id')
+                     ->select(DB::raw('year(aluno_resultado.created_at) as ano, month(aluno_resultado.created_at) as mes, day(aluno_resultado.created_at) as dia, avg(nota) as y, alunos.nome as aluno_nome'))
+                     ->where('avaliacoes.professor_id', '=', $professor_id)
+                     ->groupBy(DB::raw('year(aluno_resultado.created_at), month(aluno_resultado.created_at),day(aluno_resultado.created_at), alunos.nome'))
+                     ->get();       
+        
+//CRIANDO A ESTRUTURA EM JSON PARA O GRAFICO
+        $root = [];
+        $data = [];
+        $data2 = [];
+        $dataPoints = [];
+        foreach ($media as $m)
+        {
+            $data_formatada = $m->dia.'-'.$m->mes.'-'.$m->ano;
+            $my_date =  strtotime($data_formatada);
+
+            $data2[] = [
+                'x' => 'new Date('.$my_date.')',
+                'y' => 'parseInt('.$m->y.')'
+            ];
+
+            $dataPoints = $data2;
+
+            $data[] = [
+                             'showInLegend' => true, 
+                             
+                              
+                             'dataPoints' => $dataPoints
+                             ];
+            $root['data'] = $data;
+        }
+
+        if(empty($media))
+        {
+            return 0;    
+        }
+        else
+        {
+            return $media;
+        }
+        
+    }
 }

@@ -83,9 +83,14 @@ class AlunoController extends Controller
         $aluno->email = $request->email;
         $cryptPassword = bcrypt($request->password);
         $aluno->password = $cryptPassword;
+        $aluno->uf = $request->input('uf');
+        $aluno->bairro = $request->input('bairro');
+        $aluno->cidade = $request->input('cidade');
+        $aluno->logradouro = $request->input('logradouro');
+        $aluno->cep = $request->input('cep');
         $aluno->save();
 
-        $aluno->disciplinas()->sync($request->disciplinas, false);
+        //$aluno->disciplinas()->sync($request->disciplinas, false);
 
         return 'salvou';
     }
@@ -181,19 +186,26 @@ class AlunoController extends Controller
     public function bemvindo()
     {
         $usuario = Aluno::find(Auth::user()->id);
-        $aluno = Aluno::ultimaNota();
+        $ultimaNota = Aluno::ultimaNota();
 
-        $alunos = Aluno::all();
+        $disciplinas = Aluno::find(Auth::user()->id)->disciplinas;
+        $turmas = Aluno::find(Auth::user()->id)->turmas;
         $notificacoes = Notificacao::all()->where('aluno_id', Auth::user()->id)->where('avaliacao_id', '=', 0);
         
+        $media = Aluno::mediaAluno(Auth::user()->id);
         $contador_notificacoes = Notificacao::all()
                                                 ->where('visualizado', '<>', 1)
                                                 ->where('aluno_id', Auth::user()->id)
                                                 ->where('avaliacao_id', '=', 0);
-
-        return view('alunos.index')->with('aluno', $aluno)->withAluno($usuario)
+                                            
+        $diames = \App\Models\Util::pegarDiaSemana();
+        return view('alunos.index')->with('aluno', $ultimaNota)
                                     ->with('notificacoes', $notificacoes)
-                                    ->with('contador_notificacoes', count($contador_notificacoes));;
+                                    ->with('contador_notificacoes', count($contador_notificacoes))
+                                    ->with('turmas', count($turmas))
+                                    ->with('disciplinas', count($disciplinas))
+                                    ->with('diames', $diames)
+                                    ->with('media', $media);
     }
 
     public function avaliacao(Request $request)
@@ -1177,7 +1189,7 @@ class AlunoController extends Controller
         $profArray[] = $request->aluno_id;
 
         $nome = $aluno->nome;
-
+        
         if($aluno->save())
         {
             if($disciplina->save())

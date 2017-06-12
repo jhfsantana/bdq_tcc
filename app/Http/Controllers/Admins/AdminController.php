@@ -29,14 +29,14 @@ class AdminController extends Controller
         $professore2s = Professor::professorTopQuestoes();
         $questoes = Questao::topQuestoes();
         $media = Avaliacao::mediaAvaliacao();
-        
+        $alunoMedia = Admin::mediaAluno();
         $todos = Professor::all();
       
         $total = Professor::totalProfessores();
-        $alunos = ALuno::totalAlunos();
+        $alunos = Aluno::totalAlunos();
         $diames = Util::pegarDiaSemana();
                        
-        $chart[] = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'bar', 'highcharts')
+        $chart = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'bar', 'highcharts')
             ->setTitle('Quantidade de questões adicionadas ao BDQ')
             ->setElementLabel("Total de questões")
             ->setDimensions(425, 250)
@@ -68,7 +68,8 @@ class AdminController extends Controller
                                    ->with('realtime', $realtime)
                                    ->with('chartPizza', $chartPizza)
                                    ->with('diames', $diames)
-                                   ->with('todos',  $todos);
+                                   ->with('todos',  $todos)
+                                   ->with('media', $alunoMedia);
     }
 
     public function indexAPI($id = null)
@@ -142,6 +143,11 @@ class AdminController extends Controller
         $admin->matricula = $request->input('matricula');
         $admin->name = $request->input('name');
         $admin->sobrenome = $request->input('sobrenome');
+        $admin->uf = $request->input('uf');
+        $admin->bairro = $request->input('bairro');
+        $admin->cidade = $request->input('cidade');
+        $admin->logradouro = $request->input('logradouro');
+        $admin->cep = $request->input('cep');
         
         if(!Admin::validarCPF($request->input('cpf')))
         {

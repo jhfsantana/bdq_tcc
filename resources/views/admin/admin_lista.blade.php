@@ -17,7 +17,15 @@
 
 		@stop
 		
-
+		<style type="text/css">
+			input[type="text"][readonly] {
+				   color: #2c3e50;
+				}
+		</style>
+		@section('titulo')
+			<i class="fa fa-cogs" title="Edit"></i>
+			Administradores
+		@stop
 		@section('content')
 			<div class="container" style="margin-top: 5px;">
     		<div id="main
@@ -128,11 +136,15 @@
 					      </div>
 					      <div class="modal-body">
 							<form name="frmAdmin" class="form-horizontal" novalidate="">
+							<fieldset>
+								<legend>
+									Dados pessoais
+								</legend>
 								<div layout="row">
 									<md-input-container class="md-block"  flex="50">
 										<label>Matricula</label>
 										<md-icon md-svg-src="/images/admin/matricula.svg" class="name"></md-icon>
-											<input required dado-unico md-no-asterisk type="text" name="matricula" value="@{{ administrador.matricula }}" ng-model="administrador.matricula" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="text" name="matricula" value="@{{ administrador.matricula }}" ng-model="administrador.matricula" minlength="11" ng-model-options="{updateOn: 'blur'}"/>
 											<div ng-messages="frmAdmin.matricula.$error">
           										<div ng-message="required">
           											Campo matricula é obrigatório.
@@ -193,7 +205,7 @@
 									<md-input-container class="md-block" flex="50">
 										<label>CPF</label>
 											<md-icon md-svg-src="/images/admin/cpf.svg" class="name"></md-icon>
-											<input required dado-unico md-no-asterisk type="text" name="cpf" value="@{{ administrador.cpf }}" ng-model="administrador.cpf" minlength="11"/>
+											<input required dado-unico md-no-asterisk type="text" name="cpf" value="@{{ administrador.cpf }}" ng-model="administrador.cpf" minlength="11" ng-model-options="{updateOn: 'blur'}"/>
 											<div ng-messages="frmAdmin.cpf.$error">
           										<div ng-message="required">
           											Campo cpf é obrigatório.
@@ -219,7 +231,7 @@
 									<md-input-container class="md-block" flex="50">
 										<label>E-MAIL</label>
 											<md-icon md-svg-src="/images/admin/email.svg" class="name"></md-icon>
-											<input dado-unico required md-no-asterisk type="text" name="email" value="@{{ administrador.email }}" ng-model="administrador.email"  minlength="11"/>
+											<input dado-unico required md-no-asterisk type="text" name="email" value="@{{ administrador.email }}" ng-model="administrador.email"  minlength="11" ng-model-options="{updateOn: 'blur'}"/>
 											<div ng-messages="frmAdmin.email.$error">
           										<div ng-message="required">
           											Campo email é obrigatório.
@@ -236,11 +248,83 @@
 											</div>
 									</md-input-container>
 								</div>
+							</fieldset>
+							<fieldset>
+								<legend>Endereço</legend>
+								
+								<div class="form-group">
+										<label>CEP</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="text" name="cep" class="zipcode form-control" value="@{{ administrador.cep }}" ng-model="administrador.cep" minlength="8" ng-model-options="{updateOn: 'blur'}"/>
+											<div ng-messages="frmAdmin.cep.$error">
+          										<div ng-message="required">
+          											Campo cep é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do campo cep deve ter no minimo 8 caracteres.
+          										</div>
+											</div>
+										</div>
+								</div>
+								<div class="form-group">
+										<label>logradouro</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="text" readonly="true" name="logradouro" value="@{{ administrador.logradouro }}" class="logradouro form-control" ng-model="administrador.logradouro" minlength="8"/>
+											
+										</div>
+								</div>
+								<div class="form-group">
+									<label>Bairro</label>
+									<div class="col-sm-9">
+										<input required md-no-asterisk type="text" class="form-control" name="bairro" readonly="true" value="@{{ administrador.bairro }}" ng-model="administrador.bairro" class="bairro" minlength="8"/>
 
+										
+									</div>
+								</div>
+								<!-- <md-input-container class="md-block" flex="50">
+										<label>Bairro</label>
+											<input required md-no-asterisk type="bairro" name="bairro" value="@{{ professor.bairro }}" ng-model="professor.bairro" maxlength="30"  ng-model-options="{updateOn: 'blur'}"/>
+											<div ng-messages="frmProfessor.bairro.$error">
+          										<div ng-message="required">
+          											Campo bairro é obrigatório.
+          										</div>
+         										<div ng-message="maxlength">
+          											Tamanho do campo bairro deve ter no máximo 30 caracteres.
+          										</div>
+         										<div ng-message="dadoUnico">
+          											E-mail já existente.
+          										</div>        										
+												<span class="text-success" ng-show="frmProfessor.bairro.$valid">
+													E-mail disponível.
+												</span>
+												<span ng-if="frmProfessor.bairro.$pending" >
+ 													<md-progress-circular ng-disabled="!vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+ 												</span>
+											</div>
+									</md-input-container> -->
+								<div class="form-group">
+										<label>UF</label>
+										<div class="col-sm-9">
+											<input required md-no-asterisk type="text" class="uf form-control" name="uf" readonly="true" value="@{{ administrador.uf }}" ng-model="administrador.uf" minlength="2"/>
+											
+										</div>
+								</div>
+								<div class="form-group">
+									<label>Cidade</label>
+									<div class="col-sm-9">
+										<input required md-no-asterisk type="text" readonly="true" class="cidade form-control" name="cidade" value="@{{ administrador.cidade }}" ng-model="administrador.cidade" minlength="8"/>
+										
+									</div>
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend>
+									Segurança
+								</legend>
 								<div layout="row">
 									<md-input-container class="md-block">
 										<label>Password</label>
-											<md-icon md-svg-src="/images/admin/email.svg" class="name"></md-icon>
+											<md-icon md-svg-src="/images/admin/cpf.svg" class="name"></md-icon>
 											<input required md-no-asterisk type="password" name="password" value="@{{ administrador.password }}" ng-model="administrador.password" minlength="8"/>
 											<div ng-messages="frmAdmin.password.$error">
           										<div ng-message="required">
@@ -251,7 +335,24 @@
           										</div>
 											</div>
 									</md-input-container>
+									<md-input-container class="md-block">
+										<label>Confirmar Password</label>
+											<md-icon md-svg-src="/images/admin/cpf.svg" class="name"></md-icon>
+											<input required md-no-asterisk type="password" name="confirmarPassword" value="@{{ administrador.password }}" ng-model="administrador.confirmarPassword" minlength="8" confirmar-password="administrador.password"/>
+											<div ng-messages="frmAdmin.confirmarPassword.$error">
+          										<div ng-message="required">
+          											Campo password é obrigatório.
+          										</div>
+         										<div ng-message="minlength">
+          											Tamanho do campo password deve ter no minimo 8 caracteres.
+          										</div>
+          										<div ng-message="confirmarPassword">
+          											Confirmação inválida, o password deverá se igual ao do campo ao lado.
+          										</div>
+											</div>
+									</md-input-container>
 								</div>
+							</fieldset>
 							</form>
 								<div class="modal-footer">
 									<div ng-if="modalstate == 'add'" >

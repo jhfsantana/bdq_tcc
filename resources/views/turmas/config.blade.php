@@ -111,10 +111,7 @@ Turmas
 			</tbody>
 		</table>
 	</fieldset>
-	<fieldset>
-		<legend>
-			Configuração
-		</legend>
+
 		<!-- INICIO ! Adicionando disciplina -->
 		
 
