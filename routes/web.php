@@ -111,11 +111,11 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 
 	Route::get('professor/questoes', 'Questoes\QuestaoController@index');
 	
-	Route::post('professor/questao/deletar/{id}', 'Questoes\QuestaoController@deletar');
+	Route::post('professor/questao/deletar', 'Questoes\QuestaoController@removerByProfessor');
 
-	Route::post('professor/questao/alterar/{id}', 'Questoes\QuestaoController@edit');
+	Route::post('professor/questao/alterar', 'Questoes\QuestaoController@edit');
 	
-	Route::post('professor/questao/alterada', 'Questoes\QuestaoController@update');
+	Route::post('professor/questao/alterada', 'Questoes\QuestaoController@updateByProfessor');
 	
 	Route::post('/avaliacao/status', 'Avaliacoes\AvaliacaoController@status');
 

@@ -78,6 +78,11 @@
           </button>	
 
 		<div class="conteudo">
+      <div style="width: 100%; height: 85px; margin-top: 105px;background-color: #bdc3c7;">
+          <div class="row">
+            <h3 style="margin-left: 25px; color: white; ">@yield('titulo')</h3>
+          </div>
+      </div>
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1" style="margin-top: 45px;">
 					@yield('content')

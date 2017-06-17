@@ -43,39 +43,48 @@ function confirmDelete(e) {
 
 	</script>
 	@stop
+	@section('titulo')
+			<i class="fa fa-book" title="Edit"></i>
+			QUESTÕES
+	@stop
 	@section('content')
 	<br>
 	<br>
-	<br>
-	<h3 style="text-align: center;"> Lista de questões</h3>
-	<div class="" id="questoes">
-	<br>
-	<br>
-		<table class="table table-striped">
+	<fieldset>
+		<legend>
+			MINHAS QUESTÕES
+		</legend>
+		<div class="col-md-3" style="margin-bottom: 35px;">
+			<input type="text" class="form-control" id="myInput" onkeyup="procurar()" placeholder="Buscar por ....." title="Digite sua busca aqui">
+		</div>
+		<div  style="float: right;">
+			<a href="/professor/questao/add"><span class="btn btn-success">NOVA QUESTÃO</span></a>
+		</div>
+		<table class="table table-striped" id="questoes">
 			<tr>
 				<td><strong>ID</strong></td>
 				<td><strong>Questão</strong></td>
 				<td><strong>Disciplina</strong></td>
-				<td><strong>Ação</strong></td>
+				<td><strong>Editar</strong></td>
+				<td><strong>Remover</strong></td>
 			</tr>
 			@foreach($questoes as $questao)
 				<tr>
 					<td>{{$questao->id}}</td>
 					<td>{{$questao->questao}}</td>
 					<td>{{$questao->disciplina->nome}}</td>
-					<td><form id="formalterar" method="post" action="/professor/questao/alterar/{{$questao->id}}">
+					<td><form id="formalterar" method="post" action="/professor/questao/alterar">
                     		<input name="_token" type="hidden" value="{{ csrf_token() }}">
 							<input type="hidden"  value="{{$questao->id}}" name="questao_id"/>
-							<input type="hidden"  value="{{Auth::user()->id}}" name="professor_id" id="professor-id"/>
 							<button type="submit" name="alterar" id="alterar" class="btn btn-warning">
 								<i class="glyphicon glyphicon-pencil"></i>
 							</button>
 						</form>
 					</td>
-
-
-					<td><form id="formdeletar" method="post" action="/professor/questao/deletar/{{$questao->id}}">
+					<td>
+						<form id="formdeletar" method="post" action="/professor/questao/deletar">
                     		<input name="_token" type="hidden" value="{{ csrf_token() }}">
+							<input type="hidden"  value="{{$questao->id}}" name="questao_id"/>
 							<button type="submit" onclick="confirmDelete(event)" name="deletar" id="deletar" class="btn btn-danger">
 								<i class="glyphicon glyphicon-trash"></i>
 							</button>
@@ -85,4 +94,27 @@ function confirmDelete(e) {
 			@endforeach
 		</table>
 	</div>
+	</fieldset>
 	@stop
+	 <script type="text/javascript">
+ 	function procurar() {
+	  var input, filter, table, tr, td, td2, td3, i;
+	  input = document.getElementById("myInput");
+	  filter = input.value.toUpperCase();
+	  table = document.getElementById("questoes");
+	  tr = table.getElementsByTagName("tr");
+	  for (i = 0; i < tr.length; i++) {
+	    td = tr[i].getElementsByTagName("td")[0];
+	    td2 = tr[i].getElementsByTagName("td")[1];
+	    td3 = tr[i].getElementsByTagName("td")[2];
+
+	    if (td || td2 || td3) {
+	      if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1 || td3.innerHTML.toUpperCase().indexOf(filter) > -1) {
+	        tr[i].style.display = "";
+	      } else {
+	        tr[i].style.display = "none";
+	      }
+	    }       
+	  }
+	}
+ </script>

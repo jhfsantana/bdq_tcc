@@ -28,7 +28,10 @@
 		});
 		</script>
 	@stop
-	
+    @section('titulo')
+            <i class="fa fa-book" title="Edit"></i>
+         	AVALIAÇÕES
+    @stop	
 	@section('content')
 	<br>
 	<br>

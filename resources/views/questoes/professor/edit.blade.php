@@ -195,7 +195,7 @@ by the way it is so weird when you look at your code a couple of years after you
     @stop
     @section('titulo')
             <i class="fa fa-book" title="Edit"></i>
-            NOVA QUESTÃO
+            ALTERAR QUESTÃO
     @stop
     @section('content')
 	<div class="container" style="width: 100%">
@@ -211,13 +211,14 @@ by the way it is so weird when you look at your code a couple of years after you
                 @endif              
                 <fieldset>
                     <legend>
-                        Formulário para Cadastrar uma nova Questão
+                        Formulário de Alteração
                     </legend>
                     <div class="col-md-12">
                         <div class="row">
-                            <form id="questaoform" class="form-horizontal" role="form" method="post" action="adicionada">
+                            <form id="questaoform" class="form-horizontal" role="form" method="post" action="/professor/questao/alterada">
                                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
                                 <input name="trace" type="hidden" value="web">
+                                <input name="id" type="hidden" value="{{$questao->id}}">
                                 <div class="col-md-6">
                                     <div class="panel panel-info " >
                                         <div class="panel-heading">
@@ -227,9 +228,7 @@ by the way it is so weird when you look at your code a couple of years after you
                                     <div style="margin-bottom: 15px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
                                         <select class="form-control" name="disciplina_id">
-                                            @foreach($professor->disciplinas as $disciplinas)
-                                                <option value="{{$disciplinas->id}}">{{$disciplinas->nome}}</option>
-                                            @endforeach
+                                          <option value="{{$questao->disciplina->id}}">{{$questao->disciplina->nome}}</option>
                                         </select>   
                                     </div>
                                 </div>
@@ -242,28 +241,28 @@ by the way it is so weird when you look at your code a couple of years after you
                                     <div class="form-group">
                                         <ul>
                                           <li>
-                                            <input type="radio" id="f-option" name="nivel" value="1">
+                                            <input type="radio" id="f-option" name="nivel" value="1" {{$questao->nivel=='1' ? 'checked='.'"'.'checked'.'"' : '' }}>
                                             <label for="f-option">Facil</label>
                                             
                                             <div class="check"></div>
                                           </li>
                                           
                                           <li>
-                                            <input type="radio" id="s-option" name="nivel" value="2">
+                                            <input type="radio" id="s-option" name="nivel" value="2"  {{$questao->nivel=='2' ? 'checked='.'"'.'checked'.'"' : '' }}>
                                             <label for="s-option">Moderada</label>
                                             
                                             <div class="check"><div class="inside"></div></div>
                                           </li>
                                           
                                           <li>
-                                            <input type="radio" id="t-option" name="nivel" value="3">
+                                            <input type="radio" id="t-option" name="nivel" value="3" {{$questao->nivel=='3' ? 'checked='.'"'.'checked'.'"' : '' }}>
                                             <label for="t-option">Dificil</label>
                                             
                                             <div class="check"><div class="inside"></div></div>
                                           </li>
 
                                           <li>
-                                            <input type="radio" id="z-option" name="nivel" value="4">
+                                            <input type="radio" id="z-option" name="nivel" value="4" {{$questao->nivel=='4' ? 'checked='.'"'.'checked'.'"' : '' }}>
                                             <label for="z-option">Muito dificil</label>
                                             
                                             <div class="check"><div class="inside"></div></div>
@@ -274,7 +273,7 @@ by the way it is so weird when you look at your code a couple of years after you
                                 <div class="col-md-6">
                                     <div style="margin: 0; padding: 0;" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                                        <textarea required id="questao-area" type="textarea" rows="10" class="form-control" name="questao" placeholder="Questão"></textarea>
+                                        <textarea required id="questao-area" type="textarea" rows="10" class="form-control" name="questao" placeholder="Questão" >{{$questao->questao}}</textarea>
                                     </div>
                                 </div>
                                 </br></br>
@@ -286,27 +285,27 @@ by the way it is so weird when you look at your code a couple of years after you
                                     </div>
                                     <div class="input-group" style="margin-top: 25px;">
                                         <span class="input-group-addon" id="basic-addon1">A</span>
-                                            <input required id="questao-alternativa-a" type="text" class="form-control" name="alternativaA" placeholder="Alternativa A">
+                                            <input required id="questao-alternativa-a" type="text" class="form-control" name="alternativaA" placeholder="Alternativa A" value="{{$questao->alternativaA}}">
                                     </div>
 
                                     <div class="input-group" style="margin-top: 25px;">
                                         <span class="input-group-addon" id="basic-addon1">B</span>  
-                                            <input required id="questao-alternativa-b" type="text" class="form-control" name="alternativaB" placeholder="Alternativa B">
+                                            <input required id="questao-alternativa-b" type="text" class="form-control" name="alternativaB" placeholder="Alternativa B" value="{{$questao->alternativaB}}">
                                     </div>
 
                                     <div class="input-group" style="margin-top: 25px;">
                                         <span class="input-group-addon" id="basic-addon1">C</span>
-                                            <input required id="questao-alternativa-c" type="text" class="form-control" name="alternativaC" placeholder="Alternativa C">
+                                            <input required id="questao-alternativa-c" type="text" class="form-control" name="alternativaC" placeholder="Alternativa C" value="{{$questao->alternativaC}}">
                                     </div>
 
                                     <div class="input-group" style="margin-top: 25px;">
                                         <span class="input-group-addon" id="basic-addon1">D</span>                                              
-                                            <input required id="questao-alternativa-d" type="text" class="form-control" name="alternativaD" placeholder="Alternativa D">
+                                            <input required id="questao-alternativa-d" type="text" class="form-control" name="alternativaD" placeholder="Alternativa D" value="{{$questao->alternativaD}}">
                                     </div>
 
                                     <div class="input-group" style="margin-top: 25px;">
                                         <span class="input-group-addon" id="basic-addon1">E</span>                                              
-                                            <input required id="questao-alternativa-e" type="text" class="form-control" name="alternativaE" placeholder="Alternativa E">
+                                            <input required id="questao-alternativa-e" type="text" class="form-control" name="alternativaE" placeholder="Alternativa E" value="{{$questao->alternativaE}}">
                                     </div>
                                 </div>
                             </div>
@@ -318,11 +317,11 @@ by the way it is so weird when you look at your code a couple of years after you
                                     <div class="panel-body">
                                          <div style="margin-bottom: 15px; border-style: ridge; border-radius: 8px; border-color: #ecf0f1; opacity: 4px; text-align: center; vertical-align: middle;" class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-alert"></i></span>
-                                            <input type="radio" name="correta" value="a"> A
-                                            <input type="radio" name="correta" value="b"> B
-                                            <input type="radio" name="correta" value="c"> C
-                                            <input type="radio" name="correta" value="d"> D
-                                            <input type="radio" name="correta" value="e"> E
+                                            <input type="radio" name="correta" value="a" {{$questao->correta=='a' ? 'checked='.'"'.'checked'.'"' : '' }}> A
+                                            <input type="radio" name="correta" value="b" {{$questao->correta=='b' ? 'checked='.'"'.'checked'.'"' : '' }}> B
+                                            <input type="radio" name="correta" value="c" {{$questao->correta=='c' ? 'checked='.'"'.'checked'.'"' : '' }} > C
+                                            <input type="radio" name="correta" value="d" {{$questao->correta=='d' ? 'checked='.'"'.'checked'.'"' : '' }}> D
+                                            <input type="radio" name="correta" value="e" {{$questao->correta=='e' ? 'checked='.'"'.'checked'.'"' : '' }}> E
                                         </div>                                   
                                     </div>
                                 </div>

@@ -86,6 +86,10 @@ function showQ(select){
 }
 
 </script>
+@section('titulo')
+            <i class="fa fa-book" title="Edit"></i>
+            GERANDO AVALIAÇAO
+    @stop
 @section('content')
     @if(!empty($errors->all()))
     <div class="alert alert-warning" role="alert-warning">

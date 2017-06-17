@@ -3,11 +3,13 @@
 	<link rel="stylesheet" href="/css/global.css">	
 	<link rel="stylesheet" href="/css/formularios.css">	
 	<title>Lista de avaliacoes</title>
-
+    @section('titulo')
+            <i class="fa fa-book" title="Edit"></i>
+         	AVALIAÇÃO
+    @stop
 	@section('content')
 	<br>
-	<br>
-	<br>
+
 		<div class="container">
 		<h2 style="text-align: center;">Avaliação</h2>
 		<table class="table">

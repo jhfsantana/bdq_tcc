@@ -68,11 +68,13 @@ class QuestaoController extends Controller
             [
                 'disciplina_id' => 'required|max:255',
                 'nivel'         => 'required',
+                'correta'         => 'required',
             ],
             $messages = 
                 [
                     'disciplina_id.required' => 'Escolha uma disciplina',
                     'nivel.required'         => 'Nivel de dificuldade é obrigatório',
+                    'correta.required'         => 'Alternativa correta é obrigatório',
                 ]);
         $questao = new Questao();
         $questao->questao         = $request->questao;
@@ -459,5 +461,46 @@ class QuestaoController extends Controller
         header("Content-Transfer-Encoding: Binary"); 
         header("Content-disposition: attachment; filename=\"" . basename($caminho) . "\""); 
         readfile($caminho); // do the double-download-dance (dirty but worky)
+    }
+
+    public function edit(Request $request)
+    {
+        $questao = Questao::find($request->questao_id);
+    
+        return view('questoes.professor.edit')->with('questao', $questao);
+    }
+
+    public function updateByProfessor(Request $request)
+    {
+
+        $questao = Questao::find($request->id);
+
+        $questao->questao = $request->questao;
+        $questao->alternativaA = $request->alternativaA;
+        $questao->alternativaB = $request->alternativaB;
+        $questao->alternativaC = $request->alternativaC;
+        $questao->alternativaD = $request->alternativaD;
+        $questao->alternativaE = $request->alternativaE;
+        $questao->correta = $request->correta;
+        $questao->nivel = $request->nivel;
+        $questao->professor()->associate(Auth::guard('web_teachers')->user()->id);
+        $questao->disciplina()->associate($request->disciplina_id);
+
+        if($questao->save())
+        {
+            $request->session()->flash('alert-success', 'Questão '. $questao->questao .' alterada com sucesso!');
+            return redirect ('/professor'); 
+        }
+    }
+
+    public function removerByProfessor(Request $request)
+    {
+        $questao = Questao::find($request->questao_id);
+    
+        if($questao->delete())
+        {
+            $request->session()->flash('alert-danger', 'Questão '. $questao->questao .' removida com sucesso!');
+            return redirect ('/professor');        
+        }
     }
 }
