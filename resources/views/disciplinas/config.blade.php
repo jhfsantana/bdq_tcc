@@ -48,6 +48,7 @@ Disciplinas, Professores e Alunos
 					<tr>
 						<th>Matricula</th>
 						<th>Nome</th>
+						<th>Turma</th>
 						<th>Ação</th>
 					</tr>
 				</thead>
@@ -57,15 +58,18 @@ Disciplinas, Professores e Alunos
 						    <tr>
 						    	<td class="tg-yw4l"><a href="/professor/config/{{$professor->id}}"> {{ $professor->matricula }} </a> </td>
 						    	<td class="tg-yw4l"><a href="/professor/config/{{$professor->id}}"> {{ $professor->nome }}      </a> </td>
-
-						    <td class="tg-yw41" style="padding: 20px;"> 
-						    	<a href="#" id="prof_id"  onclick="confimar({{ $professor->id }});">
-						    		<span class="btn btn-danger btn-sm btn-config">
-										<span class="glyphicon glyphicon-trash">
+						    	
+						    	@foreach($professor->turmas as $turma)
+						    	<td class="tg-yw4l"><a href="/professor/config/{{$professor->id}}"> {{ $turma->nome }}      </a> </td>
+						    	@endforeach
+							    <td class="tg-yw41" style="padding: 20px;"> 
+							    	<a href="#" id="prof_id"  onclick="confimar({{ $professor->id }});">
+							    		<span class="btn btn-danger btn-sm btn-config">
+											<span class="glyphicon glyphicon-trash">
+											</span>
 										</span>
-									</span>
-						    	</a>
-						    </td>
+							    	</a>
+							    </td>
 						    </tr>
 						@endforeach
 					</tr>
@@ -81,6 +85,7 @@ Disciplinas, Professores e Alunos
 					<tr>
 						<th>Matricula</th>
 						<th>Nome</th>
+						<th>Turma</th>
 						<th>Ação</th>
 					</tr>
 				</thead>
@@ -90,7 +95,9 @@ Disciplinas, Professores e Alunos
 						    <tr>
 						    	<td class="tg-yw4l"><a href="/aluno/config/{{$aluno->id}}"> {{ $aluno->matricula }} </a> </td>
 						    	<td class="tg-yw4l"><a href="/aluno/config/{{$aluno->id}}"> {{ $aluno->nome }}      </a> </td>
-
+						    	@foreach($aluno->turmas as $turma)
+						    	<td class="tg-yw4l"><a href="/aluno/config/{{$aluno->id}}"> {{ $turma->nome }}      </a> </td>
+						    	@endforeach
 						    <td class="tg-yw41" style="padding: 20px;"> 
 						    	<a href="#" id="prof_id"  onclick="confimar({{ $aluno->id }});">
 						    		<span class="btn btn-danger btn-sm btn-config">

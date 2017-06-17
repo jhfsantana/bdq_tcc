@@ -55,12 +55,14 @@ class ProfessorController extends Controller
 
         $lista_alunos = Professor::listarAlunos(Auth::user()->id);
         $media = Professor::mediaMeusAluno(Auth::user()->id);
+        $professor = Professor::find(Auth::user()->id);
         return view('professores.index')->with('alunos', count($alunos))
             ->with('diames', $diames)
             ->with('notificacoes', $notificacoes)
             ->with('contador_notificacoes', count($contador_notificacoes))
-            ->with('lista_alunos', $lista_alunos)
-            ->with('medias', $media);
+            ->with('lista_alunos', count($lista_alunos))
+            ->with('medias', $media)
+            ->with('turmas', count($professor->turmas));
     }
 
 
@@ -203,8 +205,8 @@ class ProfessorController extends Controller
 
     public function alunos()
     {
-        $disciplina = Disciplina::with('professores')->find(Auth::user()->id);
-        return view('professores.alunos')->with('disciplina', $disciplina);
+        $professor = Professor::find(Auth::user()->id);
+        return view('professores.alunos')->with('professor', $professor);
     }
 
     public function enviarMensagem(Request $request)
@@ -285,4 +287,12 @@ class ProfessorController extends Controller
 
         return redirect()->back();
     }
+
+
+    public function turmas()
+    {   
+        $professor = Professor::find(Auth::user()->id);
+        return view('professores.turmas')->with('professor', $professor);
+    }
+
 }

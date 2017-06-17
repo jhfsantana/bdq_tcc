@@ -36,6 +36,7 @@ class QuestaoController extends Controller
         if($id == null)
         {
             $q = DB::table('questoes')->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
+            ->select(DB::raw('questoes.*, disciplinas.nome as disciplina_nome'))
             ->get();
             return $q;
         }else
@@ -154,7 +155,12 @@ class QuestaoController extends Controller
 
     public function destroy($id)
     {
-        Questao::find($id)->delete();
+        $questao = Questao::find($id);
+    
+        if($questao->delete())
+        {
+            return json_encode(['message' => 'Questao ' . $questao->nome. ' deletada com sucesso!']);
+        }
     }
 
     public function deletar(Request $request)

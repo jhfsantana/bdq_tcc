@@ -64,7 +64,7 @@
 								<tr ng-repeat="questao in questoes | filter:buscar | comecarEm:(currentPage - 1) * pageSize | limitTo:pageSize | orderBy:sortType:sortReverse">
 									<td>@{{ questao.id }}</td>
 									<td>@{{ questao.questao }}</td>
-									<td>@{{ questao.nome}}</td>
+									<td>@{{ questao.disciplina_nome}}</td>
 
 									<td style="text-align: right;">
 										<button class="btn btn-warning btn-sm btn-detail" ng-click="toggle('edit', questao.id)">

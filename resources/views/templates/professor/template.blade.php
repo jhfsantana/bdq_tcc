@@ -59,6 +59,10 @@
                 </li>
 
                 <li>
+                   <a href="/professor/turmas"><i class="fa fa-fw fa-users"></i> Turmas</a>
+                </li>
+                
+                <li>
                     <a href="/professor/logout"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
                 </li>
             </ul>

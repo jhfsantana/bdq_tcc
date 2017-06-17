@@ -198,6 +198,10 @@
                 </li>
 
                 <li>
+                   <a href="/professor/turmas"><i class="fa fa-fw fa-users"></i> Turmas</a>
+                </li>
+
+                <li>
                     <a href="/professor/logout"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
                 </li>
             </ul>
@@ -214,47 +218,57 @@
 
 		<div class="conteudo">
 			<div class="row">
-				<div class="col-md-10 col-md-offset-1" style="margin-top: 175px;">
+				<div class="col-md-12" style="margin-top: 175px;">
+          <div class="col-md-offset-1">
+            <h4>Professor(a): {{Auth::guard('web_teachers')->user()->nome }} </h4>
+            <i class="fa fa-fw fa-calendar"></i><em>{{$diames}}</em>  
+          </div>
+				
+        <!-- MENSAGEM DE SUCESSO -->
+        <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+              @if(Session::has('alert-' . $msg))
+              <h3><p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p></h3>
+              @endif
+            @endforeach
+        </div>  
+        <!-- FIM DA MENSAGEM DE SUCESSO -->
 
-				<h4>Professor(a): {{Auth::guard('web_teachers')->user()->nome }} </h4>
-				<i class="fa fa-fw fa-calendar"></i><em>{{$diames}}</em>
-      
-      <!-- MENSAGEM DE SUCESSO -->
-      <div class="flash-message">
-          @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-            @if(Session::has('alert-' . $msg))
-            <h3><p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close"></a></p></h3>
-            @endif
-          @endforeach
-      </div>  
-      <!-- FIM DA MENSAGEM DE SUCESSO -->
-				<h4>Resumo das informações</h4>
+        <fieldset>
+          <legend>
+            <h4>Resumo das informações</h4>  
+          </legend>
 
-				<div class="box-top" style="border-color: #2980b9; background-color: #ecf0f1;">
-					<img src="images/professor_64px.png">
-					<h3 class="professores"  style="color: #2980b9;">20</h3>
-					<a href="#" style="color: #2980b9;"><u>Nº Minhas turmas</u></a>
-				</div>
+  				<div class="box-top" style="border-color: #2980b9; background-color: #ecf0f1;">
+  					<img src="images/professor_64px.png">
+  					<h3 class="professores"  style="color: #2980b9;">{{$turmas}}</h3>
+            <a href="/professor/turmas"><p style="color: #2980b9;">MINHAS TURMAS <i class="glyphicon glyphicon-circle-arrow-right"></i></p></a>
+  				</div>
 
-				<div class="box2-top" style="border-color: #e67e22;background-color: #ecf0f1; ">
-					<img src="images/estudantes_64.png">
-					<h3 class="estudantes" style="color: #e67e22;"> {{$alunos}} </h3>
-					<a href="#"style="color: #e67e22;"><u>Nº Estudantes</u></a>
-				</div>
+  				<div class="box2-top" style="border-color: #e67e22;background-color: #ecf0f1; ">
+  					<img src="images/estudantes_64.png">
+  					<h3 class="estudantes" style="color: #e67e22;"> {{$alunos}} </h3>
+  					<a href="/professor/alunos"><p style="color: #e67e22;">MEUS ALUNOS <i class="glyphicon glyphicon-circle-arrow-right"></i></p></a>
+  				</div>
 
-				<div class="box3-top" style="border-color: #27ae60; background-color:#ecf0f1 ">
-					<img src="images/estatistica_64.png">
-					<a href="/relatorio/" style="color: #27ae60;"><u>Relatórios <i class="fa fa-fw fa-arrow-right"></i></u></a>
-				</div>
+  				<div class="box3-top" style="border-color: #27ae60; background-color:#ecf0f1 ">
+  					<img src="images/professor/notification.svg" style="width: 64px; height: 64px;">
+            <a href="/professor/notificacoes"><p style="color: #27ae60;">NOTIFICAÇÕES <i class="glyphicon glyphicon-circle-arrow-right"></i></p></a>
+  				</div>
+        </fieldset>    
 			</div>
 		</div>
-    
-    <div class="col-md-10 col-md-offset-1" style="margin-top: 45px;">
-      <div class="col-md-12">
-        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-      </div>
-    </div>
-	</div>
+    <fieldset>
+      <legend>
+        MÉTRICA
+      </legend>
+        <div class="col-md-12">
+          <div class="col-md-12">
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            </div>
+        </div>
+    </fieldset>
+  </div>
 </div>
 
 <div class="modal fade" id="enviarMensagem" tabindex="-1" role="dialog" aria-labelledby="enviarMensagemLabel" aria-hidden="true">
@@ -382,12 +396,33 @@ $(document).ready(function() {
 
 
 
- window.onload = function () {
+// var objectFromJSON = some_json_decode_procedure(); // decoding JSON to native object
+// var dateArray = objectFromJSON.start.split(','); // splitting string to elements for new Date()
+// objectFromJSON.start = new Date(dateArray[0], dateArray[1], dateArray[2], dateArray[3], dateArray[4], dateArray[5]);
+
+var jsonMedias = {!! json_encode($medias, JSON_NUMERIC_CHECK) !!}
+var dateArray = jsonMedias.data;
+
+
+$.each(jsonMedias.data, function (key, data) {
+    $.each(data.dataPoints, function(key, data){
+      data.x = new Date(data.x)
+      //data.dataPoints = new Date(data.x);
+    })
+})
+
+var jsonFormatado = jsonMedias.data;
+
+console.log(JSON.stringify(jsonFormatado))
+//   $.each(jsonMedias)
+// jsonMedias.data.dataPoints = new Date(dateArray[0].dataPoints[0].x);
+// console.log(jsonMedias)
+  window.onload = function () {
     var chart = new CanvasJS.Chart("chartContainer",
     {
 
       title:{
-        text: "MÉDIA MEUS ALUNOS",
+        text: "DESEMPENHO DOS MEUS ALUNOS",
         fontSize: 30
       },
                         animationEnabled: true,
@@ -395,13 +430,13 @@ $(document).ready(function() {
 
         gridColor: "Silver",
         tickColor: "silver",
-        valueFormatString: "DD/MMM"
+        valueFormatString: "MMM/YY"
 
       },                        
                         toolTip:{
                           shared:true
                         },
-      theme: "theme2",
+      theme: "theme1",
       axisY: {
         gridColor: "Silver",
         tickColor: "silver"
@@ -410,20 +445,7 @@ $(document).ready(function() {
         verticalAlign: "center",
         horizontalAlign: "right"
       },
-      data: [
-      @foreach($medias as $media)       
-      { 
-        type: "column",
-        showInLegend: true,
-        lineThickness: 5,
-        name: '{{$media->aluno_nome}}',
-        markerType: "square",
-        dataPoints: [
-        { x: new Date({{$media->ano}}+'-'+{{$media->mes}}), y: {{$media->y}} },
-        ],
-      },
-      @endforeach
-      ],
+      data: jsonFormatado,
           legend:{
             cursor:"pointer",
             itemclick:function(e){
@@ -441,6 +463,5 @@ $(document).ready(function() {
 chart.render();
 }
 </script>
-
 </body>
 </html>

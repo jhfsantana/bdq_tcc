@@ -16,11 +16,10 @@
 	<div id="container">
 		<div class="sidebar">
 			<ul id="nav"> 
-			    <li><a href="/aluno" ><img src="/images/home.svg" style="width: 32px;width: 32px;" data-toggle="tooltip" title="Home"></a></li> 
-			    <li><a href="/aluno/avaliacoes"><img src="/images/exam.svg" style="width: 32px;width: 32px;" data-toggle="tooltip" title="Avaliações"></a></li>
-				<li><a href="/aluno/avaliacoes/realizadas"><img src="/images/notas.png" style="width: 32px;width: 32px;" data-toggle="tooltip" title="Avaliações Realizadas"></a></li>
-          		<li><a href="/aluno/mensagens"><img src="/images/messagewhite.svg" style="width: 32px;width: 32px;" data-toggle="tooltip" title="Mensagens"></a></li>
-			    <li><a href="/aluno/logout"><img src="/images/logout.svg" style="width: 32px;width: 32px;" data-toggle="tooltip" title="Sair"></a></li> 
+			    <li data-toggle="tooltip" data-placement="right" title="Home"><a href="/aluno" ><img src="/images/home.svg" style="width: 22px;width: 22px;"></a></li> 
+			    <li data-toggle="tooltip" data-placement="right" title="Avaliações"><a href="/aluno/avaliacoes"><img src="/images/exam.svg" style="width: 22px;width: 22px;"></a></li>
+				  <li data-toggle="tooltip" data-placement="right" title="Avaliações Realizadas"><a href="/aluno/avaliacoes/realizadas"><img src="/images/notas.png" style="width: 22px;width: 22px;"></a></li>
+			    <li data-toggle="tooltip" data-placement="right" title="Sair"><a href="/aluno/logout"><img src="/images/logout.svg" style="width: 22px;width: 22px;" ></a></li> 
 
 			 </ul>
 		</div>

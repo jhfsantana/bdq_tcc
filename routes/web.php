@@ -120,6 +120,7 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 	Route::post('/avaliacao/status', 'Avaliacoes\AvaliacaoController@status');
 
 	Route::get('/professor/alunos', 'Professores\ProfessorController@alunos');
+	Route::get('/professor/turmas', 'Professores\ProfessorController@turmas');
 
 	Route::post('/enviar/mensagem', 'Professores\ProfessorController@enviarMensagem');
 	

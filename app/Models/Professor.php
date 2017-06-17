@@ -161,44 +161,62 @@ class Professor extends User
         $media = DB::table('aluno_resultado')
                      ->join('avaliacoes', 'aluno_resultado.avaliacao_id', '=', 'avaliacoes.id')
                      ->join('alunos', 'aluno_resultado.aluno_id', '=', 'alunos.id')
-                     ->select(DB::raw('year(aluno_resultado.created_at) as ano, month(aluno_resultado.created_at) as mes, day(aluno_resultado.created_at) as dia, avg(nota) as y, alunos.nome as aluno_nome'))
+                     ->select(DB::raw('year(aluno_resultado.created_at) as ano, month(aluno_resultado.created_at) as mes, day(aluno_resultado.created_at) as dia, avg(nota) as y, alunos.nome as aluno_nome, alunos.id'))
                      ->where('avaliacoes.professor_id', '=', $professor_id)
-                     ->groupBy(DB::raw('year(aluno_resultado.created_at), month(aluno_resultado.created_at),day(aluno_resultado.created_at), alunos.nome'))
+                     ->groupBy(DB::raw('year(aluno_resultado.created_at), month(aluno_resultado.created_at),day(aluno_resultado.created_at), alunos.nome, alunos.id'))
                      ->get();       
         
-//CRIANDO A ESTRUTURA EM JSON PARA O GRAFICO
-        $root = [];
+// SELECT a.id, a.nome, MIN(b.created_at) minDate, avg(b.nota)
+//     FROM alunos a, aluno_resultado b
+//       WHERE a.id = b.aluno_id
+//        and b.created_at >= DATE_SUB(NOW(),INTERVAL 31 DAY) 
+//    GROUP BY a.id, a.nome
+//    ORDER BY 3 DESC  limit 10 ;        $root = [];
         $data = [];
         $data2 = [];
         $dataPoints = [];
         foreach ($media as $m)
         {
+            $arr[] = $m;
             $data_formatada = $m->dia.'-'.$m->mes.'-'.$m->ano;
-            $my_date =  strtotime($data_formatada);
+            //dd($arr);
+            $date = \DateTime::createFromFormat('d-m-Y', $data_formatada); // your original DTO
+            $newFormat = $date->format('Y-m-d');
+            
 
-            $data2[] = [
-                'x' => 'new Date('.$my_date.')',
-                'y' => 'parseInt('.$m->y.')'
-            ];
 
+            for ($i=0; $i < count($arr); $i++) {
+               // dd($arr);
+                 $arrAux[$i] = $arr;
+
+                for ($j=0; $j < count($arrAux[$i][$i]); $j++) {
+                    if($arrAux[$j][$j]->id == $arr[$j]->id)
+                    {
+                       $data2[$i] =  [
+                                        'x' => $newFormat,
+                                        'y' => $m->y
+                                    ];
+                    }
+                }
+            }
             $dataPoints = $data2;
 
-            $data[] = [
+            $data[] = [      'type' => 'column',
+                             'name' => $m->aluno_nome,
+                             'markerType' => 'square',
                              'showInLegend' => true, 
-                             
-                              
                              'dataPoints' => $dataPoints
                              ];
             $root['data'] = $data;
         }
-
-        if(empty($media))
+       //dd($roo t);
+        if(empty($root))
         {
             return 0;    
         }
         else
         {
-            return $media;
+            return $root;
         }
         
     }

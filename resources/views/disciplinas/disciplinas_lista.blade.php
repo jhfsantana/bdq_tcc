@@ -62,18 +62,18 @@
 								<tr ng-repeat="disciplina in disciplinas | filter:buscar | comecarEm:(currentPage - 1) * pageSize | limitTo:pageSize | orderBy:sortType:sortReverse">
 									<td>@{{ disciplina.id }}</td>
 									<td>@{{ disciplina.nome }}</td>
-									<td style="text-align: right;">
+									<td style="text-align: right;" title="Editar">
 										<button class="btn btn-warning btn-sm btn-detail" ng-click="toggle('edit', disciplina.id)">
 											<span class="glyphicon glyphicon-edit"></span>
 										</button>
 
-										<button class="btn btn-danger btn-sm btn-delete" ng-click="confirmDelete(disciplina.id)" style="margin-left: 10px;">
+										<button class="btn btn-danger btn-sm btn-delete" ng-click="confirmDelete(disciplina.id)" style="margin-left: 10px;" title="Remover">
 											<span class="glyphicon glyphicon-trash"></span>
 										</button>
 
 										<a href="/disciplina/config/@{{disciplina.id}}">
-											<span class="btn btn-primary btn-sm btn-config"  style="margin-left: 10px;">
-												<span class="glyphicon glyphicon-wrench">
+											<span class="btn btn-primary btn-sm btn-details"  style="margin-left: 10px;" title="Detalhes">
+												<span class="glyphicon glyphicon-search" title="Detalhes">
 												</span>
 											</span>
 										</a>
