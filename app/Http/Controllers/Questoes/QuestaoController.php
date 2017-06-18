@@ -384,7 +384,7 @@ class QuestaoController extends Controller
                 $xml = new \SimpleXMLElement($file, null, true);
 
                 $data = array();
-                
+                $arrayErros = array();
                 $count = 0;
                 foreach($xml->children() as $nodes)
                 {
@@ -405,28 +405,43 @@ class QuestaoController extends Controller
                     }
                     else
                     {
-                        $request->session()->flash('alert-danger', ' Disciplina informada não encontrada');
-                        return redirect()->back();
+                        if(isset($disciplina->nome))
+                        {
+                            $arrayErros[] = ['Linha' => $count, 'Mensagem' => 'Disciplina -> '. $disciplina->nome . ' não encontrada'];
+                        }
+                        else
+                        {
+                            $arrayErros[] = ['Linha' => $count, 'Mensagem' => 'Disciplina -> vazio não encontrada'];
+                        }
+                        //$request->session()->flash('alert-danger', ' Disciplina informada não encontrada');
+                        //return redirect()->back();
                     }
 
                     switch ($nodes->nivel) 
                     {
                         case 'facil':
                             $data['nivel'] = 1;
-                            break;
+                        break;
                         case 'moderado':
+                        case 'moderada':
                             $data['nivel'] = 2;
-                            break;
+                        break;
                         case 'dificil':
                             $data['nivel'] = 3;
-                            break;
+                        break;
                         case 'muito dificil':
                             $data['nivel'] = 4;
-                            break;
+                        break;
                         default:
-                            $request->session()->flash('alert-danger', 'Opção inválida para o nivel de dificuldade');
-                            return redirect()->back();
-                            break;
+                        if( isset($nodes->nivel))
+                        {
+                             $arrayErros[] = ['Linha' => $count, 'Mensagem' => 'Nível de dificuldade -> '. $nodes->nivel . ' não encontrado'];
+                        }
+                        else
+                        {
+                            $arrayErros[] = ['Linha' => $count, 'Mensagem' => 'Nível de dificuldade -> vazio não encontrado'];
+                        }
+                        break;
                     }
                     
                     $data['admin_id'] = Auth::user()->id;
@@ -440,9 +455,29 @@ class QuestaoController extends Controller
 
                 if($ok)
                 {
-                    Questao::insert($campos);
-                    $request->session()->flash('alert-success', ' XML Processado com Sucesso / Total de ' . $count . ' questões adicionadas ao Banco de Dados');
-                    return redirect()->back();
+                    foreach ($campos as $campo) {
+                        if(!empty($campo['questao']) && !empty($campo['disciplina_id']) && !empty($campo['nivel']))
+                        {
+                            Questao::insert($campo);
+                        }
+                    }
+
+                    if(!empty($arrayErros))
+                    {
+                        foreach ($arrayErros as $erro) {
+
+                        $request->session()->flash('alert-success', ' XML Processado com Sucesso / Total de ' . $count . ' linhas processadas ao Banco de Dados com sucesso! Mas contém alguns avisos na linha '. $erro['Linha']. ' Mensagem: '.$erro['Mensagem']);    
+                        }
+                        
+                    }
+                    else
+                    {
+                        $request->session()->flash('alert-success', ' XML Processado com Sucesso / Total de ' . $count . ' questões adicionadas ao Banco de Dados');
+                    }
+
+                    
+                    return back()
+                    ->withErrors($arrayErros);
                 }
             }
         }
@@ -455,12 +490,12 @@ class QuestaoController extends Controller
 
     public function downloadArquivo()
     {
-        $caminho = 'C:\wamp\www\bq_tcc\resources\assets\bdq_modelo_lote.xlsx';
-        set_time_limit(0);
+        $caminho = 'C:\wamp64\www\bdq_tcc\resources\assets\bdq_modelo_lote.xlsx';
+        
         header('Content-Type: application/octet-stream');
         header("Content-Transfer-Encoding: Binary"); 
         header("Content-disposition: attachment; filename=\"" . basename($caminho) . "\""); 
-        readfile($caminho); // do the double-download-dance (dirty but worky)
+        readfile($caminho);
     }
 
     public function edit(Request $request)

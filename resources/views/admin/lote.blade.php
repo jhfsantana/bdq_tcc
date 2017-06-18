@@ -34,6 +34,12 @@
         </div>
       </div>
     </div>
+                @if(isset($erros))
+                  @if(Session::has($erros))
+                    Session::get($erros);
+                    {{session('erros')}}
+                  @endif
+                @endif
     <h3 style="text-align: center;">Cadastrar questões em lote</h3>
 
     <div class="alert alert-warning" style="width: 50%;">

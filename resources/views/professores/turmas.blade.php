@@ -29,8 +29,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($professor->disciplinas as $disciplina)
-                        @foreach($disciplina->turmas as $turma)
+                    @foreach($professor->turmas as $turma)
+                        @foreach($turma->disciplinas as $disciplina)
                             <tr>
                                 <td>{{$turma->id}}</td>
                                 <td>{{$turma->nome}}</td>

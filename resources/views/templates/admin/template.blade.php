@@ -72,7 +72,7 @@
                 </li>
 
                 <li>
-                    <a href="/admin/questoes"><i class="fa fa-fw fa-list-ol"></i> Questões</a>
+                    <a href="/questoes"><i class="fa fa-fw fa-list-ol"></i> Questões</a>
                 </li>
 
                 <li>

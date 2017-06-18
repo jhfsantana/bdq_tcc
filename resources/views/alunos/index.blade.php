@@ -284,9 +284,9 @@ p.uppercase {
           <div class="row">
             <div class="col-md-4" style="text-align: center;">
                 <div class="nota">
-                  <p>Última nota <i class="glyphicon glyphicon-circle-arrow-right"></i></p>
-
-                    @if($aluno->nota)
+                 <a href="/aluno/avaliacao/resultado/{{$aluno->id}}"><p>Última nota <i class="glyphicon glyphicon-circle-arrow-right"></i></p></a>
+                 
+                    @if(isset($aluno->nota))
                       <h2>{{$aluno->nota}}</h2>
                       <h3>{{$aluno->disciplina}}</h3>
                     @else

@@ -290,7 +290,7 @@
 				</div>	
 			</div>
 		</div>
-
+@include('shared.angular_scripts')
 			<!-- Script para limpar o modal -->
 			<script>
 				$(document).ready(function() {

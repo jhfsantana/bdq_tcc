@@ -263,13 +263,13 @@
 								<div class="form-group">
 										<label>logradouro</label>
 										<div class="col-sm-9">
-											<input required md-no-asterisk type="text" readonly="true" name="logradouro" value="@{{ aluno.logradouro }}" class="logradouro form-control" ng-model="aluno.logradouro" minlength="8"/>
+											<input required md-no-asterisk type="text" readonly="true" name="logradouro" value="@{{ aluno.logradouro }}" class="logradouro form-control" ng-model="aluno.logradouro" minlength=3"/>
 											<div ng-messages="frmaluno.logradouro.$error">
           										<div ng-message="required">
           											Campo logradouro é obrigatório.
           										</div>
          										<div ng-message="minlength">
-          											Tamanho do campo logradouro deve ter no minimo 8 caracteres.
+          											Tamanho do campo logradouro deve ter no minimo 3 caracteres.
           										</div>
 											</div>
 										</div>
@@ -277,14 +277,11 @@
 								<div class="form-group">
 									<label>Bairro</label>
 									<div class="col-sm-9">
-										<input required md-no-asterisk type="text" class="form-control" name="bairro" readonly="true" value="@{{ aluno.bairro }}" ng-model="aluno.bairro" class="bairro" minlength="8"/>
+										<input required md-no-asterisk type="text" class="form-control" name="bairro" readonly="true" value="@{{ aluno.bairro }}" ng-model="aluno.bairro" class="bairro"/>
 
 										<div ng-messages="frmaluno.bairro.$error">
       										<div ng-message="required">
       											Campo bairro é obrigatório.
-      										</div>
-     										<div ng-message="minlength">
-      											Tamanho do campo bairro deve ter no minimo 8 caracteres.
       										</div>
 										</div>
 									</div>
@@ -439,7 +436,7 @@
 				</div>
 			</div>
 		</div>
-
+@include('shared.angular_scripts')
 			<!-- Script para limpar o modal -->
 			<script>
 				$(document).ready(function() {
