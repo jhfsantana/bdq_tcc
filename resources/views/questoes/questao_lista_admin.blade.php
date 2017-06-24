@@ -49,6 +49,13 @@
 	            						<span ng-show="sortType == 'disciplina' && sortReverse" class="fa fa-caret-up"></span>
 									</th>
 
+									<th>
+										<a href="#" ng-click="sortType = 'disciplina'; sortReverse = !sortReverse">
+										Professor
+	            						<span ng-show="sortType == 'disciplina' && !sortReverse" class="fa fa-caret-down"></span>
+	            						<span ng-show="sortType == 'disciplina' && sortReverse" class="fa fa-caret-up"></span>
+									</th>
+
 									<th style="text-align: right; margin-bottom: 10px; padding: 5px;">
 										<md-button id="btn-add"  class="md-raised md-primary" ng-click="toggle('add', 0)">Nova Questão</md-button>
 										
@@ -65,6 +72,7 @@
 									<td>@{{ questao.id }}</td>
 									<td>@{{ questao.questao }}</td>
 									<td>@{{ questao.disciplina_nome}}</td>
+									<td><a target="_blank" href="/professor/config/@{{ questao.professor_id}}">@{{ questao.professor_nome}}</a></td>
 
 									<td style="text-align: right;">
 										<button class="btn btn-warning btn-sm btn-detail" ng-click="toggle('edit', questao.id)">

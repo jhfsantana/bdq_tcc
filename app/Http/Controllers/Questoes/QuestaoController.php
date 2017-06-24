@@ -35,8 +35,10 @@ class QuestaoController extends Controller
     {
         if($id == null)
         {
-            $q = DB::table('questoes')->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
-            ->select(DB::raw('questoes.*, disciplinas.nome as disciplina_nome'))
+            $q = DB::table('questoes')
+            ->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
+            ->join('professores', 'questoes.professor_id', '=', 'professores.id')
+            ->select(DB::raw('questoes.*, disciplinas.nome as disciplina_nome, professores.nome as professor_nome, professores.id as professor_id'))
             ->get();
             return $q;
         }else

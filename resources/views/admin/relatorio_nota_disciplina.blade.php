@@ -62,17 +62,18 @@
 <br>
 <br>
 <br>
-<br>
-<div class="row">
-    <div class="col-md-4 col-md-offset-5">
+<br><div class="row">
+    <div class="col-md-12">
+      <div class="col-md-4 col-md-offset-4">
+
         <div class="panel with-nav-tabs panel-default">
-            <div class="panel-heading">
-            	<ul class="nav nav-tabs">
-					<li  role="presentation"><a href="/home">Página inicial</a></li>
-					<li  role="presentation"><a href="/relatorio/questao/50">Questões</a></li>
-					<li  role="presentation"><a href="/relatorio/">Professores</a></li> 
-					<li  role="presentation"  class="active"><a href="/relatorio/notas/1">Notas</a></li> 
-				</ul>
+        <div class="panel-heading">
+          <ul class="nav nav-tabs">
+  					<li  role="presentation"><a href="/home">Página inicial</a></li>
+  					<li  role="presentation"><a href="/relatorio/questao/50">Questões</a></li>
+  					<li  role="presentation"><a href="/relatorio/">Professores</a></li> 
+  					<li  role="presentation"  class="active"><a href="/relatorio/notas/1">Notas</a></li> 
+  				</ul>
 			</div>
 		</div>
 	</div>
@@ -123,9 +124,11 @@
 </div>
 
 <div class="row">
-    <div class="col-md-2 col-md-offset-5">
-		<div class="chart_div" id="chart_div"></div>
-	</div>
+  <div class="col-md-12">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="chart_div" id="chart_div"></div>
+    </div>
+  </div>
 </div>
 
 <script src="/js/jquery.datatables.min.js"></script>

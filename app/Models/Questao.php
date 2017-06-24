@@ -54,14 +54,51 @@ class Questao extends Model
                 ->get();*/
        
 
-        $resultado = DB::table('avaliacoes')
+        $questoes = DB::table('avaliacoes')
                 ->join('avaliacao_questao', 'avaliacoes.id', '=', 'avaliacao_questao.avaliacao_id')
                 ->join('questoes', 'avaliacao_questao.questao_id', '=', 'questoes.id')
                 ->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
                 ->groupBy('questoes.id', 'questoes.created_at')
+                ->limit(15)
+                ->orderBy('qtd', 'desc')
                 ->get(['questoes.id as questao_id', 'questoes.created_at', 'disciplinas.nome as disciplina_nome', 'questoes.questao as questao_nome' , DB::raw('COUNT(questoes.id) as qtd')]);
-        //dd($resultado);
-        return $resultado;
+
+
+        foreach ($questoes as $questao)
+        {
+            $enunciado_formatado = strlen($questao->questao_nome) > 30 ? substr($questao->questao_nome,0,30)."..." : $questao->questao_nome;
+
+            $dataPoints[] = [ 'y' => $questao->qtd, 'legendText' => $questao->disciplina_nome, 'label' => 'ID: '.$questao->questao_id.' - ' .  $enunciado_formatado];
+        }
+
+            $data[] = [      
+                        'type' => 'pie',
+                        'indexLabelFontFamily' => 'Garamond',
+                        'indexLabelFontSize' => 20,
+                        'indexLabel' => '{label} | Foi adicionada {y} Vez(es)', 
+                        'startAngle' => -20,
+                        'showInLegend' => true,
+                        'toolTipContent' => 'Disciplina - {legendText}, Quantidade: {y}',
+                        'dataPoints' => $dataPoints
+                    ];
+
+        $root['data'] = $data;
+
+        return $root;
+    }
+
+    public static function tabelaQuestoes()
+    {
+        $questoes = DB::table('avaliacoes')
+                ->join('avaliacao_questao', 'avaliacoes.id', '=', 'avaliacao_questao.avaliacao_id')
+                ->join('questoes', 'avaliacao_questao.questao_id', '=', 'questoes.id')
+                ->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
+                ->groupBy('questoes.id', 'questoes.created_at')
+                ->limit(15)
+                ->orderBy('qtd', 'desc')
+                ->get(['questoes.id as questao_id', 'questoes.created_at', 'disciplinas.nome as disciplina_nome', 'questoes.questao as questao_nome' , DB::raw('COUNT(questoes.id) as qtd')]);
+
+        return $questoes;
     }
 
     public static function pegarPontos($questao_id, $avaliacao_id)

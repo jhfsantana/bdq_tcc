@@ -50,30 +50,48 @@ class Professor extends User
 
     public static function professorComMaiorNumeroDeQuestoes()
     {
-        /*$query = "SELECT p.matricula
-                        ,p.nome
-                        ,p.email
-                        ,d.nome as disciplina_nome
-                        ,count(q.questao) as total_questoes
-                    FROM professores p
-                    JOIN questoes q on (q.professor_id = p.id)
-                    JOIN disciplinas d on (d.id = q.disciplina_id)
-                   GROUP BY p.matricula, p.nome, p.email, d.nome
-                   ORDER BY p.nome";*/
-/*
-       $query = DB::table('professores')
-            ->join('questoes', 'professores.id', '=', 'questoes.professor_id')
-            ->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
-            ->select(DB::raw('COUNT(questoes.id) as total_questoes'), 'professores.nome')            
-            ->groupBy('professores.nome')
-            ->orderBy('professores.nome')
-            ->get();*/
-
         $query = self::join('questoes', 'questoes.professor_id', '=', 'professores.id')
             ->groupBy('professores.nome', 'questoes.created_at')
             ->get(['professores.nome', 'questoes.created_at', DB::raw('count(questoes.id) as total_questoes')]);
 
-        return $query;
+        $data = [];
+
+        foreach($query as $professor) 
+        {
+            $date = \DateTime::createFromFormat('Y-m-d H:i:s', $professor->created_at); // your original DTO
+            $newFormat = $date->format('Y-m-d');
+            
+            $out[$professor->nome]['dataPoints'][] = ['x' => $newFormat,
+                                    'y' => $professor->total_questoes];
+           
+
+            $aux['dataPoints'] = $out[$professor->nome]['dataPoints'];
+
+            $data[$professor->nome] = [
+                                        'type'          => 'line',
+                                        'name'          => $professor->nome,
+                                        'markerType'    => 'square',
+                                        'showInLegend'  => true,
+                                        'xValueType'    => "dateTime",
+                                        'dataPoints'    => $aux['dataPoints']];
+
+            $root = [];
+            foreach ($data as $r) 
+            {
+                $aux2=  $r;
+                $root[] = $aux2;
+            }
+        }
+        
+        if(!empty($root))
+        {
+            return $root;
+        }
+        else
+        {
+            return 0;
+        }
+        
     }
 
     public static function professorTopQuestoes()
@@ -175,41 +193,72 @@ class Professor extends User
         $data = [];
         $data2 = [];
         $dataPoints = [];
-        foreach ($media as $m)
-        {
-            $arr[] = $m;
-            $data_formatada = $m->dia.'-'.$m->mes.'-'.$m->ano;
-            //dd($arr);
-            $date = \DateTime::createFromFormat('d-m-Y', $data_formatada); // your original DTO
-            $newFormat = $date->format('Y-m-d');
+        // foreach ($media as $m)
+        // {
+        //     $arr[] = $m;
+        //     $data_formatada = $m->dia.'-'.$m->mes.'-'.$m->ano;
+        //     //dd($arr);
+        //     $date = \DateTime::createFromFormat('d-m-Y', $data_formatada); // your original DTO
+        //     $newFormat = $date->format('Y-m-d');
             
 
 
-            for ($i=0; $i < count($arr); $i++) {
-               // dd($arr);
-                 $arrAux[$i] = $arr;
+        //     // for ($i=0; $i < count($arr); $i++) {
+        //     //    // dd($arr);
+        //     //      $arrAux[$i] = $arr;
+        //     //     for ($j=0; $j < count($arrAux[$i][$i]); $j++) {
+        //     //         if($arrAux[$j][$j]->id == $arr[$j]->id)
+        //     //         {
+        //     //            $data2[$i] =  [
+        //     //                             'x' => $newFormat,
+        //     //                             'y' => $m->y
+        //     //                         ];
+        //     //         }
+        //     //     }
+        //     // }
+        //     //                  dd($arrAux);
 
-                for ($j=0; $j < count($arrAux[$i][$i]); $j++) {
-                    if($arrAux[$j][$j]->id == $arr[$j]->id)
-                    {
-                       $data2[$i] =  [
-                                        'x' => $newFormat,
-                                        'y' => $m->y
-                                    ];
-                    }
-                }
+        //     $dataPoints = $data2;
+
+        //     $data[] = [      'type' => 'column',
+        //                      'name' => $m->aluno_nome,
+        //                      'markerType' => 'square',
+        //                      'showInLegend' => true, 
+        //                      'dataPoints' => $dataPoints
+        //                      ];
+        //     $root['data'] = $data;
+        // }
+
+        foreach($media as $element) 
+        {
+            $data_formatada = $element->dia.'-'.$element->mes.'-'.$element->ano;
+            $date = \DateTime::createFromFormat('d-m-Y', $data_formatada); // your original DTO
+            $newFormat = $date->format('Y-m-d');
+            
+            $out[$element->aluno_nome]['dataPoints'][] = ['x' => $newFormat,
+                                    'y' => $element->y];
+           
+
+            $aux['dataPoints'] = $out[$element->aluno_nome]['dataPoints'];
+
+            $data[$element->aluno_nome] = [
+                                            'type'          => 'line',
+                                            'name'          => $element->aluno_nome,
+                                            'markerType'    => 'square',
+                                            'showInLegend'  => true,
+                                            'xValueType'    => "dateTime",
+                                            'dataPoints'    => $aux['dataPoints']];
+
+           // $root['data'][$element->aluno_nome] =  array_shift($data);
+            $root = [];
+            foreach ($data as $r) 
+            {
+                $aux2=  $r;
+                $root[] = $aux2;
             }
-            $dataPoints = $data2;
-
-            $data[] = [      'type' => 'column',
-                             'name' => $m->aluno_nome,
-                             'markerType' => 'square',
-                             'showInLegend' => true, 
-                             'dataPoints' => $dataPoints
-                             ];
-            $root['data'] = $data;
+            
         }
-       //dd($roo t);
+      
         if(empty($root))
         {
             return 0;    

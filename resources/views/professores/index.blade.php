@@ -395,16 +395,11 @@ $(document).ready(function() {
     });
 
 
-
-// var objectFromJSON = some_json_decode_procedure(); // decoding JSON to native object
-// var dateArray = objectFromJSON.start.split(','); // splitting string to elements for new Date()
-// objectFromJSON.start = new Date(dateArray[0], dateArray[1], dateArray[2], dateArray[3], dateArray[4], dateArray[5]);
-
 var jsonMedias = {!! json_encode($medias, JSON_NUMERIC_CHECK) !!}
 var dateArray = jsonMedias.data;
 
 
-$.each(jsonMedias.data, function (key, data) {
+$.each(jsonMedias, function (key, data) {
     $.each(data.dataPoints, function(key, data){
       data.x = new Date(data.x)
       //data.dataPoints = new Date(data.x);
@@ -413,10 +408,7 @@ $.each(jsonMedias.data, function (key, data) {
 
 var jsonFormatado = jsonMedias.data;
 
-console.log(JSON.stringify(jsonFormatado))
-//   $.each(jsonMedias)
-// jsonMedias.data.dataPoints = new Date(dateArray[0].dataPoints[0].x);
-// console.log(jsonMedias)
+
   window.onload = function () {
     var chart = new CanvasJS.Chart("chartContainer",
     {
@@ -445,7 +437,8 @@ console.log(JSON.stringify(jsonFormatado))
         verticalAlign: "center",
         horizontalAlign: "right"
       },
-      data: jsonFormatado,
+      data: jsonMedias
+        ,
           legend:{
             cursor:"pointer",
             itemclick:function(e){

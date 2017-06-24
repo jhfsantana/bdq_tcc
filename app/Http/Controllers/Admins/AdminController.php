@@ -26,7 +26,6 @@ class AdminController extends Controller
     public function index()
     {        
         $professores = Professor::professorComMaiorNumeroDeQuestoes();
-        $professore2s = Professor::professorTopQuestoes();
         $questoes = Questao::topQuestoes();
         $media = Avaliacao::mediaAvaliacao();
         $alunoMedia = Admin::mediaAluno();
@@ -36,39 +35,24 @@ class AdminController extends Controller
         $alunos = Aluno::totalAlunos();
         $diames = Util::pegarDiaSemana();
                        
-        $chart = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'bar', 'highcharts')
-            ->setTitle('Quantidade de questões adicionadas ao BDQ')
-            ->setElementLabel("Total de questões")
-            ->setDimensions(425, 250)
-            ->setResponsive(true)
-            ->groupBy('nome');
-/*
-        $chart[] = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'pie', 'highcharts')
-                    ->setTitle('Quantidade de questões adicionadas ao BDQ')
-                    ->setElementLabel("Total de questões")
-                    ->setDimensions(500, 250)
-                    ->setResponsive(true)
-                    ->groupBy('nome');*/
+        // $chart = Charts::database(Professor::professorComMaiorNumeroDeQuestoes(), 'bar', 'highcharts')
+        //     ->setTitle('Quantidade de questões adicionadas ao BDQ')
+        //     ->setElementLabel("Total de questões")
+        //     ->setDimensions(425, 250)
+        //     ->setResponsive(true)
+        //     ->groupBy('nome');
 
-        $realtime = Charts::realtime(route('media'), 1000, 'gauge', 'google')
-                    ->setTitle('Média das notas dos alunos')
-                    ->setValues([0, 0, 10])
-                    ->setResponsive(false);
-;
 
-        $chartPizza = Charts::database(Questao::topQuestoes(), 'pie', 'highcharts')
-                    ->setTitle('Questões mais utilizadas em Avaliações')
-                    ->setElementLabel("Total de questões")
-                    ->groupBy('questao_id', 'created_at');
-        
+
         return view ('admin.index')->with('professores', $total)
                                    ->with('alunos', $alunos)
-                                   ->with('chart', $chart)
+                                   //->with('chart', $chart)
                                    ->with('top', $professores)
-                                   ->with('realtime', $realtime)
-                                   ->with('chartPizza', $chartPizza)
+                                   //->with('realtime', $realtime)
+                                   //->with('chartPizza', $chartPizza)
                                    ->with('diames', $diames)
                                    ->with('todos',  $todos)
+                                   ->with('questoes',  $questoes)
                                    ->with('media', $alunoMedia);
     }
 
@@ -233,11 +217,12 @@ class AdminController extends Controller
     
     public function relatorioQuestao()  
     {   
-        $qtdQuestao = Questao::topQuestoes();
-
-
+        $qtdQuestao = Questao::tabelaQuestoes();
+        $chartQuestao = Questao::topQuestoes();
+        //dd($qtdQuestao);
         return view('admin.relatorio_qtd_questao_av')
-                    ->with('qtdQuestao', $qtdQuestao);
+                    ->with('qtdQuestao', $qtdQuestao)
+                    ->with('chartQuestao', $chartQuestao);
     }
 
     public function lista()

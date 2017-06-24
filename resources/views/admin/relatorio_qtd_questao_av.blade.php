@@ -12,41 +12,27 @@
 	<title>Relatórios</title>
 
 	<script type="text/javascript">
-		
-		 // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+		var jsonQuestoes = {!! json_encode($chartQuestao, JSON_NUMERIC_CHECK) !!}
+		var jsonFormatado = jsonQuestoes.data;
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Questão por ID');
-        data.addRows([
-		@foreach($qtdQuestao as $qtd)
-          ['ID da questão: {{$qtd->questao_id}}', {{$qtd->qtd}}],
-         @endforeach
-        ]);
-
-        // Set chart options
-        var options = {'title':'Número de questões utilizadas em Avaliações',
-        			   'is3D':false,
-                       'width':450,
-                       'height':450,
-                       'backgroundColor': 'transparent',
-                       'pieHole': 0,
-  					   'chartArea' : { left: 80 },
-                       'legend': {'position': 'top'}};
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
+		window.onload = function () {
+			var chartPizza = new CanvasJS.Chart("chartPizza",
+			  {
+			    title:{
+			      text: "Questões mais utilizadas em Avaliações"
+			    },
+			                animationEnabled: true,
+			    legend:{
+			      verticalAlign: "center",
+			      horizontalAlign: "left",
+			      fontSize: 20,
+			      fontFamily: "Helvetica"        
+			    },
+			    theme: "theme2",
+			    data: jsonFormatado
+			  });
+			  chartPizza.render();
+		}
 
 	</script>
 </head>
@@ -82,15 +68,17 @@
 	Questões mais utilizadas
 </button> -->
 <div class="row">
-    <div class="col-md-4 col-md-offset-5">
-        <div class="panel with-nav-tabs panel-default">
-            <div class="panel-heading">
-            	<ul class="nav nav-tabs">
-					<li  role="presentation"><a href="/home">Página inicial</a></li>
-					<li  role="presentation" class="active"><a href="/relatorio/questao/50">Questões</a></li>
-					<li  role="presentation"><a href="/relatorio/">Professores</a></li> 
-					<li  role="presentation"><a href="/relatorio/notas/1">Notas</a></li> 
-				</ul>
+    <div class="col-md-12">
+	    <div class="col-md-4 col-md-offset-4">
+	        <div class="panel with-nav-tabs panel-default">
+	            <div class="panel-heading">
+	            	<ul class="nav nav-tabs">
+						<li  role="presentation"><a href="/home">Página inicial</a></li>
+						<li  role="presentation" class="active"><a href="/relatorio/questao/50">Questões</a></li>
+						<li  role="presentation"><a href="/relatorio/">Professores</a></li> 
+						<li  role="presentation"><a href="/relatorio/notas/1">Notas</a></li> 
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -131,12 +119,17 @@
 
 </div>
 
+<hr>
 <div class="row">
-    <div class="col-md-2 col-md-offset-6">
-		<div class="chart_div" id="chart_div"></div>
+    <div class="col-md-12">
+	    <div class="col-md-10 col-md-offset-1">
+			<div class="chartPizza" id="chartPizza"></div>
+		</div>
 	</div>
 </div>
 	<script src="/js/jquery.datatables.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.canvasjs.min.js"></script>
+	<script type="text/javascript" src="/js/canvasjs.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="/css/dataTables.bootstrap.min.css" />
 	<script type="text/javascript">
 	$(document).ready(function() {

@@ -14,68 +14,7 @@
   
 </head>
 
-<script type="text/javascript">
-  window.onload = function () {
-    var chart = new CanvasJS.Chart("chartContainer",
-    {
 
-      title:{
-        text: "MÉDIA GERAL DOS ALUNOS POR MÊS",
-        fontSize: 30
-      },
-        animationEnabled: true,
-      axisX:{
-
-        gridColor: "Silver",
-        tickColor: "silver",
-        valueFormatString: "DD/MMM"
-
-      },                        
-                        toolTip:{
-                          shared:true
-                        },
-      theme: "theme2",
-      axisY: {
-        gridColor: "Silver",
-        tickColor: "silver"
-      },
-      legend:{
-        verticalAlign: "center",
-        horizontalAlign: "right"
-      },
-      data: [
-      {        
-        type: "line",
-        showInLegend: true,
-        lineThickness: 2,
-        name: "Media/Nota",
-        markerType: "square",
-        color: "#F08080",
-        dataPoints: [
-        @foreach($media as $m)
-          { x: new Date({{$m->ano}}+'-'+{{$m->mes}}), y: {{ $m->y }} },
-        @endforeach
-        ]
-      },
-      
-      ],
-          legend:{
-            cursor:"pointer",
-            itemclick:function(e){
-              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                e.dataSeries.visible = false;
-              }
-              else{
-                e.dataSeries.visible = true;
-              }
-              chart.render();
-            }
-          }
-    });
-
-chart.render();
-}
-</script>
 <body>
 		<div id="header" style="width: 100%; height: 135px;background-color: #34495e;">
       <div class="row">
@@ -190,10 +129,10 @@ chart.render();
               <legend>Gráficos</legend>
                   <div class="col-md-12">
                     <div class="col-md-12" style="margin-top: 10px;">
-                      {!! $chart->render() !!}
+                      <div id="chartProfessores" style="height: 300px; width: 100%;"></div>
                     </div>
                     <div class="col-md-12" style="margin-top: 10px;">
-                      {!! $chartPizza->render() !!}
+                      <div id="chartPizza" style="height: 300px; width: 100%;"></div>
                     </div>
                     <div class="col-md-12" style="margin-top: 10px;">
                       <div id="chartContainer" style="height: 300px; width: 100%;"></div>
@@ -230,5 +169,144 @@ chart.render();
 <script src="js/index.js"></script>
 <script type="text/javascript" src="/js/jquery.canvasjs.min.js"></script>
 <script type="text/javascript" src="/js/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+var jsonQuestoes = {!! json_encode($questoes, JSON_NUMERIC_CHECK) !!}
+var jsonProf = {!! json_encode($top, JSON_NUMERIC_CHECK) !!}
+
+$.each(jsonProf, function (key, data) {
+    $.each(data.dataPoints, function(key, data){
+      data.x = new Date(data.x)
+      //data.dataPoints = new Date(data.x);
+    })
+})
+console.log(JSON.stringify(jsonProf));
+
+var jsonFormatado = jsonQuestoes.data;
+
+  window.onload = function () {
+   
+  var chartProf = new CanvasJS.Chart("chartProfessores",
+    {
+
+      title:{
+        text: "Professores que adicionam questões ao BDQ",
+        fontSize: 30
+      },
+        animationEnabled: true,
+      axisX:{
+
+        gridColor: "Silver",
+        tickColor: "silver",
+        valueFormatString: "DD/MMM"
+
+      },                        
+                        toolTip:{
+                          shared:true
+                        },
+      theme: "theme2",
+      axisY: {
+        gridColor: "Silver",
+        tickColor: "silver"
+      },
+      legend:{
+        verticalAlign: "center",
+        horizontalAlign: "right"
+      },
+      data: jsonProf,
+          legend:{
+            cursor:"pointer",
+            itemclick:function(e){
+              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+              }
+              else{
+                e.dataSeries.visible = true;
+              }
+              chart.render();
+            }
+          }
+    });
+
+chartProf.render();
+
+   var chart = new CanvasJS.Chart("chartContainer",
+    {
+
+      title:{
+        text: "MÉDIA GERAL DOS ALUNOS POR MÊS",
+        fontSize: 30
+      },
+        animationEnabled: true,
+      axisX:{
+
+        gridColor: "Silver",
+        tickColor: "silver",
+        valueFormatString: "DD/MMM"
+
+      },                        
+                        toolTip:{
+                          shared:true
+                        },
+      theme: "theme2",
+      axisY: {
+        gridColor: "Silver",
+        tickColor: "silver"
+      },
+      legend:{
+        verticalAlign: "center",
+        horizontalAlign: "right"
+      },
+      data: [
+      {        
+        type: "line",
+        showInLegend: true,
+        lineThickness: 2,
+        name: "Media/Nota",
+        markerType: "square",
+        color: "#F08080",
+        dataPoints: [
+        @foreach($media as $m)
+          { x: new Date({{$m->ano}}+'-'+{{$m->mes}}), y: {{ $m->y }} },
+        @endforeach
+        ]
+      },
+      
+      ],
+          legend:{
+            cursor:"pointer",
+            itemclick:function(e){
+              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+              }
+              else{
+                e.dataSeries.visible = true;
+              }
+              chart.render();
+            }
+          }
+    });
+
+chart.render();
+
+
+ var chartPizza = new CanvasJS.Chart("chartPizza",
+  {
+    title:{
+      text: "Questões mais utilizadas em Avaliações"
+    },
+                animationEnabled: true,
+    legend:{
+      verticalAlign: "center",
+      horizontalAlign: "left",
+      fontSize: 20,
+      fontFamily: "Helvetica"        
+    },
+    theme: "theme2",
+    data: jsonFormatado
+  });
+  chartPizza.render();
+}
+</script>
 </body>
 </html>
