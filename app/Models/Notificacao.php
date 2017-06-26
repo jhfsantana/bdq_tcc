@@ -23,6 +23,11 @@ class Notificacao extends Model
       return $this->belongsTo('App\Models\Aluno');
     }
 
+    public function disciplina()
+    {
+      return $this->belongsTo('App\Models\Disciplina');
+    }
+
 
    	public static function dispararNotificacao($avaliacao_id, $professor_id, $aluno_id, $mensagem)
    	{

@@ -7,12 +7,14 @@
 /*           VARIABLES           */
 /*-------------------------------*/
 
-* {
-    font-family:  'Merriweather';
-}
 body {
   position: relative;
   overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #888;
+    line-height: 30px;
 }
 body,
 html {

@@ -404,25 +404,25 @@
 								      </div>
 								      </div>
 								    </div>
-								      	<table class="table" style="position: relative; margin-top: 60px;">
+										<table class="table" style="position: relative; margin-top: 60px;">
 								      		<thead>
 									      		<tr>
-									      			<th> ID : @{{ aluno.id }}</th>
+									      			<th> ID : @{{ aluno.id }} - Matricula : @{{ aluno.matricula }}</th>
 									      		</tr>
 									      		<tr>
-									      			<th> Matricula : @{{ aluno.matricula }}</th>
+									      			<th> Nome : @{{ aluno.nome }} @{{ aluno.sobrenome }}</th>
 									      		</tr>
-									      		<tr>
-									      			<th> Nome : @{{ aluno.nome }}</th>
-									      		</tr>
-									      		<tr>
-									      			<th> Sobrenome : @{{ aluno.sobrenome }}</th>
-												</tr>
 									      		<tr>
 									      			<th> CPF : @{{ aluno.cpf }}</th>
 									      		</tr>
 									      		<tr>
 									      			<th> E-MAIL : @{{ aluno.email }}</th>
+									      		</tr>
+									      		<tr>
+									      			<th> CEP : @{{ aluno.cep }} /  RUA : @{{ aluno.logradouro }}</th>
+									      		</tr>
+									      		<tr>
+									      			<th> CIDADE : @{{ aluno.cidade }} / BAIRRO : @{{ aluno.bairro }}</th>
 									      		</tr>
 								      		</thead>
 								      	</table>

@@ -1188,6 +1188,19 @@ class AlunoController extends Controller
         $turmaArray[] = $request->turma;
         $profArray[] = $request->aluno_id;
 
+
+        // foreach ($aluno->disciplinas as $disciplina) 
+        // {
+        //     if($disciplina->id == $request->disciplina)
+        //     {
+        //         if($disciplina->turmas)
+        //         {
+        //             $request->session()->flash('alert-danger', 'Não é possivel realizar esta operação! O aluno não pode ter uma mesma disciplina em várias turmas!');
+        //             return redirect()->back();
+        //         }
+        //     }
+        // }
+
         $nome = $aluno->nome;
         
         if($aluno->save())

@@ -18,8 +18,7 @@
 		@stop
 		
 		<style type="text/css">
-			input[type="text"][readonly] {
-				   color: #2c3e50;
+			input[type="text"][readonly				   color: #2c3e50;
 				}
 		</style>
 		@section('titulo')
@@ -269,14 +268,14 @@
 								<div class="form-group">
 										<label>logradouro</label>
 										<div class="col-sm-9">
-											<input required md-no-asterisk type="text" readonly="true" name="logradouro" value="@{{ administrador.logradouro }}" class="logradouro form-control" ng-model="administrador.logradouro" minlength="8"/>
+											<input required md-no-asterisk type="text"  name="logradouro" value="@{{ administrador.logradouro }}" class="logradouro form-control" ng-model="administrador.logradouro" minlength="8"/>
 											
 										</div>
 								</div>
 								<div class="form-group">
 									<label>Bairro</label>
 									<div class="col-sm-9">
-										<input required md-no-asterisk type="text" class="form-control" name="bairro" readonly="true" value="@{{ administrador.bairro }}" ng-model="administrador.bairro" class="bairro" minlength="8"/>
+										<input required md-no-asterisk type="text" class="form-control" name="bairro"  value="@{{ administrador.bairro }}" ng-model="administrador.bairro" class="bairro" minlength="8"/>
 
 										
 									</div>
@@ -305,14 +304,14 @@
 								<div class="form-group">
 										<label>UF</label>
 										<div class="col-sm-9">
-											<input required md-no-asterisk type="text" class="uf form-control" name="uf" readonly="true" value="@{{ administrador.uf }}" ng-model="administrador.uf" minlength="2"/>
+											<input required md-no-asterisk type="text" class="uf form-control" name="uf"  value="@{{ administrador.uf }}" ng-model="administrador.uf" minlength="2"/>
 											
 										</div>
 								</div>
 								<div class="form-group">
 									<label>Cidade</label>
 									<div class="col-sm-9">
-										<input required md-no-asterisk type="text" readonly="true" class="cidade form-control" name="cidade" value="@{{ administrador.cidade }}" ng-model="administrador.cidade" minlength="8"/>
+										<input required md-no-asterisk type="text"  class="cidade form-control" name="cidade" value="@{{ administrador.cidade }}" ng-model="administrador.cidade" minlength="8"/>
 										
 									</div>
 								</div>
@@ -393,22 +392,22 @@
 								      	<table class="table" style="position: relative; margin-top: 60px;">
 								      		<thead>
 									      		<tr>
-									      			<th> ID : @{{ administrador.id }}</th>
+									      			<th> ID : @{{ administrador.id }} - Matricula : @{{ administrador.matricula }}</th>
 									      		</tr>
 									      		<tr>
-									      			<th> Matricula : @{{ administrador.matricula }}</th>
+									      			<th> Nome : @{{ administrador.name }} @{{ administrador.sobrenome }}</th>
 									      		</tr>
-									      		<tr>
-									      			<th> name : @{{ administrador.name }}</th>
-									      		</tr>
-									      		<tr>
-									      			<th> Sobrenome : @{{ administrador.sobrenome }}</th>
-												</tr>
 									      		<tr>
 									      			<th> CPF : @{{ administrador.cpf }}</th>
 									      		</tr>
 									      		<tr>
 									      			<th> E-MAIL : @{{ administrador.email }}</th>
+									      		</tr>
+									      		<tr>
+									      			<th> CEP : @{{ administrador.cep }} /  RUA : @{{ administrador.logradouro }}</th>
+									      		</tr>
+									      		<tr>
+									      			<th> CIDADE : @{{ administrador.cidade }} / BAIRRO : @{{ administrador.bairro }}</th>
 									      		</tr>
 								      		</thead>
 								      	</table>

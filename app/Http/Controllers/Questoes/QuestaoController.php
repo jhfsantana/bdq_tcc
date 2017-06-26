@@ -37,9 +37,10 @@ class QuestaoController extends Controller
         {
             $q = DB::table('questoes')
             ->join('disciplinas', 'questoes.disciplina_id', '=', 'disciplinas.id')
-            ->join('professores', 'questoes.professor_id', '=', 'professores.id')
+            ->leftJoin('professores', 'questoes.professor_id', '=', 'professores.id')
             ->select(DB::raw('questoes.*, disciplinas.nome as disciplina_nome, professores.nome as professor_nome, professores.id as professor_id'))
             ->get();
+
             return $q;
         }else
         {
@@ -384,7 +385,7 @@ class QuestaoController extends Controller
             {
 
                 $xml = new \SimpleXMLElement($file, null, true);
-
+                    
                 $data = array();
                 $arrayErros = array();
                 $count = 0;
@@ -407,13 +408,16 @@ class QuestaoController extends Controller
                     }
                     else
                     {
-                        if(isset($disciplina->nome))
+                        if(isset($nodes->disciplina))
                         {
-                            $arrayErros[] = ['Linha' => $count, 'Mensagem' => 'Disciplina -> '. $disciplina->nome . ' não encontrada'];
+                            $novaDisciplina = new Disciplina();
+                            $novaDisciplina->nome = $nodes->disciplina;
+                            $novaDisciplina->save();
+                            $data['disciplina_id'] = $novaDisciplina->id;
                         }
                         else
                         {
-                            $arrayErros[] = ['Linha' => $count, 'Mensagem' => 'Disciplina -> vazio não encontrada'];
+                            $arrayErros[] = ['Linha' => $count, 'Mensagem' => 'Disciplina -> campo vazio'];
                         }
                         //$request->session()->flash('alert-danger', ' Disciplina informada não encontrada');
                         //return redirect()->back();
@@ -422,16 +426,25 @@ class QuestaoController extends Controller
                     switch ($nodes->nivel) 
                     {
                         case 'facil':
+                        case 'Facil':
+                        case 'fácil':
                             $data['nivel'] = 1;
                         break;
                         case 'moderado':
                         case 'moderada':
+                        case 'Moderado':
+                        case 'Moderada':
                             $data['nivel'] = 2;
                         break;
                         case 'dificil':
+                        case 'difícil':
+                        case 'Dificil':
                             $data['nivel'] = 3;
                         break;
                         case 'muito dificil':
+                        case 'muito difícil':
+                        case 'Muito difícil':
+                        case 'Muito Difícil':
                             $data['nivel'] = 4;
                         break;
                         default:

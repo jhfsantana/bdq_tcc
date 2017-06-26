@@ -111,13 +111,13 @@
       						<div class="box-top">
       							<img src="images/professor_64px.png">
       							<h3 class="professores"> {{$professores}}</h3>
-      							<a href="#">Nº Professores</a>
+      							<a href="/professores">Nº Professores</a>
       						</div>
 
       						<div class="box2-top">
       							<img src="images/estudantes_64.png">
       							<h3 class="estudantes"> {{$alunos}} </h3>
-      							<a href="#">Nº Estudantes</a>
+      							<a href="/alunos">Nº Estudantes</a>
       						</div>
 
       						<div class="box3-top">

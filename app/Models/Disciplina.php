@@ -61,18 +61,33 @@ class Disciplina extends Model
         return $resultado;
     }
 
-    public static function validarRemocao($professor_id, $disciplina_id)
+    public static function validarRemocao($professor_id = null, $disciplina_id, $aluno_id = null)
     {
-        $resultado = DB::table('professores')
-            ->join('disciplina_professor', 'professores.id', '=', 'disciplina_professor.professor_id')
-            ->join('disciplinas', 'disciplina_professor.disciplina_id', '=', 'disciplinas.id')
-            ->join('disciplina_turma', 'disciplinas.id', '=', 'disciplina_turma.disciplina_id')
-            ->join('turmas', 'disciplina_turma.turma_id', '=', 'turmas.id')
-            ->where('professores.id', '=', $professor_id)
-            ->where('disciplinas.id', '=', $disciplina_id)
-            ///->select('professores.nome as turma_nome','disciplinas.nome as disciplina_nome')
-            ->get();
+        if(!$aluno_id)
+        {
+            $resultado = DB::table('professores')
+                ->join('disciplina_professor', 'professores.id', '=', 'disciplina_professor.professor_id')
+                ->join('disciplinas', 'disciplina_professor.disciplina_id', '=', 'disciplinas.id')
+                ->join('disciplina_turma', 'disciplinas.id', '=', 'disciplina_turma.disciplina_id')
+                ->join('turmas', 'disciplina_turma.turma_id', '=', 'turmas.id')
+                ->where('professores.id', '=', $professor_id)
+                ->where('disciplinas.id', '=', $disciplina_id)
+                ///->select('professores.nome as turma_nome','disciplinas.nome as disciplina_nome')
+                ->get();
 
+        }
+        else
+        {
+            $resultado = DB::table('alunos')
+                ->join('aluno_disciplina', 'alunos.id', '=', 'aluno_disciplina.aluno_id')
+                ->join('disciplinas', 'aluno_disciplina.disciplina_id', '=', 'disciplinas.id')
+                ->join('disciplina_turma', 'disciplinas.id', '=', 'disciplina_turma.disciplina_id')
+                ->join('turmas', 'disciplina_turma.turma_id', '=', 'turmas.id')
+                ->where('alunos.id', '=', $aluno_id)
+                ->where('disciplinas.id', '=', $disciplina_id)
+                ///->select('professores.nome as turma_nome','disciplinas.nome as disciplina_nome')
+                ->get(); 
+        }
         return $resultado;
     }
 }

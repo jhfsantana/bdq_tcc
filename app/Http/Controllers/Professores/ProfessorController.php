@@ -295,4 +295,10 @@ class ProfessorController extends Controller
         return view('professores.turmas')->with('professor', $professor);
     }
 
+    public function notificacoes()
+    {   $professor = Professor::find(Auth::user()->id);
+
+        return view('professores.notificacoes')->with('professor',  $professor);
+    }
+
 }

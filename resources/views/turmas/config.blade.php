@@ -81,7 +81,6 @@ Turmas
 					<th>Professor</th>
 					<th>Disciplina</th>
 					<th>Aluno</th>
-					<th>Remover</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -91,18 +90,10 @@ Turmas
 						    @foreach($disciplina->alunos as $aluno)
 						    <tr>				
 
-						    	<td class="tg-yw4l"><a href="/professor/config/{{ $professor->id  }}"> {{ $professor->nome  }}</a></td>
-						    	<td class="tg-yw4l"><a href="/disciplina/config/{{ $disciplina->id  }}">{{ $disciplina->nome }}</a></td>
+						    	<td class="tg-yw4l"><a target="_blank" href="/professor/config/{{ $professor->id  }}"> {{ $professor->matricula  }} - {{ $professor->nome  }}</a></td>
+						    	<td class="tg-yw4l"><a target="_blank" href="/disciplina/config/{{ $disciplina->id  }}">{{ $disciplina->nome }}</a></td>
 						    	
-						    <td class="tg-yw4l">{{ $aluno->nome }} </td>
-						    <td class="tg-yw41" style="padding: 20px;"> 
-						    	<a href="#" id="prof_id"  onclick="confimar({{ $professor->id}}, {{$turma->id}}, {{$disciplina->id}});">
-						    		<span class="btn btn-danger btn-sm btn-config">
-										<span class="glyphicon glyphicon-trash">
-										</span>
-									</span>
-						    	</a>
-						    </td>
+						    <td class="tg-yw4l"><a target="_blank" href="/aluno/config/{{ $aluno->id  }}">{{ $aluno->matricula  }} - {{ $aluno->nome }}</a> </td>
 						    @endforeach
 					    @endforeach
 					    </tr>

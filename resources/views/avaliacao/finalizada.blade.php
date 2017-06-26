@@ -5,7 +5,7 @@
 	<title>Lista de avaliacoes</title>
     @section('titulo')
             <i class="fa fa-book" title="Edit"></i>
-         	AVALIAÇÃO
+         	Avaliações
     @stop
 	@section('content')
 	<br>

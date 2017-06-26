@@ -6,7 +6,7 @@
   <title>BDQ - Avaliação Online / Página inicial Administrativa</title>
   @yield('head')
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 
@@ -80,7 +80,7 @@
 		<div class="conteudo">
       <div style="width: 100%; height: 85px; margin-top: 105px;background-color: #bdc3c7;">
           <div class="row">
-            <h3 style="margin-left: 25px; color: white; ">@yield('titulo')</h3>
+            <h3 style="margin-left: 25px; color: white; "><a style="text-decoration: none;" href="{{ URL::previous() }}"> <i class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color: #FFFFFF"></i></a>@yield('titulo')</h3>
           </div>
       </div>
 			<div class="row">

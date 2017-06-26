@@ -51,6 +51,12 @@ class Avaliacao extends Model
     {
         return $this->hasMany('App\Models\Alternativa');
     }
+    public function notificacoes()
+    {
+        return $this->hasMany('App\Models\Notificacao');
+    }
+
+
     public static function checarSeAvaliacaoExiste($professor_id, $turma_id, $disciplina_id, $statusDisponivel, $statusPendente)
     {
         $sql = "SELECT * 

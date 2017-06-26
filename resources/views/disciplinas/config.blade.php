@@ -20,7 +20,7 @@
 <i class="fa fa-book" aria-hidden="true"></i>
 Disciplinas, Professores e Alunos
 @stop
-	
+
 	<input type="hidden" name="disciplina_id" id="disciplina_id" data-disciplina="{{ $disciplina->id}}">
 	<input name="_token" type="hidden" id="csrf_token" value="{{ csrf_token() }}">
 
@@ -60,7 +60,7 @@ Disciplinas, Professores e Alunos
 						    	<td class="tg-yw4l"><a href="/professor/config/{{$professor->id}}"> {{ $professor->nome }}      </a> </td>
 						    	
 						    	@foreach($professor->turmas as $turma)
-						    	<td class="tg-yw4l"><a href="/professor/config/{{$professor->id}}"> {{ $turma->nome }}      </a> </td>
+						    	<td class="tg-yw4l"><a href="/turma/config/{{$turma->id}}"> {{ $turma->nome }}      </a> </td>
 						    	@endforeach
 							    <td class="tg-yw41" style="padding: 20px;"> 
 							    	<a href="#" id="prof_id"  onclick="confimar({{ $professor->id }});">
@@ -99,7 +99,7 @@ Disciplinas, Professores e Alunos
 						    	<td class="tg-yw4l"><a href="/aluno/config/{{$aluno->id}}"> {{ $turma->nome }}      </a> </td>
 						    	@endforeach
 						    <td class="tg-yw41" style="padding: 20px;"> 
-						    	<a href="#" id="prof_id"  onclick="confimar({{ $aluno->id }});">
+						    	<a href="#" id="aluno_id"  onclick="confimarAluno({{ $aluno->id }});">
 						    		<span class="btn btn-danger btn-sm btn-config">
 										<span class="glyphicon glyphicon-trash">
 										</span>
@@ -168,6 +168,63 @@ Disciplinas, Professores e Alunos
 			function(isConfirm){
 			  if (isConfirm) {
 			    remover(professor_id);
+			  } else {
+			    swal("Cancelado", "Solicitação cancelada!", "error");
+			  }
+			});
+    }
+
+   	function removerAluno(aluno_id)
+    {
+    	var disciplina_id = $("#disciplina_id").data('disciplina');
+	 	var csrf_token = document.getElementById('csrf_token');
+
+        var url = location.href.substring(0,location.href.indexOf('disciplina'));
+
+        var form = document.createElement("form");
+        form.setAttribute("method", 'POST');
+        
+        form.setAttribute("action", url+'/disciplina/config/removerAluno');
+        
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "aluno_id");
+        hiddenField.setAttribute("value", aluno_id);
+
+        var hiddenField2 = document.createElement("input");
+        hiddenField2.setAttribute("type", "hidden");
+        hiddenField2.setAttribute("name", "disciplina_id");
+        hiddenField2.setAttribute("value", disciplina_id);
+
+        var hiddenField3 = document.createElement("input");
+        hiddenField3.setAttribute("type", "hidden");
+        hiddenField3.setAttribute("name", "_token");
+        hiddenField3.setAttribute("value", csrf_token.value);
+		console.log(hiddenField);
+	 	console.log(hiddenField2);
+        form.appendChild(hiddenField);
+        form.appendChild(hiddenField2);
+        form.appendChild(hiddenField3);
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function confimarAluno(aluno_id)
+    {
+    	swal({
+			  title: "Você tem certeza que deseja remover este aluno?",
+			  text: "vicê irá tirar a associação deste aluno, cuidado!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#DD6B55",
+			  confirmButtonText: "Sim, quero desassociar",
+			  cancelButtonText: "Não, quero cancelar solicitação!",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+			},
+			function(isConfirm){
+			  if (isConfirm) {
+			    removerAluno(aluno_id);
 			  } else {
 			    swal("Cancelado", "Solicitação cancelada!", "error");
 			  }

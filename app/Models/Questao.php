@@ -62,29 +62,37 @@ class Questao extends Model
                 ->limit(15)
                 ->orderBy('qtd', 'desc')
                 ->get(['questoes.id as questao_id', 'questoes.created_at', 'disciplinas.nome as disciplina_nome', 'questoes.questao as questao_nome' , DB::raw('COUNT(questoes.id) as qtd')]);
-
-
-        foreach ($questoes as $questao)
+        
+        if(count($questoes) > 0)
         {
-            $enunciado_formatado = strlen($questao->questao_nome) > 30 ? substr($questao->questao_nome,0,30)."..." : $questao->questao_nome;
 
-            $dataPoints[] = [ 'y' => $questao->qtd, 'legendText' => $questao->disciplina_nome, 'label' => 'ID: '.$questao->questao_id.' - ' .  $enunciado_formatado];
+            foreach ($questoes as $questao)
+            {
+                $enunciado_formatado = strlen($questao->questao_nome) > 30 ? substr($questao->questao_nome,0,30)."..." : $questao->questao_nome;
+
+                $dataPoints[] = [ 'y' => $questao->qtd, 'legendText' => $questao->disciplina_nome, 'label' => 'ID: '.$questao->questao_id.' - ' .  $enunciado_formatado];
+            }
+
+                $data[] = [      
+                            'type' => 'pie',
+                            'indexLabelFontFamily' => 'Garamond',
+                            'indexLabelFontSize' => 20,
+                            'indexLabel' => '{label} | Foi adicionada {y} Vez(es)', 
+                            'startAngle' => -20,
+                            'showInLegend' => true,
+                            'toolTipContent' => 'Disciplina - {legendText}, Quantidade: {y}',
+                            'dataPoints' => $dataPoints
+                        ];
+
+            $root['data'] = $data;
+
+            return $root;
+        }
+        else
+        {
+            return 0;
         }
 
-            $data[] = [      
-                        'type' => 'pie',
-                        'indexLabelFontFamily' => 'Garamond',
-                        'indexLabelFontSize' => 20,
-                        'indexLabel' => '{label} | Foi adicionada {y} Vez(es)', 
-                        'startAngle' => -20,
-                        'showInLegend' => true,
-                        'toolTipContent' => 'Disciplina - {legendText}, Quantidade: {y}',
-                        'dataPoints' => $dataPoints
-                    ];
-
-        $root['data'] = $data;
-
-        return $root;
     }
 
     public static function tabelaQuestoes()

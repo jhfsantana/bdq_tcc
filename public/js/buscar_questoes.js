@@ -1,4 +1,28 @@
 
+$("#btn-gerar").click(function()
+{
+    var arrayCheck = [  $("#questao_id").val(), $("#questao2_id").val(), $("#questao3_id").val(), $("#questao4_id").val(),
+                        $("#questao5_id").val(), $("#questao6_id").val(), $("#questao7_id").val(), $("#questao8_id").val(),
+                        $("#questao9_id").val(), $("#questao10_id").val() ];
+
+    var sorted_arr = arrayCheck.slice().sort(); // You can define the comparing function here. 
+                                     // JS by default uses a crappy string compare.
+                                     // (we use slice to clone the array so the
+                                     // original array won't be modified)
+    var results = [];
+    for (var i = 0; i < arrayCheck.length - 1; i++) {
+        if (sorted_arr[i + 1] == sorted_arr[i]) {
+            alert('igual');
+
+            return false;
+        }
+    }
+
+    console.log(results);
+});
+
+
+
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });

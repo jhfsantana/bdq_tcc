@@ -87,7 +87,7 @@ function showQ(select){
 
 </script>
 @section('titulo')
-            <i class="fa fa-book" title="Edit"></i>
+            <i class="fa fa-book" title="Gerar"></i>
             GERANDO AVALIAÇAO
     @stop
 @section('content')
@@ -101,7 +101,7 @@ function showQ(select){
     </div>
     @endif
 
-<div style="width: 100%; margin-top: 105px;" id="top">
+<div style="width: 100%; margin-top: 22px;" id="top">
 	<div class="row">
 		<section>
         <div class="wizard">
@@ -876,7 +876,7 @@ function showQ(select){
         <div class="tab-pane" role="tabpanel" id="complete">
             <h3>Última etapa</h3>
             <p>Tem certeza que deseja gerar a Avaliação com as questões escolhidas?</p>
-            <input  style="margin-right: auto;margin-left: auto;display: block; height: 100px;" type="submit"  value="GERAR AVALIAÇÃO" form="avaliacaoform" class="btn btn-primary btn-lg btn-block" onclick="return validar();" src="/images/gerar.svg" title="GERAR AVALIAÇÃO">
+            <input  id="btn-gerar" style="margin-right: auto;margin-left: auto;display: block; height: 100px;" type="submit"  value="GERAR AVALIAÇÃO" form="avaliacaoform" class="btn btn-primary btn-lg btn-block" onclick="return validar();" src="/images/gerar.svg" title="GERAR AVALIAÇÃO">
         </div>
         <div class="clearfix"></div>
         </div>

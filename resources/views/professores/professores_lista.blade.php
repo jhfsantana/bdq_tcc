@@ -12,7 +12,7 @@
 
 		@stop
 		<style type="text/css">
-			input[type="text"][readonly] {
+			input[type="{
 				   color: #2c3e50;
 				}
 		</style>
@@ -130,7 +130,7 @@
 					        </button>
 					        <h4 class="modal-title" id="detailsModalLabel">@{{form_title}}</h4>
 					      </div>
-					    	<div class="modal-body">
+					    	<div class="modal-body" style=" height: 100%;">
 								<div class="details">
 								  <div class="details-header">
 								    <div class="details-photo">
@@ -157,22 +157,22 @@
 								      	<table class="table" style="position: relative; margin-top: 60px;">
 								      		<thead>
 									      		<tr>
-									      			<th> ID : @{{ professor.id }}</th>
+									      			<th> ID : @{{ professor.id }} - Matricula : @{{ professor.matricula }}</th>
 									      		</tr>
 									      		<tr>
-									      			<th> Matricula : @{{ professor.matricula }}</th>
+									      			<th> Nome : @{{ professor.nome }} @{{ professor.sobrenome }}</th>
 									      		</tr>
-									      		<tr>
-									      			<th> name : @{{ professor.name }}</th>
-									      		</tr>
-									      		<tr>
-									      			<th> Sobrenome : @{{ professor.sobrenome }}</th>
-												</tr>
 									      		<tr>
 									      			<th> CPF : @{{ professor.cpf }}</th>
 									      		</tr>
 									      		<tr>
 									      			<th> E-MAIL : @{{ professor.email }}</th>
+									      		</tr>
+									      		<tr>
+									      			<th> CEP : @{{ professor.cep }} /  RUA : @{{ professor.logradouro }}</th>
+									      		</tr>
+									      		<tr>
+									      			<th> CIDADE : @{{ professor.cidade }} / BAIRRO : @{{ professor.bairro }}</th>
 									      		</tr>
 								      		</thead>
 								      	</table>
@@ -334,7 +334,7 @@
 								<div class="form-group">
 										<label>logradouro</label>
 										<div class="col-sm-9">
-											<input required md-no-asterisk type="text" readonly="true" name="logradouro" value="@{{ professor.logradouro }}" class="logradouro form-control" ng-model="professor.logradouro" minlength="8"/>
+											<input required md-no-asterisk type="text"  name="logradouro" value="@{{ professor.logradouro }}" class="logradouro form-control" ng-model="professor.logradouro" minlength="8"/>
 											<div ng-messages="frmProfessor.logradouro.$error">
           										<div ng-message="required">
           											Campo logradouro é obrigatório.
@@ -348,7 +348,7 @@
 								<div class="form-group">
 									<label>Bairro</label>
 									<div class="col-sm-9">
-										<input required md-no-asterisk type="text" class="form-control" name="bairro" readonly="true" value="@{{ professor.bairro }}" ng-model="professor.bairro" class="bairro" minlength="8"/>
+										<input required md-no-asterisk type="text" class="form-control" name="bairro"  value="@{{ professor.bairro }}" ng-model="professor.bairro" class="bairro" minlength="8"/>
 
 										<div ng-messages="frmProfessor.bairro.$error">
       										<div ng-message="required">
@@ -384,7 +384,7 @@
 								<div class="form-group">
 										<label>UF</label>
 										<div class="col-sm-9">
-											<input required md-no-asterisk type="text" class="uf form-control" name="uf" readonly="true" value="@{{ professor.uf }}" ng-model="professor.uf" minlength="8"/>
+											<input required md-no-asterisk type="text" class="uf form-control" name="uf"  value="@{{ professor.uf }}" ng-model="professor.uf" minlength="8"/>
 											<div ng-messages="frmProfessor.uf.$error">
           										<div ng-message="required">
           											Campo uf é obrigatório.
@@ -398,7 +398,7 @@
 								<div class="form-group">
 									<label>Cidade</label>
 									<div class="col-sm-9">
-										<input required md-no-asterisk type="text" readonly="true" class="cidade form-control" name="cidade" value="@{{ professor.cidade }}" ng-model="professor.cidade" minlength="8"/>
+										<input required md-no-asterisk type="text"  class="cidade form-control" name="cidade" value="@{{ professor.cidade }}" ng-model="professor.cidade" minlength="8"/>
 										<div ng-messages="frmProfessor.cidade.$error">
 	  										<div ng-message="required">
 	  											Campo cidade é obrigatório.
@@ -416,8 +416,8 @@
 									</legend>
 									
 									<md-input-container class="md-block" flex="50">
-										<label>E-mail</label>
-											<md-icon md-svg-src="/images/admin/email.svg" class="name"></md-icon>
+										<label>Password</label>
+											<md-icon md-svg-src="/images/admin/cpf.svg" class="name"></md-icon>
 											<input required  md-no-asterisk type="password" name="password" value="@{{ professor.password }}" ng-model="professor.password" maxlength="30"  ng-model-options="{updateOn: 'blur'}"/>
 											<div ng-messages="frmProfessor.password.$error">
           										<div ng-message="required">

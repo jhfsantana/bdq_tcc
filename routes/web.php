@@ -121,6 +121,7 @@ Route::group(['middleware'=> ['auth:web_teachers']], function ()
 
 	Route::get('/professor/alunos', 'Professores\ProfessorController@alunos');
 	Route::get('/professor/turmas', 'Professores\ProfessorController@turmas');
+	Route::get('/professor/notificacoes', 'Professores\ProfessorController@notificacoes');
 
 	Route::post('/enviar/mensagem', 'Professores\ProfessorController@enviarMensagem');
 	
@@ -242,6 +243,7 @@ Route::group(['middleware'=> ['auth:web_admins']], function ()
 	Route::get('disciplinas','Disciplinas\DisciplinaController@index');
 	Route::post('subjects','Disciplinas\DisciplinaController@store');
 	Route::post('disciplina/config/remover', 'Disciplinas\DisciplinaController@removerProfessor');
+	Route::post('disciplina/config/removerAluno', 'Disciplinas\DisciplinaController@removerAluno');
 
 	Route::get('/relatorio', 'Admins\AdminController@relatorio');
 
@@ -334,7 +336,6 @@ Route::post('aluno/login', 'Alunos\AuthController@login');
 
 
 Route::get('/admin', ['uses' => 'Admins\AdminController@loginTela', 'as' => 'admin.login']);
-
 
 Route::post('admin', 'Admins\AuthController@login');
 

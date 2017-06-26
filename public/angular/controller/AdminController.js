@@ -120,7 +120,7 @@ app.controller('AdminController', function($scope, $http, API_URL, adminAPI)
   		// Execute action
 		      $scope.delete;
 		});
-		$(document).on("focusout", ".zipcode", function() {
+		$(document).on("change", ".zipcode", function() {
 			  if ( $( this ).val() != '' )
 		      {
 		          $.getJSON("https://viacep.com.br/ws/"+$( this ).val()+"/json/", function(result){

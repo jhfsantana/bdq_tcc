@@ -40,7 +40,6 @@
                     {{session('erros')}}
                   @endif
                 @endif
-    <h3 style="text-align: center;">Cadastrar questões em lote</h3>
 
     <div class="alert alert-warning" style="width: 50%;">
         Instruções para processar um arquivo XML

@@ -142,6 +142,7 @@ class DisciplinaController extends Controller
         }
         else
         {
+            $disciplina->delete();
             return json_encode(['message' => 'Disciplina '. $disciplina->nome .' removida com sucesso!']);
         }
         // if($disciplina->delete())
@@ -181,7 +182,7 @@ class DisciplinaController extends Controller
 
     public function removerProfessor(Request $request)
     {        
-        $validar = Disciplina::validarRemocao($request->professor_id, $request->disciplina_id);
+        $validar = Disciplina::validarRemocao($request->professor_id, $request->disciplina_id, null);
         $foundTurma = false;
         $count = 0;
         $html = '<ul>';
@@ -203,6 +204,35 @@ class DisciplinaController extends Controller
         
 
         $result = DB::delete('DELETE FROM disciplina_professor WHERE professor_id = ? AND disciplina_id = ? LIMIT 1',[$request->professor_id, $request->disciplina_id]);
+
+        return redirect()->back();
+    }
+
+    public function removerAluno(Request $request)
+    {        
+        $validar = Disciplina::validarRemocao(null, $request->disciplina_id, $request->aluno_id);
+        $foundTurma = false;
+        $count = 0;
+        $html = '<ul>';
+        foreach ($validar as $turma) 
+        {
+           if($turma->nome)
+           {
+                $foundTurma = true;
+                $count++;
+                $html .= '<li>'.$turma->nome.'</li>'; 
+           }
+        }
+        $html .= '</ul>';
+        if($foundTurma)
+        {
+            $request->session()->flash('alert-danger', 'ERROR! Existe '.$count. ' vinculo(s) Turma/Disciplina/Aluno, por favor, vá até menu de configuração de Alunos e remova esta relação.');
+            return redirect()->back();
+        }
+        
+
+        $result = DB::delete('DELETE FROM aluno_disciplina WHERE aluno_id = ? AND disciplina_id = ? LIMIT 1',[$request->aluno_id, $request->disciplina_id]);
+
 
         return redirect()->back();
     }

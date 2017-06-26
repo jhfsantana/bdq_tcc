@@ -4,6 +4,10 @@
         <link rel="stylesheet" href="/css/formularios.css">
         <title>Lista de Alunos</title>
     @stop
+    @section('titulo')
+    <i class="fa fa-users" aria-hidden="true"></i>
+    Turmas
+    @stop
     @section('content')
     <br>
     <br>

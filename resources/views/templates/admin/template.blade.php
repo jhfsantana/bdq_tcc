@@ -104,7 +104,9 @@
 		<div class="conteudo">
         <div style="width: 100%; height: 85px; background-color: #bdc3c7;">
           <div class="row">
-            <h3 style="margin-left: 25px; color: white; ">@yield('titulo')</h3>
+            <h3 style="margin-left: 25px; color: white; "><a style="text-decoration: none;" href="{{ URL::previous() }}"> <i class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color: #FFFFFF"></i>
+</a>
+@yield('titulo')</h3>
           </div>
         </div> 
 			<div class="row" style="margin-top: 30px;">

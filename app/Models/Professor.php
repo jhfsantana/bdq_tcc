@@ -41,6 +41,11 @@ class Professor extends User
         return $this->hasMany('App\Models\Resultado');
     }
 
+    public function notificacoes()
+    {
+        return $this->hasMany('App\Models\Notificacao');
+    }
+
     public static function totalProfessores()
     {
         $total = Professor::all()->count();
@@ -51,8 +56,8 @@ class Professor extends User
     public static function professorComMaiorNumeroDeQuestoes()
     {
         $query = self::join('questoes', 'questoes.professor_id', '=', 'professores.id')
-            ->groupBy('professores.nome', 'questoes.created_at')
-            ->get(['professores.nome', 'questoes.created_at', DB::raw('count(questoes.id) as total_questoes')]);
+            ->groupBy('professores.nome', 'questoes.created_at', 'professores.id')
+            ->get(['professores.nome', 'questoes.created_at', 'professores.id', DB::raw('count(questoes.id) as total_questoes')]);
 
         $data = [];
 
@@ -61,13 +66,13 @@ class Professor extends User
             $date = \DateTime::createFromFormat('Y-m-d H:i:s', $professor->created_at); // your original DTO
             $newFormat = $date->format('Y-m-d');
             
-            $out[$professor->nome]['dataPoints'][] = ['x' => $newFormat,
+            $out[$professor->id]['dataPoints'][] = ['x' => $newFormat,
                                     'y' => $professor->total_questoes];
            
 
-            $aux['dataPoints'] = $out[$professor->nome]['dataPoints'];
+            $aux['dataPoints'] = $out[$professor->id]['dataPoints'];
 
-            $data[$professor->nome] = [
+            $data[$professor->id] = [
                                         'type'          => 'line',
                                         'name'          => $professor->nome,
                                         'markerType'    => 'square',
@@ -83,6 +88,7 @@ class Professor extends User
             }
         }
         
+        //dd(json_encode($root, JSON_PRETTY_PRINT));
         if(!empty($root))
         {
             return $root;
@@ -235,13 +241,13 @@ class Professor extends User
             $date = \DateTime::createFromFormat('d-m-Y', $data_formatada); // your original DTO
             $newFormat = $date->format('Y-m-d');
             
-            $out[$element->aluno_nome]['dataPoints'][] = ['x' => $newFormat,
+            $out[$element->id]['dataPoints'][] = ['x' => $newFormat,
                                     'y' => $element->y];
            
 
-            $aux['dataPoints'] = $out[$element->aluno_nome]['dataPoints'];
+            $aux['dataPoints'] = $out[$element->id]['dataPoints'];
 
-            $data[$element->aluno_nome] = [
+            $data[$element->id] = [
                                             'type'          => 'line',
                                             'name'          => $element->aluno_nome,
                                             'markerType'    => 'square',
